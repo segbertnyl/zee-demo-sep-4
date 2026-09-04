@@ -1233,7 +1233,7 @@ export function DiscoveryFlow() {
             collapsedUpTo={collapsedUpTo}
             setRef={(node) => { stepRefs.current[15] = node }}
             heading="How can I support your marketing efforts?"
-            body="Select up to 3."
+            body="Select all that apply."
           >
           <motion.div {...fadeUp(0)}>
             <OptionTileGroup
@@ -1271,7 +1271,7 @@ export function DiscoveryFlow() {
             collapsedUpTo={collapsedUpTo}
             setRef={(node) => { stepRefs.current[16] = node }}
             heading="What are your interests?"
-            body="Select up to 3."
+            body="Select all that apply."
           >
           <motion.div {...fadeUp(0)}>
             <OptionTileGroup

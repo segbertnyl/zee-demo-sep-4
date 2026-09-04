@@ -62,9 +62,9 @@ const CHART_PLAN_PROJ = [
 // #ff9624 = global/orange/orange-400 — no NYL token equivalent; design system gap
 // #d3a1f7 = global/purple/purple-200 — no NYL token equivalent; design system gap
 const CHART_LEGEND = [
-  { label: 'Current pace · $32.4K', color: '#ff9624' },
+  { label: 'Current pace · $145.4K', color: '#ff9624' },
   { label: 'Projected pace with my plan', color: '#bc79ec' },
-  { label: 'FYC goal · $47K', color: '#d3a1f7', dotted: true },
+  { label: 'FYC goal · $175K', color: '#d3a1f7', dotted: true },
 ]
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -184,7 +184,7 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
             <div style={{ flex: '0 0 204px', display: 'flex', flexDirection: 'column', gap: 32, paddingTop: 4 }}>
               <StatItem label="FYC goal" value="$175K" />
               <StatItem label="Council goal" value="President's" />
-              <StatItem label="Top priority" value="Go holistic" />
+              <StatItem label="Top priority" value="Build wealth clientele" />
             </div>
           </div>
         </motion.div>
@@ -234,9 +234,9 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
               vGridlineColor="rgba(255,255,255,0.1)"
               refLineColor="rgba(255,255,255,0.15)"
               refLine1={25}
-              refLine1Label="$25K"
+              refLine1Label="$150K"
               refLine2={50}
-              refLine2Label="$50K"
+              refLine2Label="$175K"
               todayDotColor="white"
               todayHaloColor="rgba(255,255,255,0.5)"
             />

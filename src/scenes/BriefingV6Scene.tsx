@@ -472,7 +472,11 @@ export function BriefingV6Scene() {
           {/* left rail — hover to expand (Figma 1002-12213) */}
           <Rail
             active={showAssessment ? 'Planning' : activeNav}
-            onSelect={(s) => { if (s === 'Briefing') { setShowAssessment(false); setShowIntegrated(false) }; setActiveNav(s) }}
+            onSelect={(s) => {
+              if (s === 'Briefing') { setShowAssessment(false); setShowIntegrated(false) }
+              if (s === 'Clients') setClientsView('onboarding')
+              setActiveNav(s)
+            }}
             onExit={close}
             slideIn={fromDiscovery}
           />

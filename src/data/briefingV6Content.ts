@@ -512,7 +512,7 @@ export const SANDRA_TASK: TaskCardModel = {
   headlinePrefix: 'Call',
   clientName: 'Eric Ellis',
   clientPreview: ERIC_PREVIEW,
-  headlineSuffix: 'a leand from NYL.com to introduce yourself.',
+  headlineSuffix: 'a lead from NYL.com to introduce yourself.',
   doneSummary: 'Call Sandra Kim to reactivate WL policy',
   description:
     'Completing this within 30 minutes gives you a 75% higher chance of closing the deal',
