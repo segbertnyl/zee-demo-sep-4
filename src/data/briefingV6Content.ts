@@ -1206,7 +1206,7 @@ export const NAV_PLACEHOLDER: Record<string, NavPlaceholderMeta> = {
     valueProp: 'Find the clients you didn\'t know to look for. Nyla learns from your niche, your history, and agents like you to surface prospects that actually fit, with the context to reach them well.',
     example: 'Explore a new prospect segment to see who Nyla surfaced and why they fit your book.',
   },
-  Business: {
+  Planning: {
     title: 'Business',
     valueProp: 'Your numbers, turned into a plan. Nyla benchmarks your production against peers, finds the real gaps, and maps the moves that matter most to your goals.',
     example: 'Open council pacing to see where you stand and what Nyla recommends to close the gap.',

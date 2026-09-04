@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type UIEvent, type ReactElement } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type UIEvent, type ReactElement, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { EASE, DURATION, SCROLL, NYLA, prefersReducedMotion } from '@/motion'
 import { glideScrollTop } from '@/lib/scrollGlide'
@@ -11,6 +11,11 @@ import { PageSubnav } from '@/ui/PageSubnav'
 import { PlanPage } from '@/ui/PlanPage'
 import { PlanSummaryBackground } from '@/ui/PlanSummaryBackground'
 import { NYLLogo } from '@/ui/NYLLogo'
+import Assessment from '@/components/Assessment'
+import Integrated from '@/components/Integrated'
+import Onboarding from '@/components/Onboarding'
+import Annual from '@/components/Annual'
+import Legacy from '@/components/Legacy'
 import {
   NavBriefingIcon, PersonCheckIcon, TagIcon, OrgChartIcon,
   BriefcaseIcon, ListAddIcon, BellIcon, CalendarIcon, CheckIcon, ArrowDropDownIcon, type IconProps,
@@ -18,7 +23,7 @@ import {
 import {
   HEADLINES, PROGRESS_TEMPLATE, WHILE_AWAY, WHILE_AWAY_2, WHILE_AWAY_3, WHILE_AWAY_4,
   YOUR_DAY, YOUR_DAY_2, YOUR_DAY_3, YOUR_DAY_4, STACK_FOOTER,
-  INITIAL_TASKS, DAY2_TASKS, DAY3_TASKS, DAY4_TASKS, SANDRA_FOLLOWUP_SUGGESTED,
+  INITIAL_TASKS, DAY2_TASKS, DAY3_TASKS, DAY4_TASKS, SANDRA_TASK2, SANDRA_TASK3, SANDRA_FOLLOWUP_SUGGESTED,
   HORIZON_VIEWS, NAV_PLACEHOLDER,
   type TaskCardModel, type DayItem, type HorizonView,
 } from '@/data/briefingV6Content'
@@ -111,6 +116,14 @@ export function BriefingV6Scene() {
   const [dayOffset, setDayOffset] = useState(0)
   /* Completed tasks collapse — hidden by default, merged into the closing line. */
   const [showCompleted, setShowCompleted] = useState(false)
+  /* Day 2's "View analysis" swaps the whole content area for the Assessment
+   * component — chrome (TopNav + Rail) stays. */
+  const [showAssessment, setShowAssessment] = useState(false)
+  /* Day 3's "Start the meeting" swaps the whole content area for the
+   * Integrated component — same pattern as showAssessment. */
+  const [showIntegrated, setShowIntegrated] = useState(false)
+  /* Clients page: lands on Onboarding, Sync cycles Onboarding → Annual → Legacy. */
+  const [clientsView, setClientsView] = useState<'onboarding' | 'annual' | 'legacy'>('onboarding')
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const dayOffsetRef = useRef(0) // mirrors dayOffset for correct rapid-click math
@@ -140,6 +153,8 @@ export function BriefingV6Scene() {
     setDayOffset(0)
     dayOffsetRef.current = 0
     setShowCompleted(false)
+    setShowAssessment(false)
+    setShowIntegrated(false)
   }, [clearTimers])
 
   /* Step the date carousel. The task set is swapped SYNCHRONOUSLY with the date
@@ -159,6 +174,8 @@ export function BriefingV6Scene() {
     setShowInjectedDay(false)
     setFocusId(null)
     setShowCompleted(false)
+    setShowAssessment(false)
+    setShowIntegrated(false)
   }, [clearTimers])
 
   useEffect(() => {
@@ -216,6 +233,11 @@ export function BriefingV6Scene() {
     const t = window.setTimeout(() => setHorizonLoading(false), 450)
     return () => window.clearTimeout(t)
   }, [horizon])
+
+  /* Landing on the Clients page always starts at Onboarding. */
+  useEffect(() => {
+    if (activeNav === 'Clients') setClientsView('onboarding')
+  }, [activeNav])
 
   /* Press G to toggle the page-grid overlay (verifies the Figma grid). */
   useEffect(() => {
@@ -405,6 +427,7 @@ export function BriefingV6Scene() {
   const completedEntries = useMemo(() => entries.filter((e) => e.archived), [entries])
 
   const showBriefing = activeNav === 'Briefing'
+  const isClients = activeNav === 'Clients'
   const isPlan = activeNav === 'Plan'
   const dayView = horizon === 'Day'
   const horizonView = dayView ? null : HORIZON_VIEWS[horizon as 'Week' | 'Month' | 'Quarter']
@@ -447,23 +470,49 @@ export function BriefingV6Scene() {
           {showBriefing ? <BriefingV6Background reducedMotion={reduced} /> : isPlan ? <PlanBackground /> : <NotBuiltBackground />}
 
           {/* left rail — hover to expand (Figma 1002-12213) */}
-          <Rail active={activeNav} onSelect={setActiveNav} onExit={close} slideIn={fromDiscovery} />
+          <Rail
+            active={showAssessment ? 'Planning' : activeNav}
+            onSelect={(s) => { if (s === 'Briefing') { setShowAssessment(false); setShowIntegrated(false) }; setActiveNav(s) }}
+            onExit={close}
+            slideIn={fromDiscovery}
+          />
 
           {/* page */}
           <div className="relative z-10 flex min-w-0 flex-1 flex-col">
-            {/* not-built pages drop the top bar (title + date) and bottom subnav */}
-            {showBriefing && (
+            {/* not-built pages (other than Clients) drop the top bar and bottom subnav */}
+            {(showBriefing || isClients) && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: chromeIn ? 1 : 0 }}
                 transition={{ duration: DURATION.standard * 2, ease: EASE.settle }}
               >
-                <TopNav eyebrow={topNavMeta.eyebrow} label={topNavMeta.label} onPrev={() => stepDay(-1)} onNext={() => stepDay(1)} />
+                {isClients ? (
+                  <TopNav
+                    title="Clients"
+                    right={(
+                      <button
+                        type="button"
+                        onClick={() => setClientsView((v) => (v === 'onboarding' ? 'annual' : v === 'annual' ? 'legacy' : v))}
+                        className="rounded-full border border-[var(--nyl-blue-500)] px-4 py-1.5 text-[13px] font-medium text-[var(--nyl-blue-500)] hover:bg-[var(--nyl-blue-050)]"
+                      >
+                        Sync
+                      </button>
+                    )}
+                  />
+                ) : (
+                  <TopNav eyebrow={topNavMeta.eyebrow} label={topNavMeta.label} onPrev={() => stepDay(-1)} onNext={() => stepDay(1)} />
+                )}
               </motion.div>
             )}
 
             {!showBriefing ? (
-              isPlan ? <PlanPage /> : <NavPlaceholder section={activeNav} />
+              isClients ? (
+                clientsView === 'onboarding' ? <Onboarding /> : clientsView === 'annual' ? <Annual /> : <Legacy />
+              ) : isPlan ? <PlanPage /> : <NavPlaceholder section={activeNav} />
+            ) : showAssessment ? (
+              <Assessment />
+            ) : showIntegrated ? (
+              <Integrated />
             ) : (
             <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
                 {/* LEFT — fixed editorial column (4 cols · does NOT scroll).
@@ -619,7 +668,11 @@ export function BriefingV6Scene() {
                           onSnooze={() => snooze(e.model.id)}
                           onDismiss={() => dismiss(e.model.id)}
                           onAddToQueue={() => {/* queued — settle proceeds via timer */}}
-                          onPrimary={() => surface(e.model.id)}
+                          onPrimary={() => (
+                            e.model === SANDRA_TASK2 ? setShowAssessment(true)
+                              : e.model === SANDRA_TASK3 ? setShowIntegrated(true)
+                              : surface(e.model.id)
+                          )}
                           onUndo={() => undo(e.model.id)}
                         />
                       </motion.div>
@@ -986,7 +1039,7 @@ const NAV_ITEMS: RailItem[] = [
   { Icon: PersonCheckIcon, label: 'Clients', size: 40 },
   { Icon: TagIcon, label: 'Actives', size: 40 },
   { Icon: OrgChartIcon, label: 'Prospects', size: 22 },
-  { Icon: BriefcaseIcon, label: 'Business', size: 40 },
+  { Icon: BriefcaseIcon, label: 'Planning', size: 40 },
   { Icon: ListAddIcon, label: 'Plan', size: 24 },
 ]
 const BOTTOM_ITEMS: RailItem[] = [
@@ -1098,25 +1151,30 @@ function Rail({ active, onSelect, onExit, slideIn = false }: { active: string; o
 /* ── top nav — "Briefing" · centered date · dev controls ────────────────────
  * Center date matches Figma (TODAY · MONDAY, DEC 12 with prev/next chevrons).
  * The time-of-day toggle + Replay are demo controls (not in the Figma chrome). */
-function TopNav({ eyebrow, label, onPrev, onNext, prevDisabled }: { eyebrow: string | null; label: string; onPrev: () => void; onNext: () => void; prevDisabled?: boolean }) {
+function TopNav({ title = 'Briefing', eyebrow, label, onPrev, onNext, prevDisabled, right }: { title?: string; eyebrow?: string | null; label?: string; onPrev?: () => void; onNext?: () => void; prevDisabled?: boolean; right?: ReactNode }) {
   /* Fixed 120px band whose center (60px) matches the rail's NYL logo center
      (rail py-10 = 40px + 40px logo / 2), so the page title + date carousel sit
      on the same horizontal line as the logo. */
   return (
     <div className="flex h-[120px] items-center">
-      {/* Same 12-col grid as the page content: "Briefing" spans the left 5 cols
-          (aligned with the headline); the date toggle spans the right 7 cols —
+      {/* Same 12-col grid as the page content: the title spans the left 5 cols
+          (aligned with the headline); the right slot spans the right 7 cols —
           the SAME column as the task-card stack — with the chevrons pinned to
-          that stack's left/right edges and the date centered between them. */}
+          that stack's left/right edges and the date centered between them
+          (or a custom `right` node, e.g. the Clients page's Sync button). */}
       <div className={[GRID, 'grid w-full grid-cols-12 items-center gap-6'].join(' ')}>
-        <p className="col-span-5 font-serif text-[18px] text-[var(--text-headline)]" style={{ fontWeight: 400 }}>Briefing</p>
+        <p className="col-span-5 font-serif text-[18px] text-[var(--text-headline)]" style={{ fontWeight: 400 }}>{title}</p>
 
-        <div className="col-span-7 grid grid-cols-[auto_1fr_auto] items-center">
-          <button type="button" onClick={onPrev} disabled={prevDisabled} aria-label="Previous day" className="justify-self-start text-[18px] leading-none text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)] disabled:opacity-40 disabled:hover:text-[var(--nyl-blue-500)]">‹</button>
-          <span className="text-center text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-headline)]">
-            {eyebrow && <>{eyebrow} <span className="text-[var(--text-body-faint)]">·</span> </>}{label}
-          </span>
-          <button type="button" onClick={onNext} aria-label="Next day" className="justify-self-end text-[18px] leading-none text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]">›</button>
+        <div className="col-span-7 flex items-center justify-end">
+          {right ? right : (
+            <div className="grid w-full grid-cols-[auto_1fr_auto] items-center">
+              <button type="button" onClick={onPrev} disabled={prevDisabled} aria-label="Previous day" className="justify-self-start text-[18px] leading-none text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)] disabled:opacity-40 disabled:hover:text-[var(--nyl-blue-500)]">‹</button>
+              <span className="text-center text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-headline)]">
+                {eyebrow && <>{eyebrow} <span className="text-[var(--text-body-faint)]">·</span> </>}{label}
+              </span>
+              <button type="button" onClick={onNext} aria-label="Next day" className="justify-self-end text-[18px] leading-none text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]">›</button>
+            </div>
+          )}
         </div>
       </div>
     </div>

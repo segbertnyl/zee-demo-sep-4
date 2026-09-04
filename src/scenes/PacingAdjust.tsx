@@ -512,7 +512,7 @@ export function PacingAdjust({ onSkip, onConfirm }: PacingAdjustProps) {
   const anyOutOfRange = SLIDERS.some(s => isOutOfRange(s.id))
   const outOfRangeSliders = SLIDERS.filter(s => isOutOfRange(s.id))
 
-  const apptsPerWk = calcApptsPerWk(values.referrals, values.prospects, values.networking)
+  const apptsPerWk = 11
   // Status: below the recommended range = off track; above it = stretch; else on track.
   const anyBelow = SLIDERS.some(s => values[s.id] < s.recommendedMin)
   const anyAbove = SLIDERS.some(s => values[s.id] > s.recommendedMax)
