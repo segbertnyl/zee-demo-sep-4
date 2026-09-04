@@ -1,0 +1,143 @@
+{
+  "24": {
+    "on-light": {
+      "dotScale": 0.07,
+      "glowScale": 0.022,
+      "minOpacity": 0.4,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.85,
+      "haloStrength": 1
+    }
+  },
+  "40": {
+    "default": {
+      "dotScale": 0.055,
+      "glowScale": 0.031,
+      "minOpacity": 0.4,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.62,
+      "haloStrength": 1,
+      "points": 51
+    },
+    "on-light": {
+      "dotScale": 0.065,
+      "glowScale": 0.022,
+      "minOpacity": 0.4,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.75,
+      "haloStrength": 0.65,
+      "points": 40
+    }
+  },
+  "64": {
+    "default": {
+      "dotScale": 0.045,
+      "glowScale": 0.022,
+      "minOpacity": 0.4,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.67,
+      "haloStrength": 1,
+      "points": 60
+    },
+    "on-light": {
+      "dotScale": 0.07,
+      "glowScale": 0.022,
+      "minOpacity": 0.4,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.8,
+      "haloStrength": 0.65,
+      "points": 50
+    },
+    "on-dark": {
+      "dotScale": 0.045,
+      "glowScale": 0.022,
+      "minOpacity": 0.4,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.8,
+      "haloStrength": 0.65,
+      "points": 60
+    }
+  },
+  "96": {
+    "default": {
+      "dotScale": 0.04,
+      "glowScale": 0.022,
+      "minOpacity": 0.4,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.7
+    },
+    "on-light": {
+      "dotScale": 0.04,
+      "glowScale": 0.022,
+      "minOpacity": 0.4,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.7,
+      "haloStrength": 0.45,
+      "points": 69
+    },
+    "on-dark": {
+      "dotScale": 0.045,
+      "glowScale": 0.022,
+      "minOpacity": 0.4,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.8,
+      "haloStrength": 1,
+      "points": 60
+    }
+  },
+  "160": {
+    "default": {
+      "dotScale": 0.04,
+      "glowScale": 0.031,
+      "minOpacity": 0.65,
+      "rotationSpeed": 0.35,
+      "purpleMix": 0.8,
+      "haloStrength": 1
+    },
+    "on-light": {
+      "dotScale": 0.04,
+      "glowScale": 0.023,
+      "minOpacity": 0.5,
+      "rotationSpeed": 0.35,
+      "purpleMix": 0.85,
+      "haloStrength": 0.35,
+      "points": 86
+    },
+    "on-dark": {
+      "dotScale": 0.045,
+      "glowScale": 0.029,
+      "minOpacity": 0.65,
+      "rotationSpeed": 0.35,
+      "purpleMix": 0.8,
+      "haloStrength": 0.8,
+      "points": 87
+    }
+  },
+  "256": {
+    "default": {
+      "dotScale": 0.04,
+      "glowScale": 0.022,
+      "minOpacity": 0.15,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.78
+    },
+    "on-light": {
+      "dotScale": 0.035,
+      "glowScale": 0.017,
+      "minOpacity": 0.1,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.9,
+      "haloStrength": 0.2,
+      "points": 120
+    },
+    "on-dark": {
+      "dotScale": 0.02,
+      "glowScale": 0.022,
+      "minOpacity": 0.15,
+      "rotationSpeed": 0.5,
+      "purpleMix": 0.92,
+      "haloStrength": 0.6,
+      "points": 200
+    }
+  }
+}

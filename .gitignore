@@ -1,0 +1,40 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vercel
+
+# PartyKit local cache
+.partykit
+.env
+scripts/service-account.json
+
+# Storybook build output
+storybook-static/
+
+# Test artifacts
+playwright-report/
+test-results/
+# Visual snapshot baselines are machine-local — regenerate with
+# `npm run test:storybook:update-snapshots` on first run.
+tests/__snapshots__/

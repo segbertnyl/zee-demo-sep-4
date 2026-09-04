@@ -1,0 +1,306 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@theme inline {
+  --color-background: var(--bg-canvas);
+  --color-foreground: var(--text-body);
+  --color-card: var(--bg-surface);
+  --color-card-foreground: var(--text-body);
+  --color-popover: var(--bg-surface-elevated);
+  --color-popover-foreground: var(--text-body);
+  --color-muted: var(--bg-surface);
+  --color-muted-foreground: var(--text-body-muted);
+
+  --color-primary: var(--action-primary);
+  --color-primary-foreground: var(--action-on-primary);
+  --color-secondary: var(--nyl-blue-800);
+  --color-secondary-foreground: var(--nyl-white);
+  --color-accent: var(--nyl-blue-500);
+  --color-accent-foreground: var(--nyl-white);
+
+  --color-border: var(--border-default);
+  --color-input: var(--border-default);
+  --color-ring: var(--focus-ring);
+
+  --color-headline: var(--text-headline);
+  --color-headline-muted: var(--text-headline-muted);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  --radius: var(--radius-md);
+}
+
+html, body, #root {
+  margin: 0;
+  background: var(--bg-canvas);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  font-weight: var(--weight-regular);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+html { height: 100%; }
+body, #root { min-height: 100%; }
+
+* { box-sizing: border-box; }
+
+::selection {
+  background: var(--nyl-blue-500);
+  color: var(--nyl-white);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.headline {
+  font-family: var(--font-serif);
+  color: var(--text-headline);
+  font-weight: var(--weight-regular);
+  letter-spacing: -0.012em;
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-body-muted);
+}
+.accent { color: var(--text-accent); }
+
+/* Fullscreen takeover roots bleed 1px past the viewport so environmental
+ * hairlines (fractional browser zoom / display scaling on demo machines)
+ * never reveal the layer underneath. Use instead of `fixed inset-0`. */
+.overlay-bleed {
+  position: fixed;
+  inset: -1px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ---- Button component ---- */
+/* Hover/active states live here so CSS pseudo-selectors apply reliably.
+ * Base layout, radius, and transitions are handled by Tailwind in Button.tsx. */
+
+.btn-primary {
+  background: var(--action-primary);
+  color: var(--nyl-white);
+  padding: 12px 32px;
+  border: none;
+}
+.btn-primary:not(:disabled):hover  { background: var(--action-primary-hover); }
+.btn-primary:not(:disabled):active { background: #001e94; }
+.btn-primary:disabled               { background: var(--bg-surface-disabled); color: var(--text-body-faint); }
+
+.btn-primary-dark {
+  background: var(--nyl-white);
+  color: var(--action-primary-hover);
+  padding: 12px 32px;
+  border: none;
+}
+.btn-primary-dark:not(:disabled):hover  { background: #e5f1ff; }
+.btn-primary-dark:not(:disabled):active { background: var(--nyl-blue-100); }
+.btn-primary-dark:disabled               { background: var(--bg-surface-disabled); color: var(--text-body-faint); }
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--action-primary-hover);
+  color: var(--action-primary-hover);
+  padding: 10px 30px; /* accounts for 2px border */
+}
+.btn-secondary:not(:disabled):hover  { border-color: #001e94; color: #001e94; }
+.btn-secondary:not(:disabled):active { border-color: var(--nyl-blue-800); color: var(--nyl-blue-800); }
+.btn-secondary:disabled               { border-color: var(--text-body-faint); color: var(--text-body-faint); }
+
+.btn-secondary-dark {
+  background: transparent;
+  border: 2px solid var(--nyl-white);
+  color: var(--nyl-white);
+  padding: 10px 30px;
+}
+.btn-secondary-dark:not(:disabled):hover  { border-color: #e5f1ff; color: #e5f1ff; }
+.btn-secondary-dark:not(:disabled):active { border-color: var(--nyl-blue-100); color: var(--nyl-blue-100); }
+.btn-secondary-dark:disabled               { border-color: var(--text-body-faint); color: var(--text-body-faint); }
+
+.btn-text {
+  background: transparent;
+  border: none;
+  color: var(--action-primary-hover);
+  padding: 12px 2px;
+}
+.btn-text:not(:disabled):hover  { color: #001e94; }
+.btn-text:not(:disabled):active { color: var(--nyl-blue-800); }
+.btn-text:disabled               { color: var(--text-body-faint); }
+
+.btn-text-dark {
+  background: transparent;
+  border: none;
+  color: var(--nyl-white);
+  padding: 12px 2px;
+}
+.btn-text-dark:not(:disabled):hover  { color: #e5f1ff; }
+.btn-text-dark:not(:disabled):active { color: var(--nyl-blue-100); }
+.btn-text-dark:disabled               { color: var(--text-body-faint); }
+
+/* Outlined — transparent bg, 1.5px brand-blue border, rounded-[8px] */
+.btn-outlined {
+  background: transparent;
+  border: 1.5px solid var(--action-primary);
+  color: var(--action-primary);
+  padding: 10px 30px;
+  border-radius: 8px;
+}
+.btn-outlined:not(:disabled):hover  { background: #f0f5ff; border-color: #001e94; color: #001e94; }
+.btn-outlined:not(:disabled):active { background: #e0ecff; border-color: var(--nyl-blue-800); color: var(--nyl-blue-800); }
+.btn-outlined:disabled              { border-color: var(--text-body-faint); color: var(--text-body-faint); opacity: 0.4; }
+
+/* Icon — square outlined button for icon-only content (e.g. nav arrows) */
+.btn-icon {
+  background: transparent;
+  border: 1.5px solid var(--action-primary);
+  color: var(--action-primary);
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+.btn-icon:not(:disabled):hover  { background: #f0f5ff; }
+.btn-icon:not(:disabled):active { background: #e0ecff; }
+.btn-icon:disabled              { opacity: 0.4; }
+
+/* ---- OptionTile component ---- */
+/* All state-dependent styles live here so the browser owns both ends of the
+ * transition. Splitting state between CSS classes and React inline styles
+ * causes a dropped frame mid-transition. */
+
+.option-tile {
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-surface-elevated);
+  border-color: var(--border-default);
+  color: var(--text-headline);
+  transition-property: color, background-color, border-color;
+  transition-timing-function: linear;
+  transition-duration: 180ms;
+}
+.option-tile:not(:disabled):not([aria-pressed="true"]):hover {
+  border-color: var(--border-strong);
+}
+.option-tile[aria-pressed="true"] {
+  background-color: var(--global\/blue\/blue-050, #e5f1ff);
+  border-color: var(--global\/blue\/blue-150, #b2d5ff);
+  color: var(--text-headline, #17181c);
+  box-shadow: 0 2px 28px 3px rgba(4, 104, 255, 0.12);
+}
+
+/* Subtitle */
+.option-tile-sub {
+  color: var(--text-body-muted);
+  transition: color 180ms linear;
+}
+.option-tile[aria-pressed="true"] .option-tile-sub {
+  color: var(--text-body-muted);
+}
+
+/* Disabled state */
+.option-tile:disabled {
+  background-color: var(--bg-surface-elevated);
+  border-color: var(--border-subtle);
+  color: var(--global\/gray\/gray-500, #7d7e82);
+  cursor: not-allowed;
+}
+.option-tile:disabled .option-tile-sub {
+  color: var(--global\/gray\/gray-500, #7d7e82);
+}
+
+
+/* ----------------------------------------------------------------------------
+ * Nyla-suggested card glow — rotating conic-gradient border (purple↔blue).
+ * Technique adapted from https://codepen.io/Quakeee/pen/EaxRKjp — an animated
+ * @property angle drives a conic-gradient behind the card; the inner card sits
+ * on top so only the edge shows as a glowing border. Per direction: kept purple
+ * with a blue gradient, slowed ~4x (the reference spins ~3s → 12s here), with
+ * extra blur + a wider glow halo for a softer effect. The static base purple
+ * glow is the box-shadow applied by the component (NYLA.glow.peakShadow).
+ * -------------------------------------------------------------------------- */
+@property --nyla-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes nyla-border-spin {
+  to { --nyla-angle: 360deg; }
+}
+
+.nyla-suggest-glow { position: relative; }
+
+/* The card content layer sits above the gradient pseudos. */
+.nyla-suggest-glow > .nyla-suggest-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* ::before = the visible rotating gradient border · ::after = soft blurred
+ * halo. Two bright purple-400 "sparkle" arcs sweep the perimeter fast (comet-
+ * style, like codepen EaxRKjp) over a faint purple base, so a moving highlight
+ * reads clearly the moment the card appears. Purple-400 per request. */
+.nyla-suggest-glow::before,
+.nyla-suggest-glow::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 18px;
+  z-index: 0;
+  background: conic-gradient(
+    from var(--nyla-angle),
+    color-mix(in srgb, var(--nyl-purple-100) 14%, transparent) 0deg,
+    var(--nyl-purple-100) 28deg,
+    color-mix(in srgb, var(--nyl-purple-100) 70%, white) 44deg,
+    var(--nyl-purple-100) 60deg,
+    color-mix(in srgb, var(--nyl-purple-100) 14%, transparent) 104deg,
+    color-mix(in srgb, var(--nyl-purple-100) 14%, transparent) 180deg,
+    var(--nyl-purple-100) 208deg,
+    color-mix(in srgb, var(--nyl-purple-100) 70%, white) 224deg,
+    var(--nyl-purple-100) 240deg,
+    color-mix(in srgb, var(--nyl-purple-100) 14%, transparent) 284deg,
+    color-mix(in srgb, var(--nyl-purple-100) 14%, transparent) 360deg
+  );
+  animation: nyla-border-spin 5.2s ease-in-out infinite; /* toned-down purple-100 sparkle; slow, eased sweep */
+}
+/* Wider, heavily-blurred halo = the prominent glow. */
+.nyla-suggest-glow::after {
+  inset: -14px;
+  border-radius: 30px;
+  filter: blur(20px);
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nyla-suggest-glow::before,
+  .nyla-suggest-glow::after {
+    animation: none;
+    background: var(--nyl-purple-100);
+  }
+  .nyla-suggest-glow::after { opacity: 0.35; }
+}
+
+/* Dotted ground — used in v4 scenes for an editorial paper texture */
+.dot-ground {
+  background-color: #ecebe7;
+  background-image: radial-gradient(circle at center, rgba(15, 25, 65, 0.08) 1px, transparent 1.4px);
+  background-size: 18px 18px;
+}
+
+/* TextInput text variant — italic muted placeholder for free-text fields */
+.text-input-text::placeholder {
+  font-style: italic;
+  color: var(--text-body-muted);
+}

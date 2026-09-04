@@ -1,0 +1,239 @@
+/* ----------------------------------------------------------------------------
+ * NYL token layer — Light Theme.
+ * Primitives → Semantics → Theme. Touch tokens here, not components.
+ * Raw JSON preserved at src/styles/tokens/*.tokens.json
+ * -------------------------------------------------------------------------- */
+
+:root {
+  /* Brand primitives — Extended palette */
+  --nyl-white: #ffffff;
+  --nyl-gray-025: #faf9f8;
+  --nyl-gray-050: #f0efed;
+  --nyl-gray-100: #e8e6e4;
+  --nyl-gray-150: #d6d3d0;
+  --nyl-gray-250: #c2bfbd;
+  --nyl-gray-300: #b3afac;
+  --nyl-gray-500: #76757a;
+  --nyl-gray-700: #4b4c52;
+  --nyl-gray-800: #313238;
+  --nyl-gray-900: #17181c;
+
+  --nyl-blue-025: #f2f8ff;         /* Figma blue-025 */
+  --nyl-blue-050: #e5f1ff;         /* Lightest blue tint — selected state backgrounds */
+  --nyl-blue-100: #cce3ff;
+  --nyl-blue-200: #99c8ff;         /* Figma blue-200 */
+  --nyl-blue-250: #80baff;         /* Brand Light Blue — node base */
+  --nyl-blue-400: #3388ff;         /* Figma blue-400 */
+  --nyl-blue-500: #0468ff;         /* Brand Blue */
+  --nyl-blue-600: #0044cc;
+  --nyl-blue-700: #001e94;         /* Mid-dark blue — selected tag text, active states */
+  --nyl-blue-800: #000a62;         /* Brand Dark Blue */
+
+  --nyl-green-50: #e9f9f1;
+  --nyl-green-200: #a5efbf;
+  --nyl-green-600: #1ab382;
+  --nyl-green-700: #0d8b6b;
+  --nyl-green-800: #016355;
+
+  /* Red / lapse-risk primitives (from Figma red-40 / red-80). Closes the
+   * documented urgent-color design-system gap. */
+  --nyl-red-040: #ffbab8;
+  --nyl-red-080: #c02321;
+
+  --nyl-orange-100: #ffe8cf;       /* Brand Light Orange — Pantone 155 */
+  --nyl-orange-400: #ff9522;       /* Brand Orange — Pantone 2013 */
+  --nyl-orange-500: #f2840d;       /* Custom darker hover; not in brand sheet */
+  --nyl-orange-700: #b45309;       /* Deep orange — status-pill text on light fill */
+
+  --nyl-purple-025: #faf5ff;
+  --nyl-purple-050: #f4e6ff;
+  --nyl-purple-100: #eaccff;
+  --nyl-purple-200: #d3a1f7;
+  --nyl-purple-400: #a552e0;       /* rgb(165,82,224) — gradient stop */
+  --nyl-purple-500: #8b37c8;       /* rgb(139,55,200) — gradient stop */
+  --nyl-purple-600: #7028a4;
+  --nyl-purple-700: #4d1773;       /* Brand Purple — Pantone 2607 */
+  --nyl-purple-900: #1c092b;       /* rgb(28,9,43)    — gradient stop */
+
+  /* Brand "Light Gray" — Pantone Warm Gray 1 */
+  --nyl-gray-warm: #e3e0dd;
+
+  /* Data Visualization palette */
+  --dv-blue-01: var(--nyl-blue-250);
+  --dv-blue-02: var(--nyl-blue-500);
+  --dv-blue-03: var(--nyl-blue-800);
+  --dv-green-01: var(--nyl-green-600);
+  --dv-green-02: var(--nyl-green-800);
+  --dv-orange: var(--nyl-orange-500);
+  --dv-purple: var(--nyl-purple-600);
+  --dv-gray: var(--nyl-gray-500);
+
+  /* Trigger → DV color map */
+  --trigger-new-home: var(--dv-orange);
+  --trigger-birth: var(--dv-green-01);
+  --trigger-job-change: var(--dv-blue-02);
+  --trigger-term-expiring: var(--dv-orange);
+  --trigger-no-touch-60: var(--dv-gray);
+  --trigger-no-touch-90: var(--dv-purple);
+  --trigger-wealth-milestone: var(--dv-blue-01);
+  --trigger-business-sale: var(--dv-green-02);
+
+  /* Typography */
+  --font-serif: "alverata", "Alverata", Georgia, ui-serif, serif;
+  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Type scale */
+  --size-display-01: 56px;
+  --line-display-01: 64px;
+  --size-display-02: 48px;
+  --line-display-02: 56px;
+  --size-display-03: 40px;
+  --line-display-03: 48px;
+  --size-xl-01: 32px;
+  --line-xl-01: 40px;
+  --size-lg-01: 24px;
+  --line-lg-01: 32px;
+  --size-md-01: 18px;
+  --line-md-01: 28px;
+  --size-sm-01: 14px;
+  --line-sm-01: 20px;
+  --size-xs-01: 12px;
+  --line-xs-01: 16px;
+
+  /* Spacing */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+}
+
+/* ----------------------------------------------------------------------------
+ * LIGHT semantic surface — white canvas, black/blue type, editorial restraint.
+ * -------------------------------------------------------------------------- */
+:root {
+  --bg-canvas: #ffffff;
+  --bg-canvas-fog: #ffffff;
+  --bg-canvas-dark: var(--nyl-blue-800);   /* Brand Dark Blue field, used for hero bands & covers. */
+  --bg-surface: var(--nyl-gray-025);
+  --bg-surface-elevated: var(--nyl-white);
+  --bg-surface-translucent: rgba(255, 255, 255, 0.78);
+  --bg-inverse: var(--nyl-blue-800);
+  --bg-overlay-dark: #1a0a2e;              /* Deep-purple takeover overlays (welcome sequence, landing chooser). */
+
+  --text-headline: var(--nyl-gray-900);
+  --text-headline-muted: var(--nyl-gray-700);
+  --text-accent: var(--nyl-blue-500);
+  --text-body: var(--nyl-gray-800);
+  --text-body-muted: var(--nyl-gray-500);
+  --text-body-faint: var(--nyl-gray-300);
+
+  --border-subtle: rgba(23, 24, 28, 0.08);
+  --border-default: rgba(23, 24, 28, 0.14);
+  --border-strong: rgba(23, 24, 28, 0.28);
+  --border-brand: var(--nyl-blue-500);
+
+  --action-primary: var(--nyl-blue-500);
+  --action-primary-hover: var(--nyl-blue-600);
+  --action-on-primary: var(--nyl-white);
+  --focus-ring: var(--nyl-blue-500);
+
+  /* AI / agent action signature — purple. Standard human-initiated actions stay
+   * blue. Documented rule: anything that triggers Nyla to think,
+   * draft, or act autonomously uses --action-ai-*; manual destinations use blue. */
+  --action-ai: var(--nyl-purple-700);
+  --action-ai-hover: #5e1d8a;
+  --action-ai-soft: rgba(77, 23, 115, 0.08);
+  --action-ai-ring: rgba(77, 23, 115, 0.18);
+
+  /* Badge tones — briefing-v6 task cards. */
+  --badge-lapse: var(--nyl-red-080);
+  --badge-lapse-soft: rgba(192, 35, 33, 0.08);
+  --badge-opportunity: var(--nyl-green-800);
+  --badge-opportunity-soft: rgba(1, 99, 85, 0.10);
+  /* Ready (green) — fill green-50, dot green-600, text green-700. */
+  --badge-ready: var(--nyl-green-700);
+  --badge-ready-soft: var(--nyl-green-50);
+  --badge-ready-dot: var(--nyl-green-600);
+  --badge-monitor: var(--nyl-gray-700);
+  --badge-monitor-soft: var(--nyl-gray-050);
+  --badge-prep: var(--nyl-orange-700);
+  --badge-prep-soft: rgba(242, 132, 13, 0.12);
+  /* Event badge — blue, with a visible stroke + brighter dot. */
+  --badge-event: var(--nyl-blue-600);
+  --badge-event-soft: var(--nyl-blue-025);
+  --badge-event-border: var(--nyl-blue-100);
+  --badge-event-dot: var(--nyl-blue-400);
+  /* Nyla "NEW" suggested pill — purple. */
+  --badge-new: var(--nyl-purple-600);
+  --badge-new-soft: var(--nyl-purple-050);
+
+  /* Client priority tiers — A (top: green), B (orange), C (blue), D (warm gray). */
+  --tier-a: var(--nyl-green-800);
+  --tier-a-soft: var(--nyl-green-200);
+  --tier-b: var(--nyl-orange-400);
+  --tier-b-soft: var(--nyl-orange-100);
+  --tier-c: var(--nyl-blue-500);
+  --tier-c-soft: var(--nyl-blue-100);
+  --tier-d: var(--nyl-gray-500);
+  --tier-d-soft: var(--nyl-gray-warm);
+
+  /* Goal status — used in goals rail + plan / target views. */
+  --status-on-track: var(--nyl-green-800);
+  --status-on-track-soft: var(--nyl-green-200);
+  --status-stretch: var(--nyl-orange-400);
+  --status-stretch-soft: var(--nyl-orange-100);
+  --status-off-course: #c44a1f;
+  --status-off-course-soft: #ffd6c2;
+
+  /* Node base colors (used by ProspectNodes) */
+  --node-client: var(--nyl-blue-250);
+  --node-prospect: #b8d4f5;
+  --node-dim-mix: var(--nyl-gray-100);
+
+  /* Hover/disabled surfaces — theme-aware shorthand for the gray-25/50 used across UI */
+  --bg-surface-subtle: var(--nyl-gray-025);
+  --bg-surface-disabled: var(--nyl-gray-050);
+
+  /* Onboarding intro (dark) screen blobs — overlaid on --nyl-purple-700 base.
+   * Cool = --nyl-purple-600 @ 65% (lighter purple zone), Warm = --nyl-orange-400 @ 30% */
+  --bg-onboarding-intro-blob-cool: rgba(112, 40, 164, 0.75);
+  --bg-onboarding-intro-blob-warm: rgba(255, 149, 34, 0.35);
+
+  /* "Not built" page background — soft peach + lavender cloud on white
+   * (Figma 1268-29002). Used behind the placeholder pages. */
+  --bg-notbuilt-warm:     rgba(255, 221, 209, 0.65);
+  --bg-notbuilt-lavender: rgba(214, 175, 244, 0.42);
+
+  /* Onboarding ambient background blobs — primitives at alpha.
+   * Warm = --nyl-orange-100 @ 55%, Cool = --nyl-blue-100 @ 50%, Accent = --nyl-blue-250 @ 40%
+   * Lavender = --nyl-purple-700 family at 90% lightness @ 45% — tonally similar to cool/accent */
+  --bg-onboarding-blob-warm:     rgba(255, 232, 207, 0.65);
+  --bg-onboarding-blob-cool:     rgba(204, 227, 255, 0.50);
+  --bg-onboarding-blob-accent:   rgba(128, 186, 255, 0.40);
+  --bg-onboarding-blob-lavender: rgba(232, 214, 245, 0.45);
+}
+
+/* Dark theme removed · app is light-only.
+ * The previous :root[data-theme="dark"] block was inverting the entire token
+ * layer when the user's OS preferred dark mode, producing washed-out renders. */
