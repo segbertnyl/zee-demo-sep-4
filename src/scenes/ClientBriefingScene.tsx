@@ -209,8 +209,7 @@ const FOUR_TASK: TaskCardModel = {
   clientPreview: ERIC_PREVIEW,
   headlineSuffix: 'is ready to discuss your full plan in details',
   doneSummary: 'Call Sandra Kim to reactivate WL policy',
-  description:
-    'Join the meeting and Sarah will open up your collaboration board so that you can work together.',
+  description: 'Join the meeting and Sarah will open up your collaboration board so that you can work together.',
   tags: [],
   footerLabel: 'Why is this important',
   primaryCta: 'Join now',
@@ -595,13 +594,10 @@ export function ClientBriefingScene() {
                 </div>
               </div>
             )}
-                        {activeNav === 'Dashboard' && dashboardView === 4 && (
+            {activeNav === 'Dashboard' && dashboardView === 4 && (
               <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
                 <div className="col-span-5 flex h-full flex-col pt-6">
-                  <BriefingHeadline
-                    text={'Today you take another step toward your goals'}
-                    reducedMotion={reduced}
-                  />
+                  <BriefingHeadline text={'Today you take another step toward your goals'} reducedMotion={reduced} />
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -948,12 +944,30 @@ export function ClientBriefingScene() {
                 )}
               </div>
             ) : activeNav === 'Resources' ? (
-              <div className="flex flex-row justify-center">
+              <motion.div
+                className="flex flex-row justify-center"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: DURATION.deliberate,
+                  ease: EASE.settle as [number, number, number, number],
+                }}
+              >
                 <img src={sarah} />
                 <Nyla size={120} className="absolute bottom-0 right-10" />
-              </div>
+              </motion.div>
             ) : activeNav === 'Financial Plan' && financialPlanView === 1 ? (
-              <div className="flex flex-row justify-center">
+              <motion.div
+                className="flex flex-row justify-center"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: DURATION.deliberate,
+                  ease: EASE.settle as [number, number, number, number],
+                }}
+              >
                 <img src={potentialRisks} />
                 <img src={nylaRisks} className="absolute right-0 top-[50%]" />
                 {
@@ -976,10 +990,19 @@ export function ClientBriefingScene() {
                 }
 
                 <Nyla size={120} className="absolute bottom-0 right-10" />
-              </div>
+              </motion.div>
             ) : activeNav === 'Financial Plan' && financialPlanView === 2 ? (
-              <div className="flex flex-row justify-center -mt-6">
-                <img src={financial2} className="absolute top-20"/>
+              <motion.div
+                className="flex flex-row justify-center -mt-6"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: DURATION.deliberate,
+                  ease: EASE.settle as [number, number, number, number],
+                }}
+              >
+                <img src={financial2} className="absolute top-20" />
                 <img src={nylaFin2} className="absolute right-0 top-[50%]" />
                 {
                   <ButtonContainer
@@ -989,8 +1012,8 @@ export function ClientBriefingScene() {
                     showClientSecondary={true}
                     showSecondary={false}
                     onPrimary={() => {
-                          setDashboardView(4)
-                          setActiveNav('Dashboard')
+                      setDashboardView(4)
+                      setActiveNav('Dashboard')
                     }}
                     onSecondary={() => {
                       setDashboardView(4)
@@ -1001,38 +1024,50 @@ export function ClientBriefingScene() {
                 }
 
                 <Nyla size={120} className="absolute bottom-0 right-10" />
-              </div>
-            ) : 
-            
-            activeNav === 'Financial Plan' && financialPlanView === 3 ? (
-              <div className="flex flex-col justify-center items-center w-full ">
-                <img src={financial3}  />
+              </motion.div>
+            ) : activeNav === 'Financial Plan' && financialPlanView === 3 ? (
+              <motion.div
+                className="flex flex-col justify-center items-center w-full "
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: DURATION.deliberate,
+                  ease: EASE.settle as [number, number, number, number],
+                }}
+              >
+                <img src={financial3} />
                 <img src={nylaApply} className="absolute right-0 " />
-     
-                  <ButtonContainer
-                    primaryLabel="Start your application"
-                    showSecondary={false}
-                    onPrimary={() => {
-                          setPreferenceView(2)
-                          setActiveNav('Preference Center')
-                    }}
-    
-                    className="absolute bottom-2 right-[20%]"
-                  />
+
+                <ButtonContainer
+                  primaryLabel="Start your application"
+                  showSecondary={false}
+                  onPrimary={() => {
+                    setPreferenceView(2)
+                    setActiveNav('Preference Center')
+                  }}
+
+                  className="absolute bottom-2 right-[20%]"
+                />
 
                 <Nyla size={120} className="absolute bottom-0 right-10" />
-              </div>
-            ) :
-            activeNav === 'Collab Board' ? (
-              <div className="flex flex-row justify-center">
+              </motion.div>
+            ) : activeNav === 'Collab Board' ? (
+              <motion.div
+                className="flex flex-row justify-center"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: DURATION.deliberate,
+                  ease: EASE.settle as [number, number, number, number],
+                }}
+              >
                 <img src={collabBoard} />
- 
 
                 <Nyla size={120} className="absolute bottom-0 right-10" />
-              </div>
-            ) :
-            
-            (
+              </motion.div>
+            ) : (
               <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
                 {SECTION_PLACEHOLDER[activeNav]}
               </div>

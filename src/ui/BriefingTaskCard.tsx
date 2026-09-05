@@ -665,7 +665,9 @@ export function BriefingTaskCard({
                     className={[
                       'text-[12.5px] font-medium transition-opacity',
                       LINK,
-                      state === 'default' ? 'opacity-0 group-hover:opacity-100 focus-visible:opacity-100' : 'opacity-100',
+                      state === 'default'
+                        ? 'opacity-0 group-hover:opacity-100 focus-visible:opacity-100'
+                        : 'opacity-100',
                     ].join(' ')}
                   >
                     Mark as done
