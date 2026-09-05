@@ -64,19 +64,6 @@ const BOTTOM_ITEMS: RailItem[] = [
   { Icon: CalendarIcon, label: 'Calendar', size: 40, dot: true },
 ]
 
-/* Placeholder body copy per rail section — separate from briefingV6Content.ts
- * on purpose. Fill in for real next pass. */
-const SECTION_PLACEHOLDER: Record<string, string> = {
-  Briefing: "Eric's briefing — skeleton placeholder.",
-  Clients: 'Clients — skeleton placeholder.',
-  Actives: 'Actives — skeleton placeholder.',
-  Prospects: 'Prospects — skeleton placeholder.',
-  Planning: 'Planning — skeleton placeholder.',
-  Plan: 'Plan — skeleton placeholder.',
-  Notifications: 'Notifications — skeleton placeholder.',
-  Calendar: 'Calendar — skeleton placeholder.',
-}
-
 const ERIC_PREVIEW = {
   nickname: '"Sarah Chen"',
   clientSince: '10+ years experience',
@@ -492,6 +479,9 @@ export function ClientBriefingScene() {
   useEffect(() => {
     if (open) setPreferenceStep(1)
   }, [open])
+  useEffect(() => {
+    if (open) setActiveNav('Dashboard')
+  }, [open])
   const [financialPlanView, setFinancialPlanView] = useState(1)
   useEffect(() => {
     if (open) setFinancialPlanView(1)
@@ -532,8 +522,8 @@ export function ClientBriefingScene() {
                     reducedMotion={reduced}
                   />
                   <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1 , y: 0}}
                     transition={{ duration: DURATION.standard, delay: 0.2 }}
                     className="mt-5 flex items-center gap-3"
                   >
@@ -578,7 +568,12 @@ export function ClientBriefingScene() {
                     />
                   </motion.div>
                 </div>
-                <div className="col-span-7 flex flex-col gap-8">
+                <motion.div
+                  className="col-span-7 flex flex-col gap-8"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: DURATION.standard, ease: EASE.settle }}
+                >
                   <BriefingTaskCard
                     model={THREE_TASK}
                     state="focus"
@@ -591,7 +586,7 @@ export function ClientBriefingScene() {
                   />
                   <img src={adB} />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
-                </div>
+                </motion.div>
               </div>
             )}
             {activeNav === 'Dashboard' && dashboardView === 4 && (
@@ -599,8 +594,8 @@ export function ClientBriefingScene() {
                 <div className="col-span-5 flex h-full flex-col pt-6">
                   <BriefingHeadline text={'Today you take another step toward your goals'} reducedMotion={reduced} />
                   <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: DURATION.standard, delay: 0.2 }}
                     className="mt-5 flex items-center gap-3"
                   >
@@ -645,7 +640,12 @@ export function ClientBriefingScene() {
                     />
                   </motion.div>
                 </div>
-                <div className="col-span-7 flex flex-col gap-8">
+                <motion.div
+                  className="col-span-7 flex flex-col gap-8"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: DURATION.standard, ease: EASE.settle }}
+                >
                   <BriefingTaskCard
                     model={FOUR_TASK}
                     state="focus"
@@ -658,17 +658,17 @@ export function ClientBriefingScene() {
                   />
                   <img src={adB} />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
-                </div>
+                </motion.div>
               </div>
             )}
-            {activeNav === 'Dashboard' && (dashboardView === 1 || dashboardView === 2) ? (
+            {activeNav === 'Dashboard' && (dashboardView === 1 || dashboardView === 2) && (
               /* View 1 — Sarah follow-up. Same shape as the original BriefingV6
                  layout: full-height 5/7 columns (no top/bottom split). Left
                  keeps the headline with While-You-Were-Away/Helpful-Insights
                  underneath; right keeps the top/bottom "nuance" but contained
                  in one column — one follow-up task card stacked above the
                  assets/debts image. */
-              <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
+              <div key={dashboardView} className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
                 <div className="col-span-5 flex h-full flex-col pt-6">
                   <BriefingHeadline
                     text={
@@ -725,7 +725,12 @@ export function ClientBriefingScene() {
                     />
                   </motion.div>
                 </div>
-                <div className="col-span-7 flex flex-col gap-8">
+                <motion.div
+                  className="col-span-7 flex flex-col gap-8"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: DURATION.standard, ease: EASE.settle }}
+                >
                   <BriefingTaskCard
                     model={dashboardView === 1 ? SANDRA_TASK : TWO_TASK}
                     state="focus"
@@ -737,9 +742,10 @@ export function ClientBriefingScene() {
                   />
                   <img src={adB} />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
-                </div>
+                </motion.div>
               </div>
-            ) : activeNav === 'Dashboard' && dashboardView === 0 ? (
+            )}
+            {activeNav === 'Dashboard' && dashboardView === 0 && (
               <div className="flex min-h-0 flex-1 flex-col ">
                 {/* view 0 (default) — top region: 7/12 of the body height.
                     5/7 col split inside, same shape as BriefingV6's left/right
@@ -819,7 +825,8 @@ export function ClientBriefingScene() {
                   </motion.div>
                 </div>
               </div>
-            ) : activeNav === 'Preference Center' && preferenceView === 1 ? (
+            )}
+            {activeNav === 'Preference Center' && preferenceView === 1 && (
               <div className={'pt-6 h-full flex flex-col items-center justify-center'}>
                 {preferenceStep === 1 && (
                   <>
@@ -943,7 +950,17 @@ export function ClientBriefingScene() {
                   </>
                 )}
               </div>
-            ) : activeNav === 'Resources' ? (
+            )}
+            {activeNav === 'Preference Center' && preferenceView === 2 && (
+              <div>hi</div>
+            )}
+                        {activeNav === 'Preference Center' && preferenceView === 3 && (
+              <div>hi</div>
+            )}
+                                    {activeNav === 'Legacy Vault' && (
+              <div>hi</div>
+            )}
+            {activeNav === 'Resources' && (
               <motion.div
                 className="flex flex-row justify-center"
                 initial={{ opacity: 0, y: 8 }}
@@ -957,20 +974,31 @@ export function ClientBriefingScene() {
                 <img src={sarah} />
                 <Nyla size={120} className="absolute bottom-0 right-10" />
               </motion.div>
-            ) : activeNav === 'Financial Plan' && financialPlanView === 1 ? (
-              <motion.div
-                className="flex flex-row justify-center"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: DURATION.deliberate,
-                  ease: EASE.settle as [number, number, number, number],
-                }}
-              >
-                <img src={potentialRisks} />
-                <img src={nylaRisks} className="absolute right-0 top-[50%]" />
-                {
+            )}
+            {activeNav === 'Financial Plan' && financialPlanView === 1 && (
+              <>
+                <motion.div
+                  className={[GRID, 'flex flex-row justify-center'].join(' ')}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: DURATION.deliberate,
+                    ease: EASE.settle as [number, number, number, number],
+                  }}
+                >
+                  <img src={potentialRisks} />
+
+                </motion.div>
+                <motion.div
+                  className={GRID}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+                >
+                                    <img src={nylaRisks} className="absolute right-0 top-[50%]" />
+                  <Nyla size={120} className="absolute bottom-0 right-10" />
                   <ButtonContainer
                     secondaryVariant="secondary"
                     primaryLabel="Accept"
@@ -987,24 +1015,33 @@ export function ClientBriefingScene() {
                     }}
                     className="mt-6 absolute bottom-10 right-72"
                   />
-                }
+                </motion.div>
+              </>
+            )}
+            {activeNav === 'Financial Plan' && financialPlanView === 2 && (
+              <>
+                <motion.div
+                  className={[GRID, 'flex flex-row justify-center -mt-6'].join(' ')}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: DURATION.deliberate,
+                    ease: EASE.settle as [number, number, number, number],
+                  }}
+                >
+                  <img src={financial2}/>
 
-                <Nyla size={120} className="absolute bottom-0 right-10" />
-              </motion.div>
-            ) : activeNav === 'Financial Plan' && financialPlanView === 2 ? (
-              <motion.div
-                className="flex flex-row justify-center -mt-6"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: DURATION.deliberate,
-                  ease: EASE.settle as [number, number, number, number],
-                }}
-              >
-                <img src={financial2} className="absolute top-20" />
-                <img src={nylaFin2} className="absolute right-0 top-[50%]" />
-                {
+                </motion.div>
+                <motion.div
+                  className={GRID}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+                >
+                                    <img src={nylaFin2} className="absolute right-0 top-[50%]" />
+                  <Nyla size={120} className="absolute bottom-0 right-10" />
                   <ButtonContainer
                     secondaryVariant="secondary"
                     primaryLabel="Prepare for my meeting"
@@ -1021,38 +1058,46 @@ export function ClientBriefingScene() {
                     }}
                     className="mt-6 absolute bottom-0 right-72"
                   />
-                }
-
-                <Nyla size={120} className="absolute bottom-0 right-10" />
-              </motion.div>
-            ) : activeNav === 'Financial Plan' && financialPlanView === 3 ? (
-              <motion.div
-                className="flex flex-col justify-center items-center w-full "
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: DURATION.deliberate,
-                  ease: EASE.settle as [number, number, number, number],
-                }}
-              >
-                <img src={financial3} />
-                <img src={nylaApply} className="absolute right-0 " />
-
-                <ButtonContainer
-                  primaryLabel="Start your application"
-                  showSecondary={false}
-                  onPrimary={() => {
-                    setPreferenceView(2)
-                    setActiveNav('Preference Center')
+                </motion.div>
+              </>
+            )}
+            {activeNav === 'Financial Plan' && financialPlanView === 3 && (
+              <>
+                <motion.div
+                  className={['ml-6 flex flex-row items-center justify-center w-full'].join(' ')}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: DURATION.deliberate,
+                    ease: EASE.settle as [number, number, number, number],
                   }}
+                >
+                  <img src={financial3} />
+                  <img src={nylaApply} className="" />
 
-                  className="absolute bottom-2 right-[20%]"
-                />
-
-                <Nyla size={120} className="absolute bottom-0 right-10" />
-              </motion.div>
-            ) : activeNav === 'Collab Board' ? (
+                </motion.div>
+                <motion.div
+                  className={GRID}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+                >
+                  <Nyla size={120} className="absolute bottom-0 right-10" />
+                  <ButtonContainer
+                    primaryLabel="Start your application"
+                    showSecondary={false}
+                    onPrimary={() => {
+                      setPreferenceView(2)
+                      setActiveNav('Preference Center')
+                    }}
+                    className="absolute bottom-2 right-[20%]"
+                  />
+                </motion.div>
+              </>
+            )}
+            {activeNav === 'Collab Board' && (
               <motion.div
                 className="flex flex-row justify-center"
                 initial={{ opacity: 0, y: 8 }}
@@ -1067,10 +1112,6 @@ export function ClientBriefingScene() {
 
                 <Nyla size={120} className="absolute bottom-0 right-10" />
               </motion.div>
-            ) : (
-              <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
-                {SECTION_PLACEHOLDER[activeNav]}
-              </div>
             )}
           </div>
         </motion.div>
