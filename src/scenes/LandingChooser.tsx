@@ -24,6 +24,7 @@ export function LandingChooser() {
   const openDiscovery = useAppStore((s) => s.openDiscovery)
   const openDiscoveryAt = useAppStore((s) => s.openDiscoveryAt)
   const openBriefingV6 = useAppStore((s) => s.openBriefingV6)
+  const openClientFlow = useAppStore((s) => s.openClientFlow)
   const completed = hasCompletedOnboarding()
 
   function pickOnboarding() {
@@ -38,6 +39,7 @@ export function LandingChooser() {
       quickLinks: [
         { label: 'Discovery', action: () => openDiscovery() },
         { label: 'Plan reveal', action: () => openDiscoveryAt('plan') },
+        { label: 'Client', action: () => openClientFlow() },
       ],
       action: pickOnboarding,
     },

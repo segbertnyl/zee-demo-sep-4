@@ -135,6 +135,18 @@ type AppState = {
   briefingV6FromDiscovery: boolean
   openBriefingV6FromDiscovery: () => void
   clearBriefingV6FromDiscovery: () => void
+  /* Client flow — placeholder onboarding wizard for a single client (Eric),
+   * fully separate from the advisor Discovery flow. Intro splash → loader →
+   * 3 question screens → hands off to the Client Briefing scene. */
+  clientFlowOpen: boolean
+  openClientFlow: () => void
+  closeClientFlow: () => void
+  /* Client Briefing — the client's own version of the briefing screen. Same
+   * chrome (rail + header shape) as BriefingV6Scene, but entirely separate
+   * nav state and body content. */
+  clientBriefingOpen: boolean
+  openClientBriefing: () => void
+  closeClientBriefing: () => void
   /* Drill-down breadcrumb trail — starts populating when the advisor enters
    * canvas mode and clicks a tile. Stays visible across destination scenes
    * (Business, Calendar, deep-dive canvases, etc.) so they can click back to
@@ -260,6 +272,12 @@ export const useAppStore = create<AppState>((set, get) => ({
   openBriefingV6FromDiscovery: () => set({ briefingV6Open: true, landingChoiceOpen: false, briefingV6FromDiscovery: true }),
   closeBriefingV6: () => set({ briefingV6Open: false, landingChoiceOpen: true }),
   clearBriefingV6FromDiscovery: () => set({ briefingV6FromDiscovery: false }),
+  clientFlowOpen: false,
+  openClientFlow: () => set({ clientFlowOpen: true, landingChoiceOpen: false }),
+  closeClientFlow: () => set({ clientFlowOpen: false, landingChoiceOpen: true }),
+  clientBriefingOpen: false,
+  openClientBriefing: () => set({ clientBriefingOpen: true, landingChoiceOpen: false }),
+  closeClientBriefing: () => set({ clientBriefingOpen: false, landingChoiceOpen: true }),
   navTrail: [],
   pushTrail: (crumb) => {
     const trail = get().navTrail
@@ -319,6 +337,8 @@ export const useAppStore = create<AppState>((set, get) => ({
     discoveryInitialStep: null,
     quickStartOpen: false,
     coachOpen: false,
+    clientFlowOpen: false,
+    clientBriefingOpen: false,
   }),
   canvasDrill: (next) => set({ canvasPath: [...get().canvasPath, next] }),
   canvasSurface: () => {

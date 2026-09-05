@@ -8,6 +8,7 @@ export interface ButtonContainerProps {
   onSecondary?: () => void
   secondaryVariant?: 'text' | 'secondary'
   showSecondary?: boolean
+  showClientSecondary?: boolean
   className?: string
 }
 
@@ -19,6 +20,7 @@ export function ButtonContainer({
   onSecondary,
   secondaryVariant = 'text',
   showSecondary = true,
+  showClientSecondary = false,
   className,
 }: ButtonContainerProps) {
   return (
@@ -31,6 +33,16 @@ export function ButtonContainer({
           variant={secondaryVariant === 'text' ? 'text' : 'secondary'}
           noArrow={secondaryVariant === 'text'}
           onClick={onSecondary}
+        >
+          {secondaryLabel}
+        </Button>
+      )}
+      {showClientSecondary && (
+        <Button
+          variant={'secondary'}
+          noArrow={secondaryVariant === 'text'}
+          onClick={onSecondary}
+          style={{border: 'none'}}
         >
           {secondaryLabel}
         </Button>

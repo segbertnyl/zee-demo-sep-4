@@ -20,6 +20,8 @@ import { YearInReview } from '@/scenes/YearInReview'
 import { PlanScene } from '@/scenes/PlanScene'
 import { DiscoveryFlow } from '@/scenes/DiscoveryFlow'
 import { BriefingV6Scene } from '@/scenes/BriefingV6Scene'
+import { ClientFlow } from '@/scenes/ClientFlow'
+import { ClientBriefingScene } from '@/scenes/ClientBriefingScene'
 import { NylaOverlay } from '@/components/NylaOverlay'
 import { WelcomeToDiscoveryProto } from '@/proto/WelcomeToDiscoveryProto'
 
@@ -149,6 +151,8 @@ export default function App() {
       <YearInReview />
       <DiscoveryFlow />
       <BriefingV6Scene />
+      <ClientFlow />
+      <ClientBriefingScene />
       {showTransitionProto && <WelcomeToDiscoveryProto onClose={() => setShowTransitionProto(false)} />}
       {showGrid && !briefingV6Open && <GridOverlay />}
       {showNylaOverlay && <NylaOverlay onClose={() => setShowNylaOverlay(false)} />}
