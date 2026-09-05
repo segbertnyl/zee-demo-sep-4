@@ -46,6 +46,7 @@ We're splitting the work into three lanes so nobody blocks anyone else.
 **What you own:** Individual UI components — buttons, cards, rails, loaders — in Storybook. You work on one component at a time, in isolation, without needing to understand the full prototype flow.
 
 **Where your files live:**
+
 - Components: `src/ui/YourComponent.tsx`
 - Storybook stories: `src/ui/YourComponent.stories.tsx`
 
@@ -74,12 +75,12 @@ We're splitting the work into three lanes so nobody blocks anyone else.
 
 **The four flows and their status:**
 
-| Flow | Figma section | Status |
-|---|---|---|
-| Welcome | `00 — Welcome` | Done |
-| Discovery | `01 — Discovery` | Done |
-| Plan Reveal | `02 — Plan Reveal` | In progress — sub-steps 2.A → 2.E still need migration |
-| Briefing | `03 — Briefing` | In progress — multi-state card layout + Sandra Kim content remaining |
+| Flow        | Figma section      | Status                                                               |
+| ----------- | ------------------ | -------------------------------------------------------------------- |
+| Welcome     | `00 — Welcome`     | Done                                                                 |
+| Discovery   | `01 — Discovery`   | Done                                                                 |
+| Plan Reveal | `02 — Plan Reveal` | In progress — sub-steps 2.A → 2.E still need migration               |
+| Briefing    | `03 — Briefing`    | In progress — multi-state card layout + Sandra Kim content remaining |
 
 **How to migrate a screen:**
 
@@ -91,6 +92,7 @@ We're splitting the work into three lanes so nobody blocks anyone else.
 **Your first task:** Migrate the Plan Reveal loading and math sub-steps (Figma `02 — Plan Reveal`, sub-steps 2.A and 2.B) in `src/scenes/OnboardingFlow.tsx`. Open those Figma screens, screenshot them, and say: "Update OnboardingFlow.tsx so the Plan Reveal sub-steps 2.A (loading state) and 2.B (math reveal) match these Figma designs."
 
 **Key components already available for Plan Reveal:**
+
 - `PercentLoader` — the circular loading indicator
 - `StageRail` / `PlanRail` — the left-side navigation rails
 - `CreatingBriefing` — the "building your briefing" transition screen
@@ -102,11 +104,13 @@ We're splitting the work into three lanes so nobody blocks anyone else.
 **What you own:** The words. You keep narrative copy, client names, data labels, and scenario content accurate and on-brand. You work primarily in data and content files — no component logic.
 
 **Where your files live:**
+
 - `src/data/briefingContent.ts` — all briefing card copy (client names, signal descriptions, action labels)
 - `src/scenes/freeformContent.ts` — freeform canvas content
 - Copy throughout `src/scenes/OnboardingFlow.tsx` — question labels, answer options, Nyla's dialogue lines
 
 **Demo personas to know:**
+
 - **Advisor:** Sarah (the user persona — do not use Marisol)
 - **AI assistant:** Nyla (do not call her "Chief of Staff" in UI copy)
 - **Featured client:** Sandra Kim (lapse risk scenario in Briefing)
@@ -128,6 +132,7 @@ We're splitting the work into three lanes so nobody blocks anyone else.
 ## What's already built
 
 **Component library (all in Storybook):**
+
 - Backgrounds: OnboardingBackground (V1/V2), OnboardingIntroBackground, OnboardingIntroOverlay
 - Onboarding nav: StageRail (with active states), PlanRail
 - Actions: Button (primary/secondary/text/outlined/icon), SectionActions
@@ -139,6 +144,7 @@ We're splitting the work into three lanes so nobody blocks anyone else.
 - Design system: Grid (desktop + mobile), Motion System (with widget), Colors, Spacing, Typography tokens
 
 **Prototype flows (working in dev server):**
+
 - Full onboarding: Welcome → Discovery (All About You + Your Plan steps)
 - Plan Reveal: partially migrated — 2.A–2.E still need work
 - Morning Briefing: card layout updated, some Sandra Kim content still to migrate
@@ -149,14 +155,14 @@ We're splitting the work into three lanes so nobody blocks anyone else.
 
 ## Key links
 
-| Link | URL |
-|---|---|
-| Figma source | https://www.figma.com/design/VCjqlGu9kQVy2i5nqDxKqa/Exploration-pt-II |
-| GitHub repo | https://github.com/HugeInternal/nylife-proto |
-| Active branch | `feat/storybook-components` |
-| Live preview | https://agent-os-v5-5-evienna-2363-huge-inc-sandbox.vercel.app *(password-gated)* |
-| Dev server (local) | http://localhost:5174 |
-| Storybook (local) | http://localhost:6007 |
+| Link               | URL                                                                               |
+| ------------------ | --------------------------------------------------------------------------------- |
+| Figma source       | https://www.figma.com/design/VCjqlGu9kQVy2i5nqDxKqa/Exploration-pt-II             |
+| GitHub repo        | https://github.com/HugeInternal/nylife-proto                                      |
+| Active branch      | `feat/storybook-components`                                                       |
+| Live preview       | https://agent-os-v5-5-evienna-2363-huge-inc-sandbox.vercel.app _(password-gated)_ |
+| Dev server (local) | http://localhost:5174                                                             |
+| Storybook (local)  | http://localhost:6007                                                             |
 
 ---
 
@@ -185,6 +191,7 @@ If `npm run build` fails, paste the error into Claude Code. Do not push with a f
 ## Branch and commit rules
 
 **Branch naming:**
+
 ```
 yourname/short-description
 # examples:
@@ -197,6 +204,7 @@ alex/navtrailbar-stories
 "Create a branch called jana/plan-reveal-math-step and commit my changes with the message 'Add Plan Reveal 2.B math step'"
 
 **Rules:**
+
 - Never push to `main` directly — always branch → PR
 - Every PR gets an automatic Vercel preview URL — use that to share work for review
 - Merging to `main` auto-deploys to production (the live Vercel URL)
@@ -206,4 +214,4 @@ alex/navtrailbar-stories
 
 ---
 
-*Internal prototype — New York Life × Huge — not for distribution*
+_Internal prototype — New York Life × Huge — not for distribution_

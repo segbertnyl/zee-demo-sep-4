@@ -146,9 +146,7 @@ export function NylaOverlay({ onClose }: NylaOverlayProps) {
             >
               256px · Hero
             </div>
-            <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>
-              Animated
-            </div>
+            <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>Animated</div>
           </div>
         </div>
 
@@ -195,12 +193,8 @@ export function NylaOverlay({ onClose }: NylaOverlayProps) {
                       background: isDark ? DEEP : '#ffffff',
                       display: 'grid',
                       placeItems: 'center',
-                      boxShadow: isDark
-                        ? '0 8px 24px rgba(0,0,0,0.4)'
-                        : '0 4px 16px rgba(0,10,98,0.14)',
-                      border: isDark
-                        ? '1px solid rgba(255,255,255,0.08)'
-                        : '1px solid rgba(0,10,98,0.08)',
+                      boxShadow: isDark ? '0 8px 24px rgba(0,0,0,0.4)' : '0 4px 16px rgba(0,10,98,0.14)',
+                      border: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,10,98,0.08)',
                       overflow: 'hidden',
                       flexShrink: 0,
                     }}

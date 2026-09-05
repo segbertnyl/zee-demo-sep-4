@@ -28,15 +28,7 @@ export interface StatCardProps {
 // StatCard — profile / onboarding data card
 // ---------------------------------------------------------------------------
 
-export function StatCard({
-  label,
-  value,
-  sub,
-  subBelow = false,
-  source,
-  revealed = true,
-  className,
-}: StatCardProps) {
+export function StatCard({ label, value, sub, subBelow = false, source, revealed = true, className }: StatCardProps) {
   const [tipOpen, setTipOpen] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -52,9 +44,12 @@ export function StatCard({
     closeTimer.current = setTimeout(() => setTipOpen(false), 80)
   }
 
-  useEffect(() => () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current)
-  }, [])
+  useEffect(
+    () => () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current)
+    },
+    [],
+  )
 
   return (
     <motion.div
@@ -64,7 +59,9 @@ export function StatCard({
       className={[
         'relative flex min-h-[150px] flex-col justify-between gap-4 rounded-[4px] border border-[var(--border-subtle)] bg-white p-4',
         className,
-      ].filter(Boolean).join(' ')}
+      ]
+        .filter(Boolean)
+        .join(' ')}
     >
       {/* Header — label + optional info trigger */}
       <div className="flex items-start justify-between gap-3">
@@ -115,13 +112,7 @@ export function StatCard({
 
       {/* Tooltip */}
       <AnimatePresence>
-        {tipOpen && source && (
-          <StatCardTooltip
-            source={source}
-            onMouseEnter={openTip}
-            onMouseLeave={scheduleClose}
-          />
-        )}
+        {tipOpen && source && <StatCardTooltip source={source} onMouseEnter={openTip} onMouseLeave={scheduleClose} />}
       </AnimatePresence>
     </motion.div>
   )
@@ -152,7 +143,9 @@ export function StatCardTooltip({
     >
       <p className="text-[12.5px] font-semibold text-[var(--text-headline)]">{source.title}</p>
       <ul className="mt-2 flex flex-col gap-0.5 text-[12px] text-[var(--text-body)]">
-        {source.rows.map((r) => <li key={r}>{r}</li>)}
+        {source.rows.map((r) => (
+          <li key={r}>{r}</li>
+        ))}
       </ul>
       <p className="mt-3 text-[11.5px] italic text-[var(--text-body-muted)]">{source.src}</p>
     </motion.div>
@@ -175,15 +168,7 @@ export interface MetricTileProps {
   className?: string
 }
 
-export function MetricTile({
-  label,
-  value,
-  sub,
-  valueSize = 32,
-  dot,
-  delay = 0,
-  className,
-}: MetricTileProps) {
+export function MetricTile({ label, value, sub, valueSize = 32, dot, delay = 0, className }: MetricTileProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
@@ -192,7 +177,9 @@ export function MetricTile({
       className={[
         'flex h-[133px] flex-col rounded-[4px] border border-[var(--nyl-gray-050)] bg-white px-4 pb-4 pt-2 drop-shadow-[0_0_20px_#f8f7f7]',
         className,
-      ].filter(Boolean).join(' ')}
+      ]
+        .filter(Boolean)
+        .join(' ')}
     >
       <p className="flex-1 text-[12px] font-medium uppercase leading-[26px] tracking-[2px] text-[var(--text-body)]">
         {label}
@@ -205,9 +192,7 @@ export function MetricTile({
       </p>
       <div className="mt-2 flex items-center justify-between gap-2">
         <p className="text-[12px] leading-[16px] tracking-[0.2px] text-[var(--text-headline)]">{sub}</p>
-        {dot && (
-          <span aria-hidden="true" className="size-2 shrink-0 rounded-full" style={{ background: dot }} />
-        )}
+        {dot && <span aria-hidden="true" className="size-2 shrink-0 rounded-full" style={{ background: dot }} />}
       </div>
     </motion.div>
   )
@@ -232,7 +217,9 @@ export function GoalsCard({ label, status, dot, value, sub, className }: GoalsCa
       className={[
         'flex h-[111px] flex-col rounded-[4px] border border-[var(--nyl-purple-200)] bg-[var(--nyl-purple-025)] px-4 py-2',
         className,
-      ].filter(Boolean).join(' ')}
+      ]
+        .filter(Boolean)
+        .join(' ')}
     >
       <div className="flex items-center justify-between gap-2">
         <p className="text-[12px] font-medium uppercase tracking-[1.5px] text-[var(--text-body)]">{label}</p>
@@ -301,7 +288,17 @@ export function ProgressCard(props: ProgressCardProps) {
 
 function InfoIcon() {
   return (
-    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <circle cx="8" cy="8" r="6.5" />
       <path d="M8 7.5v4" />
       <circle cx="8" cy="5" r="0.5" fill="currentColor" stroke="none" />
@@ -311,7 +308,16 @@ function InfoIcon() {
 
 function PlusIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
       <path d="M7 2v10M2 7h10" />
     </svg>
   )

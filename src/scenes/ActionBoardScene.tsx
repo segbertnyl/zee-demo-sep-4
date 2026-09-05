@@ -58,8 +58,7 @@ const CROSSSELL: Opportunity[] = [
     badges: [{ label: 'Opportunity', tone: 'opportunity' }],
     confidence: 92,
     headline: 'Janet Henderson has recently had a change of address to a high flood-risk coastal location.',
-    body:
-      "Similar life-event cases with this propensity score convert at a high rate when contacted within the first 30 days of a move. You're in that window now, but don't limit the conversation to flood. Instead, ask what else has changed. Showing up as a proactive agent is most valuable.",
+    body: "Similar life-event cases with this propensity score convert at a high rate when contacted within the first 30 days of a move. You're in that window now, but don't limit the conversation to flood. Instead, ask what else has changed. Showing up as a proactive agent is most valuable.",
     metrics: [
       { label: 'Propensity', value: 0.95, tone: 'good' },
       { label: 'Engagement', value: 0.45, tone: 'warn' },
@@ -75,11 +74,20 @@ const CROSSSELL: Opportunity[] = [
         collabPrompt:
           "Draft a warm reconnection message to Janet Henderson. She just moved to a coastal home in a high flood-risk zone. Acknowledge the move, ask how the household is settling, and propose a 15-min check-in to review coverage — don't lead with flood.",
       },
-      { label: 'Close the flood coverage gap', sub: 'Avg +$1,200 FYC', cta: 'Prepare flood coverage quotes', promptId: 'draft-outreach' },
-      { label: 'Full coverage review', sub: 'Broaden wallet share', cta: 'Open coverage analysis', promptId: 'henderson' },
+      {
+        label: 'Close the flood coverage gap',
+        sub: 'Avg +$1,200 FYC',
+        cta: 'Prepare flood coverage quotes',
+        promptId: 'draft-outreach',
+      },
+      {
+        label: 'Full coverage review',
+        sub: 'Broaden wallet share',
+        cta: 'Open coverage analysis',
+        promptId: 'henderson',
+      },
     ],
-    tip:
-      'Tip — Top-performing agents use major life changes, like a move, as opportunities to proactively review protection needs before clients encounter unexpected gaps in coverage.',
+    tip: 'Tip — Top-performing agents use major life changes, like a move, as opportunities to proactively review protection needs before clients encounter unexpected gaps in coverage.',
   },
   {
     id: 'helena-1',
@@ -89,8 +97,7 @@ const CROSSSELL: Opportunity[] = [
     ],
     confidence: 72,
     headline: 'Helena Garcia recently turned 58 and is showing a spike in retirement-related content engagement.',
-    body:
-      "Similar life-event cases with this propensity score convert at a high rate when contacted within the first 30 days of a move. Instead, ask what else has changed. Showing up as a proactive agent is most valuable.",
+    body: 'Similar life-event cases with this propensity score convert at a high rate when contacted within the first 30 days of a move. Instead, ask what else has changed. Showing up as a proactive agent is most valuable.',
     metrics: [
       { label: 'Propensity', value: 0.71, tone: 'good' },
       { label: 'Engagement', value: 0.66, tone: 'good' },
@@ -99,7 +106,12 @@ const CROSSSELL: Opportunity[] = [
     fycEstimate: 'Avg +$2,800',
     clientPromptId: 'clarke',
     plan: [
-      { label: 'Open the retirement-readiness frame', sub: 'Pre-call prep', cta: 'Build the prep card', promptId: 'open-prep-card' },
+      {
+        label: 'Open the retirement-readiness frame',
+        sub: 'Pre-call prep',
+        cta: 'Build the prep card',
+        promptId: 'open-prep-card',
+      },
       {
         label: 'Draft the warm outreach',
         sub: 'Time the milestone right',
@@ -107,7 +119,12 @@ const CROSSSELL: Opportunity[] = [
         collabPrompt:
           "Draft a warm outreach to Helena Garcia. She just turned 58 and is engaging with retirement-readiness content. Don't pitch — frame as a milestone check-in and offer a 20-min conversation about what she's been thinking about for retirement.",
       },
-      { label: 'Run the conversation drill', sub: 'Synthetic Helena loaded', cta: 'Start the 4-min drill', promptId: 'start-drill' },
+      {
+        label: 'Run the conversation drill',
+        sub: 'Synthetic Helena loaded',
+        cta: 'Start the 4-min drill',
+        promptId: 'start-drill',
+      },
     ],
   },
 ]
@@ -116,7 +133,7 @@ const HERO: Record<Tab, { headline: string; tips: { stat: string; copy: string }
   priorities: {
     headline: 'Three priorities lead your day.',
     tips: [
-      { stat: '65%', copy: 'Of your week\'s closes come from the first three priorities of each day.' },
+      { stat: '65%', copy: "Of your week's closes come from the first three priorities of each day." },
       { stat: '2.5×', copy: 'Earlier action on the right priority over a triggered priority.' },
     ],
   },
@@ -167,9 +184,7 @@ export function ActionBoardScene() {
     <section className="flex flex-1 flex-col">
       {/* Top tab strip */}
       <div className="sticky top-0 z-30 flex items-center justify-between gap-6 border-b border-neutral-200 bg-white/85 px-8 py-3 backdrop-blur-sm md:px-12">
-        <p className="text-[11.5px] font-medium uppercase tracking-[0.22em] text-neutral-500">
-          Client
-        </p>
+        <p className="text-[11.5px] font-medium uppercase tracking-[0.22em] text-neutral-500">Client</p>
 
         <nav aria-label="Workspace" className="flex items-center gap-1">
           {TABS.map((t) => {
@@ -233,12 +248,8 @@ export function ActionBoardScene() {
               <div className="mt-6 flex flex-wrap gap-x-12 gap-y-3">
                 {hero.tips.map((t) => (
                   <div key={t.stat} className="flex items-baseline gap-3">
-                    <p className="font-serif text-[40px] tracking-tight text-[var(--nyl-blue-500)]">
-                      {t.stat}
-                    </p>
-                    <p className="max-w-[40ch] text-[13px] leading-snug text-neutral-600">
-                      {t.copy}
-                    </p>
+                    <p className="font-serif text-[40px] tracking-tight text-[var(--nyl-blue-500)]">{t.stat}</p>
+                    <p className="max-w-[40ch] text-[13px] leading-snug text-neutral-600">{t.copy}</p>
                   </div>
                 ))}
               </div>
@@ -264,7 +275,7 @@ export function ActionBoardScene() {
                   <FeaturedOpportunity key={o.id} opp={o} index={i} />
                 ) : (
                   <OpportunityCard key={o.id} opp={o} index={i} />
-                )
+                ),
               )
             ) : tab === 'mybook' ? (
               <div className="relative -mx-8 -mt-10 h-[calc(100vh-160px)] overflow-hidden md:-mx-12">
@@ -314,11 +325,8 @@ function OpportunityCard({ opp, index }: { opp: Opportunity; index: number }) {
     }
     if (step.collabPrompt) {
       /* Map the opportunity id to the client whose draft template should render. */
-      const client: 'janet' | 'helena' | 'tom' | undefined = opp.id === 'janet'
-        ? 'janet'
-        : opp.id.startsWith('helena')
-          ? 'helena'
-          : undefined
+      const client: 'janet' | 'helena' | 'tom' | undefined =
+        opp.id === 'janet' ? 'janet' : opp.id.startsWith('helena') ? 'helena' : undefined
       openCollab(step.collabPrompt, client)
     } else if (step.promptId) {
       jumpToFreeform(step.promptId)
@@ -407,17 +415,13 @@ function OpportunityCard({ opp, index }: { opp: Opportunity; index: number }) {
           </h2>
 
           {/* Body */}
-          <p className="mt-3 max-w-[58ch] text-[13.5px] leading-[1.55] text-neutral-700">
-            {opp.body}
-          </p>
+          <p className="mt-3 max-w-[58ch] text-[13.5px] leading-[1.55] text-neutral-700">{opp.body}</p>
 
           {/* Metrics */}
           <div className="mt-6 grid grid-cols-3 gap-6 border-t border-neutral-100 pt-5">
             {opp.metrics.map((m) => (
               <div key={m.label}>
-                <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-400">
-                  {m.label}
-                </p>
+                <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-400">{m.label}</p>
                 <ProgressBar value={m.value} tone={m.tone} />
               </div>
             ))}
@@ -430,9 +434,7 @@ function OpportunityCard({ opp, index }: { opp: Opportunity; index: number }) {
         {/* Right — sequenced plan + dynamic CTA */}
         <div className="col-span-12 lg:col-span-5">
           <div className="rounded-2xl bg-[var(--nyl-blue-100)]/35 p-5">
-            <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--nyl-blue-800)]">
-              Plan
-            </p>
+            <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--nyl-blue-800)]">Plan</p>
             <ol className="mt-4 flex flex-col gap-3.5">
               {opp.plan.map((p, i) => {
                 const done = i < activeStep
@@ -449,13 +451,22 @@ function OpportunityCard({ opp, index }: { opp: Opportunity; index: number }) {
                         <span
                           className={[
                             'block text-[13.5px] leading-snug',
-                            done ? 'text-neutral-400 line-through decoration-1' : active ? 'font-medium text-neutral-900' : 'text-neutral-700',
+                            done
+                              ? 'text-neutral-400 line-through decoration-1'
+                              : active
+                                ? 'font-medium text-neutral-900'
+                                : 'text-neutral-700',
                           ].join(' ')}
                         >
                           {p.label}
                         </span>
                         {p.sub && (
-                          <span className={['mt-0.5 block text-[11.5px]', done ? 'text-neutral-300' : 'text-neutral-500'].join(' ')}>
+                          <span
+                            className={[
+                              'mt-0.5 block text-[11.5px]',
+                              done ? 'text-neutral-300' : 'text-neutral-500',
+                            ].join(' ')}
+                          >
                             {p.sub}
                           </span>
                         )}
@@ -487,10 +498,20 @@ function OpportunityCard({ opp, index }: { opp: Opportunity; index: number }) {
   )
 }
 
-
 function CalendarGlyph() {
   return (
-    <svg width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="text-neutral-700">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 22 22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className="text-neutral-700"
+    >
       <rect x="3" y="5" width="16" height="14" rx="2" />
       <path d="M3 9 H19" />
       <path d="M7 3 V6" />
@@ -524,13 +545,23 @@ function QuickMoveChip({
 
 function PencilGlyph() {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="shrink-0">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className="shrink-0"
+    >
       <path d="M11.3 2.2 L13.8 4.7 L5 13.5 L2 14 L2.5 11 Z" />
       <path d="M10.3 3.2 L12.8 5.7" />
     </svg>
   )
 }
-
 
 /* ----------------------------------------------------------------------------
  * Featured opportunity — first tile with hover-glow AI + push-out chip panel
@@ -545,15 +576,8 @@ function FeaturedOpportunity({ opp, index }: { opp: Opportunity; index: number }
   const showSparkle = hover || open
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-    >
-      <motion.div
-        animate={{ x: open ? -380 : 0 }}
-        transition={{ duration: 0.42, ease: [0.22, 0.65, 0.05, 1] }}
-      >
+    <div className="relative" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+      <motion.div animate={{ x: open ? -380 : 0 }} transition={{ duration: 0.42, ease: [0.22, 0.65, 0.05, 1] }}>
         <OpportunityCard opp={opp} index={index} />
       </motion.div>
 
@@ -571,13 +595,15 @@ function FeaturedOpportunity({ opp, index }: { opp: Opportunity; index: number }
             transition={{ duration: 0.25 }}
             className="absolute right-[-26px] top-1/2 z-10 flex size-12 -translate-y-1/2 items-center justify-center rounded-full text-white"
             style={{
-              background:
-                'linear-gradient(150deg, #4a7bff 0%, #0468ff 55%, #0044cc 100%)',
+              background: 'linear-gradient(150deg, #4a7bff 0%, #0468ff 55%, #0044cc 100%)',
               boxShadow:
                 '0 0 0 6px rgba(4,104,255,0.18), 0 0 24px 4px rgba(4,104,255,0.45), 0 12px 30px -10px rgba(4,104,255,0.55)',
             }}
           >
-            <span aria-hidden="true" className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--nyl-blue-500)] opacity-40" />
+            <span
+              aria-hidden="true"
+              className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--nyl-blue-500)] opacity-40"
+            />
             <Nyla size={24} variant="on-dark" className="relative" />
           </motion.button>
         )}
@@ -601,8 +627,7 @@ function FeaturedOpportunity({ opp, index }: { opp: Opportunity; index: number }
               aria-label="Close agent quick actions"
               className="flex size-12 shrink-0 items-center justify-center rounded-full text-[var(--nyl-blue-500)]"
               style={{
-                background:
-                  'radial-gradient(circle at 30% 30%, #1a2a6b 0%, #0a1640 70%, #05103a 100%)',
+                background: 'radial-gradient(circle at 30% 30%, #1a2a6b 0%, #0a1640 70%, #05103a 100%)',
                 boxShadow: '0 8px 20px -8px rgba(2,7,31,0.55)',
               }}
             >
@@ -643,4 +668,3 @@ function FeaturedOpportunity({ opp, index }: { opp: Opportunity; index: number }
     </div>
   )
 }
-

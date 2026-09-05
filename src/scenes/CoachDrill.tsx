@@ -13,11 +13,11 @@ import { useAppStore } from '@/state/useAppStore'
 
 type Beat = {
   id: string
-  label: string         /* "BEAT 1 · OPEN WITH THE MILESTONE" */
+  label: string /* "BEAT 1 · OPEN WITH THE MILESTONE" */
   durationSec: number
-  prompt: string        /* short guidance */
-  script: string        /* literal words to say, in quotes */
-  listenFor: string     /* what to listen for in the client's reply */
+  prompt: string /* short guidance */
+  script: string /* literal words to say, in quotes */
+  listenFor: string /* what to listen for in the client's reply */
 }
 
 type Drill = {
@@ -25,7 +25,7 @@ type Drill = {
   client: string
   title: string
   sub: string
-  totalLabel: string    /* "5 minutes · 3 beats" */
+  totalLabel: string /* "5 minutes · 3 beats" */
   beats: Beat[]
 }
 
@@ -43,7 +43,7 @@ const DRILLS: Record<string, Drill> = {
         durationSec: 60,
         prompt: 'Lead with what just happened — not what you sell. Curiosity, not consulting.',
         script:
-          '"Hi Helena. It\'s been too long — I\'ve been thinking about you and Sergio.\n\nYou just crossed into a new chapter, and I\'d love to hear what\'s on your mind."',
+          "\"Hi Helena. It's been too long — I've been thinking about you and Sergio.\n\nYou just crossed into a new chapter, and I'd love to hear what's on your mind.\"",
         listenFor:
           'A pause. A small sigh. A "well…". Anything that suggests she\'s already been thinking about the next chapter — that\'s your in.',
       },
@@ -51,8 +51,7 @@ const DRILLS: Record<string, Drill> = {
         id: 'b2',
         label: 'Beat 2 · One question, then silence',
         durationSec: 90,
-        prompt:
-          'The hard part: ask one discovery question and don\'t rescue the pause. Let her answer.',
+        prompt: "The hard part: ask one discovery question and don't rescue the pause. Let her answer.",
         script:
           '"What does the next ten years look like for you and Sergio?"\n\nThen stop. Don\'t fill it. The silence is the work.',
         listenFor:
@@ -62,8 +61,7 @@ const DRILLS: Record<string, Drill> = {
         id: 'b3',
         label: 'Beat 3 · Land the soft close',
         durationSec: 90,
-        prompt:
-          'No quote. No pitch. Offer a 20-minute portfolio walk — and book it before you hang up.',
+        prompt: 'No quote. No pitch. Offer a 20-minute portfolio walk — and book it before you hang up.',
         script:
           '"Based on what you just shared, I\'d love to walk you through how the plan you have today stacks up against where you\'re heading. No quote, no pitch — just twenty minutes.\n\nWould Tuesday or Wednesday next week work?"',
         listenFor:
@@ -80,7 +78,7 @@ const DRILLS: Record<string, Drill> = {
     beats: [
       {
         id: 'b1',
-        label: 'Beat 1 · Acknowledge — don\'t defend',
+        label: "Beat 1 · Acknowledge — don't defend",
         durationSec: 60,
         prompt: 'Lead with respect for the question. Defending makes you sound like a salesperson.',
         script:
@@ -106,7 +104,7 @@ const DRILLS: Record<string, Drill> = {
         script:
           '"The clean way to think about it is two buckets — one for the long game (your 401(k)), one for protected income (what we set up together). The buckets do different jobs. That\'s the conversation I\'d love to have with you and Lily."',
         listenFor:
-          'Lily\'s name. If he mentions her, he\'s thinking household, not solo. Lean into that — propose a joint conversation.',
+          "Lily's name. If he mentions her, he's thinking household, not solo. Lean into that — propose a joint conversation.",
       },
     ],
   },
@@ -149,7 +147,9 @@ export function CoachDrill() {
         return s - 1
       })
     }, 1000)
-    return () => { if (tickRef.current) clearInterval(tickRef.current) }
+    return () => {
+      if (tickRef.current) clearInterval(tickRef.current)
+    }
   }, [running, done, drill, beatIdx])
 
   /* ESC + space shortcuts. */
@@ -199,8 +199,7 @@ export function CoachDrill() {
         aria-label={drill.title}
         className="fixed inset-0 z-[200] flex flex-col"
         style={{
-          background:
-            'radial-gradient(circle at 25% 15%, #1a2a6b 0%, #060f3f 55%, #02071f 100%)',
+          background: 'radial-gradient(circle at 25% 15%, #1a2a6b 0%, #060f3f 55%, #02071f 100%)',
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -237,10 +236,12 @@ export function CoachDrill() {
                   transition={{ duration: 0.4, ease: 'linear' }}
                 />
               </div>
-              <p className={[
-                'text-[10px] font-medium uppercase tracking-[0.22em]',
-                i === beatIdx ? 'text-white' : 'text-white/40',
-              ].join(' ')}>
+              <p
+                className={[
+                  'text-[10px] font-medium uppercase tracking-[0.22em]',
+                  i === beatIdx ? 'text-white' : 'text-white/40',
+                ].join(' ')}
+              >
                 Beat {i + 1}
               </p>
             </div>
@@ -270,9 +271,7 @@ export function CoachDrill() {
                   >
                     {mm}:{ss}
                   </p>
-                  <p className="mt-5 max-w-[44ch] text-[15px] leading-[1.55] text-white/75">
-                    {beat.prompt}
-                  </p>
+                  <p className="mt-5 max-w-[44ch] text-[15px] leading-[1.55] text-white/75">{beat.prompt}</p>
 
                   <div className="mt-8 flex flex-wrap items-center gap-2">
                     <button
@@ -314,8 +313,13 @@ export function CoachDrill() {
                 {/* Right — script + listen-for */}
                 <div className="md:col-span-7">
                   <div className="rounded-2xl bg-white/[0.06] p-7 backdrop-blur-sm md:p-9">
-                    <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--nyl-blue-250,#bccff9)]">What to say</p>
-                    <p className="mt-4 whitespace-pre-line font-serif text-[20px] leading-[1.45] tracking-tight text-white md:text-[22px]" style={{ fontWeight: 400, textWrap: 'balance' }}>
+                    <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--nyl-blue-250,#bccff9)]">
+                      What to say
+                    </p>
+                    <p
+                      className="mt-4 whitespace-pre-line font-serif text-[20px] leading-[1.45] tracking-tight text-white md:text-[22px]"
+                      style={{ fontWeight: 400, textWrap: 'balance' }}
+                    >
                       {beat.script}
                     </p>
                   </div>
@@ -334,7 +338,9 @@ export function CoachDrill() {
                 transition={{ duration: 0.4, ease: [0.22, 0.65, 0.05, 1] }}
                 className="w-full max-w-[720px] text-center"
               >
-                <p className="text-[10.5px] font-medium uppercase tracking-[0.24em] text-[var(--nyl-green-200,#c4f0d9)]">Drill complete</p>
+                <p className="text-[10.5px] font-medium uppercase tracking-[0.24em] text-[var(--nyl-green-200,#c4f0d9)]">
+                  Drill complete
+                </p>
                 <h2
                   className="mt-5 font-serif text-[40px] leading-tight tracking-tight text-white md:text-[56px]"
                   style={{ fontWeight: 400, textWrap: 'balance' }}
@@ -342,7 +348,8 @@ export function CoachDrill() {
                   You're ready. Make the call.
                 </h2>
                 <p className="mx-auto mt-5 max-w-[54ch] text-[15px] leading-[1.55] text-white/70">
-                  Three beats logged. The Coach saved the tape — you can replay any beat after the call to see how the live conversation lined up.
+                  Three beats logged. The Coach saved the tape — you can replay any beat after the call to see how the
+                  live conversation lined up.
                 </p>
                 <div className="mt-9 flex flex-wrap items-center justify-center gap-2">
                   <button
@@ -354,7 +361,12 @@ export function CoachDrill() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => { setBeatIdx(0); setSecsLeft(drill.beats[0].durationSec); setRunning(false); setDone(false) }}
+                    onClick={() => {
+                      setBeatIdx(0)
+                      setSecsLeft(drill.beats[0].durationSec)
+                      setRunning(false)
+                      setDone(false)
+                    }}
                     className="rounded-full border border-white/20 px-5 py-2.5 text-[13px] font-medium text-white/80 hover:border-white/60 hover:text-white"
                   >
                     Run it again

@@ -29,9 +29,7 @@ export function MetricTile({ label, value, sub, dot, delay = 0, valueSize = 32 }
         {value}
       </p>
       <div className="mt-2 flex items-center justify-between gap-2">
-        {sub && (
-          <p className="text-[12px] leading-[16px] tracking-[0.2px] text-[var(--text-headline)]">{sub}</p>
-        )}
+        {sub && <p className="text-[12px] leading-[16px] tracking-[0.2px] text-[var(--text-headline)]">{sub}</p>}
         {dot && <span aria-hidden="true" className="size-2 shrink-0 rounded-full" style={{ background: dot }} />}
       </div>
     </motion.div>

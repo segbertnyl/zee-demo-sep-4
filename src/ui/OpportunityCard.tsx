@@ -146,19 +146,13 @@ export function OpportunityCard({
             className="mt-4 font-serif text-[22px] leading-[1.22] tracking-tight text-[var(--text-headline)] md:text-[24px]"
             style={{ fontWeight: 400, textWrap: 'balance' } as React.CSSProperties}
           >
-            <button
-              type="button"
-              onClick={onClientClick}
-              className="text-[var(--nyl-blue-500)] hover:underline"
-            >
+            <button type="button" onClick={onClientClick} className="text-[var(--nyl-blue-500)] hover:underline">
               {clientNamePart}
             </button>{' '}
             {restPart}
           </h2>
 
-          <p className="mt-3 max-w-[58ch] text-[13.5px] leading-[1.55] text-[var(--text-body)]">
-            {body}
-          </p>
+          <p className="mt-3 max-w-[58ch] text-[13.5px] leading-[1.55] text-[var(--text-body)]">{body}</p>
 
           <div className="mt-6 grid grid-cols-3 gap-6 border-t border-[var(--border-subtle)] pt-5">
             {metrics.map((m) => (
@@ -177,9 +171,7 @@ export function OpportunityCard({
 
         <div className="col-span-12 lg:col-span-5">
           <div className="rounded-2xl bg-[var(--nyl-blue-100)]/35 p-5">
-            <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--nyl-blue-800)]">
-              Plan
-            </p>
+            <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--nyl-blue-800)]">Plan</p>
             <ol className="mt-4 flex flex-col gap-3.5">
               {plan.map((p, i) => {
                 const done = i < activeStep

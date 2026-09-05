@@ -20,10 +20,10 @@ export type AdvisorSegment = {
   /* Profile card data (used on the profile-loaded screen) */
   name: string
   initials: string
-  segment: string                 /* e.g. "Core Specialist — Leading" */
-  tenure: number                  /* years with NYL */
-  fyc3yr: number                  /* 3-year average FYC */
-  annualFYC: number               /* this year's pace */
+  segment: string /* e.g. "Core Specialist — Leading" */
+  tenure: number /* years with NYL */
+  fyc3yr: number /* 3-year average FYC */
+  annualFYC: number /* this year's pace */
   councilStanding: string
   clientBook: number
   productMix: string
@@ -37,10 +37,10 @@ export type AdvisorSegment = {
   segmentNote: string
 
   /* Plan-math constants (Zee's tenure-based logic) */
-  avgCaseSize: number             /* From history; fallback to cohort default */
-  closeRate: number               /* 0–1 */
-  apptToQualifiedRate: number     /* 0–1 */
-  activityMultiplier: number      /* prospect contacts vs appointments */
+  avgCaseSize: number /* From history; fallback to cohort default */
+  closeRate: number /* 0–1 */
+  apptToQualifiedRate: number /* 0–1 */
+  activityMultiplier: number /* prospect contacts vs appointments */
 
   /* Onboarding-step content */
   intro: {
@@ -77,22 +77,35 @@ export type AdvisorSegment = {
 
 const csLeading: AdvisorSegment = {
   code: 'cs-leading',
-  name: 'Marcus T.', initials: 'MT', segment: 'Core Specialist · Leading',
-  tenure: 16, fyc3yr: 114_000, annualFYC: 114_000,
-  councilStanding: 'Executive Council', clientBook: 633,
+  name: 'Marcus T.',
+  initials: 'MT',
+  segment: 'Core Specialist · Leading',
+  tenure: 16,
+  fyc3yr: 114_000,
+  annualFYC: 114_000,
+  councilStanding: 'Executive Council',
+  clientBook: 633,
   productMix: 'Basic Life & Whole Life (94%)',
-  pace: 'ahead', paceDetail: '+12% vs. last year at this point',
-  staff: true, staffCount: '1–2',
+  pace: 'ahead',
+  paceDetail: '+12% vs. last year at this point',
+  staff: true,
+  staffCount: '1–2',
   knownStrengths: ['client retention', 'protection conversations', 'underwriting navigation'],
   knownGaps: ['digital prospecting', 'holistic expansion'],
   suggestedFYC: 125_000,
-  segmentNote: 'Experienced, high-performing protection specialist. The OS frames you as a peer — no basics, no padding.',
-  avgCaseSize: 4200, closeRate: 0.34, apptToQualifiedRate: 0.58, activityMultiplier: 2.5,
+  segmentNote:
+    'Experienced, high-performing protection specialist. The OS frames you as a peer — no basics, no padding.',
+  avgCaseSize: 4200,
+  closeRate: 0.34,
+  apptToQualifiedRate: 0.58,
+  activityMultiplier: 2.5,
   intro: {
-    coachIdentityPrompt: "How would your best long-term clients describe what makes you different from other advisors they've worked with?",
-    coachIdentityPlaceholder: 'e.g., Warm and direct. They know I\'m being straight with them, not selling.',
-    coachConsentLabel: 'Would you like the OS to flag when your activity pace changes — so you can get ahead of it before it affects your numbers?',
-    brandVoicePlaceholder: 'e.g., Warm, direct. They know I\'m being straight with them, not selling.',
+    coachIdentityPrompt:
+      "How would your best long-term clients describe what makes you different from other advisors they've worked with?",
+    coachIdentityPlaceholder: "e.g., Warm and direct. They know I'm being straight with them, not selling.",
+    coachConsentLabel:
+      'Would you like the OS to flag when your activity pace changes — so you can get ahead of it before it affects your numbers?',
+    brandVoicePlaceholder: "e.g., Warm, direct. They know I'm being straight with them, not selling.",
     chiefBigGoalPlaceholder: "e.g., Building a practice that doesn't depend on me being in every room.",
   },
   growthAreas: [
@@ -140,24 +153,28 @@ const csLeading: AdvisorSegment = {
   ],
   conciergeEliminatePrompt: 'If you could reclaim 5 hours a week from one thing, what would it be?',
   brandChannels: [
-    { id: 'personal',  label: 'Personal emails I write myself',       sub: 'High-touch, relationship-first' },
-    { id: 'phone',     label: 'Phone calls — I prefer direct contact', sub: 'Not a big email person' },
-    { id: 'social',    label: 'LinkedIn — building my professional brand', sub: 'Referrals, visibility, COIs' },
-    { id: 'events',    label: 'Events I host or attend',              sub: 'Seminars, community, client dinners' },
+    { id: 'personal', label: 'Personal emails I write myself', sub: 'High-touch, relationship-first' },
+    { id: 'phone', label: 'Phone calls — I prefer direct contact', sub: 'Not a big email person' },
+    { id: 'social', label: 'LinkedIn — building my professional brand', sub: 'Referrals, visibility, COIs' },
+    { id: 'events', label: 'Events I host or attend', sub: 'Seminars, community, client dinners' },
     { id: 'referrals', label: 'Referral requests from happy clients', sub: 'My primary growth channel' },
-    { id: 'nosystem',  label: "I don't have a consistent system",     sub: "I'd like to change that" },
+    { id: 'nosystem', label: "I don't have a consistent system", sub: "I'd like to change that" },
   ],
   brandLifeEventInstincts: [
-    { id: 'always',    label: 'I reach out immediately — always',         sub: "It's what the relationship is for" },
+    { id: 'always', label: 'I reach out immediately — always', sub: "It's what the relationship is for" },
     { id: 'financial', label: "I reach out if there's a clear financial angle", sub: 'Targeted, not reflexive' },
-    { id: 'sooner',    label: "I'd reach out more if I knew sooner",      sub: 'The timing is the challenge' },
-    { id: 'wait',      label: 'I let clients come to me at these moments', sub: "I don't want to intrude" },
+    { id: 'sooner', label: "I'd reach out more if I knew sooner", sub: 'The timing is the challenge' },
+    { id: 'wait', label: 'I let clients come to me at these moments', sub: "I don't want to intrude" },
   ],
   chiefOsStyleOptions: [
-    { id: 'briefing', label: 'Give me a morning briefing when I start',         sub: 'Top priorities, no noise' },
-    { id: 'urgent',   label: 'Only alert me when something urgent needs action', sub: 'I prefer quiet unless it matters' },
-    { id: 'auto',     label: 'Handle routine tasks without asking me',          sub: 'I trust it — just get it done' },
-    { id: 'checkin',  label: 'Check in when my pace shifts',                    sub: "I want to know before it's a problem" },
+    { id: 'briefing', label: 'Give me a morning briefing when I start', sub: 'Top priorities, no noise' },
+    {
+      id: 'urgent',
+      label: 'Only alert me when something urgent needs action',
+      sub: 'I prefer quiet unless it matters',
+    },
+    { id: 'auto', label: 'Handle routine tasks without asking me', sub: 'I trust it — just get it done' },
+    { id: 'checkin', label: 'Check in when my pace shifts', sub: "I want to know before it's a problem" },
   ],
 }
 
@@ -168,23 +185,37 @@ const csLeading: AdvisorSegment = {
 
 const hlAccelerating: AdvisorSegment = {
   code: 'hl-accelerating',
-  name: 'Priya M.', initials: 'PM', segment: 'Holistic Leaning · Accelerating',
-  tenure: 14, fyc3yr: 37_000, annualFYC: 37_000,
-  councilStanding: 'No Council', clientBook: 303,
+  name: 'Priya M.',
+  initials: 'PM',
+  segment: 'Holistic Leaning · Accelerating',
+  tenure: 14,
+  fyc3yr: 37_000,
+  annualFYC: 37_000,
+  councilStanding: 'No Council',
+  clientBook: 303,
   productMix: 'Mixed — transitioning to holistic',
-  pace: 'behind', paceDetail: '−18% vs. last year at this point',
-  staff: false, staffCount: null,
+  pace: 'behind',
+  paceDetail: '−18% vs. last year at this point',
+  staff: false,
+  staffCount: null,
   knownStrengths: ['multi-product conversations', 'client discovery'],
   knownGaps: ['referral pipeline', 'Eagle pathway', 'compensation clarity'],
   suggestedFYC: 42_000,
   segmentNote: 'In transition. The OS gives you sequenced guidance and a clear path forward — not generic options.',
-  avgCaseSize: 3600, closeRate: 0.28, apptToQualifiedRate: 0.48, activityMultiplier: 2.5,
+  avgCaseSize: 3600,
+  closeRate: 0.28,
+  apptToQualifiedRate: 0.48,
+  activityMultiplier: 2.5,
   intro: {
-    coachIdentityPrompt: "What kind of advisor are you building toward — how would you want clients to describe you in 3 years?",
-    coachIdentityPlaceholder: 'e.g., Someone who helps people think about their whole financial picture, not just their policies.',
-    coachConsentLabel: 'Would you like the OS to check in when your activity slows down — and surface specific actions to get back on track?',
+    coachIdentityPrompt:
+      'What kind of advisor are you building toward — how would you want clients to describe you in 3 years?',
+    coachIdentityPlaceholder:
+      'e.g., Someone who helps people think about their whole financial picture, not just their policies.',
+    coachConsentLabel:
+      'Would you like the OS to check in when your activity slows down — and surface specific actions to get back on track?',
     brandVoicePlaceholder: 'e.g., Thoughtful and curious. Like a friend who happens to know a lot about money.',
-    chiefBigGoalPlaceholder: 'e.g., Having my first clients who think of me as their full financial advisor, not just their insurance person.',
+    chiefBigGoalPlaceholder:
+      'e.g., Having my first clients who think of me as their full financial advisor, not just their insurance person.',
   },
   growthAreas: [
     { id: 'pathway', label: 'Understanding my path to Eagle or IAR', sub: "Licensing, sequencing, what's next" },
@@ -209,7 +240,11 @@ const hlAccelerating: AdvisorSegment = {
     { id: 'referral', label: 'Referral network signals', sub: 'Household connections worth exploring' },
   ],
   strategistDirections: [
-    { id: 'holistic', label: 'Become a true holistic financial advisor', sub: 'Planning, investments, protection together' },
+    {
+      id: 'holistic',
+      label: 'Become a true holistic financial advisor',
+      sub: 'Planning, investments, protection together',
+    },
     { id: 'eagle', label: 'Build toward Eagle and investment advisory', sub: 'IAR track, AUM, fee-based' },
     { id: 'protection', label: 'Strengthen my protection foundation first', sub: 'Before expanding further' },
     { id: 'referral', label: 'Build a referral-driven practice', sub: 'Less cold outreach, more warm pipeline' },
@@ -219,7 +254,11 @@ const hlAccelerating: AdvisorSegment = {
     { id: 'casetrack', label: 'Chasing case status and NIGO updates', sub: 'Delays that kill momentum' },
     { id: 'service', label: 'Client service issues pulling me away', sub: 'From prospecting and growth' },
     { id: 'navigation', label: 'Finding the right system, form, or answer', sub: 'Too much hunting' },
-    { id: 'meetingprep', label: 'Preparing for meetings across product lines', sub: 'More complex than pure protection' },
+    {
+      id: 'meetingprep',
+      label: 'Preparing for meetings across product lines',
+      sub: 'More complex than pure protection',
+    },
     { id: 'admin', label: 'Admin after meetings', sub: 'Notes, next steps, follow-up emails' },
     { id: 'workflow', label: 'Managing multi-product workflows', sub: 'Life + investments + planning' },
   ],
@@ -229,27 +268,28 @@ const hlAccelerating: AdvisorSegment = {
     'Writing post-meeting emails from scratch',
     'Preparing for meetings across multiple product lines',
   ],
-  conciergeEliminatePrompt: "What's the one thing in your week that consistently pulls you away from the work that actually grows your business?",
+  conciergeEliminatePrompt:
+    "What's the one thing in your week that consistently pulls you away from the work that actually grows your business?",
   brandChannels: [
-    { id: 'personal',  label: 'Personal emails — relationship-driven',           sub: 'I write them myself' },
-    { id: 'social',    label: 'LinkedIn and social media',                        sub: 'Building my profile as a broader advisor' },
-    { id: 'referrals', label: 'Referral requests and COI relationships',         sub: 'Key to growing beyond warm market' },
-    { id: 'events',    label: 'Events and community involvement',                sub: 'Niche or market-specific' },
-    { id: 'content',   label: 'Sharing content and market insights',             sub: 'Email, social, text' },
-    { id: 'nosystem',  label: 'I want to do more but lack a system',             sub: 'Would like help building one' },
+    { id: 'personal', label: 'Personal emails — relationship-driven', sub: 'I write them myself' },
+    { id: 'social', label: 'LinkedIn and social media', sub: 'Building my profile as a broader advisor' },
+    { id: 'referrals', label: 'Referral requests and COI relationships', sub: 'Key to growing beyond warm market' },
+    { id: 'events', label: 'Events and community involvement', sub: 'Niche or market-specific' },
+    { id: 'content', label: 'Sharing content and market insights', sub: 'Email, social, text' },
+    { id: 'nosystem', label: 'I want to do more but lack a system', sub: 'Would like help building one' },
   ],
   brandLifeEventInstincts: [
-    { id: 'always',    label: 'I try to reach out — it matters to clients',         sub: 'Even if just to acknowledge' },
-    { id: 'sooner',    label: "I'd do it more if I knew about it sooner",           sub: 'I miss too many moments' },
-    { id: 'financial', label: "I reach out when there's a financial angle",         sub: 'I focus on relevant moments' },
-    { id: 'unsure',    label: "I'm not sure what's appropriate yet",                sub: 'I could use guidance on this' },
+    { id: 'always', label: 'I try to reach out — it matters to clients', sub: 'Even if just to acknowledge' },
+    { id: 'sooner', label: "I'd do it more if I knew about it sooner", sub: 'I miss too many moments' },
+    { id: 'financial', label: "I reach out when there's a financial angle", sub: 'I focus on relevant moments' },
+    { id: 'unsure', label: "I'm not sure what's appropriate yet", sub: 'I could use guidance on this' },
   ],
   chiefOsStyleOptions: [
-    { id: 'briefing', label: 'Give me a morning briefing',              sub: 'Show me what needs attention today' },
-    { id: 'urgent',   label: 'Alert me when something needs action',    sub: 'Cases, signals, time-sensitive items' },
-    { id: 'auto',     label: 'Handle routine admin without asking',     sub: 'Free me up for client-facing work' },
-    { id: 'checkin',  label: "Check in when I'm off pace",              sub: 'So I can adjust before it\'s too late' },
-    { id: 'quiet',    label: 'Stay quiet unless I ask',                 sub: "I'll use it on my terms" },
+    { id: 'briefing', label: 'Give me a morning briefing', sub: 'Show me what needs attention today' },
+    { id: 'urgent', label: 'Alert me when something needs action', sub: 'Cases, signals, time-sensitive items' },
+    { id: 'auto', label: 'Handle routine admin without asking', sub: 'Free me up for client-facing work' },
+    { id: 'checkin', label: "Check in when I'm off pace", sub: "So I can adjust before it's too late" },
+    { id: 'quiet', label: 'Stay quiet unless I ask', sub: "I'll use it on my terms" },
   ],
 }
 
@@ -260,23 +300,36 @@ const hlAccelerating: AdvisorSegment = {
 
 const csBuilding: AdvisorSegment = {
   code: 'cs-building',
-  name: 'Jordan R.', initials: 'JR', segment: 'Core Specialist · Building',
-  tenure: 2, fyc3yr: 6_000, annualFYC: 6_000,
-  councilStanding: 'No Council', clientBook: 71,
+  name: 'Jordan R.',
+  initials: 'JR',
+  segment: 'Core Specialist · Building',
+  tenure: 2,
+  fyc3yr: 6_000,
+  annualFYC: 6_000,
+  councilStanding: 'No Council',
+  clientBook: 71,
   productMix: 'Basic Life & Whole Life (early)',
-  pace: 'behind', paceDetail: 'First full year — baseline being established',
-  staff: false, staffCount: null,
+  pace: 'behind',
+  paceDetail: 'First full year — baseline being established',
+  staff: false,
+  staffCount: null,
   knownStrengths: ['energy', 'client empathy'],
   knownGaps: ['pipeline building', 'application workflow', 'warm market exhaustion'],
   suggestedFYC: 18_000,
-  segmentNote: "Early career. The OS gives you practical rhythm, income clarity, and confidence-building support — not strategy theatre.",
-  avgCaseSize: 3200, closeRate: 0.22, apptToQualifiedRate: 0.48, activityMultiplier: 2.8,
+  segmentNote:
+    'Early career. The OS gives you practical rhythm, income clarity, and confidence-building support — not strategy theatre.',
+  avgCaseSize: 3200,
+  closeRate: 0.22,
+  apptToQualifiedRate: 0.48,
+  activityMultiplier: 2.8,
   intro: {
-    coachIdentityPrompt: "What drew you to this career — what do you most want to be known for with clients?",
+    coachIdentityPrompt: 'What drew you to this career — what do you most want to be known for with clients?',
     coachIdentityPlaceholder: 'e.g., The advisor who actually shows up and takes the time to explain things.',
-    coachConsentLabel: 'Would you like the OS to check in with you when momentum dips — not just report on it, but actually help you get moving again?',
+    coachConsentLabel:
+      'Would you like the OS to check in with you when momentum dips — not just report on it, but actually help you get moving again?',
     brandVoicePlaceholder: "e.g., Approachable and real — I don't want to sound like a corporate script.",
-    chiefBigGoalPlaceholder: "e.g., Getting to a point where I stop worrying about whether this career is going to work.",
+    chiefBigGoalPlaceholder:
+      'e.g., Getting to a point where I stop worrying about whether this career is going to work.',
   },
   growthAreas: [
     { id: 'nameflow', label: 'Building name flow beyond warm market', sub: 'New prospects, referrals' },
@@ -323,24 +376,24 @@ const csBuilding: AdvisorSegment = {
   ],
   conciergeEliminatePrompt: "What's taking the most time in your week that feels like it shouldn't be your job?",
   brandChannels: [
-    { id: 'personal',  label: 'Personal texts or calls',                     sub: "Still building my natural market" },
-    { id: 'social',    label: 'Social media — building my presence',         sub: 'LinkedIn, Instagram, community groups' },
-    { id: 'referrals', label: 'Asking happy clients for referrals',          sub: 'My best source right now' },
-    { id: 'events',    label: 'Community events and local groups',           sub: 'Where I meet new people' },
-    { id: 'content',   label: 'Sharing educational content',                 sub: 'Building trust before the ask' },
-    { id: 'nosystem',  label: "I don't have a system yet",                   sub: "I'd like one" },
+    { id: 'personal', label: 'Personal texts or calls', sub: 'Still building my natural market' },
+    { id: 'social', label: 'Social media — building my presence', sub: 'LinkedIn, Instagram, community groups' },
+    { id: 'referrals', label: 'Asking happy clients for referrals', sub: 'My best source right now' },
+    { id: 'events', label: 'Community events and local groups', sub: 'Where I meet new people' },
+    { id: 'content', label: 'Sharing educational content', sub: 'Building trust before the ask' },
+    { id: 'nosystem', label: "I don't have a system yet", sub: "I'd like one" },
   ],
   brandLifeEventInstincts: [
-    { id: 'always',    label: 'I try to reach out — it matters to clients',         sub: 'Even if just to acknowledge' },
-    { id: 'sooner',    label: "I'd do it more if I knew about it sooner",           sub: 'I miss too many moments' },
-    { id: 'financial', label: "I reach out when there's a financial angle",         sub: 'I focus on relevant moments' },
-    { id: 'unsure',    label: "I'm not sure what's appropriate yet",                sub: 'I could use guidance on this' },
+    { id: 'always', label: 'I try to reach out — it matters to clients', sub: 'Even if just to acknowledge' },
+    { id: 'sooner', label: "I'd do it more if I knew about it sooner", sub: 'I miss too many moments' },
+    { id: 'financial', label: "I reach out when there's a financial angle", sub: 'I focus on relevant moments' },
+    { id: 'unsure', label: "I'm not sure what's appropriate yet", sub: 'I could use guidance on this' },
   ],
   chiefOsStyleOptions: [
-    { id: 'briefing',   label: 'Walk me through my day each morning',     sub: "I'm still building my routine" },
-    { id: 'stepbystep', label: 'Guide me step by step on new tasks',      sub: 'Applications, illustrations, UW' },
-    { id: 'checkin',    label: "Check in if I haven't done my activity", sub: 'Help me stay consistent' },
-    { id: 'urgent',     label: 'Alert me when something needs action',    sub: 'Cases, leads, follow-ups' },
+    { id: 'briefing', label: 'Walk me through my day each morning', sub: "I'm still building my routine" },
+    { id: 'stepbystep', label: 'Guide me step by step on new tasks', sub: 'Applications, illustrations, UW' },
+    { id: 'checkin', label: "Check in if I haven't done my activity", sub: 'Help me stay consistent' },
+    { id: 'urgent', label: 'Alert me when something needs action', sub: 'Cases, leads, follow-ups' },
   ],
 }
 

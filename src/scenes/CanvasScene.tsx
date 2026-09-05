@@ -1,8 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  addNode, moveNode, moveTile, removeNode, renameNode, selfUser, setPresence,
-  useConnState, useCustomNodes, usePeers, useTilePositions,
-  type CustomNode, type Peer,
+  addNode,
+  moveNode,
+  moveTile,
+  removeNode,
+  renameNode,
+  selfUser,
+  setPresence,
+  useConnState,
+  useCustomNodes,
+  usePeers,
+  useTilePositions,
+  type CustomNode,
+  type Peer,
 } from '@/collab/collab'
 import { motion } from 'motion/react'
 import { useAppStore, type Role } from '@/state/useAppStore'
@@ -75,78 +85,146 @@ const Y0 = 60
 const TILES: Tile[] = [
   /* Row 0 — practice / business signals */
   {
-    id: 'practice-score', title: 'Practice Score', eyebrow: 'YOU · BUSINESS',
+    id: 'practice-score',
+    title: 'Practice Score',
+    eyebrow: 'YOU · BUSINESS',
     preview: '68 / 100  ·  Peer +2',
-    x: X0 + 0 * COL, y: Y0 + 0 * ROW, w: 280, h: 160,
-    accessibleBy: ['advisor'], tier: 'practice',
-    drillsTo: 'scene', fallbackScene: 'business',
+    x: X0 + 0 * COL,
+    y: Y0 + 0 * ROW,
+    w: 280,
+    h: 160,
+    accessibleBy: ['advisor'],
+    tier: 'practice',
+    drillsTo: 'scene',
+    fallbackScene: 'business',
   },
   {
-    id: 'pipeline', title: 'Pipeline & Goals', eyebrow: 'YOU · MONEY',
+    id: 'pipeline',
+    title: 'Pipeline & Goals',
+    eyebrow: 'YOU · MONEY',
     preview: '$122K plan  ·  74 qualified appts',
-    x: X0 + 1 * COL, y: Y0 + 0 * ROW, w: 280, h: 160,
-    accessibleBy: ['advisor'], tier: 'practice',
-    drillsTo: 'scene', fallbackScene: 'business',
+    x: X0 + 1 * COL,
+    y: Y0 + 0 * ROW,
+    w: 280,
+    h: 160,
+    accessibleBy: ['advisor'],
+    tier: 'practice',
+    drillsTo: 'scene',
+    fallbackScene: 'business',
   },
   {
-    id: 'priorities', title: "Today's Priorities", eyebrow: 'TODAY',
+    id: 'priorities',
+    title: "Today's Priorities",
+    eyebrow: 'TODAY',
     preview: '3 priorities  ·  Tom · day 11 underwriting',
-    x: X0 + 2 * COL, y: Y0 + 0 * ROW, w: 280, h: 160,
-    accessibleBy: ['advisor', 'assistant'], tier: 'ops',
-    drillsTo: 'scene', fallbackScene: 'briefing',
+    x: X0 + 2 * COL,
+    y: Y0 + 0 * ROW,
+    w: 280,
+    h: 160,
+    accessibleBy: ['advisor', 'assistant'],
+    tier: 'ops',
+    drillsTo: 'scene',
+    fallbackScene: 'briefing',
   },
 
   /* Row 1 — the book + its feeds */
   {
-    id: 'plans', title: 'Suggested Plans', eyebrow: 'QUICK WINS',
+    id: 'plans',
+    title: 'Suggested Plans',
+    eyebrow: 'QUICK WINS',
     preview: '2 plays ready  ·  Russo · Park',
-    x: X0 + 0 * COL, y: Y0 + 1 * ROW, w: 280, h: 160,
-    accessibleBy: ['advisor', 'assistant'], tier: 'ops',
-    drillsTo: 'scene', fallbackScene: 'business',
+    x: X0 + 0 * COL,
+    y: Y0 + 1 * ROW,
+    w: 280,
+    h: 160,
+    accessibleBy: ['advisor', 'assistant'],
+    tier: 'ops',
+    drillsTo: 'scene',
+    fallbackScene: 'business',
   },
   {
-    id: 'my-book', title: 'My Book', eyebrow: 'CLIENTS',
+    id: 'my-book',
+    title: 'My Book',
+    eyebrow: 'CLIENTS',
     preview: '20 households  ·  5 priority',
-    x: X0 + 1 * COL, y: Y0 + 1 * ROW, w: 280, h: 160,
-    accessibleBy: ['advisor', 'assistant'], tier: 'book',
+    x: X0 + 1 * COL,
+    y: Y0 + 1 * ROW,
+    w: 280,
+    h: 160,
+    accessibleBy: ['advisor', 'assistant'],
+    tier: 'book',
     drillsTo: 'canvas',
   },
   {
-    id: 'signals', title: 'Signals Feed', eyebrow: 'TRIGGERS',
+    id: 'signals',
+    title: 'Signals Feed',
+    eyebrow: 'TRIGGERS',
     preview: '12 fresh  ·  4 urgent in 7d',
-    x: X0 + 2 * COL, y: Y0 + 1 * ROW, w: 280, h: 160,
-    accessibleBy: ['advisor', 'assistant'], tier: 'book',
+    x: X0 + 2 * COL,
+    y: Y0 + 1 * ROW,
+    w: 280,
+    h: 160,
+    accessibleBy: ['advisor', 'assistant'],
+    tier: 'book',
     drillsTo: 'canvas',
   },
 
   /* Row 2 — time + field + onboarding */
   {
-    id: 'calendar', title: 'Calendar', eyebrow: 'TIME',
+    id: 'calendar',
+    title: 'Calendar',
+    eyebrow: 'TIME',
     preview: '3 today  ·  Emma 9:30 AM',
-    x: X0 + 0 * COL, y: Y0 + 2 * ROW, w: 280, h: 160,
-    accessibleBy: ['advisor', 'assistant'], tier: 'ops',
-    drillsTo: 'scene', fallbackScene: 'calendar',
+    x: X0 + 0 * COL,
+    y: Y0 + 2 * ROW,
+    w: 280,
+    h: 160,
+    accessibleBy: ['advisor', 'assistant'],
+    tier: 'ops',
+    drillsTo: 'scene',
+    fallbackScene: 'calendar',
   },
   {
-    id: 'field-run', title: 'Field Run', eyebrow: 'TERRITORY',
+    id: 'field-run',
+    title: 'Field Run',
+    eyebrow: 'TERRITORY',
     preview: '1 saved  ·  Astoria · Tuesday',
-    x: X0 + 1 * COL, y: Y0 + 2 * ROW, w: 280, h: 160,
-    accessibleBy: ['advisor', 'assistant'], tier: 'ops',
-    drillsTo: 'scene', fallbackScene: 'actionboard',
+    x: X0 + 1 * COL,
+    y: Y0 + 2 * ROW,
+    w: 280,
+    h: 160,
+    accessibleBy: ['advisor', 'assistant'],
+    tier: 'ops',
+    drillsTo: 'scene',
+    fallbackScene: 'actionboard',
   },
   {
-    id: 'onboarding', title: 'Onboarding', eyebrow: 'SETUP · NEW HERE',
+    id: 'onboarding',
+    title: 'Onboarding',
+    eyebrow: 'SETUP · NEW HERE',
     preview: 'Personalize your OS  ·  ~3 min',
-    x: X0 + 2 * COL, y: Y0 + 2 * ROW, w: 280, h: 160,
-    accessibleBy: ['advisor'], tier: 'setup',
-    drillsTo: 'takeover', takeover: 'onboarding',
+    x: X0 + 2 * COL,
+    y: Y0 + 2 * ROW,
+    w: 280,
+    h: 160,
+    accessibleBy: ['advisor'],
+    tier: 'setup',
+    drillsTo: 'takeover',
+    takeover: 'onboarding',
   },
   {
-    id: 'wrapped', title: 'Practice Wrapped', eyebrow: 'YOUR YEAR · 2026',
+    id: 'wrapped',
+    title: 'Practice Wrapped',
+    eyebrow: 'YOUR YEAR · 2026',
     preview: '11 stories  ·  $132K · 74 cases',
-    x: X0 + 3 * COL, y: Y0 + 2 * ROW, w: 280, h: 160,
-    accessibleBy: ['advisor'], tier: 'setup',
-    drillsTo: 'takeover', takeover: 'wrapped',
+    x: X0 + 3 * COL,
+    y: Y0 + 2 * ROW,
+    w: 280,
+    h: 160,
+    accessibleBy: ['advisor'],
+    tier: 'setup',
+    drillsTo: 'takeover',
+    takeover: 'wrapped',
   },
 ]
 
@@ -166,10 +244,13 @@ const EDGES: Array<[TileId, TileId]> = [
 ]
 
 const TIER_ACCENT: Record<Tile['tier'], { ring: string; chip: string }> = {
-  practice: { ring: 'border-[var(--nyl-purple-700)]/35', chip: 'bg-[rgba(112,40,164,0.08)] text-[var(--nyl-purple-700)]' },
-  book:     { ring: 'border-[var(--nyl-blue-500)]/35',   chip: 'bg-[var(--nyl-blue-100)] text-[var(--nyl-blue-800)]' },
-  ops:      { ring: 'border-[var(--nyl-orange-400)]/35', chip: 'bg-[var(--nyl-orange-100)] text-[var(--nyl-orange-500)]' },
-  setup:    { ring: 'border-dashed border-[var(--nyl-blue-500)]/60', chip: 'bg-[var(--nyl-blue-500)] text-white' },
+  practice: {
+    ring: 'border-[var(--nyl-purple-700)]/35',
+    chip: 'bg-[rgba(112,40,164,0.08)] text-[var(--nyl-purple-700)]',
+  },
+  book: { ring: 'border-[var(--nyl-blue-500)]/35', chip: 'bg-[var(--nyl-blue-100)] text-[var(--nyl-blue-800)]' },
+  ops: { ring: 'border-[var(--nyl-orange-400)]/35', chip: 'bg-[var(--nyl-orange-100)] text-[var(--nyl-orange-500)]' },
+  setup: { ring: 'border-dashed border-[var(--nyl-blue-500)]/60', chip: 'bg-[var(--nyl-blue-500)] text-white' },
 }
 
 /* ----------------------------------------------------------------------------
@@ -181,11 +262,25 @@ export function CanvasScene() {
   const top = path[path.length - 1]
 
   if (top.layer === 1) return <PracticeLayer />
-  if (top.layer === 2 && top.tileId === 'my-book') return <DomainLayer tile="my-book"><MyBookCanvas /></DomainLayer>
-  if (top.layer === 2 && top.tileId === 'signals') return <DomainLayer tile="signals"><SignalsCanvas /></DomainLayer>
+  if (top.layer === 2 && top.tileId === 'my-book')
+    return (
+      <DomainLayer tile="my-book">
+        <MyBookCanvas />
+      </DomainLayer>
+    )
+  if (top.layer === 2 && top.tileId === 'signals')
+    return (
+      <DomainLayer tile="signals">
+        <SignalsCanvas />
+      </DomainLayer>
+    )
   /* Layer 3 — handled by ActionDeepDive overlay, but we still need a layer to
    * render under it. Fall through to MyBookCanvas for now. */
-  return <DomainLayer tile="my-book"><MyBookCanvas /></DomainLayer>
+  return (
+    <DomainLayer tile="my-book">
+      <MyBookCanvas />
+    </DomainLayer>
+  )
 }
 
 /* ----------------------------------------------------------------------------
@@ -307,7 +402,11 @@ function PracticeLayer() {
     if (e.button === 2) return
     dragRef.current = { x: e.clientX, y: e.clientY, tx, ty }
     setGrabbing(true)
-    try { (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId) } catch { /* no-op */ }
+    try {
+      ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+    } catch {
+      /* no-op */
+    }
   }
   function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
     if (!dragRef.current) return
@@ -318,7 +417,11 @@ function PracticeLayer() {
     if (!dragRef.current) return
     dragRef.current = null
     setGrabbing(false)
-    try { (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId) } catch { /* no-op */ }
+    try {
+      ;(e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId)
+    } catch {
+      /* no-op */
+    }
   }
 
   /* Tile/node drag — pointer capture on the tile itself; deltas divided by
@@ -326,7 +429,13 @@ function PracticeLayer() {
    * the shared Y.Map, so remote peers watch the tile travel live. A small
    * movement threshold keeps click/double-click working. */
   const tileDrag = useRef<{
-    id: string; kind: 'tile' | 'node'; px: number; py: number; ox: number; oy: number; moved: boolean
+    id: string
+    kind: 'tile' | 'node'
+    px: number
+    py: number
+    ox: number
+    oy: number
+    moved: boolean
   } | null>(null)
   const justDragged = useRef(false)
 
@@ -335,7 +444,11 @@ function PracticeLayer() {
     /* Typing in a node title or hitting its delete affordance isn't a drag. */
     if ((e.target as HTMLElement).closest('input,[data-node-action]')) return
     tileDrag.current = { id, kind, px: e.clientX, py: e.clientY, ox: x, oy: y, moved: false }
-    try { (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId) } catch { /* no-op */ }
+    try {
+      ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+    } catch {
+      /* no-op */
+    }
   }
   function moveTileDrag(e: React.PointerEvent) {
     const d = tileDrag.current
@@ -355,9 +468,15 @@ function PracticeLayer() {
     tileDrag.current = null
     if (d.moved) {
       justDragged.current = true
-      setTimeout(() => { justDragged.current = false }, 250)
+      setTimeout(() => {
+        justDragged.current = false
+      }, 250)
     }
-    try { (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId) } catch { /* no-op */ }
+    try {
+      ;(e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId)
+    } catch {
+      /* no-op */
+    }
   }
 
   /* Cursor presence — broadcast pointer position in canvas-space coords,
@@ -380,10 +499,7 @@ function PracticeLayer() {
   function addNodeAtCenter() {
     const el = viewportRef.current
     if (!el) return
-    addNode(
-      (el.clientWidth / 2 - tx) / scale - 140,
-      (el.clientHeight / 2 - ty) / scale - 80,
-    )
+    addNode((el.clientWidth / 2 - tx) / scale - 140, (el.clientHeight / 2 - ty) / scale - 80)
   }
 
   function zoomBy(factor: number) {
@@ -413,9 +529,16 @@ function PracticeLayer() {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (!(e.metaKey || e.ctrlKey)) return
-      if (e.key === '=' || e.key === '+') { e.preventDefault(); zoomBy(1.2) }
-      else if (e.key === '-' || e.key === '_') { e.preventDefault(); zoomBy(1 / 1.2) }
-      else if (e.key === '0') { e.preventDefault(); resetView() }
+      if (e.key === '=' || e.key === '+') {
+        e.preventDefault()
+        zoomBy(1.2)
+      } else if (e.key === '-' || e.key === '_') {
+        e.preventDefault()
+        zoomBy(1 / 1.2)
+      } else if (e.key === '0') {
+        e.preventDefault()
+        resetView()
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -432,7 +555,10 @@ function PracticeLayer() {
           grabbing ? 'cursor-grabbing' : 'cursor-grab',
         ].join(' ')}
         onPointerDown={onPointerDown}
-        onPointerMove={(e) => { onPointerMove(e); broadcastCursor(e) }}
+        onPointerMove={(e) => {
+          onPointerMove(e)
+          broadcastCursor(e)
+        }}
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
         onPointerLeave={() => setPresence('layer1', null)}
@@ -464,7 +590,10 @@ function PracticeLayer() {
               return (
                 <line
                   key={`${a}-${b}-${i}`}
-                  x1={pa.cx} y1={pa.cy} x2={pb.cx} y2={pb.cy}
+                  x1={pa.cx}
+                  y1={pa.cy}
+                  x2={pb.cx}
+                  y2={pb.cy}
                   stroke="var(--nyl-blue-500)"
                   strokeWidth={1.1}
                   opacity={muted ? 0.08 : 0.22}
@@ -482,7 +611,9 @@ function PracticeLayer() {
                 key={t.id}
                 type="button"
                 data-canvas-tile
-                onDoubleClick={() => { if (!justDragged.current) openTile(t) }}
+                onDoubleClick={() => {
+                  if (!justDragged.current) openTile(t)
+                }}
                 onPointerDown={(e) => startTileDrag(e, t.id, 'tile', t.x, t.y)}
                 onPointerMove={moveTileDrag}
                 onPointerUp={endTileDrag}
@@ -504,17 +635,23 @@ function PracticeLayer() {
                 title={locked ? `${t.title} — restricted for assistants` : `${t.title} — double-click to open`}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className={['rounded-full px-2 py-0.5 text-[9.5px] font-medium uppercase tracking-[0.18em]', accent.chip].join(' ')}>
+                  <span
+                    className={[
+                      'rounded-full px-2 py-0.5 text-[9.5px] font-medium uppercase tracking-[0.18em]',
+                      accent.chip,
+                    ].join(' ')}
+                  >
                     {t.eyebrow}
                   </span>
                   {locked ? <LockGlyph /> : <ArrowGlyph />}
                 </div>
-                <p className="font-serif text-[24px] leading-tight tracking-tight text-neutral-900" style={{ fontWeight: 400 }}>
+                <p
+                  className="font-serif text-[24px] leading-tight tracking-tight text-neutral-900"
+                  style={{ fontWeight: 400 }}
+                >
                   {t.title}
                 </p>
-                <p className="text-[13px] leading-snug text-neutral-600">
-                  {t.preview}
-                </p>
+                <p className="text-[13px] leading-snug text-neutral-600">{t.preview}</p>
                 <p className="mt-auto text-[10px] uppercase tracking-[0.22em] text-neutral-400">
                   {locked
                     ? 'Restricted · advisor only'
@@ -556,7 +693,9 @@ function PracticeLayer() {
             onClick={addNodeAtCenter}
             className="pointer-events-auto flex h-9 items-center gap-2 rounded-full bg-[var(--nyl-blue-800)] px-4 text-[12px] font-medium text-white shadow-[0_8px_24px_-12px_rgba(0,10,98,0.4)] hover:bg-[var(--nyl-blue-600)]"
           >
-            <span aria-hidden="true" className="text-[14px] leading-none">＋</span>
+            <span aria-hidden="true" className="text-[14px] leading-none">
+              ＋
+            </span>
             New node
           </button>
         </div>
@@ -649,9 +788,7 @@ function CustomNodeTile({
         className="w-full bg-transparent font-serif text-[24px] leading-tight tracking-tight text-neutral-900 focus:outline-none"
         style={{ fontWeight: 400 }}
       />
-      <p className="mt-auto text-[10px] uppercase tracking-[0.22em] text-neutral-400">
-        Drag to move · shared live
-      </p>
+      <p className="mt-auto text-[10px] uppercase tracking-[0.22em] text-neutral-400">Drag to move · shared live</p>
     </motion.div>
   )
 }
@@ -690,7 +827,13 @@ function PresencePill({ peers, conn }: { peers: Peer[]; conn: string }) {
   return (
     <div
       className="pointer-events-auto flex h-9 items-center gap-2 rounded-full border border-neutral-200 bg-white/90 py-1.5 pl-3 pr-2 shadow-[0_8px_24px_-12px_rgba(0,10,98,0.18)] backdrop-blur-sm"
-      title={conn === 'connected' ? 'Live — connected to the room' : conn === 'connecting' ? 'Connecting…' : 'Offline — run npm run collab'}
+      title={
+        conn === 'connected'
+          ? 'Live — connected to the room'
+          : conn === 'connecting'
+            ? 'Connecting…'
+            : 'Offline — run npm run collab'
+      }
     >
       <span aria-hidden="true" className={['size-2 rounded-full', dot].join(' ')} />
       <span className="text-[10.5px] font-medium uppercase tracking-[0.18em] text-neutral-500">
@@ -735,9 +878,7 @@ function DomainLayer({ tile, children }: { tile: TileId; children: React.ReactNo
   return (
     <section className="relative flex flex-1 flex-col overflow-hidden bg-[#f4f3ef]">
       <CanvasTopBar tileTitle={tileMeta?.title} />
-      <div className="relative flex-1 overflow-hidden">
-        {children}
-      </div>
+      <div className="relative flex-1 overflow-hidden">{children}</div>
     </section>
   )
 }
@@ -761,15 +902,27 @@ function CanvasTopBar({ tileTitle }: { tileTitle?: string }) {
         className="flex items-center gap-3 text-[13px] font-medium text-neutral-700 hover:text-neutral-900"
         title={depth > 1 ? 'Back' : 'Close canvas mode'}
       >
-        <span aria-hidden="true" className="text-[18px] text-neutral-500">←</span>
+        <span aria-hidden="true" className="text-[18px] text-neutral-500">
+          ←
+        </span>
         <span className="flex items-baseline gap-2">
-          <span className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-neutral-400">
-            Canvas
-          </span>
-          <Crumb label="Practice" active={depth === 1} onClick={depth > 1 ? () => { while (path.length > 1) surface() } : undefined} />
+          <span className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-neutral-400">Canvas</span>
+          <Crumb
+            label="Practice"
+            active={depth === 1}
+            onClick={
+              depth > 1
+                ? () => {
+                    while (path.length > 1) surface()
+                  }
+                : undefined
+            }
+          />
           {depth > 1 && tileTitle && (
             <>
-              <span aria-hidden="true" className="text-neutral-300">›</span>
+              <span aria-hidden="true" className="text-neutral-300">
+                ›
+              </span>
               <Crumb label={tileTitle} active={depth === 2} />
             </>
           )}
@@ -777,9 +930,7 @@ function CanvasTopBar({ tileTitle }: { tileTitle?: string }) {
       </button>
       <div className="flex items-center gap-3">
         <RoleChip role={role} />
-        <p className="text-[10.5px] uppercase tracking-[0.22em] text-neutral-400">
-          ESC to surface
-        </p>
+        <p className="text-[10.5px] uppercase tracking-[0.22em] text-neutral-400">ESC to surface</p>
         <CollabLauncher />
       </div>
     </div>
@@ -812,7 +963,12 @@ function RoleChip({ role }: { role: Role }) {
           : 'bg-[var(--nyl-orange-100)] text-[var(--nyl-orange-500)]',
       ].join(' ')}
     >
-      <span aria-hidden="true" className={['size-1.5 rounded-full', advisor ? 'bg-[var(--nyl-blue-500)]' : 'bg-[var(--nyl-orange-400)]'].join(' ')} />
+      <span
+        aria-hidden="true"
+        className={['size-1.5 rounded-full', advisor ? 'bg-[var(--nyl-blue-500)]' : 'bg-[var(--nyl-orange-400)]'].join(
+          ' ',
+        )}
+      />
       {advisor ? 'Marisol · advisor' : 'Lily · assistant'}
     </span>
   )
@@ -824,13 +980,26 @@ function RoleChip({ role }: { role: Role }) {
 
 function ArrowGlyph() {
   return (
-    <span aria-hidden="true" className="text-[14px] text-neutral-300">↗</span>
+    <span aria-hidden="true" className="text-[14px] text-neutral-300">
+      ↗
+    </span>
   )
 }
 
 function LockGlyph() {
   return (
-    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="text-neutral-400">
+    <svg
+      aria-hidden="true"
+      width="14"
+      height="14"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="text-neutral-400"
+    >
       <rect x="3" y="7" width="10" height="7" rx="1.5" />
       <path d="M5.5 7 V5 a2.5 2.5 0 0 1 5 0 V7" />
     </svg>

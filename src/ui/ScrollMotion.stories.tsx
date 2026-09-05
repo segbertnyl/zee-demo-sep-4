@@ -32,8 +32,12 @@ const CARDS = [
 /* Evaluate a cubic-bézier easing curve at progress x (Newton-Raphson on X).
  * Returns y, which may exceed 1 for overshoot curves. */
 function cubicBezier([x1, y1, x2, y2]: EaseCurve) {
-  const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx
-  const cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by
+  const cx = 3 * x1,
+    bx = 3 * (x2 - x1) - cx,
+    ax = 1 - cx - bx
+  const cy = 3 * y1,
+    by = 3 * (y2 - y1) - cy,
+    ay = 1 - cy - by
   const sampleX = (t: number) => ((ax * t + bx) * t + cx) * t
   const sampleY = (t: number) => ((ay * t + by) * t + cy) * t
   const slopeX = (t: number) => (3 * ax * t + 2 * bx) * t + cx
@@ -52,9 +56,9 @@ function cubicBezier([x1, y1, x2, y2]: EaseCurve) {
 function ScrollMotionDemo() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number | undefined>(undefined)
-  const glidingRef = useRef(false)               // true while a programmatic glide runs
+  const glidingRef = useRef(false) // true while a programmatic glide runs
   const snapTimer = useRef<number | undefined>(undefined)
-  const stretchRef = useRef(false)               // current curve, read inside rAF/handlers
+  const stretchRef = useRef(false) // current curve, read inside rAF/handlers
   const [stretch, setStretch] = useState(false)
   const [index, setIndex] = useState(0)
 
@@ -65,13 +69,20 @@ function ScrollMotionDemo() {
   }
 
   /* Animate scrollTop a → b over durMs along an eased curve, then onDone. */
-  const runPhase = (el: HTMLDivElement, a: number, b: number, durMs: number, ease: (x: number) => number, onDone?: () => void) => {
+  const runPhase = (
+    el: HTMLDivElement,
+    a: number,
+    b: number,
+    durMs: number,
+    ease: (x: number) => number,
+    onDone?: () => void,
+  ) => {
     const delta = b - a
     let start: number | null = null
     const frame = (ts: number) => {
       if (start === null) start = ts
       const p = Math.min(1, (ts - start) / durMs)
-      el.scrollTop = a + delta * ease(p)           // ease(p) may exceed 1 → overshoot
+      el.scrollTop = a + delta * ease(p) // ease(p) may exceed 1 → overshoot
       if (p < 1) rafRef.current = requestAnimationFrame(frame)
       else onDone?.()
     }
@@ -90,7 +101,9 @@ function ScrollMotionDemo() {
     if (Math.abs(to - from) < 1) return
     if (rafRef.current) cancelAnimationFrame(rafRef.current)
     glidingRef.current = true
-    const done = () => { glidingRef.current = false }
+    const done = () => {
+      glidingRef.current = false
+    }
     if (stretchRef.current) {
       const peak = to + (to - from) * SCROLL.stretch.overshoot
       runPhase(el, from, peak, SCROLL.stretch.riseMs, cubicBezier(SCROLL.stretch.riseEase), () =>
@@ -109,19 +122,26 @@ function ScrollMotionDemo() {
     snapTimer.current = window.setTimeout(() => {
       const el = scrollRef.current
       if (!el) return
-      let nearest = 0, best = Infinity
+      let nearest = 0,
+        best = Infinity
       CARDS.forEach((c, i) => {
         const t = cardTop(el, c.id)
         if (t === null) return
         const d = Math.abs(t - el.scrollTop)
-        if (d < best) { best = d; nearest = i }
+        if (d < best) {
+          best = d
+          nearest = i
+        }
       })
       if (best > 2) glideTo(nearest)
       else setIndex(nearest)
     }, 130)
   }
 
-  const setMode = (s: boolean) => { stretchRef.current = s; setStretch(s) }
+  const setMode = (s: boolean) => {
+    stretchRef.current = s
+    setStretch(s)
+  }
 
   return (
     <div className="w-[440px] font-sans">
@@ -146,7 +166,9 @@ function ScrollMotionDemo() {
           )
         })}
         <span className="ml-auto text-[11px] text-[var(--text-body-faint)]">
-          {stretch ? `${SCROLL.stretch.riseMs}ms rise · ${SCROLL.stretch.settleMs}ms eased settle` : `${Math.round(SCROLL.glide.duration * 1000)}ms · ease-out · snap-locked`}
+          {stretch
+            ? `${SCROLL.stretch.riseMs}ms rise · ${SCROLL.stretch.settleMs}ms eased settle`
+            : `${Math.round(SCROLL.glide.duration * 1000)}ms · ease-out · snap-locked`}
         </span>
       </div>
 
@@ -165,7 +187,9 @@ function ScrollMotionDemo() {
               onClick={() => glideTo(i)}
               className={[
                 'block w-full rounded-[12px] border bg-white p-4 text-left transition-shadow',
-                i === index ? 'border-[var(--nyl-blue-200)] shadow-[0_8px_28px_-14px_rgba(23,24,28,0.25)]' : 'border-[var(--border-subtle)]',
+                i === index
+                  ? 'border-[var(--nyl-blue-200)] shadow-[0_8px_28px_-14px_rgba(23,24,28,0.25)]'
+                  : 'border-[var(--border-subtle)]',
               ].join(' ')}
             >
               <span
@@ -176,7 +200,9 @@ function ScrollMotionDemo() {
                 {c.label}
               </span>
               <p className="mt-2 font-serif text-[18px] text-[var(--text-headline)]">{c.title}</p>
-              <p className="mt-1 text-[12.5px] text-[var(--text-body-muted)]">Scroll freely — it snaps a full card to the top.</p>
+              <p className="mt-1 text-[12.5px] text-[var(--text-body-muted)]">
+                Scroll freely — it snaps a full card to the top.
+              </p>
             </button>
           ))}
         </div>
@@ -184,13 +210,33 @@ function ScrollMotionDemo() {
 
       {/* controls */}
       <div className="mt-3 flex items-center gap-2">
-        <button type="button" onClick={() => glideTo(index - 1)} className="rounded-lg border border-[var(--border-default)] px-3 py-1.5 text-[13px] font-medium text-[var(--text-body)] hover:bg-[var(--bg-surface)]">↑ Prev</button>
-        <button type="button" onClick={() => glideTo(index + 1)} className="rounded-lg border border-[var(--border-default)] px-3 py-1.5 text-[13px] font-medium text-[var(--text-body)] hover:bg-[var(--bg-surface)]">↓ Next</button>
-        <button type="button" onClick={() => glideTo(0)} className="ml-auto text-[13px] font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]">Back to top</button>
+        <button
+          type="button"
+          onClick={() => glideTo(index - 1)}
+          className="rounded-lg border border-[var(--border-default)] px-3 py-1.5 text-[13px] font-medium text-[var(--text-body)] hover:bg-[var(--bg-surface)]"
+        >
+          ↑ Prev
+        </button>
+        <button
+          type="button"
+          onClick={() => glideTo(index + 1)}
+          className="rounded-lg border border-[var(--border-default)] px-3 py-1.5 text-[13px] font-medium text-[var(--text-body)] hover:bg-[var(--bg-surface)]"
+        >
+          ↓ Next
+        </button>
+        <button
+          type="button"
+          onClick={() => glideTo(0)}
+          className="ml-auto text-[13px] font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]"
+        >
+          Back to top
+        </button>
       </div>
 
       <p className="mt-3 text-[11.5px] leading-[1.5] text-[var(--text-body-faint)]">
-        Preview only — not wired into the Briefing yet. <strong>Glide</strong> snap-locks to a full card on scroll-end; <strong>stretch</strong> overshoots then eases back (~2× settle). Curves: <code>SCROLL</code> in <code>@/motion</code>.
+        Preview only — not wired into the Briefing yet. <strong>Glide</strong> snap-locks to a full card on scroll-end;{' '}
+        <strong>stretch</strong> overshoots then eases back (~2× settle). Curves: <code>SCROLL</code> in{' '}
+        <code>@/motion</code>.
       </p>
     </div>
   )

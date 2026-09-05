@@ -107,9 +107,7 @@ export function TomGuidedCanvas() {
             Tom Anderson · stalled application
           </span>
         </button>
-        <p className="ml-2 text-[11px] uppercase tracking-[0.22em] text-neutral-400">
-          Saved just now
-        </p>
+        <p className="ml-2 text-[11px] uppercase tracking-[0.22em] text-neutral-400">Saved just now</p>
       </div>
 
       {/* Body */}
@@ -158,30 +156,25 @@ export function TomGuidedCanvas() {
                 className="font-serif text-[20px] leading-[1.22] tracking-tight text-neutral-900 md:text-[22px]"
                 style={{ fontWeight: 400, textWrap: 'balance' }}
               >
-                Tom Anderson has been sitting at{' '}
-                <span className="text-[#B82A1F]">underwriting for 11 days</span> on a missing form. One 10-minute call clears it.
+                Tom Anderson has been sitting at <span className="text-[#B82A1F]">underwriting for 11 days</span> on a
+                missing form. One 10-minute call clears it.
               </h2>
               <div className="mt-5 grid grid-cols-1 gap-5 border-t border-neutral-100 pt-5 md:grid-cols-3">
                 <div>
-                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-400">
-                    Analysis
-                  </p>
+                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-400">Analysis</p>
                   <p className="mt-1.5 text-[13.5px] leading-[1.5] text-neutral-700">
-                    While the app stalled at underwriting due to a missing APS medical form, Tom hasn't received the request.
+                    While the app stalled at underwriting due to a missing APS medical form, Tom hasn't received the
+                    request.
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-400">
-                    Insight
-                  </p>
+                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-400">Insight</p>
                   <p className="mt-1.5 text-[13.5px] leading-[1.5] text-neutral-700">
                     This is a system failure, not a client failure. One outreach resolves it.
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-400">
-                    Recommendation
-                  </p>
+                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-400">Recommendation</p>
                   <p className="mt-1.5 text-[13.5px] leading-[1.5] text-neutral-700">
                     Call Tom Anderson to set expectations, then resend APS request via Sales Central.
                   </p>
@@ -235,7 +228,8 @@ export function TomGuidedCanvas() {
                         Take the next 5 min to chat with Tom and resend the application.
                       </p>
                       <p className="mt-1 text-[12.5px] text-neutral-500">
-                        When you connect with him, acknowledge the hold, and tell him you've identified the issue and are resolving it today.
+                        When you connect with him, acknowledge the hold, and tell him you've identified the issue and
+                        are resolving it today.
                       </p>
                     </div>
                     <div className="flex items-center justify-between gap-3 border-b border-neutral-100 px-4 py-2.5">
@@ -309,13 +303,26 @@ export function TomGuidedCanvas() {
                     {/* Footer — Send / Adjust, or a sent confirmation */}
                     {sent ? (
                       <div className="flex items-center gap-2 border-t border-neutral-100 bg-[var(--nyl-green-200)]/25 px-4 py-3 text-[12.5px] text-[var(--nyl-green-800)]">
-                        <span aria-hidden="true" className="inline-flex size-4 items-center justify-center rounded-full bg-[var(--nyl-green-600)] text-white">
-                          <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <span
+                          aria-hidden="true"
+                          className="inline-flex size-4 items-center justify-center rounded-full bg-[var(--nyl-green-600)] text-white"
+                        >
+                          <svg
+                            width="9"
+                            height="9"
+                            viewBox="0 0 12 12"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
                             <path d="M2.5 6.5 L5 9 L9.5 3.5" />
                           </svg>
                         </span>
                         <span className="font-medium">
-                          {channel === 'call' ? 'Talking points ready' : 'Message sent to Tom'} · logged in Sales Central
+                          {channel === 'call' ? 'Talking points ready' : 'Message sent to Tom'} · logged in Sales
+                          Central
                         </span>
                         <button
                           type="button"
@@ -404,8 +411,7 @@ export function TomGuidedCanvas() {
                 type="button"
                 className="rounded-full px-4 py-2 text-[12.5px] font-medium text-white shadow-[0_10px_24px_-12px_rgba(0,10,98,0.5)] hover:opacity-90"
                 style={{
-                  background:
-                    'linear-gradient(150deg, #122879 0%, #000a62 55%, #00084a 100%)',
+                  background: 'linear-gradient(150deg, #122879 0%, #000a62 55%, #00084a 100%)',
                 }}
               >
                 Review Helena's portfolio
@@ -414,8 +420,7 @@ export function TomGuidedCanvas() {
                 type="button"
                 className="rounded-full px-4 py-2 text-[12.5px] font-medium text-white shadow-[0_10px_24px_-12px_rgba(0,10,98,0.5)] hover:opacity-90"
                 style={{
-                  background:
-                    'linear-gradient(150deg, #122879 0%, #000a62 55%, #00084a 100%)',
+                  background: 'linear-gradient(150deg, #122879 0%, #000a62 55%, #00084a 100%)',
                 }}
               >
                 Review the Tom Anderson timeline
@@ -425,8 +430,7 @@ export function TomGuidedCanvas() {
           <div
             className="flex items-center gap-3 rounded-2xl px-5 py-3.5 text-white shadow-[0_18px_40px_-22px_rgba(0,10,98,0.5)]"
             style={{
-              background:
-                'linear-gradient(155deg, #122879 0%, #000a62 55%, #00084a 100%)',
+              background: 'linear-gradient(155deg, #122879 0%, #000a62 55%, #00084a 100%)',
             }}
           >
             <span className="text-[var(--nyl-blue-500)]" aria-hidden="true">
@@ -441,15 +445,24 @@ export function TomGuidedCanvas() {
               onKeyDown={(e) => {
                 if (e.key === 'Enter') submitChat()
               }}
-              placeholder={stage === 0 ? 'What would you like to change or dive deeper into?' : 'what are the best next steps to resolve this promptly'}
+              placeholder={
+                stage === 0
+                  ? 'What would you like to change or dive deeper into?'
+                  : 'what are the best next steps to resolve this promptly'
+              }
               className="flex-1 bg-transparent text-[14px] text-white placeholder:text-white/45 focus:outline-none"
             />
-            <button
-              type="button"
-              aria-label="Voice"
-              className="text-white/55 hover:text-white"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <button type="button" aria-label="Voice" className="text-white/55 hover:text-white">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <rect x="9" y="3" width="6" height="11" rx="3" />
                 <path d="M5 11 a7 7 0 0 0 14 0" />
                 <path d="M12 18 V21" />
@@ -464,7 +477,17 @@ export function TomGuidedCanvas() {
 
 function PhoneIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M6.5 3 H4.2 C3.5 3 3 3.5 3 4.2 C3 10.5 9.5 17 15.8 17 C16.5 17 17 16.5 17 15.8 V13.5 L13.5 12.5 L12 14 C9.8 13 7 10.2 6 8 L7.5 6.5 Z" />
     </svg>
   )
@@ -472,7 +495,17 @@ function PhoneIcon() {
 
 function ChatIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M3 5 a2 2 0 0 1 2-2 H15 a2 2 0 0 1 2 2 V12 a2 2 0 0 1 -2 2 H8 L4 17 V14 H5 a2 2 0 0 1 -2-2 Z" />
     </svg>
   )
@@ -505,12 +538,8 @@ function StepCard({
       className="overflow-hidden rounded-2xl border border-neutral-200 bg-white"
     >
       <div className="p-5">
-        <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--nyl-blue-500)]">
-          {badge}
-        </p>
-        <p className="mt-1.5 text-[16.5px] font-medium leading-snug text-neutral-900">
-          {title}
-        </p>
+        <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--nyl-blue-500)]">{badge}</p>
+        <p className="mt-1.5 text-[16.5px] font-medium leading-snug text-neutral-900">{title}</p>
         <p className="mt-2 max-w-[60ch] text-[12.5px] leading-snug text-neutral-500">{sub}</p>
         {cta && !expanded && (
           <button

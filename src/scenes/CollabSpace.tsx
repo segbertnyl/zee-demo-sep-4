@@ -25,21 +25,23 @@ const TITLES: Record<Mode, { title: string; saved: string }> = {
 
 /* Per-client draft templates. The draft view is a focused single-card writer
  * keyed off the action-board "Draft a message" CTA. */
-const DRAFT_BY_CLIENT: Record<DraftClient, {
-  topBarTitle: string
-  eyebrow: string
-  headline: string
-  sub: string
-  message: string
-  tones: readonly string[]
-  followups: string[]
-}> = {
+const DRAFT_BY_CLIENT: Record<
+  DraftClient,
+  {
+    topBarTitle: string
+    eyebrow: string
+    headline: string
+    sub: string
+    message: string
+    tones: readonly string[]
+    followups: string[]
+  }
+> = {
   janet: {
     topBarTitle: 'Janet Henderson — reconnection message',
     eyebrow: 'WARM RECONNECTION',
-    headline: "Open with the move, not the policy.",
-    sub:
-      "Janet just moved to a coastal home in a high flood-risk zone. Lead with the household, not the coverage gap — you'll get the meeting.",
+    headline: 'Open with the move, not the policy.',
+    sub: "Janet just moved to a coastal home in a high flood-risk zone. Lead with the household, not the coverage gap — you'll get the meeting.",
     message:
       "Hi Janet — congratulations on the new place! I saw the address change come through and wanted to check in before things settle.\n\nA few clients who've moved recently have run into surprises with coverage on the new house, so I'd love to take 15 minutes this week to walk through where you stand and what (if anything) needs an update. No pressure either way — just want to make sure you're not left holding a gap you don't know about.\n\nDoes Thursday afternoon or Friday morning work?",
     tones: ['Warm', 'Professional', 'Direct', 'Update'] as const,
@@ -49,8 +51,7 @@ const DRAFT_BY_CLIENT: Record<DraftClient, {
     topBarTitle: 'Helena Garcia — milestone outreach',
     eyebrow: 'MILESTONE CHECK-IN',
     headline: 'Frame the milestone, not the rate.',
-    sub:
-      "Helena just turned 58 and is engaging with retirement-readiness content. Don't pitch — open the door to a conversation about what she's been thinking about.",
+    sub: "Helena just turned 58 and is engaging with retirement-readiness content. Don't pitch — open the door to a conversation about what she's been thinking about.",
     message:
       "Hi Helena — happy belated 58th. I know that age can sneak up on a calendar, and a lot of clients around the same milestone start asking different questions about what's ahead.\n\nI'd love to grab 20 minutes in the next two weeks just to hear what you've been thinking about for the next chapter — not a review, not a pitch, just a conversation. If something useful comes up I'll bring it; if not, you get 20 minutes of free planning back.\n\nWould the week of the 16th work?",
     tones: ['Warm', 'Professional', 'Direct', 'Update'] as const,
@@ -60,8 +61,7 @@ const DRAFT_BY_CLIENT: Record<DraftClient, {
     topBarTitle: 'Tom Anderson — application stall',
     eyebrow: 'RESOLVE THE STALL',
     headline: 'Take the next 5 min to chat with Tom and resend the application.',
-    sub:
-      "Acknowledge the hold, tell him you've identified the issue and are resolving it today.",
+    sub: "Acknowledge the hold, tell him you've identified the issue and are resolving it today.",
     message:
       "Hey Tom, how are you? I wanted to call you off immediately after you hung up. I'm reaching out right now, and once we have that back, we can finalize. Shouldn't take more than a couple of days.",
     tones: ['Personal', 'Professional', 'Apology', 'Update'] as const,
@@ -76,18 +76,15 @@ const CONTEXT_CARD = {
   columns: [
     {
       label: 'LIKELY',
-      body:
-        "Whole life app stalled at underwriting due to a missing APS medical form and Tom hasn't received the request.",
+      body: "Whole life app stalled at underwriting due to a missing APS medical form and Tom hasn't received the request.",
     },
     {
       label: 'INSIGHT',
-      body:
-        'This is a system failure, not a client failure since the form was never sent. One resend resolves it.',
+      body: 'This is a system failure, not a client failure since the form was never sent. One resend resolves it.',
     },
     {
       label: 'RECOMMENDATION',
-      body:
-        'Call Tom Anderson to set expectations, then resend APS request via Sales Central.',
+      body: 'Call Tom Anderson to set expectations, then resend APS request via Sales Central.',
     },
   ],
   footer: "You'll hit $4,200 FYC if this closes.",
@@ -134,7 +131,13 @@ type GenOutput =
       pill: string
       headline: string
       body?: string
-      items: { id: string; title: string; meta: string; tone?: 'blue' | 'green' | 'amber' | 'red' | 'neutral'; action?: { label: string; prompt?: string; canvasId?: string } }[]
+      items: {
+        id: string
+        title: string
+        meta: string
+        tone?: 'blue' | 'green' | 'amber' | 'red' | 'neutral'
+        action?: { label: string; prompt?: string; canvasId?: string }
+      }[]
       chips?: GenChip[]
     }
 
@@ -148,24 +151,21 @@ const ANDERSON_PLAN: GenPlan = {
       id: 'connect',
       badge: 'CONNECT WITH TOM ASAP',
       title: 'Own the delay before he notices it',
-      body:
-        "Clients who hear about a problem from their advisor stay clients. Clients who discover it themselves don't.",
+      body: "Clients who hear about a problem from their advisor stay clients. Clients who discover it themselves don't.",
       cta: 'View conversation guidance',
     },
     {
       id: 'followup',
       badge: 'IMMEDIATE FOLLOW-UP',
       title: 'Resend the APS request via Sales Central',
-      body:
-        "Do this while Tom is still on the call or immediately after you hang up. Confirm the resend, note the timestamp in the case file, and a 48-hour follow-up alert to check receipt. Don't let this slip into next week.",
+      body: "Do this while Tom is still on the call or immediately after you hang up. Confirm the resend, note the timestamp in the case file, and a 48-hour follow-up alert to check receipt. Don't let this slip into next week.",
       cta: 'Prepare the resend request',
     },
     {
       id: 'protect',
       badge: 'LOG AND PROTECT',
       title: 'Update the case and block your follow-up',
-      body:
-        "Log the call in Sales Central with the 48-hour timestamp. Set a 48-hour alert to confirm the form was received by underwriting. If APS not returned in 48 hours, escalate and don't wait for another 11-day drift.",
+      body: "Log the call in Sales Central with the 48-hour timestamp. Set a 48-hour alert to confirm the form was received by underwriting. If APS not returned in 48 hours, escalate and don't wait for another 11-day drift.",
       cta: null,
     },
   ],
@@ -216,9 +216,9 @@ function generateOutput(prompt: string | null): GenOutput {
       ],
       tones: ['Warm', 'Curious', 'Professional', 'Brief'],
       chips: [
-        { label: 'Make it warmer',     prompt: 'Make the Helena reconnection a touch warmer — still my voice.' },
-        { label: 'Send as drafted',    prompt: 'Send the Helena reconnection as drafted.' },
-        { label: 'Open the canvas',    canvasId: 'helena-1' },
+        { label: 'Make it warmer', prompt: 'Make the Helena reconnection a touch warmer — still my voice.' },
+        { label: 'Send as drafted', prompt: 'Send the Helena reconnection as drafted.' },
+        { label: 'Open the canvas', canvasId: 'helena-1' },
       ],
     }
   }
@@ -233,7 +233,7 @@ function generateOutput(prompt: string | null): GenOutput {
         'Hi Janet,',
         "Congratulations on the new place — Sergio mentioned you've finally settled in. The 30-day window after a move is one of the best moments to look at how your coverage lines up with the new household, and I'd love to walk through it with you.",
         'Could we find 20 minutes this week or next? No quote, no pressure — just a fresh look across the household.',
-        "Talk soon,\nPriya",
+        'Talk soon,\nPriya',
       ],
       tones: ['Warm', 'Practical', 'Brief', 'Curious'],
       chips: [
@@ -257,7 +257,10 @@ function generateOutput(prompt: string | null): GenOutput {
       ],
       tones: ['Warm', 'Curious', 'Professional'],
       chips: [
-        { label: 'Try a different client', prompt: 'Pick a different client for today\'s morning outreach and draft for them instead.' },
+        {
+          label: 'Try a different client',
+          prompt: "Pick a different client for today's morning outreach and draft for them instead.",
+        },
         { label: 'Make it warmer', prompt: 'Make the outreach a touch warmer — still my voice.' },
         { label: 'Send as drafted', prompt: 'Send the morning outreach as drafted.' },
       ],
@@ -267,12 +270,17 @@ function generateOutput(prompt: string | null): GenOutput {
     return {
       kind: 'narrative',
       pill: 'Helena Garcia · 90-second opener',
-      headline: "Open with what just happened — not what you sell.",
-      body:
-        "\"Hi Helena. It's been too long. I wanted to reach out — I noticed you've been thinking about the next chapter, and I'd love to hear what's on your mind. No agenda, just a 20-minute conversation about where things are headed for you and Sergio. When would work?\"\n\nThen — and this is the hard part — pause. Don't fill the silence. Let her say the next thing.",
+      headline: 'Open with what just happened — not what you sell.',
+      body: "\"Hi Helena. It's been too long. I wanted to reach out — I noticed you've been thinking about the next chapter, and I'd love to hear what's on your mind. No agenda, just a 20-minute conversation about where things are headed for you and Sergio. When would work?\"\n\nThen — and this is the hard part — pause. Don't fill the silence. Let her say the next thing.",
       chips: [
-        { label: 'Run the full 5-min drill', prompt: 'Run the full 5-minute holistic talk-track drill — pre-60 scenario.' },
-        { label: 'Give me the close instead', prompt: 'Skip the open — give me the soft-close script for the 20-minute look.' },
+        {
+          label: 'Run the full 5-min drill',
+          prompt: 'Run the full 5-minute holistic talk-track drill — pre-60 scenario.',
+        },
+        {
+          label: 'Give me the close instead',
+          prompt: 'Skip the open — give me the soft-close script for the 20-minute look.',
+        },
         { label: 'Open the canvas', canvasId: 'helena-2' },
       ],
     }
@@ -283,13 +291,15 @@ function generateOutput(prompt: string | null): GenOutput {
     return {
       kind: 'narrative',
       pill: "Today's top of the stack",
-      headline: "Make the Helena call at 10:30. Nothing else matters first.",
-      body:
-        "The pre-60 window opened overnight — three retirement-content reads in seven days. This is the unprompted holistic opening you flagged at onboarding. Park morning prep, run the 5-minute drill at 10:25, and make the call at 10:30. Patel at 11:00 is already prep'd. Janet stays open-ended for the week.",
+      headline: 'Make the Helena call at 10:30. Nothing else matters first.',
+      body: "The pre-60 window opened overnight — three retirement-content reads in seven days. This is the unprompted holistic opening you flagged at onboarding. Park morning prep, run the 5-minute drill at 10:25, and make the call at 10:30. Patel at 11:00 is already prep'd. Janet stays open-ended for the week.",
       chips: [
-        { label: 'Open Helena canvas',          canvasId: 'helena-1' },
-        { label: 'Run the 5-min drill',         canvasId: 'helena-2' },
-        { label: 'Draft the reconnection',      prompt: "Draft a warm reconnection to Helena Garcia framed around the pre-60 milestone, not the rate." },
+        { label: 'Open Helena canvas', canvasId: 'helena-1' },
+        { label: 'Run the 5-min drill', canvasId: 'helena-2' },
+        {
+          label: 'Draft the reconnection',
+          prompt: 'Draft a warm reconnection to Helena Garcia framed around the pre-60 milestone, not the rate.',
+        },
       ],
     }
   }
@@ -297,9 +307,8 @@ function generateOutput(prompt: string | null): GenOutput {
     return {
       kind: 'narrative',
       pill: 'Practice canvas read',
-      headline: 'Today\'s win lives in Signals Feed → Helena Garcia.',
-      body:
-        "Pipeline & Goals is on pace. My Book has nothing urgent. Today's Priorities lead with Helena, but the actual leverage is in the Signals Feed tile — that's where the pre-60 milestone surfaced overnight, and where you'll see future life-event triggers first.",
+      headline: "Today's win lives in Signals Feed → Helena Garcia.",
+      body: "Pipeline & Goals is on pace. My Book has nothing urgent. Today's Priorities lead with Helena, but the actual leverage is in the Signals Feed tile — that's where the pre-60 milestone surfaced overnight, and where you'll see future life-event triggers first.",
       chips: [
         { label: 'Open Signals Feed', prompt: 'Open the Signals Feed canvas.' },
         { label: 'Open Helena canvas', canvasId: 'helena-1' },
@@ -311,8 +320,7 @@ function generateOutput(prompt: string | null): GenOutput {
       kind: 'narrative',
       pill: 'Quick start',
       headline: "Here's the shortest version of how this works.",
-      body:
-        "Briefing lives top-left — that's your morning. The starburst (top-right of any screen) is me — ask anything, anytime. The briefcase opens your plan; the calendar shows the week ahead. Drag any card to reorder it. You can re-onboard from the home menu when life changes — your daily briefing rebuilds from your new answers.",
+      body: "Briefing lives top-left — that's your morning. The starburst (top-right of any screen) is me — ask anything, anytime. The briefcase opens your plan; the calendar shows the week ahead. Drag any card to reorder it. You can re-onboard from the home menu when life changes — your daily briefing rebuilds from your new answers.",
       chips: [
         { label: 'Open my plan', prompt: 'Open my plan and walk me through what I can change.' },
         { label: 'Show me the briefing', prompt: "Take me to today's briefing and explain what I'm looking at." },
@@ -326,16 +334,18 @@ function generateOutput(prompt: string | null): GenOutput {
       kind: 'insight',
       pill: 'Single biggest opportunity',
       headline: "Janet Henderson's coastal move is the largest opening this week.",
-      body:
-        "She moved 9 days ago. Her current Term + WL is sized for the old household, not the new coastal one. The 30-day post-move window is when household conversations have the highest trust — and it closes in 21 days.",
+      body: 'She moved 9 days ago. Her current Term + WL is sized for the old household, not the new coastal one. The 30-day post-move window is when household conversations have the highest trust — and it closes in 21 days.',
       metrics: [
         { label: 'FYC potential', value: '$8,400', sub: 'over 12 mo if household converts' },
-        { label: 'Window left',    value: '21 days', sub: 'post-move trust window' },
-        { label: 'Propensity',     value: '95%',     sub: 'household-conversation fit' },
+        { label: 'Window left', value: '21 days', sub: 'post-move trust window' },
+        { label: 'Propensity', value: '95%', sub: 'household-conversation fit' },
       ],
       chips: [
-        { label: 'Open Janet canvas',   canvasId: 'janet' },
-        { label: 'Draft the outreach',  prompt: 'Draft a warm outreach to Janet Henderson about the new coastal household.' },
+        { label: 'Open Janet canvas', canvasId: 'janet' },
+        {
+          label: 'Draft the outreach',
+          prompt: 'Draft a warm outreach to Janet Henderson about the new coastal household.',
+        },
       ],
     }
   }
@@ -344,16 +354,18 @@ function generateOutput(prompt: string | null): GenOutput {
       kind: 'insight',
       pill: 'Plan math · May',
       headline: "You're pacing ahead — three weeks left to lock the month.",
-      body:
-        "Your strongest driver is existing-household multi-policy (38% of May FYC). Annual-review conversions are next (25%). The fastest lever for the remaining three weeks is one more multi-policy household — Janet is the candidate.",
+      body: 'Your strongest driver is existing-household multi-policy (38% of May FYC). Annual-review conversions are next (25%). The fastest lever for the remaining three weeks is one more multi-policy household — Janet is the candidate.',
       metrics: [
-        { label: 'May FYC',          value: '$11.2K', sub: '+18% vs. April' },
-        { label: 'Cases closed',     value: '7 / 6',  sub: '117% of plan' },
-        { label: 'YTD to $122K',     value: '76%',    sub: 'on track for August lock' },
+        { label: 'May FYC', value: '$11.2K', sub: '+18% vs. April' },
+        { label: 'Cases closed', value: '7 / 6', sub: '117% of plan' },
+        { label: 'YTD to $122K', value: '76%', sub: 'on track for August lock' },
       ],
       chips: [
-        { label: 'Show me the levers',  prompt: 'What are the 2-3 levers I can pull this month to lock the year early?' },
-        { label: 'Open Janet canvas',   canvasId: 'janet' },
+        {
+          label: 'Show me the levers',
+          prompt: 'What are the 2-3 levers I can pull this month to lock the year early?',
+        },
+        { label: 'Open Janet canvas', canvasId: 'janet' },
       ],
     }
   }
@@ -365,10 +377,37 @@ function generateOutput(prompt: string | null): GenOutput {
       pill: 'Overnight deltas',
       headline: "Here's what shifted while you slept.",
       items: [
-        { id: 'helena', title: 'Helena Garcia · engagement spike',     meta: 'Score 23 → 41 · pre-60 window opened',      tone: 'green', action: { label: 'Open canvas', canvasId: 'helena-1' } },
-        { id: 'nigo',   title: 'Reyes term app · NIGO cleared',         meta: 'SSN reformatted · case back in carrier queue', tone: 'blue', action: { label: 'View case', prompt: 'Open the Reyes term application case file.' } },
-        { id: 'cal',    title: 'Okafor moved to 2:30 PM',                meta: 'Was 3:00 PM · he confirmed at 9:14 PM',     tone: 'neutral', action: { label: 'Open brief', prompt: 'Open the Okafor pre-meeting brief.' } },
-        { id: 'inbox',  title: '23 inbox items triaged',                  meta: '5 flagged for your eyes · 18 routed',     tone: 'neutral', action: { label: 'Show flagged', prompt: 'Pull up the 5 inbox items the Concierge flagged for me this morning.' } },
+        {
+          id: 'helena',
+          title: 'Helena Garcia · engagement spike',
+          meta: 'Score 23 → 41 · pre-60 window opened',
+          tone: 'green',
+          action: { label: 'Open canvas', canvasId: 'helena-1' },
+        },
+        {
+          id: 'nigo',
+          title: 'Reyes term app · NIGO cleared',
+          meta: 'SSN reformatted · case back in carrier queue',
+          tone: 'blue',
+          action: { label: 'View case', prompt: 'Open the Reyes term application case file.' },
+        },
+        {
+          id: 'cal',
+          title: 'Okafor moved to 2:30 PM',
+          meta: 'Was 3:00 PM · he confirmed at 9:14 PM',
+          tone: 'neutral',
+          action: { label: 'Open brief', prompt: 'Open the Okafor pre-meeting brief.' },
+        },
+        {
+          id: 'inbox',
+          title: '23 inbox items triaged',
+          meta: '5 flagged for your eyes · 18 routed',
+          tone: 'neutral',
+          action: {
+            label: 'Show flagged',
+            prompt: 'Pull up the 5 inbox items the Concierge flagged for me this morning.',
+          },
+        },
       ],
     }
   }
@@ -378,14 +417,30 @@ function generateOutput(prompt: string | null): GenOutput {
       pill: 'Priorities re-sequenced',
       headline: 'Helena rises to #1. Patel slides to #2.',
       items: [
-        { id: '1', title: '#1 · Helena Garcia',  meta: 'Pre-60 milestone · call at 10:30',                 tone: 'red',   action: { label: 'Open',  canvasId: 'helena-1' } },
-        { id: '2', title: '#2 · Leela Patel',    meta: 'Annual review at 11:00 · pack ready',              tone: 'blue',  action: { label: 'Brief', prompt: "Open Leela Patel's pre-meeting brief." } },
-        { id: '3', title: '#3 · Janet Henderson', meta: 'Coverage review · this week, not today',          tone: 'amber', action: { label: 'Open',  canvasId: 'janet' } },
-        { id: '4', title: '#4 · Tom Anderson',   meta: 'APS resend in flight · monitor only',              tone: 'neutral' },
+        {
+          id: '1',
+          title: '#1 · Helena Garcia',
+          meta: 'Pre-60 milestone · call at 10:30',
+          tone: 'red',
+          action: { label: 'Open', canvasId: 'helena-1' },
+        },
+        {
+          id: '2',
+          title: '#2 · Leela Patel',
+          meta: 'Annual review at 11:00 · pack ready',
+          tone: 'blue',
+          action: { label: 'Brief', prompt: "Open Leela Patel's pre-meeting brief." },
+        },
+        {
+          id: '3',
+          title: '#3 · Janet Henderson',
+          meta: 'Coverage review · this week, not today',
+          tone: 'amber',
+          action: { label: 'Open', canvasId: 'janet' },
+        },
+        { id: '4', title: '#4 · Tom Anderson', meta: 'APS resend in flight · monitor only', tone: 'neutral' },
       ],
-      chips: [
-        { label: 'Lock this order', prompt: 'Lock today\'s reranked priorities — keep them through the day.' },
-      ],
+      chips: [{ label: 'Lock this order', prompt: "Lock today's reranked priorities — keep them through the day." }],
     }
   }
   if (p.includes('who needs me this week') || p.includes('needs a personal touch')) {
@@ -394,28 +449,89 @@ function generateOutput(prompt: string | null): GenOutput {
       pill: 'Personal touches owed this week',
       headline: '4 clients are worth your direct time.',
       items: [
-        { id: 'helena', title: 'Helena Garcia',  meta: 'Pre-60 milestone · holistic open',            tone: 'green', action: { label: 'Draft a note', prompt: 'Draft a warm reconnection to Helena Garcia.' } },
-        { id: 'janet',  title: 'Janet Henderson', meta: 'Post-move review · household conversation',  tone: 'blue',  action: { label: 'Open canvas', canvasId: 'janet' } },
-        { id: 'leela',  title: 'Leela Patel',    meta: 'Annual review · second baby in Feb',          tone: 'blue',  action: { label: 'Open brief', prompt: "Open Leela Patel's pre-meeting brief." } },
-        { id: 'maria',  title: 'Maria Garcia',   meta: 'Two referrals in a month · thank-you owed',   tone: 'amber', action: { label: 'Draft thanks', prompt: 'Draft a thank-you note to Maria Garcia for the recent referrals.' } },
+        {
+          id: 'helena',
+          title: 'Helena Garcia',
+          meta: 'Pre-60 milestone · holistic open',
+          tone: 'green',
+          action: { label: 'Draft a note', prompt: 'Draft a warm reconnection to Helena Garcia.' },
+        },
+        {
+          id: 'janet',
+          title: 'Janet Henderson',
+          meta: 'Post-move review · household conversation',
+          tone: 'blue',
+          action: { label: 'Open canvas', canvasId: 'janet' },
+        },
+        {
+          id: 'leela',
+          title: 'Leela Patel',
+          meta: 'Annual review · second baby in Feb',
+          tone: 'blue',
+          action: { label: 'Open brief', prompt: "Open Leela Patel's pre-meeting brief." },
+        },
+        {
+          id: 'maria',
+          title: 'Maria Garcia',
+          meta: 'Two referrals in a month · thank-you owed',
+          tone: 'amber',
+          action: { label: 'Draft thanks', prompt: 'Draft a thank-you note to Maria Garcia for the recent referrals.' },
+        },
       ],
     }
   }
-  if (p.includes('3 new prospects') || p.includes('three new prospects') || p.includes('suggest') && p.includes('prospect')) {
+  if (
+    p.includes('3 new prospects') ||
+    p.includes('three new prospects') ||
+    (p.includes('suggest') && p.includes('prospect'))
+  ) {
     return {
       kind: 'list',
       pill: 'Net-new prospects · match your book shape',
       headline: '3 strong candidates with warm context.',
       items: [
-        { id: 'p1', title: 'Sam Bennett',  meta: 'Referred by Helena Garcia · 32, just got married',      tone: 'green',  action: { label: 'Reach out', prompt: 'Draft a warm intro reach-out to Sam Bennett — referred by Helena Garcia.' } },
-        { id: 'p2', title: 'Omar Hadi',    meta: 'NYC Estate Forum attendee · estate attorney',           tone: 'blue',   action: { label: 'Reach out', prompt: 'Draft a "let\'s grab coffee" reach-out to Omar Hadi after the NYC Estate Forum.' } },
-        { id: 'p3', title: 'Tara O\'Donnell', meta: 'Adult child of Henderson household · 28, new home', tone: 'amber',  action: { label: 'Reach out', prompt: 'Draft a gen-2 reach-out to Tara O\'Donnell — Janet Henderson\'s daughter.' } },
+        {
+          id: 'p1',
+          title: 'Sam Bennett',
+          meta: 'Referred by Helena Garcia · 32, just got married',
+          tone: 'green',
+          action: {
+            label: 'Reach out',
+            prompt: 'Draft a warm intro reach-out to Sam Bennett — referred by Helena Garcia.',
+          },
+        },
+        {
+          id: 'p2',
+          title: 'Omar Hadi',
+          meta: 'NYC Estate Forum attendee · estate attorney',
+          tone: 'blue',
+          action: {
+            label: 'Reach out',
+            prompt: 'Draft a "let\'s grab coffee" reach-out to Omar Hadi after the NYC Estate Forum.',
+          },
+        },
+        {
+          id: 'p3',
+          title: "Tara O'Donnell",
+          meta: 'Adult child of Henderson household · 28, new home',
+          tone: 'amber',
+          action: {
+            label: 'Reach out',
+            prompt: "Draft a gen-2 reach-out to Tara O'Donnell — Janet Henderson's daughter.",
+          },
+        },
       ],
     }
   }
 
   /* === PLAN outputs (kept for the briefing CTA + explicit "give me a plan" asks) === */
-  if (p.includes('tom') || p.includes('anderson') || p.includes('aps') || p.includes('run this before 10') || p.includes('underwriting')) {
+  if (
+    p.includes('tom') ||
+    p.includes('anderson') ||
+    p.includes('aps') ||
+    p.includes('run this before 10') ||
+    p.includes('underwriting')
+  ) {
     return { kind: 'plan', pill: ANDERSON_PLAN.footer, headline: ANDERSON_PLAN.headline, steps: ANDERSON_PLAN.steps }
   }
   if (p.includes('plan') && (p.includes('q3') || p.includes('compound') || p.includes('build me a'))) {
@@ -424,9 +540,27 @@ function generateOutput(prompt: string | null): GenOutput {
       pill: 'Quarterly plan · Q3 compounding',
       headline: 'Compound the wins from Q2 in three moves.',
       steps: [
-        { id: 'q1', badge: 'JULY · HOLD HOLISTIC',         title: 'Keep one holistic open per week as the floor',                    body: 'Q2 delivered 6 holistic conversations — double Q1. Keep that cadence; one a week is the practice shape you committed to in onboarding.', cta: 'Set the weekly target' },
-        { id: 'q2', badge: 'AUG · MULTI-POLICY MOVE',      title: 'Run 3 referral asks out of existing households',                  body: 'You sit at 11 multi-policy households; cohort top quartile is 22. Three referrals from existing households moves your Practice Score ~6 points.', cta: 'See candidate households' },
-        { id: 'q3', badge: 'SEP · CENTER OF INFLUENCE',    title: 'Land one estate attorney relationship by end of quarter',         body: 'Zero estate-attorney relationships today; cohort average is 2. One coffee a month for 90 days closes that gap.', cta: null },
+        {
+          id: 'q1',
+          badge: 'JULY · HOLD HOLISTIC',
+          title: 'Keep one holistic open per week as the floor',
+          body: 'Q2 delivered 6 holistic conversations — double Q1. Keep that cadence; one a week is the practice shape you committed to in onboarding.',
+          cta: 'Set the weekly target',
+        },
+        {
+          id: 'q2',
+          badge: 'AUG · MULTI-POLICY MOVE',
+          title: 'Run 3 referral asks out of existing households',
+          body: 'You sit at 11 multi-policy households; cohort top quartile is 22. Three referrals from existing households moves your Practice Score ~6 points.',
+          cta: 'See candidate households',
+        },
+        {
+          id: 'q3',
+          badge: 'SEP · CENTER OF INFLUENCE',
+          title: 'Land one estate attorney relationship by end of quarter',
+          body: 'Zero estate-attorney relationships today; cohort average is 2. One coffee a month for 90 days closes that gap.',
+          cta: null,
+        },
       ],
     }
   }
@@ -436,32 +570,29 @@ function generateOutput(prompt: string | null): GenOutput {
     kind: 'narrative',
     pill: 'Quick take',
     headline: "Here's how I'd think about that.",
-    body:
-      "I read your last 30 days, your calendar, and your book before answering. Tell me a bit more about what you mean — a specific client, a specific outcome, or a time frame — and I'll generate the right next thing (a draft, a list, a plan, a meeting brief). Or pick one of the moves below.",
+    body: "I read your last 30 days, your calendar, and your book before answering. Tell me a bit more about what you mean — a specific client, a specific outcome, or a time frame — and I'll generate the right next thing (a draft, a list, a plan, a meeting brief). Or pick one of the moves below.",
     chips: [
-      { label: 'Show me the one thing today', prompt: "Tell me the one thing I should not miss today, and why." },
-      { label: 'Draft my morning outreach',    prompt: 'Draft the warmest outreach I can send before 10 AM — pick the right client.' },
-      { label: 'What changed overnight?',      prompt: 'Show me only what changed in my book overnight — deltas only.' },
+      { label: 'Show me the one thing today', prompt: 'Tell me the one thing I should not miss today, and why.' },
+      {
+        label: 'Draft my morning outreach',
+        prompt: 'Draft the warmest outreach I can send before 10 AM — pick the right client.',
+      },
+      { label: 'What changed overnight?', prompt: 'Show me only what changed in my book overnight — deltas only.' },
     ],
   }
 }
 
 const EXPANDED = {
   label: 'CONVERSATION GUIDANCE',
-  headline:
-    'Take the next 5 min to chat with Tom and resend the application.',
-  sub:
-    "When you connect with him, acknowledge the hold, and tell him you've identified the issue and are resolving it today.",
+  headline: 'Take the next 5 min to chat with Tom and resend the application.',
+  sub: "When you connect with him, acknowledge the hold, and tell him you've identified the issue and are resolving it today.",
   tabs: ['Call', 'Text'] as const,
   message:
     "Hey Tom, how are you? I wanted to call you off immediately after you hung up. I'm reaching out right now, and once we have that back, we can finalize. Shouldn't take more than a couple of days.",
   tones: ['Personal', 'Professional', 'Apology', 'Update'] as const,
 }
 
-const SUGGESTED_FOLLOWUPS = [
-  'What needs me this week?',
-  'Summarize my day',
-]
+const SUGGESTED_FOLLOWUPS = ['What needs me this week?', 'Summarize my day']
 
 /* One ask + one generated component. Turns stack vertically — prior turns dim,
  * blur, and slide up the chain while the newest generates underneath. */
@@ -501,7 +632,7 @@ export function CollabSpace() {
   const [askInput, setAskInput] = useState('')
   const [submittedQuery, setSubmittedQuery] = useState('')
   const [activeTone, setActiveTone] = useState<string>('Warm')
-  const [activeTab, setActiveTab] = useState<typeof EXPANDED.tabs[number]>('Text')
+  const [activeTab, setActiveTab] = useState<(typeof EXPANDED.tabs)[number]>('Text')
   const [suggestionsVisible, setSuggestionsVisible] = useState(false)
   const askInputRef = useRef<HTMLInputElement>(null)
   /* The generative turn stack rendered in Stage 1+. Each ask appends a turn:
@@ -708,9 +839,7 @@ export function CollabSpace() {
                           turn={turn}
                           isLatest={isLatest}
                           expandedCardId={
-                            isLatest && stage === 2 && turn.output.kind === 'plan'
-                              ? turn.output.steps[0].id
-                              : null
+                            isLatest && stage === 2 && turn.output.kind === 'plan' ? turn.output.steps[0].id : null
                           }
                           activeTab={activeTab}
                           activeTone={activeTone}
@@ -729,8 +858,13 @@ export function CollabSpace() {
           </div>
 
           {/* Sticky bottom dock — dark ask bar w/ optional suggestion chips.
-            * Hidden on Stage0Global, which has its own inline ask field. */}
-          <div className={['pointer-events-none absolute bottom-0 left-0 right-0 flex justify-center px-6 pb-6', stage === 0 && mode === 'global' ? 'hidden' : ''].join(' ')}>
+           * Hidden on Stage0Global, which has its own inline ask field. */}
+          <div
+            className={[
+              'pointer-events-none absolute bottom-0 left-0 right-0 flex justify-center px-6 pb-6',
+              stage === 0 && mode === 'global' ? 'hidden' : '',
+            ].join(' ')}
+          >
             <div className="pointer-events-auto flex w-full max-w-[760px] flex-col items-center gap-3">
               <AnimatePresence>
                 {(stage === 2 || mode === 'draft') && suggestionsVisible && (
@@ -752,10 +886,8 @@ export function CollabSpace() {
                         onClick={() => submitAsk(s)}
                         className="rounded-full px-4 py-2 text-[12.5px] font-medium text-white"
                         style={{
-                          background:
-                            'linear-gradient(180deg, #0b1740 0%, #050b29 100%)',
-                          boxShadow:
-                            '0 6px 14px -10px rgba(2, 7, 31, 0.6), 0 0 0 1px rgba(255,255,255,0.06) inset',
+                          background: 'linear-gradient(180deg, #0b1740 0%, #050b29 100%)',
+                          boxShadow: '0 6px 14px -10px rgba(2, 7, 31, 0.6), 0 0 0 1px rgba(255,255,255,0.06) inset',
                         }}
                       >
                         {s}
@@ -803,14 +935,15 @@ function TopBar({ onClose, mode, draftClient }: { onClose: () => void; mode: Mod
         onClick={onClose}
         className="group flex items-center gap-3 text-left text-neutral-700 hover:text-neutral-900"
       >
-        <span aria-hidden="true" className="text-[18px] text-neutral-500 transition-transform group-hover:-translate-x-0.5">←</span>
+        <span
+          aria-hidden="true"
+          className="text-[18px] text-neutral-500 transition-transform group-hover:-translate-x-0.5"
+        >
+          ←
+        </span>
         <span className="flex flex-col">
-          <span className="text-[15px] font-medium tracking-tight text-neutral-900">
-            {title}
-          </span>
-          <span className="text-[10.5px] font-medium uppercase tracking-[0.18em] text-neutral-400">
-            {saved}
-          </span>
+          <span className="text-[15px] font-medium tracking-tight text-neutral-900">{title}</span>
+          <span className="text-[10.5px] font-medium uppercase tracking-[0.18em] text-neutral-400">{saved}</span>
         </span>
       </button>
       <div className="flex items-center gap-1.5">
@@ -819,7 +952,15 @@ function TopBar({ onClose, mode, draftClient }: { onClose: () => void; mode: Mod
           className="flex size-9 items-center justify-center rounded-lg text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
           aria-label="List view"
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          >
             <path d="M3 4 H13" />
             <path d="M3 8 H13" />
             <path d="M3 12 H13" />
@@ -894,7 +1035,10 @@ function Stage0Global({ onPickStarter }: { onPickStarter: (prompt: string) => vo
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.3 }}
-        onSubmit={(e) => { e.preventDefault(); submit() }}
+        onSubmit={(e) => {
+          e.preventDefault()
+          submit()
+        }}
         className="mt-9 flex items-center gap-3 rounded-full bg-white px-5 py-2.5 shadow-[0_18px_40px_-22px_rgba(0,10,98,0.22)]"
       >
         <button
@@ -902,8 +1046,18 @@ function Stage0Global({ onPickStarter }: { onPickStarter: (prompt: string) => vo
           aria-label="Attach"
           className="flex size-7 items-center justify-center rounded-full text-neutral-400 hover:text-neutral-700"
         >
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
-            <path d="M9 3 V15" /><path d="M3 9 H15" />
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M9 3 V15" />
+            <path d="M3 9 H15" />
           </svg>
         </button>
         <input
@@ -920,8 +1074,19 @@ function Stage0Global({ onPickStarter }: { onPickStarter: (prompt: string) => vo
           className="flex size-9 items-center justify-center rounded-full text-white transition-opacity disabled:opacity-40"
           style={{ background: 'radial-gradient(circle at 30% 30%, #1a2a6b 0%, #060f3f 65%, #02071f 100%)' }}
         >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M8 13 V3" /><path d="M3.5 7.5 L8 3 L12.5 7.5" />
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M8 13 V3" />
+            <path d="M3.5 7.5 L8 3 L12.5 7.5" />
           </svg>
         </button>
       </motion.form>
@@ -946,12 +1111,28 @@ function Stage0Global({ onPickStarter }: { onPickStarter: (prompt: string) => vo
               className="group flex w-full items-center justify-between gap-4 border-b border-neutral-200/70 px-2 py-4 text-left transition-colors hover:bg-white/50"
             >
               <span className="flex items-center gap-3">
-                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true" className="shrink-0 text-neutral-400 group-hover:text-[var(--nyl-blue-500)]">
-                  <path d="M9 3 V15" /><path d="M3 9 H15" />
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  aria-hidden="true"
+                  className="shrink-0 text-neutral-400 group-hover:text-[var(--nyl-blue-500)]"
+                >
+                  <path d="M9 3 V15" />
+                  <path d="M3 9 H15" />
                 </svg>
                 <span className="text-[15px] text-neutral-900">{s.label}</span>
               </span>
-              <span aria-hidden="true" className="text-[15px] text-neutral-300 transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--nyl-blue-500)]">→</span>
+              <span
+                aria-hidden="true"
+                className="text-[15px] text-neutral-300 transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--nyl-blue-500)]"
+              >
+                →
+              </span>
             </button>
           </motion.li>
         ))}
@@ -989,9 +1170,7 @@ function Stage0({ onPickCta }: { onPickCta: (label: string) => void }) {
             </div>
           ))}
         </div>
-        <p className="mt-6 text-right text-[12.5px] font-medium text-[var(--nyl-blue-800)]">
-          {CONTEXT_CARD.footer}
-        </p>
+        <p className="mt-6 text-right text-[12.5px] font-medium text-[var(--nyl-blue-800)]">{CONTEXT_CARD.footer}</p>
       </motion.div>
 
       <motion.div
@@ -1007,10 +1186,8 @@ function Stage0({ onPickCta }: { onPickCta: (label: string) => void }) {
             onClick={() => onPickCta(c.label)}
             className="rounded-full px-5 py-2.5 text-[13px] font-medium text-white"
             style={{
-              background:
-                'linear-gradient(180deg, #0b1740 0%, #050b29 100%)',
-              boxShadow:
-                '0 6px 14px -10px rgba(2, 7, 31, 0.6), 0 0 0 1px rgba(255,255,255,0.06) inset',
+              background: 'linear-gradient(180deg, #0b1740 0%, #050b29 100%)',
+              boxShadow: '0 6px 14px -10px rgba(2, 7, 31, 0.6), 0 0 0 1px rgba(255,255,255,0.06) inset',
             }}
           >
             {c.label}
@@ -1042,9 +1219,9 @@ const TurnBlock = forwardRef(function TurnBlock(
     turn: GenTurn
     isLatest: boolean
     expandedCardId: string | null
-    activeTab: typeof EXPANDED.tabs[number]
+    activeTab: (typeof EXPANDED.tabs)[number]
     activeTone: string
-    setActiveTab: (t: typeof EXPANDED.tabs[number]) => void
+    setActiveTab: (t: (typeof EXPANDED.tabs)[number]) => void
     setActiveTone: (t: string) => void
     onExpandFirst: () => void
     onCollapse: () => void
@@ -1159,8 +1336,7 @@ function PulsingMark() {
         aria-hidden="true"
         className="absolute inset-0 rounded-xl"
         style={{
-          background:
-            'radial-gradient(circle, rgba(4,104,255,0.30) 0%, rgba(4,104,255,0) 70%)',
+          background: 'radial-gradient(circle, rgba(4,104,255,0.30) 0%, rgba(4,104,255,0) 70%)',
         }}
         animate={{ scale: [1, 1.55, 1], opacity: [0.55, 1, 0.55] }}
         transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
@@ -1211,9 +1387,9 @@ function Stage1({
 }: {
   output: GenOutput
   expandedCardId: string | null
-  activeTab: typeof EXPANDED.tabs[number]
+  activeTab: (typeof EXPANDED.tabs)[number]
   activeTone: string
-  setActiveTab: (t: typeof EXPANDED.tabs[number]) => void
+  setActiveTab: (t: (typeof EXPANDED.tabs)[number]) => void
   setActiveTone: (t: string) => void
   onExpandFirst: () => void
   onCollapse: () => void
@@ -1256,9 +1432,9 @@ function Stage1({
           className="mt-7"
         >
           {output.kind === 'narrative' && <NarrativeBlock body={output.body} />}
-          {output.kind === 'draft'     && <DraftBlock output={output} />}
-          {output.kind === 'insight'   && <InsightBlock output={output} />}
-          {output.kind === 'list'      && <ListBlock output={output} fireChip={fireChip} />}
+          {output.kind === 'draft' && <DraftBlock output={output} />}
+          {output.kind === 'insight' && <InsightBlock output={output} />}
+          {output.kind === 'list' && <ListBlock output={output} fireChip={fireChip} />}
         </motion.div>
 
         {output.chips && output.chips.length > 0 && (
@@ -1330,21 +1506,21 @@ function Stage1({
                   if (isExpanded) onCollapse()
                   else onExpandFirst()
                 }}
-                className={[
-                  'block w-full p-6 text-left md:p-7',
-                  isFirst ? 'cursor-pointer' : 'cursor-default',
-                ].join(' ')}
+                className={['block w-full p-6 text-left md:p-7', isFirst ? 'cursor-pointer' : 'cursor-default'].join(
+                  ' ',
+                )}
               >
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--nyl-blue-100)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--nyl-blue-800)]">
                   <span aria-hidden="true" className="inline-block size-1.5 rounded-full bg-[var(--nyl-blue-500)]" />
                   {card.badge}
                 </span>
-                <h3 className="mt-3 font-serif text-[22px] leading-tight tracking-tight text-neutral-900" style={{ fontWeight: 400 }}>
+                <h3
+                  className="mt-3 font-serif text-[22px] leading-tight tracking-tight text-neutral-900"
+                  style={{ fontWeight: 400 }}
+                >
                   {card.title}
                 </h3>
-                <p className="mt-2 max-w-[68ch] text-[13.5px] leading-[1.55] text-neutral-700">
-                  {card.body}
-                </p>
+                <p className="mt-2 max-w-[68ch] text-[13.5px] leading-[1.55] text-neutral-700">{card.body}</p>
                 {card.cta && !isExpanded && (
                   <span className="mt-4 inline-flex items-center rounded-lg border border-[var(--nyl-blue-500)] px-3.5 py-2 text-[12.5px] font-medium text-[var(--nyl-blue-500)]">
                     {card.cta}
@@ -1367,12 +1543,13 @@ function Stage1({
                       <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-neutral-500">
                         {EXPANDED.label}
                       </p>
-                      <p className="mt-3 font-serif text-[18px] leading-snug tracking-tight text-neutral-900" style={{ fontWeight: 400 }}>
+                      <p
+                        className="mt-3 font-serif text-[18px] leading-snug tracking-tight text-neutral-900"
+                        style={{ fontWeight: 400 }}
+                      >
                         {EXPANDED.headline}
                       </p>
-                      <p className="mt-2 max-w-[68ch] text-[13px] leading-[1.55] text-neutral-700">
-                        {EXPANDED.sub}
-                      </p>
+                      <p className="mt-2 max-w-[68ch] text-[13px] leading-[1.55] text-neutral-700">{EXPANDED.sub}</p>
 
                       <div className="mt-5 rounded-xl border border-neutral-200 bg-white p-5">
                         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -1410,9 +1587,7 @@ function Stage1({
                             ))}
                           </div>
                         </div>
-                        <p className="mt-4 text-[13px] leading-[1.6] text-neutral-700">
-                          {EXPANDED.message}
-                        </p>
+                        <p className="mt-4 text-[13px] leading-[1.6] text-neutral-700">{EXPANDED.message}</p>
 
                         <div className="mt-5 flex flex-wrap items-center gap-2">
                           <button
@@ -1447,8 +1622,8 @@ function DraftView({
   setActiveTone,
 }: {
   client: DraftClient
-  activeTab: typeof EXPANDED.tabs[number]
-  setActiveTab: (t: typeof EXPANDED.tabs[number]) => void
+  activeTab: (typeof EXPANDED.tabs)[number]
+  setActiveTab: (t: (typeof EXPANDED.tabs)[number]) => void
   activeTone: string
   setActiveTone: (t: string) => void
 }) {
@@ -1480,9 +1655,7 @@ function DraftView({
           >
             {draft.headline}
           </h2>
-          <p className="mt-3 max-w-[68ch] text-[13.5px] leading-[1.55] text-neutral-700">
-            {draft.sub}
-          </p>
+          <p className="mt-3 max-w-[68ch] text-[13.5px] leading-[1.55] text-neutral-700">{draft.sub}</p>
 
           <div className="mt-6 rounded-xl border border-neutral-200 bg-[var(--nyl-blue-100)]/25 p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -1567,10 +1740,8 @@ const AskBar = forwardRef(function AskBar(
     <div
       className="flex w-full items-center gap-3 rounded-2xl px-5 py-3.5 text-white"
       style={{
-        background:
-          'linear-gradient(120deg, #0b1740 0%, #060f3f 55%, #02071f 100%)',
-        boxShadow:
-          '0 22px 56px -26px rgba(2,7,31,0.7), 0 0 0 1px rgba(255,255,255,0.05) inset',
+        background: 'linear-gradient(120deg, #0b1740 0%, #060f3f 55%, #02071f 100%)',
+        boxShadow: '0 22px 56px -26px rgba(2,7,31,0.7), 0 0 0 1px rgba(255,255,255,0.05) inset',
       }}
     >
       <input
@@ -1578,11 +1749,15 @@ const AskBar = forwardRef(function AskBar(
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        onKeyDown={(e) => { if (e.key === 'Enter') onSubmit() }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') onSubmit()
+        }}
         placeholder={placeholder}
         className={[
           'flex-1 bg-transparent text-[14px] focus:outline-none',
-          showSubmittedAsValue ? 'italic text-white/85 placeholder:text-white/85' : 'text-white placeholder:text-white/55',
+          showSubmittedAsValue
+            ? 'italic text-white/85 placeholder:text-white/85'
+            : 'text-white placeholder:text-white/55',
         ].join(' ')}
       />
       <button
@@ -1590,7 +1765,16 @@ const AskBar = forwardRef(function AskBar(
         aria-label="Attach"
         className="flex size-8 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white"
       >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M10.5 3.5 L5 9 a2 2 0 0 0 2.8 2.8 L12 7.7" />
         </svg>
       </button>
@@ -1599,7 +1783,16 @@ const AskBar = forwardRef(function AskBar(
         aria-label="Voice input"
         className="flex size-8 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white"
       >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <rect x="6" y="2.5" width="4" height="7" rx="2" />
           <path d="M4 9 a4 4 0 0 0 8 0" />
           <path d="M8 13 V14.5" />
@@ -1611,7 +1804,16 @@ const AskBar = forwardRef(function AskBar(
         aria-label="Send"
         className="flex size-8 items-center justify-center rounded-full bg-white text-[#06122e] hover:bg-white/90"
       >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M7 12 V2" />
           <path d="M3 6 L7 2 L11 6" />
         </svg>
@@ -1636,10 +1838,17 @@ function DraftBlock({ output }: { output: Extract<GenOutput, { kind: 'draft' }> 
   return (
     <div className="rounded-2xl bg-white p-7 shadow-[0_18px_40px_-22px_rgba(0,10,98,0.18)] md:p-9">
       <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-neutral-500">{output.subjectLabel}</p>
-      <p className="mt-3 font-serif text-[20px] leading-snug tracking-tight text-neutral-900" style={{ fontWeight: 400 }}>{output.subject}</p>
+      <p
+        className="mt-3 font-serif text-[20px] leading-snug tracking-tight text-neutral-900"
+        style={{ fontWeight: 400 }}
+      >
+        {output.subject}
+      </p>
       <div className="mt-5 flex flex-col gap-3 text-[14px] leading-[1.65] text-neutral-800">
         {output.bodyLines.map((line, i) => (
-          <p key={i} className="whitespace-pre-line">{line}</p>
+          <p key={i} className="whitespace-pre-line">
+            {line}
+          </p>
         ))}
       </div>
       {output.tones && output.tones.length > 0 && (
@@ -1651,7 +1860,9 @@ function DraftBlock({ output }: { output: Extract<GenOutput, { kind: 'draft' }> 
               type="button"
               className={[
                 'rounded-full px-2.5 py-0.5 text-[10.5px] font-medium uppercase tracking-[0.16em]',
-                i === 0 ? 'bg-neutral-900 text-white' : 'border border-neutral-200 text-neutral-500 hover:border-neutral-400',
+                i === 0
+                  ? 'bg-neutral-900 text-white'
+                  : 'border border-neutral-200 text-neutral-500 hover:border-neutral-400',
               ].join(' ')}
             >
               {t}
@@ -1671,7 +1882,12 @@ function InsightBlock({ output }: { output: Extract<GenOutput, { kind: 'insight'
         {output.metrics.map((m) => (
           <div key={m.label} className="rounded-xl border border-neutral-200 bg-[var(--nyl-blue-100)]/30 p-4">
             <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-neutral-500">{m.label}</p>
-            <p className="mt-2 font-serif text-[28px] leading-none tracking-tight text-neutral-900" style={{ fontWeight: 400 }}>{m.value}</p>
+            <p
+              className="mt-2 font-serif text-[28px] leading-none tracking-tight text-neutral-900"
+              style={{ fontWeight: 400 }}
+            >
+              {m.value}
+            </p>
             {m.sub && <p className="mt-2 text-[11.5px] leading-snug text-neutral-500">{m.sub}</p>}
           </div>
         ))}
@@ -1688,21 +1904,29 @@ function ListBlock({
   fireChip: (c: GenChip) => void
 }) {
   const dot = (tone: string | undefined) =>
-    tone === 'red' ? 'bg-[#dc2626]'
-    : tone === 'amber' ? 'bg-[var(--nyl-orange-400)]'
-    : tone === 'green' ? 'bg-[var(--nyl-green-600)]'
-    : tone === 'blue' ? 'bg-[var(--nyl-blue-500)]'
-    : 'bg-neutral-400'
+    tone === 'red'
+      ? 'bg-[#dc2626]'
+      : tone === 'amber'
+        ? 'bg-[var(--nyl-orange-400)]'
+        : tone === 'green'
+          ? 'bg-[var(--nyl-green-600)]'
+          : tone === 'blue'
+            ? 'bg-[var(--nyl-blue-500)]'
+            : 'bg-neutral-400'
   return (
     <div className="rounded-2xl bg-white p-3 shadow-[0_18px_40px_-22px_rgba(0,10,98,0.18)] md:p-4">
-      {output.body && (
-        <p className="px-4 pb-2 pt-3 text-[14px] leading-snug text-neutral-700">{output.body}</p>
-      )}
+      {output.body && <p className="px-4 pb-2 pt-3 text-[14px] leading-snug text-neutral-700">{output.body}</p>}
       <ul className="flex flex-col">
         {output.items.map((it) => (
-          <li key={it.id} className="flex items-center justify-between gap-4 border-b border-neutral-100 px-4 py-4 last:border-b-0">
+          <li
+            key={it.id}
+            className="flex items-center justify-between gap-4 border-b border-neutral-100 px-4 py-4 last:border-b-0"
+          >
             <div className="flex min-w-0 items-center gap-3">
-              <span aria-hidden="true" className={['inline-block size-2 shrink-0 rounded-full', dot(it.tone)].join(' ')} />
+              <span
+                aria-hidden="true"
+                className={['inline-block size-2 shrink-0 rounded-full', dot(it.tone)].join(' ')}
+              />
               <div className="min-w-0">
                 <p className="text-[14px] font-medium leading-snug text-neutral-900">{it.title}</p>
                 <p className="text-[12px] leading-snug text-neutral-500">{it.meta}</p>
@@ -1711,7 +1935,9 @@ function ListBlock({
             {it.action && (
               <button
                 type="button"
-                onClick={() => fireChip({ label: it.action!.label, prompt: it.action!.prompt, canvasId: it.action!.canvasId })}
+                onClick={() =>
+                  fireChip({ label: it.action!.label, prompt: it.action!.prompt, canvasId: it.action!.canvasId })
+                }
                 className="shrink-0 rounded-md bg-[var(--nyl-blue-500)] px-3 py-1.5 text-[11px] font-medium text-white hover:bg-[var(--nyl-blue-600)]"
               >
                 {it.action.label}
@@ -1726,14 +1952,32 @@ function ListBlock({
 
 function CallGlyph() {
   return (
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M3 3.5 a1.5 1.5 0 0 1 1.5 -1.5 h1.2 a1 1 0 0 1 1 0.8 L7 5 a1 1 0 0 1 -0.4 0.95 L5.3 7 a8 8 0 0 0 3.7 3.7 l1.05 -1.3 a1 1 0 0 1 0.95 -0.4 l2.2 0.3 a1 1 0 0 1 0.8 1 v1.2 A1.5 1.5 0 0 1 12.5 13 A9.5 9.5 0 0 1 3 3.5 Z" />
     </svg>
   )
 }
 function TextGlyph() {
   return (
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M2.5 3.5 h11 a1 1 0 0 1 1 1 v6 a1 1 0 0 1 -1 1 H6 l-3 2 v-2 H2.5 a1 1 0 0 1 -1 -1 v-6 a1 1 0 0 1 1 -1 Z" />
     </svg>
   )

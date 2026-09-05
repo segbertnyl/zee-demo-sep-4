@@ -52,11 +52,7 @@ export interface OnboardingIntroOverlayProps {
   advisorName?: string
 }
 
-export function OnboardingIntroOverlay({
-  onReveal,
-  onStart,
-  advisorName = 'Sarah',
-}: OnboardingIntroOverlayProps) {
+export function OnboardingIntroOverlay({ onReveal, onStart, advisorName = 'Sarah' }: OnboardingIntroOverlayProps) {
   const [phase, setPhase] = useState<0 | 1 | 2 | 3 | 4 | 5>(0)
   const [tagIndex, setTagIndex] = useState(0)
   const starRef = useRef<HTMLDivElement | null>(null)
@@ -65,12 +61,18 @@ export function OnboardingIntroOverlay({
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 1800)
     const t2 = setTimeout(() => setPhase(2), 3600)
-    return () => { clearTimeout(t1); clearTimeout(t2) }
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
   }, [])
 
   const beginExit = () => {
     setPhase(3)
-    setTimeout(() => { setPhase(4); onReveal() }, 850)
+    setTimeout(() => {
+      setPhase(4)
+      onReveal()
+    }, 850)
     setTimeout(() => {
       const star = starRef.current?.getBoundingClientRect()
       const slot = document.getElementById('create-plan-star-slot')?.getBoundingClientRect()
@@ -105,7 +107,14 @@ export function OnboardingIntroOverlay({
           src={bgIntroOverlay}
           alt=""
           aria-hidden="true"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+          }}
         />
         <HighlightBlob />
         <DriftingBlobs />
@@ -175,7 +184,12 @@ export function OnboardingIntroOverlay({
                 exit={{ opacity: 0, y: -14 }}
                 transition={{ duration: 0.85, ease: EASE.standard }}
                 className="text-center font-serif text-[36px] leading-[1.2] tracking-tight md:text-[44px]"
-                style={{ fontWeight: 400, fontFamily: 'var(--font-serif)', textWrap: 'balance', willChange: 'opacity, transform' }}
+                style={{
+                  fontWeight: 400,
+                  fontFamily: 'var(--font-serif)',
+                  textWrap: 'balance',
+                  willChange: 'opacity, transform',
+                }}
               >
                 <TypewriterText
                   text={phase === 0 ? OPENING_LINE_1 : OPENING_LINE_2}
@@ -211,7 +225,12 @@ export function OnboardingIntroOverlay({
                       exit={{ opacity: 0, y: -22 }}
                       transition={{ duration: 0.7, ease: EASE.standard }}
                       className="absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap font-serif text-[36px] leading-[1.12] tracking-tight md:text-[44px]"
-                      style={{ fontWeight: 400, fontFamily: 'var(--font-serif)', color: 'var(--nyl-blue-250)', willChange: 'opacity, transform' }}
+                      style={{
+                        fontWeight: 400,
+                        fontFamily: 'var(--font-serif)',
+                        color: 'var(--nyl-blue-250)',
+                        willChange: 'opacity, transform',
+                      }}
                     >
                       <TypewriterText text={INTRO_TAGLINES[tagIndex]} perWordMs={110} />
                     </motion.h2>
@@ -242,25 +261,25 @@ export function OnboardingIntroOverlay({
  * theme='dark'  — saturated colors for the dark purple background (default)
  * theme='light' — soft, low-opacity colors for white/near-white backgrounds */
 export function DriftingBlobs({ theme = 'dark' }: { theme?: 'dark' | 'light' }) {
-  const colors = theme === 'light'
-    ? [
-        'rgba(165,82,224,0.12)',   // soft purple
-        'rgba(200,100,220,0.09)',  // soft violet
-        'rgba(255,160,100,0.10)', // warm peach
-        'rgba(180,140,255,0.10)', // lavender
-      ]
-    : [
-        'rgba(143,86,179,0.55)',
-        'rgba(99,79,150,0.55)',
-        'rgba(255,176,120,0.50)',
-        'rgba(180,120,220,0.42)',
-      ]
+  const colors =
+    theme === 'light'
+      ? [
+          'rgba(165,82,224,0.12)', // soft purple
+          'rgba(200,100,220,0.09)', // soft violet
+          'rgba(255,160,100,0.10)', // warm peach
+          'rgba(180,140,255,0.10)', // lavender
+        ]
+      : ['rgba(143,86,179,0.55)', 'rgba(99,79,150,0.55)', 'rgba(255,176,120,0.50)', 'rgba(180,120,220,0.42)']
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0">
       <motion.div
         className="absolute"
         style={{
-          left: '-10%', top: '15%', width: '70%', height: '70%', borderRadius: '50%',
+          left: '-10%',
+          top: '15%',
+          width: '70%',
+          height: '70%',
+          borderRadius: '50%',
           background: `radial-gradient(circle at 50% 50%, ${colors[0]} 0%, ${colors[0].replace(/[\d.]+\)$/, '0)')} 100%)`,
           filter: 'blur(80px)',
         }}
@@ -270,7 +289,11 @@ export function DriftingBlobs({ theme = 'dark' }: { theme?: 'dark' | 'light' }) 
       <motion.div
         className="absolute"
         style={{
-          right: '-8%', top: '-10%', width: '60%', height: '60%', borderRadius: '50%',
+          right: '-8%',
+          top: '-10%',
+          width: '60%',
+          height: '60%',
+          borderRadius: '50%',
           background: `radial-gradient(circle at 50% 50%, ${colors[1]} 0%, ${colors[1].replace(/[\d.]+\)$/, '0)')} 100%)`,
           filter: 'blur(90px)',
         }}
@@ -280,7 +303,11 @@ export function DriftingBlobs({ theme = 'dark' }: { theme?: 'dark' | 'light' }) 
       <motion.div
         className="absolute"
         style={{
-          right: '-5%', bottom: '-12%', width: '55%', height: '55%', borderRadius: '50%',
+          right: '-5%',
+          bottom: '-12%',
+          width: '55%',
+          height: '55%',
+          borderRadius: '50%',
           background: `radial-gradient(circle at 50% 50%, ${colors[2]} 0%, ${colors[2].replace(/[\d.]+\)$/, '0)')} 100%)`,
           filter: 'blur(100px)',
         }}
@@ -290,7 +317,11 @@ export function DriftingBlobs({ theme = 'dark' }: { theme?: 'dark' | 'light' }) 
       <motion.div
         className="absolute"
         style={{
-          left: '20%', bottom: '-10%', width: '45%', height: '45%', borderRadius: '50%',
+          left: '20%',
+          bottom: '-10%',
+          width: '45%',
+          height: '45%',
+          borderRadius: '50%',
           background: `radial-gradient(circle at 50% 50%, ${colors[3]} 0%, ${colors[3].replace(/[\d.]+\)$/, '0)')} 100%)`,
           filter: 'blur(110px)',
         }}

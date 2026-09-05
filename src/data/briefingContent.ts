@@ -127,12 +127,12 @@ export type OpportunityToday = {
   /* Numeric FYC achievable today across the priority threads. */
   fycInPlayValue: number
   /* Position on the year — drives the ring fill. */
-  fycToDateLabel: string  /* "$92,400 of $122,000" */
-  percentToGoal: number   /* 0–100 */
+  fycToDateLabel: string /* "$92,400 of $122,000" */
+  percentToGoal: number /* 0–100 */
   /* "Two more closes today and you cross 80%." — the close-the-ring nudge. */
   ringNudge: string
   /* Optional secondary stat — a meaningful streak or motion. */
-  streak?: string         /* "9 days in a row at >80% pace" */
+  streak?: string /* "9 days in a row at >80% pace" */
 }
 
 export type DailyBriefing = {
@@ -140,10 +140,10 @@ export type DailyBriefing = {
   firstName: string
   council: string
   location: string
-  tenureLabel: string  /* "Year 16 · 633 clients" */
+  tenureLabel: string /* "Year 16 · 633 clients" */
   /* Hero strip */
   date: { weekday: string; monthDay: string }
-  dateLabel: string                  /* "Today  |  Thu, May 28" — shown in the ribbon */
+  dateLabel: string /* "Today  |  Thu, May 28" — shown in the ribbon */
   generatedAt: string
   /* Fitness-tracker style advisor opportunity (top motivator). */
   opportunityToday: OpportunityToday
@@ -192,7 +192,8 @@ const marcus: DailyBriefing = {
   priorities: [
     {
       id: 'anderson',
-      headline: 'Tom Anderson has been sitting at underwriting for 11 days on a missing form. One 10-minute call clears it.',
+      headline:
+        'Tom Anderson has been sitting at underwriting for 11 days on a missing form. One 10-minute call clears it.',
       highlight: 'underwriting for 11 days',
       badge: { label: 'Urgent', tone: 'urgent' },
       defaultOpen: true,
@@ -201,19 +202,24 @@ const marcus: DailyBriefing = {
           "Whole life app stalled at underwriting due to a missing APS medical form and Tom hasn't received the request.",
         insight:
           'This is a system failure, not a client failure since the form was never sent. One resend resolves it.',
-        recommendation:
-          'Call Tom Anderson to set expectations, then resend APS request via Sales Central.',
+        recommendation: 'Call Tom Anderson to set expectations, then resend APS request via Sales Central.',
         followup: "You'll hit $4,200 FYC if this closes.",
         suggestedActions: [
-          { label: 'Review the issue', prompt: "Walk me through Tom Anderson's stall and what's actually blocking the APS resend." },
-          { label: 'View underwriting timeline', prompt: "Show me Tom Anderson's underwriting timeline from submission to today." },
+          {
+            label: 'Review the issue',
+            prompt: "Walk me through Tom Anderson's stall and what's actually blocking the APS resend.",
+          },
+          {
+            label: 'View underwriting timeline',
+            prompt: "Show me Tom Anderson's underwriting timeline from submission to today.",
+          },
           { label: 'Something else…', freeform: true },
         ],
       },
     },
     {
       id: 'clarke',
-      headline: 'Prepare for Emma Clarke\'s annual review at 11:00 AM',
+      headline: "Prepare for Emma Clarke's annual review at 11:00 AM",
       sub: '12-year client · WL + term + investment · pre-meeting brief loaded',
       badge: { label: 'Prep ready', tone: 'ready' },
       meetingId: 'clarke',
@@ -234,12 +240,12 @@ const marcus: DailyBriefing = {
     {
       id: 'clarke-referral',
       headline: "Emma's business partner may need coverage — listen for the second name at close",
-      sub: 'Opportunity surfaces in today\'s annual review',
+      sub: "Opportunity surfaces in today's annual review",
       badge: { label: 'Opportunity', tone: 'opportunity' },
     },
     {
       id: 'holloway',
-      headline: "James Holloway turns 45 in six months — WL age-change deadline approaching",
+      headline: 'James Holloway turns 45 in six months — WL age-change deadline approaching',
       sub: 'Add to next-week contact list',
       badge: { label: 'Monitor', tone: 'monitor' },
     },
@@ -250,41 +256,59 @@ const marcus: DailyBriefing = {
     {
       id: 'sandra-kim-lapse',
       title: 'Call Eric Ellis a lead from NYL.com to introduce yourself',
-      body: "Completing this within the next 30 minutes gives you a 75% higher chane of closing the deal",
+      body: 'Completing this within the next 30 minutes gives you a 75% higher chane of closing the deal',
       meta: 'Prioritize existing clients · Boost FYC',
       badge: { label: 'NEW LEAD', tone: 'opportunity' },
       defaultOpen: false,
       phone: '(917) 625-4843',
       outreachCta: 'Plan a call',
       priorityTags: ['Lead', 'Potential High FYC'],
-      actionPrompt: "Sandra Kim's WL policy is 14 days past due — draft a call script to reactivate the policy before it lapses.",
+      actionPrompt:
+        "Sandra Kim's WL policy is 14 days past due — draft a call script to reactivate the policy before it lapses.",
       details: {
-        analysis: "Sandra's whole life policy payment is 14 days overdue. She has a 30-day grace period — 16 days remain.",
-        insight: "Sandra has been a client since 2021 with a strong payment history. This is likely an oversight, not a cancellation intent.",
-        recommendation: "Call before 10AM today. Lead with the policy and grace period deadline — skip the warmup. Have the payment link ready.",
-        followup: "Resolving this protects $1,800 in FYC from chargeback this month.",
+        analysis:
+          "Sandra's whole life policy payment is 14 days overdue. She has a 30-day grace period — 16 days remain.",
+        insight:
+          'Sandra has been a client since 2021 with a strong payment history. This is likely an oversight, not a cancellation intent.',
+        recommendation:
+          'Call before 10AM today. Lead with the policy and grace period deadline — skip the warmup. Have the payment link ready.',
+        followup: 'Resolving this protects $1,800 in FYC from chargeback this month.',
         suggestedActions: [
-          { label: 'Draft call script', prompt: "Draft a short call script for Sandra Kim — WL payment past due, 16 days left in grace period. Direct and warm." },
-          { label: 'Draft text', prompt: "Draft a text to Sandra Kim about her WL payment being past due. Friendly but clear about the deadline." },
+          {
+            label: 'Draft call script',
+            prompt:
+              'Draft a short call script for Sandra Kim — WL payment past due, 16 days left in grace period. Direct and warm.',
+          },
+          {
+            label: 'Draft text',
+            prompt:
+              'Draft a text to Sandra Kim about her WL payment being past due. Friendly but clear about the deadline.',
+          },
           { label: 'Something else…', freeform: true },
         ],
       },
     },
     {
       id: 'laura-mendez-appt',
-      title: "Contact Laura Mendez about her new home coverage and to add an uninsured spouse.",
-      body: "This appointment gap spans one close per week. A short conversation here covers a $3,500 FYC opportunity.",
+      title: 'Contact Laura Mendez about her new home coverage and to add an uninsured spouse.',
+      body: 'This appointment gap spans one close per week. A short conversation here covers a $3,500 FYC opportunity.',
       meta: 'Qualified appointment · New coverage need',
       badge: { label: 'Qualified appt first', tone: 'opportunity' },
       priorityTags: ['Grow new clients', 'Boost FYC'],
       outreachCta: 'Book time',
-      actionPrompt: "Help me prepare a quick outreach to Laura Mendez about home coverage and adding her spouse to her policy.",
+      actionPrompt:
+        'Help me prepare a quick outreach to Laura Mendez about home coverage and adding her spouse to her policy.',
       details: {
-        analysis: "Laura purchased a new home 6 weeks ago. Her current policy doesn't cover the new property and her spouse is uninsured.",
-        insight: "Home purchase triggers strong receptivity to coverage conversations. The timing is ideal.",
-        recommendation: "Reach out this week. Lead with the home congratulations, pivot to coverage gap naturally.",
+        analysis:
+          "Laura purchased a new home 6 weeks ago. Her current policy doesn't cover the new property and her spouse is uninsured.",
+        insight: 'Home purchase triggers strong receptivity to coverage conversations. The timing is ideal.',
+        recommendation: 'Reach out this week. Lead with the home congratulations, pivot to coverage gap naturally.',
         suggestedActions: [
-          { label: 'Draft outreach', prompt: "Draft a short outreach to Laura Mendez — congrats on the new home, mention coverage gap, propose a quick call." },
+          {
+            label: 'Draft outreach',
+            prompt:
+              'Draft a short outreach to Laura Mendez — congrats on the new home, mention coverage gap, propose a quick call.',
+          },
           { label: 'Something else…', freeform: true },
         ],
       },
@@ -303,8 +327,7 @@ const marcus: DailyBriefing = {
       time: '11:00 AM',
       duration: '60 MIN',
       title: 'Emma Clarke — Annual Review',
-      body:
-        '12-year client, WL + term + investment account. Key agenda: beneficiary update (catch before she notices), fee-based rollover conversation ($210K), college funding gap. See pre-meeting brief for full pack.',
+      body: '12-year client, WL + term + investment account. Key agenda: beneficiary update (catch before she notices), fee-based rollover conversation ($210K), college funding gap. See pre-meeting brief for full pack.',
       status: 'ready',
       meetingId: 'clarke',
     },
@@ -313,8 +336,7 @@ const marcus: DailyBriefing = {
       time: '2:30 PM',
       duration: '60 MIN',
       title: 'Derek Okafor — Prospect discovery',
-      body:
-        'Referred by Clarke. Business owner, age 44, no current life coverage. Target: term + DI conversation. Confirm meeting — he was only verbal-committed.',
+      body: 'Referred by Clarke. Business owner, age 44, no current life coverage. Target: term + DI conversation. Confirm meeting — he was only verbal-committed.',
       status: 'needsPrep',
       meetingId: 'okafor',
     },
@@ -335,15 +357,27 @@ const marcus: DailyBriefing = {
       action: 'Call today or queue automated payment reminder via GuideMe',
       badge: { label: 'Day 28/30', tone: 'urgent' },
       defaultOpen: true,
-      actionPrompt: "Help me decide whether to call Patricia Lau directly or queue an automated payment reminder via GuideMe.",
+      actionPrompt:
+        'Help me decide whether to call Patricia Lau directly or queue an automated payment reminder via GuideMe.',
       details: {
-        analysis: 'UL premium overdue for 28 of 30 days. Patricia paid late twice in the last 12 months but always recovered after a personal call.',
-        insight: 'Auto-reminders work for first-time slips; not for the third. This needs a real call — the lapse risk is $1,800 FYC plus relationship damage.',
-        recommendation: 'Call today before noon. If voicemail, send a personal text with the payment link and follow up by EOD.',
+        analysis:
+          'UL premium overdue for 28 of 30 days. Patricia paid late twice in the last 12 months but always recovered after a personal call.',
+        insight:
+          'Auto-reminders work for first-time slips; not for the third. This needs a real call — the lapse risk is $1,800 FYC plus relationship damage.',
+        recommendation:
+          'Call today before noon. If voicemail, send a personal text with the payment link and follow up by EOD.',
         followup: 'Cure rate after a personal call: 92% vs. 51% for automated reminder.',
         suggestedActions: [
-          { label: 'Draft the call script', prompt: 'Draft a 60-second call script for Patricia Lau — empathetic, focused on the missed payment without sounding like collections.' },
-          { label: 'Queue the GuideMe reminder', prompt: 'Queue an automated payment reminder for Patricia Lau via GuideMe and set a 24-hour follow-up alert.' },
+          {
+            label: 'Draft the call script',
+            prompt:
+              'Draft a 60-second call script for Patricia Lau — empathetic, focused on the missed payment without sounding like collections.',
+          },
+          {
+            label: 'Queue the GuideMe reminder',
+            prompt:
+              'Queue an automated payment reminder for Patricia Lau via GuideMe and set a 24-hour follow-up alert.',
+          },
           { label: 'Something else…', freeform: true },
         ],
       },
@@ -355,29 +389,36 @@ const marcus: DailyBriefing = {
       body: 'Turns 45 in 6 months. WL age-change deadline approaching — rate locks now or steps up at 45.',
       action: 'No action today; add to next-week contact list',
       badge: { label: 'Monitor', tone: 'monitor' },
-      actionPrompt: "Add James Holloway to next week's contact list and queue a WL age-change conversation talking point.",
+      actionPrompt:
+        "Add James Holloway to next week's contact list and queue a WL age-change conversation talking point.",
     },
     {
       id: 'clarke-referral',
       pip: 'green',
       title: 'Clarke meeting — second referral opportunity',
-      body: "Emma mentioned her business partner may also need coverage. Look for a second name at the natural close of the annual review.",
+      body: 'Emma mentioned her business partner may also need coverage. Look for a second name at the natural close of the annual review.',
       action: 'Prepare referral ask at close — the mood after the beneficiary catch will be right',
       badge: { label: 'Opportunity', tone: 'opportunity' },
-      actionPrompt: "Draft a referral ask I can use at the natural close of Emma Clarke's annual review — about her business partner.",
+      actionPrompt:
+        "Draft a referral ask I can use at the natural close of Emma Clarke's annual review — about her business partner.",
     },
   ],
   pace: [
-    { label: 'FYC this month',         value: '$18.4K', sub: 'of $22K target',              tone: 'warn' },
-    { label: 'Appointments this week', value: '2 of 4', sub: '2 remaining',                 tone: 'neutral' },
-    { label: 'Open cases',             value: '7',      sub: '1 urgent (Anderson)',         tone: 'warn' },
-    { label: 'Council pace',           value: 'On track', sub: 'Executive Council',          tone: 'good' },
+    { label: 'FYC this month', value: '$18.4K', sub: 'of $22K target', tone: 'warn' },
+    { label: 'Appointments this week', value: '2 of 4', sub: '2 remaining', tone: 'neutral' },
+    { label: 'Open cases', value: '7', sub: '1 urgent (Anderson)', tone: 'warn' },
+    { label: 'Council pace', value: 'On track', sub: 'Executive Council', tone: 'good' },
   ],
   autonomous: [
-    { id: 'a1', label: 'Resent Anderson APS reminder',   meta: 'Sales Central · 7:48 AM',
-      actionPrompt: 'Show me what was sent to Tom Anderson — the APS reminder, when, and whether anything else should follow.',
+    {
+      id: 'a1',
+      label: 'Resent Anderson APS reminder',
+      meta: 'Sales Central · 7:48 AM',
+      actionPrompt:
+        'Show me what was sent to Tom Anderson — the APS reminder, when, and whether anything else should follow.',
       expand: {
-        summary: 'Re-sent the APS medical form request to Tom Anderson via Sales Central with a follow-up SMS scheduled if not signed by 9:00 AM.',
+        summary:
+          'Re-sent the APS medical form request to Tom Anderson via Sales Central with a follow-up SMS scheduled if not signed by 9:00 AM.',
         bullets: [
           'Email subject: "One last form to wrap your application"',
           'Pre-filled with the carrier portal link · expires in 14 days',
@@ -385,31 +426,50 @@ const marcus: DailyBriefing = {
           'Underwriter notified the resend is in-flight',
         ],
         chips: [
-          { label: 'View what was sent', prompt: "Show me the exact email + SMS the OS sent to Tom Anderson this morning — verbatim." },
-          { label: 'Add a personal call', prompt: "Draft a 60-second personal call script for Tom Anderson to back up the APS resend." },
+          {
+            label: 'View what was sent',
+            prompt: 'Show me the exact email + SMS the OS sent to Tom Anderson this morning — verbatim.',
+          },
+          {
+            label: 'Add a personal call',
+            prompt: 'Draft a 60-second personal call script for Tom Anderson to back up the APS resend.',
+          },
         ],
       },
     },
-    { id: 'a2', label: 'Assembled Clarke meeting pack',  meta: 'Pre-meeting brief · 8:02 AM',
-      actionPrompt: "Walk me through what was put into Emma Clarke's pre-meeting pack and where the source data came from.",
+    {
+      id: 'a2',
+      label: 'Assembled Clarke meeting pack',
+      meta: 'Pre-meeting brief · 8:02 AM',
+      actionPrompt:
+        "Walk me through what was put into Emma Clarke's pre-meeting pack and where the source data came from.",
       expand: {
-        summary: "Built Emma Clarke's full annual-review brief — beneficiary catch, 401(k) rollover, and college funding ready to lead with.",
+        summary:
+          "Built Emma Clarke's full annual-review brief — beneficiary catch, 401(k) rollover, and college funding ready to lead with.",
         bullets: [
           'Pulled household + product data from last review (Mar 2025)',
           'Flagged: beneficiary not updated since 2012 (ex-husband still primary)',
-          '$210K stranded 401(k) re-surfaced from last year\'s notes',
+          "$210K stranded 401(k) re-surfaced from last year's notes",
           'College funding math refreshed against the new 14-month timeline',
         ],
         chips: [
           { label: 'Open the brief', prompt: 'Open the Emma Clarke pre-meeting brief.' },
-          { label: 'Draft talking points', prompt: 'Draft my opening talking points for the Emma Clarke meeting based on the pre-meeting brief.' },
+          {
+            label: 'Draft talking points',
+            prompt: 'Draft my opening talking points for the Emma Clarke meeting based on the pre-meeting brief.',
+          },
         ],
       },
     },
-    { id: 'a3', label: 'Queued Lau payment reminder',    meta: 'GuideMe · queued for 9:00 AM send',
-      actionPrompt: "Show me the Patricia Lau payment reminder queued in GuideMe — I want to see it before it sends and decide if I should call instead.",
+    {
+      id: 'a3',
+      label: 'Queued Lau payment reminder',
+      meta: 'GuideMe · queued for 9:00 AM send',
+      actionPrompt:
+        'Show me the Patricia Lau payment reminder queued in GuideMe — I want to see it before it sends and decide if I should call instead.',
       expand: {
-        summary: 'Queued a GuideMe payment reminder for Patricia Lau\'s UL policy (day 28 of 30). You can hold it and call instead.',
+        summary:
+          "Queued a GuideMe payment reminder for Patricia Lau's UL policy (day 28 of 30). You can hold it and call instead.",
         bullets: [
           'Channel: GuideMe SMS + email · personalized with policy + payment link',
           'Send time: 9:00 AM · cancellable up to that point',
@@ -418,12 +478,19 @@ const marcus: DailyBriefing = {
         ],
         chips: [
           { label: 'Hold the auto-send', prompt: 'Hold the Patricia Lau GuideMe send. I want to call her directly.' },
-          { label: 'Draft the call script', prompt: 'Draft a 60-second empathetic call script for Patricia Lau about the missed UL premium.' },
+          {
+            label: 'Draft the call script',
+            prompt: 'Draft a 60-second empathetic call script for Patricia Lau about the missed UL premium.',
+          },
         ],
       },
     },
-    { id: 'a4', label: 'Triaged 23 inbox items',         meta: 'Concierge · filed overnight',
-      actionPrompt: 'Show me the 23 inbox items triaged overnight — what got routed where, what was auto-replied, and what still needs me.',
+    {
+      id: 'a4',
+      label: 'Triaged 23 inbox items',
+      meta: 'Concierge · filed overnight',
+      actionPrompt:
+        'Show me the 23 inbox items triaged overnight — what got routed where, what was auto-replied, and what still needs me.',
       expand: {
         summary: 'Concierge sorted 23 overnight inbox items. 18 routed/auto-replied, 5 await your eyes.',
         bullets: [
@@ -433,13 +500,23 @@ const marcus: DailyBriefing = {
           '5 items flagged for you — referral from Maria Garcia is the standout',
         ],
         chips: [
-          { label: 'Show me the 5 flagged items', prompt: 'Pull up the 5 inbox items the Concierge flagged for me this morning.' },
-          { label: 'Reply to Maria Garcia', prompt: 'Draft a reply to the referral note from Maria Garcia — warm, brief, ask for the connection.' },
+          {
+            label: 'Show me the 5 flagged items',
+            prompt: 'Pull up the 5 inbox items the Concierge flagged for me this morning.',
+          },
+          {
+            label: 'Reply to Maria Garcia',
+            prompt: 'Draft a reply to the referral note from Maria Garcia — warm, brief, ask for the connection.',
+          },
         ],
       },
     },
-    { id: 'a5', label: 'Refreshed pipeline state',       meta: '7 open cases · 1 stuck on client docs',
-      actionPrompt: 'Walk me through the 7 open cases — which one is stuck on client docs and what the next move is on each.',
+    {
+      id: 'a5',
+      label: 'Refreshed pipeline state',
+      meta: '7 open cases · 1 stuck on client docs',
+      actionPrompt:
+        'Walk me through the 7 open cases — which one is stuck on client docs and what the next move is on each.',
       expand: {
         summary: '7 open cases re-scored. Anderson is the only one stuck — everything else has a clear next step.',
         bullets: [
@@ -449,14 +526,19 @@ const marcus: DailyBriefing = {
           '4 healthy cases moving on cadence — no action needed',
         ],
         chips: [
-          { label: 'Show pipeline detail', prompt: 'Walk me through every case in the pipeline right now — status, next step, est. FYC.' },
-          { label: 'What changed overnight', prompt: 'What changed in my pipeline overnight? Surface only the deltas.' },
+          {
+            label: 'Show pipeline detail',
+            prompt: 'Walk me through every case in the pipeline right now — status, next step, est. FYC.',
+          },
+          {
+            label: 'What changed overnight',
+            prompt: 'What changed in my pipeline overnight? Surface only the deltas.',
+          },
         ],
       },
     },
   ],
-  whyThisOrder:
-    "You told the OS lapse & at-risk alerts and pipeline items come first. Anderson hits both.",
+  whyThisOrder: 'You told the OS lapse & at-risk alerts and pipeline items come first. Anderson hits both.',
 }
 
 /* ----------------------------------------------------------------------------
@@ -484,7 +566,8 @@ const priya: DailyBriefing = {
   priorities: [
     {
       id: 'helena',
-      headline: 'Helena Garcia just turned 58 and is engaging with retirement content. Park morning prep until 10:30, then make the call.',
+      headline:
+        'Helena Garcia just turned 58 and is engaging with retirement content. Park morning prep until 10:30, then make the call.',
       highlight: 'retirement content',
       badge: { label: 'Opportunity', tone: 'opportunity' },
       defaultOpen: true,
@@ -497,8 +580,16 @@ const priya: DailyBriefing = {
           'Draft a warm reconnection that frames the milestone, not the rate. Run the holistic talk-track drill first; aim for a 10:30 AM call.',
         followup: 'You said holistic openings and life events matter most. This is both.',
         suggestedActions: [
-          { label: 'Draft the reconnection', canvasId: 'helena-1', prompt: "Draft a warm reconnection to Helena Garcia framed around the pre-60 milestone, not the rate." },
-          { label: 'Run the holistic drill', canvasId: 'helena-2', prompt: "Run the holistic talk-track drill for the Helena Garcia call." },
+          {
+            label: 'Draft the reconnection',
+            canvasId: 'helena-1',
+            prompt: 'Draft a warm reconnection to Helena Garcia framed around the pre-60 milestone, not the rate.',
+          },
+          {
+            label: 'Run the holistic drill',
+            canvasId: 'helena-2',
+            prompt: 'Run the holistic talk-track drill for the Helena Garcia call.',
+          },
           { label: 'Something else…', freeform: true },
         ],
       },
@@ -535,20 +626,31 @@ const priya: DailyBriefing = {
     {
       id: 'helena',
       title: 'Helena Garcia — retirement-readiness window opens',
-      body:
-        'Turned 58 in March. Three retirement-content opens this week. Last touched 5 months ago. The pre-60 window for holistic planning is open and unprompted — this is the move you flagged in onboarding.',
+      body: 'Turned 58 in March. Three retirement-content opens this week. Last touched 5 months ago. The pre-60 window for holistic planning is open and unprompted — this is the move you flagged in onboarding.',
       meta: 'Action: Draft a warm reconnection · Frame the milestone, not the rate · Suggested time: 10:30 AM',
       badge: { label: 'Act today', tone: 'urgent' },
       defaultOpen: true,
-      actionPrompt: "Open Helena Garcia's retirement-readiness window — walk me into a warm reconnection that frames the milestone, not the rate.",
+      actionPrompt:
+        "Open Helena Garcia's retirement-readiness window — walk me into a warm reconnection that frames the milestone, not the rate.",
       details: {
-        analysis: 'Helena turned 58 in March. Three retirement-content articles opened in 7 days. Engagement score 23 → 41. Last touched 5 months ago.',
-        insight: "This is the holistic opening you've been waiting for. The pre-60 planning window is widest in the first 30 days of a milestone like this, and Helena flagged it herself through her behavior.",
-        recommendation: 'Draft a warm reconnection that opens with the milestone, not the rate. Run the holistic talk-track drill first. Aim for a 10:30 AM call.',
+        analysis:
+          'Helena turned 58 in March. Three retirement-content articles opened in 7 days. Engagement score 23 → 41. Last touched 5 months ago.',
+        insight:
+          "This is the holistic opening you've been waiting for. The pre-60 planning window is widest in the first 30 days of a milestone like this, and Helena flagged it herself through her behavior.",
+        recommendation:
+          'Draft a warm reconnection that opens with the milestone, not the rate. Run the holistic talk-track drill first. Aim for a 10:30 AM call.',
         followup: 'You said holistic openings and life events matter most. This is both.',
         suggestedActions: [
-          { label: 'Draft the reconnection', canvasId: 'helena-1', prompt: "Draft a warm reconnection to Helena Garcia framed around the pre-60 milestone, not the rate." },
-          { label: 'Run the holistic drill', canvasId: 'helena-2', prompt: "Run the holistic talk-track drill for the Helena Garcia call." },
+          {
+            label: 'Draft the reconnection',
+            canvasId: 'helena-1',
+            prompt: 'Draft a warm reconnection to Helena Garcia framed around the pre-60 milestone, not the rate.',
+          },
+          {
+            label: 'Run the holistic drill',
+            canvasId: 'helena-2',
+            prompt: 'Run the holistic talk-track drill for the Helena Garcia call.',
+          },
           { label: 'Something else…', freeform: true },
         ],
       },
@@ -567,8 +669,7 @@ const priya: DailyBriefing = {
       time: '11:00 AM',
       duration: '45 MIN',
       title: 'Leela Patel — annual review window opens',
-      body:
-        'Household grew (second dependent, new home). $1.2M term right-sized to a smaller household — talking points loaded. Cross-sell entry point: education funding.',
+      body: 'Household grew (second dependent, new home). $1.2M term right-sized to a smaller household — talking points loaded. Cross-sell entry point: education funding.',
       status: 'ready',
       meetingId: 'patel',
     },
@@ -597,14 +698,26 @@ const priya: DailyBriefing = {
       action: 'Lead with curiosity, not the rate. Helena flagged this through her own behavior.',
       badge: { label: 'Opportunity', tone: 'opportunity' },
       defaultOpen: true,
-      actionPrompt: "Help me lead Helena with curiosity — not the rate. She flagged retirement readiness through her own behavior.",
+      actionPrompt:
+        'Help me lead Helena with curiosity — not the rate. She flagged retirement readiness through her own behavior.',
       details: {
-        analysis: 'Three retirement-content opens in 7 days. Engagement score lift +18 points week-over-week. Articles span Social Security timing, retirement income, and pre-60 planning.',
-        insight: 'Structural lift, not seasonal. Helena is doing the homework; she just needs the conversation. The wrong move here is to lead with a rate or a product.',
-        recommendation: 'Open with a curiosity question: "I noticed you\'ve been thinking about the next chapter — want to talk through it?" The rate lives at the end of the conversation, not the start.',
+        analysis:
+          'Three retirement-content opens in 7 days. Engagement score lift +18 points week-over-week. Articles span Social Security timing, retirement income, and pre-60 planning.',
+        insight:
+          'Structural lift, not seasonal. Helena is doing the homework; she just needs the conversation. The wrong move here is to lead with a rate or a product.',
+        recommendation:
+          'Open with a curiosity question: "I noticed you\'ve been thinking about the next chapter — want to talk through it?" The rate lives at the end of the conversation, not the start.',
         suggestedActions: [
-          { label: "Draft the curiosity opener", canvasId: 'helena-2', prompt: "Draft a curiosity-led opening message to Helena Garcia that doesn't mention rates." },
-          { label: 'Pull her household profile', canvasId: 'helena-1', prompt: 'Pull Helena Garcia\'s household profile and last 3 touches so I can review before the call.' },
+          {
+            label: 'Draft the curiosity opener',
+            canvasId: 'helena-2',
+            prompt: "Draft a curiosity-led opening message to Helena Garcia that doesn't mention rates.",
+          },
+          {
+            label: 'Pull her household profile',
+            canvasId: 'helena-1',
+            prompt: "Pull Helena Garcia's household profile and last 3 touches so I can review before the call.",
+          },
           { label: 'Something else…', freeform: true },
         ],
       },
@@ -616,14 +729,26 @@ const priya: DailyBriefing = {
       body: 'Coastal household in a flood-risk zone. Coverage gap on the new property. 30-day post-move window is open.',
       action: 'Add to this week — review pack queued by Strategist',
       badge: { label: 'Monitor', tone: 'monitor' },
-      actionPrompt: "Open the Janet Henderson coverage review — schedule it into this week and load the Strategist's review pack.",
+      actionPrompt:
+        "Open the Janet Henderson coverage review — schedule it into this week and load the Strategist's review pack.",
       details: {
-        analysis: 'Janet moved 9 days ago to a coastal household in a flood-risk zone. Current term + WL coverage is right-sized for her old property, not the new one.',
-        insight: "The 30-day post-move window is the highest-trust moment for a coverage conversation. After day 30, the move loses its emotional weight.",
-        recommendation: 'Schedule a 30-minute review this week. Strategist has queued the review pack with flood-risk benchmarks and her household profile.',
+        analysis:
+          'Janet moved 9 days ago to a coastal household in a flood-risk zone. Current term + WL coverage is right-sized for her old property, not the new one.',
+        insight:
+          'The 30-day post-move window is the highest-trust moment for a coverage conversation. After day 30, the move loses its emotional weight.',
+        recommendation:
+          'Schedule a 30-minute review this week. Strategist has queued the review pack with flood-risk benchmarks and her household profile.',
         suggestedActions: [
-          { label: 'Schedule the review', canvasId: 'janet', prompt: 'Help me find a 30-minute slot for Janet Henderson this week and draft the meeting invite.' },
-          { label: 'Open the review pack', canvasId: 'janet', prompt: "Open Janet Henderson's coverage review pack and walk me through the flood-risk benchmarks." },
+          {
+            label: 'Schedule the review',
+            canvasId: 'janet',
+            prompt: 'Help me find a 30-minute slot for Janet Henderson this week and draft the meeting invite.',
+          },
+          {
+            label: 'Open the review pack',
+            canvasId: 'janet',
+            prompt: "Open Janet Henderson's coverage review pack and walk me through the flood-risk benchmarks.",
+          },
           { label: 'Something else…', freeform: true },
         ],
       },
@@ -635,20 +760,26 @@ const priya: DailyBriefing = {
       body: 'Underwriting hold on a missing APS form. Same pattern as the Maria Diaz case from March.',
       action: 'Resend APS via Sales Central today; this kills momentum on close',
       badge: { label: 'Day 11', tone: 'urgent' },
-      actionPrompt: "Walk me through the Tom Anderson stall — same pattern as Maria Diaz in March. Help me resend the APS today.",
+      actionPrompt:
+        'Walk me through the Tom Anderson stall — same pattern as Maria Diaz in March. Help me resend the APS today.',
     },
   ],
   pace: [
-    { label: 'FYC this month',         value: '$2.6K',  sub: 'of $3.5K target',              tone: 'warn' },
-    { label: 'Holistic conversations', value: '1 of 2', sub: 'Helena opens the second',      tone: 'good' },
-    { label: 'Open cases',             value: '5',      sub: '1 stalled (Anderson)',         tone: 'warn' },
-    { label: 'Plan pace',              value: '−18% YoY', sub: 'Helena + Janet recovers it',  tone: 'warn' },
+    { label: 'FYC this month', value: '$2.6K', sub: 'of $3.5K target', tone: 'warn' },
+    { label: 'Holistic conversations', value: '1 of 2', sub: 'Helena opens the second', tone: 'good' },
+    { label: 'Open cases', value: '5', sub: '1 stalled (Anderson)', tone: 'warn' },
+    { label: 'Plan pace', value: '−18% YoY', sub: 'Helena + Janet recovers it', tone: 'warn' },
   ],
   autonomous: [
-    { id: 'a1', label: 'Drafted Helena reconnection',       meta: 'Brand Advocate · matched your voice',
-      actionPrompt: 'Show me the Helena Garcia reconnection draft. I want to review and edit it before it goes out at 10:30.',
+    {
+      id: 'a1',
+      label: 'Drafted Helena reconnection',
+      meta: 'Brand Advocate · matched your voice',
+      actionPrompt:
+        'Show me the Helena Garcia reconnection draft. I want to review and edit it before it goes out at 10:30.',
       expand: {
-        summary: "A warm, milestone-first reconnection drafted in your voice. Frames the pre-60 planning window, not the rate.",
+        summary:
+          'A warm, milestone-first reconnection drafted in your voice. Frames the pre-60 planning window, not the rate.',
         bullets: [
           'Opens with "Hi Helena — thinking of you as you cross into a new chapter."',
           'No product references · no rate quotes · invites a 20-minute conversation',
@@ -656,15 +787,26 @@ const priya: DailyBriefing = {
           'Voice: thoughtful, curious, conservative — matched to your onboarding answers',
         ],
         chips: [
-          { label: 'Review the draft', prompt: 'Show me the full Helena Garcia reconnection draft — I want to read it before it goes out.' },
-          { label: 'Make it warmer',   prompt: 'Make the Helena reconnection draft warmer and a bit more personal — still my voice.' },
+          {
+            label: 'Review the draft',
+            prompt: 'Show me the full Helena Garcia reconnection draft — I want to read it before it goes out.',
+          },
+          {
+            label: 'Make it warmer',
+            prompt: 'Make the Helena reconnection draft warmer and a bit more personal — still my voice.',
+          },
         ],
       },
     },
-    { id: 'a2', label: 'Loaded Patel review pack',          meta: 'Intelligence Analyst · cross-sell notes',
-      actionPrompt: "Walk me through Leela Patel's annual review pack — what changed in her household, and where the cross-sell notes came from.",
+    {
+      id: 'a2',
+      label: 'Loaded Patel review pack',
+      meta: 'Intelligence Analyst · cross-sell notes',
+      actionPrompt:
+        "Walk me through Leela Patel's annual review pack — what changed in her household, and where the cross-sell notes came from.",
       expand: {
-        summary: "Leela's review pack is ready. Household grew (baby #2 in February), term is right-sized to the old household, education gap surfaced.",
+        summary:
+          "Leela's review pack is ready. Household grew (baby #2 in February), term is right-sized to the old household, education gap surfaced.",
         bullets: [
           'Pulled new dependent + address from public records · cross-checked with CRM',
           'Term gap: current $1M, recommended ~$1.8M for new household',
@@ -673,14 +815,21 @@ const priya: DailyBriefing = {
         ],
         chips: [
           { label: 'Open the brief', prompt: "Open Leela Patel's pre-meeting brief." },
-          { label: 'Draft the right-size pitch', prompt: 'Draft how I should walk Leela through the term right-size — calm, visual, household-first.' },
+          {
+            label: 'Draft the right-size pitch',
+            prompt: 'Draft how I should walk Leela through the term right-size — calm, visual, household-first.',
+          },
         ],
       },
     },
-    { id: 'a3', label: 'Queued holistic talk-track drill',  meta: 'Coach · 5-min run before 10:30',
+    {
+      id: 'a3',
+      label: 'Queued holistic talk-track drill',
+      meta: 'Coach · 5-min run before 10:30',
       actionPrompt: 'Run the holistic talk-track drill the Coach queued for the Helena call — 5 minutes, role-play.',
       expand: {
-        summary: "A 5-minute Coach drill on the holistic talk-track, tuned to a pre-60 milestone conversation. Three roleplay beats.",
+        summary:
+          'A 5-minute Coach drill on the holistic talk-track, tuned to a pre-60 milestone conversation. Three roleplay beats.',
         bullets: [
           'Beat 1 · Open with the milestone, not the rate (60 sec)',
           'Beat 2 · One discovery question, then silence (90 sec)',
@@ -688,15 +837,26 @@ const priya: DailyBriefing = {
           'Practice tape will be saved and reviewable',
         ],
         chips: [
-          { label: 'Start the drill now', prompt: 'Start the 5-minute holistic talk-track drill — pre-60 milestone scenario.' },
-          { label: 'Run a shorter version', prompt: 'Give me the 90-second version of the holistic talk-track drill — just the open.' },
+          {
+            label: 'Start the drill now',
+            prompt: 'Start the 5-minute holistic talk-track drill — pre-60 milestone scenario.',
+          },
+          {
+            label: 'Run a shorter version',
+            prompt: 'Give me the 90-second version of the holistic talk-track drill — just the open.',
+          },
         ],
       },
     },
-    { id: 'a4', label: 'Flagged Janet flood-risk gap',      meta: 'Signals · review by Friday',
-      actionPrompt: "Show me the Janet Henderson flood-risk signal — what triggered it and what the recommended response is by Friday.",
+    {
+      id: 'a4',
+      label: 'Flagged Janet flood-risk gap',
+      meta: 'Signals · review by Friday',
+      actionPrompt:
+        'Show me the Janet Henderson flood-risk signal — what triggered it and what the recommended response is by Friday.',
       expand: {
-        summary: 'Janet moved to a coastal address in March; FEMA Zone AE flood map shows risk her current household coverage does not address.',
+        summary:
+          'Janet moved to a coastal address in March; FEMA Zone AE flood map shows risk her current household coverage does not address.',
         bullets: [
           'New address change pulled from postal record (Mar 18, 2026)',
           'FEMA cross-check: Zone AE · 1% annual flood probability',
@@ -704,15 +864,24 @@ const priya: DailyBriefing = {
           'Suggested response: 20-min portfolio review against the new household',
         ],
         chips: [
-          { label: 'Open the canvas', prompt: "Open the Janet Henderson flood policy opportunity canvas." },
-          { label: 'Draft Janet outreach', prompt: 'Draft a warm outreach to Janet Henderson framing a 20-minute portfolio review for the new coastal household.' },
+          { label: 'Open the canvas', prompt: 'Open the Janet Henderson flood policy opportunity canvas.' },
+          {
+            label: 'Draft Janet outreach',
+            prompt:
+              'Draft a warm outreach to Janet Henderson framing a 20-minute portfolio review for the new coastal household.',
+          },
         ],
       },
     },
-    { id: 'a5', label: 'Filed yesterday\'s NIGO update',    meta: 'Concierge · case status refreshed',
-      actionPrompt: 'Show me yesterday\'s NIGO update — which case, what was outstanding, and what the Concierge did to clear it.',
+    {
+      id: 'a5',
+      label: "Filed yesterday's NIGO update",
+      meta: 'Concierge · case status refreshed',
+      actionPrompt:
+        "Show me yesterday's NIGO update — which case, what was outstanding, and what the Concierge did to clear it.",
       expand: {
-        summary: "Yesterday's NIGO on the Reyes term app was an SSN format issue. Concierge corrected it overnight and the case is back in queue.",
+        summary:
+          "Yesterday's NIGO on the Reyes term app was an SSN format issue. Concierge corrected it overnight and the case is back in queue.",
         bullets: [
           'Issue: SSN entered with dashes — carrier requires unformatted',
           'Resolution: Concierge resubmitted the corrected app at 11:42 PM',
@@ -720,14 +889,19 @@ const priya: DailyBriefing = {
           'No client-facing impact — Reyes was never notified',
         ],
         chips: [
-          { label: 'Show the case file', prompt: 'Pull up the Reyes term application — show me the NIGO history and current status.' },
-          { label: 'What else is at risk?', prompt: 'Are any other open applications at risk of going NIGO this week? Show me what to pre-check.' },
+          {
+            label: 'Show the case file',
+            prompt: 'Pull up the Reyes term application — show me the NIGO history and current status.',
+          },
+          {
+            label: 'What else is at risk?',
+            prompt: 'Are any other open applications at risk of going NIGO this week? Show me what to pre-check.',
+          },
         ],
       },
     },
   ],
-  whyThisOrder:
-    "You said holistic openings and life events matter most. Helena's the rare moment where both line up.",
+  whyThisOrder: "You said holistic openings and life events matter most. Helena's the rare moment where both line up.",
 }
 
 /* ----------------------------------------------------------------------------
@@ -749,13 +923,13 @@ const jordan: DailyBriefing = {
     ringNudge: 'Land Nguyen today and you cross 25% — first time this year.',
     streak: 'Activity up 22% this month',
   },
-  headline: "Get the Nguyen signature today — your first close of the week is one resend away.",
+  headline: 'Get the Nguyen signature today — your first close of the week is one resend away.',
   headlineHighlight: 'first close of the week',
   summary: '2 items require your attention · 1 prospect call today · 4 follow-ups owed',
   priorities: [
     {
       id: 'nguyen',
-      headline: "Nguyen application — DocuSign reminder pending, day 5. Resend before noon.",
+      headline: 'Nguyen application — DocuSign reminder pending, day 5. Resend before noon.',
       highlight: 'day 5',
       sub: 'Standard send-twice-then-call pattern · est. first commission: $1,400',
       badge: { label: 'Urgent', tone: 'urgent' },
@@ -766,11 +940,17 @@ const jordan: DailyBriefing = {
         insight:
           "This is your first close. The send-twice-then-call pattern is your training playbook — don't deviate. Letting it drift past day 7 is where new agents lose first cases.",
         recommendation:
-          "Resend the DocuSign reminder, then text Nguyen to confirm receipt. If no signature by EOD, call tomorrow morning.",
+          'Resend the DocuSign reminder, then text Nguyen to confirm receipt. If no signature by EOD, call tomorrow morning.',
         followup: 'Est. first commission: $1,400.',
         suggestedActions: [
-          { label: 'Resend the reminder', prompt: "Resend the DocuSign reminder to Nguyen and draft a confirmation text." },
-          { label: 'Draft the call script', prompt: "Draft a 90-second call script for the Nguyen follow-up tomorrow morning." },
+          {
+            label: 'Resend the reminder',
+            prompt: 'Resend the DocuSign reminder to Nguyen and draft a confirmation text.',
+          },
+          {
+            label: 'Draft the call script',
+            prompt: 'Draft a 90-second call script for the Nguyen follow-up tomorrow morning.',
+          },
           { label: 'Something else…', freeform: true },
         ],
       },
@@ -807,8 +987,7 @@ const jordan: DailyBriefing = {
     {
       id: 'nguyen',
       title: 'Nguyen application — DocuSign reminder pending, day 5',
-      body:
-        "Application complete but client hasn't returned the electronic signature. Standard send-twice-then-call pattern. This is your first close — don't let it drift past day 7.",
+      body: "Application complete but client hasn't returned the electronic signature. Standard send-twice-then-call pattern. This is your first close — don't let it drift past day 7.",
       meta: 'Action: Resend DocuSign reminder · Confirm via text · Est. first commission: $1,400',
       badge: { label: 'Urgent', tone: 'urgent' },
     },
@@ -826,8 +1005,7 @@ const jordan: DailyBriefing = {
       time: '11:00 AM',
       duration: '40 MIN',
       title: 'Paul Reyes — fact-finding (virtual)',
-      body:
-        'Referred by M. Rosenthal. Married, two kids, freelance income. Lead with goals, not products. Confirmed via email yesterday.',
+      body: 'Referred by M. Rosenthal. Married, two kids, freelance income. Lead with goals, not products. Confirmed via email yesterday.',
       status: 'ready',
       meetingId: 'reyes',
     },
@@ -853,7 +1031,7 @@ const jordan: DailyBriefing = {
       pip: 'green',
       title: 'Your activity is up 22% this month',
       body: '11 new contacts, 4 fact-finds, 1 close pending. Above your weekly target three weeks running.',
-      action: 'Keep the rhythm. Coach will surface a milestone callout at week\'s end.',
+      action: "Keep the rhythm. Coach will surface a milestone callout at week's end.",
       badge: { label: 'On pace', tone: 'opportunity' },
     },
     {
@@ -874,16 +1052,21 @@ const jordan: DailyBriefing = {
     },
   ],
   pace: [
-    { label: 'Weekly contacts',  value: '11 of 8', sub: '+3 ahead of pace',         tone: 'good' },
-    { label: 'Fact-finds',       value: '4 of 3',  sub: '+1 ahead',                 tone: 'good' },
-    { label: 'Open cases',       value: '3',       sub: '1 awaiting e-sign',        tone: 'warn' },
-    { label: 'First-year income',value: '$8.4K',   sub: 'of $18K plan',             tone: 'neutral' },
+    { label: 'Weekly contacts', value: '11 of 8', sub: '+3 ahead of pace', tone: 'good' },
+    { label: 'Fact-finds', value: '4 of 3', sub: '+1 ahead', tone: 'good' },
+    { label: 'Open cases', value: '3', sub: '1 awaiting e-sign', tone: 'warn' },
+    { label: 'First-year income', value: '$8.4K', sub: 'of $18K plan', tone: 'neutral' },
   ],
   autonomous: [
-    { id: 'a1', label: 'Resent Nguyen DocuSign reminder',     meta: 'Concierge · 7:55 AM',
-      actionPrompt: 'Show me what was sent to Nguyen on the DocuSign reminder — and whether I should follow up with a text or call.',
+    {
+      id: 'a1',
+      label: 'Resent Nguyen DocuSign reminder',
+      meta: 'Concierge · 7:55 AM',
+      actionPrompt:
+        'Show me what was sent to Nguyen on the DocuSign reminder — and whether I should follow up with a text or call.',
       expand: {
-        summary: 'Re-sent the DocuSign envelope to Nguyen with a short personalized note. Day 5 of 7 — escalation pattern is ready if needed.',
+        summary:
+          'Re-sent the DocuSign envelope to Nguyen with a short personalized note. Day 5 of 7 — escalation pattern is ready if needed.',
         bullets: [
           'Email subject: "One more click and your application is done"',
           'Personalized line: "Your wife asked about timing — this is the last step."',
@@ -891,13 +1074,24 @@ const jordan: DailyBriefing = {
           'If unsigned by Friday: call queued in your morning block',
         ],
         chips: [
-          { label: 'Show what was sent', prompt: 'Show me the exact DocuSign reminder that went to Nguyen this morning.' },
-          { label: 'Send a personal text now', prompt: "Draft a personal text from me to Nguyen — friendly, gentle, asking if there's anything blocking the signature." },
+          {
+            label: 'Show what was sent',
+            prompt: 'Show me the exact DocuSign reminder that went to Nguyen this morning.',
+          },
+          {
+            label: 'Send a personal text now',
+            prompt:
+              "Draft a personal text from me to Nguyen — friendly, gentle, asking if there's anything blocking the signature.",
+          },
         ],
       },
     },
-    { id: 'a2', label: 'Drafted Adams + Reyes follow-ups',    meta: 'Brand Advocate · review before send',
-      actionPrompt: 'Show me the Adams and Reyes follow-up drafts the Brand Advocate prepared. I want to review both before they go.',
+    {
+      id: 'a2',
+      label: 'Drafted Adams + Reyes follow-ups',
+      meta: 'Brand Advocate · review before send',
+      actionPrompt:
+        'Show me the Adams and Reyes follow-up drafts the Brand Advocate prepared. I want to review both before they go.',
       expand: {
         summary: 'Two warm follow-ups drafted in your voice — both wait for your sign-off before sending.',
         bullets: [
@@ -908,30 +1102,45 @@ const jordan: DailyBriefing = {
         ],
         chips: [
           { label: 'Review both drafts', prompt: 'Show me both the Adams and Reyes follow-up drafts side by side.' },
-          { label: 'Send them as-is',    prompt: 'Send the Adams and Reyes follow-ups as drafted — no changes.' },
+          { label: 'Send them as-is', prompt: 'Send the Adams and Reyes follow-ups as drafted — no changes.' },
         ],
       },
     },
-    { id: 'a3', label: 'Queued 6 contacts for the afternoon', meta: 'Coach · warm-warm cohort',
-      actionPrompt: 'Show me the 6 warm contacts the Coach queued for the afternoon — who, why, and the suggested opener for each.',
+    {
+      id: 'a3',
+      label: 'Queued 6 contacts for the afternoon',
+      meta: 'Coach · warm-warm cohort',
+      actionPrompt:
+        'Show me the 6 warm contacts the Coach queued for the afternoon — who, why, and the suggested opener for each.',
       expand: {
-        summary: '6 warm contacts queued for your 1:00 PM block — all "warm-warm" (no cold calls), each with a written opener.',
+        summary:
+          '6 warm contacts queued for your 1:00 PM block — all "warm-warm" (no cold calls), each with a written opener.',
         bullets: [
           '3 from referrals · 2 from past events · 1 LinkedIn re-engagement',
           'Average touch effort: 4 minutes per contact',
-          "Coach selected for current confidence — none are above your level",
+          'Coach selected for current confidence — none are above your level',
           'Total realistic ask: 2 fact-finders out of 6',
         ],
         chips: [
-          { label: 'Show the 6 contacts', prompt: "Walk me through each of the 6 warm contacts in today's afternoon block — who, why, opener." },
-          { label: 'Start the block now', prompt: 'Start my prospecting block — guide me through the first contact in the queue.' },
+          {
+            label: 'Show the 6 contacts',
+            prompt: "Walk me through each of the 6 warm contacts in today's afternoon block — who, why, opener.",
+          },
+          {
+            label: 'Start the block now',
+            prompt: 'Start my prospecting block — guide me through the first contact in the queue.',
+          },
         ],
       },
     },
-    { id: 'a4', label: 'Loaded retirement-income drill',      meta: 'Coach · 4 min · for the Reyes call',
+    {
+      id: 'a4',
+      label: 'Loaded retirement-income drill',
+      meta: 'Coach · 4 min · for the Reyes call',
       actionPrompt: 'Run the 4-minute retirement-income objection drill loaded for the Paul Reyes call.',
       expand: {
-        summary: 'A 4-minute Coach drill on the most common retirement-income objection — "why not just save in my 401(k)?" — tuned for Paul Reyes.',
+        summary:
+          'A 4-minute Coach drill on the most common retirement-income objection — "why not just save in my 401(k)?" — tuned for Paul Reyes.',
         bullets: [
           'Beat 1 · Acknowledge the question without defending (60 sec)',
           'Beat 2 · Reframe to risk, not return (90 sec)',
@@ -939,30 +1148,47 @@ const jordan: DailyBriefing = {
           'Tape will be saved + reviewable after the call',
         ],
         chips: [
-          { label: 'Start the drill', prompt: 'Start the 4-minute retirement-income objection drill — Paul Reyes scenario.' },
-          { label: 'Just give me the script', prompt: 'Skip the drill — just give me the 3-beat script for the retirement-income objection.' },
+          {
+            label: 'Start the drill',
+            prompt: 'Start the 4-minute retirement-income objection drill — Paul Reyes scenario.',
+          },
+          {
+            label: 'Just give me the script',
+            prompt: 'Skip the drill — just give me the 3-beat script for the retirement-income objection.',
+          },
         ],
       },
     },
-    { id: 'a5', label: 'Logged yesterday\'s 11 contacts',     meta: 'Concierge · activity refreshed',
-      actionPrompt: "Show me yesterday's 11 logged contacts — who they were, what the outcome was, and which need a touch this week.",
+    {
+      id: 'a5',
+      label: "Logged yesterday's 11 contacts",
+      meta: 'Concierge · activity refreshed',
+      actionPrompt:
+        "Show me yesterday's 11 logged contacts — who they were, what the outcome was, and which need a touch this week.",
       expand: {
-        summary: 'Concierge logged yesterday\'s 11 client contacts into the CRM and refreshed your activity counters. You are 22% above weekly target.',
+        summary:
+          "Concierge logged yesterday's 11 client contacts into the CRM and refreshed your activity counters. You are 22% above weekly target.",
         bullets: [
           '6 calls · 3 texts · 2 in-person · all auto-summarized',
           '4 outcomes need your input — flagged in your follow-up queue',
           'Activity counter: 38/45 weekly target · on pace',
-          "Your 3-week streak of >80% target is intact",
+          'Your 3-week streak of >80% target is intact',
         ],
         chips: [
-          { label: 'Show the 4 flagged', prompt: 'Pull up the 4 contacts from yesterday that need my input — what they need, what to do next.' },
-          { label: "What's my week look like?", prompt: 'Show my activity for this week — what I have hit, what I owe, where I am vs. plan.' },
+          {
+            label: 'Show the 4 flagged',
+            prompt: 'Pull up the 4 contacts from yesterday that need my input — what they need, what to do next.',
+          },
+          {
+            label: "What's my week look like?",
+            prompt: 'Show my activity for this week — what I have hit, what I owe, where I am vs. plan.',
+          },
         ],
       },
     },
   ],
   whyThisOrder:
-    "You said the OS should help you keep the rhythm and call out when momentum dips. This week, the rhythm is on — Coach is pointing at confidence, not pace.",
+    'You said the OS should help you keep the rhythm and call out when momentum dips. This week, the rhythm is on — Coach is pointing at confidence, not pace.',
 }
 
 export const DAILY_BRIEFING_BY_SEGMENT: Record<SegmentCode, DailyBriefing> = {
@@ -982,7 +1208,7 @@ export type PreMeetingBrief = {
   segment: SegmentCode
   /* Header */
   title: string
-  scheduledLabel: string  /* "Thursday, May 28 · 11:00 AM · In-office · 60 min · Prepared 8:02 AM" */
+  scheduledLabel: string /* "Thursday, May 28 · 11:00 AM · In-office · 60 min · Prepared 8:02 AM" */
   durationMin: number
   meetingType: string
   /* Body */
@@ -991,7 +1217,7 @@ export type PreMeetingBrief = {
     initials: string
     name: string
     age: number
-    facts: string[]   /* ["Client since 2012", "3 products", "Last contact: March 14", "Referred Derek Okafor"] */
+    facts: string[] /* ["Client since 2012", "3 products", "Last contact: March 14", "Referred Derek Okafor"] */
   }
   productsHeld: { label: string; value: string; warn?: boolean }[]
   household: { label: string; value: string }[]
@@ -1015,7 +1241,7 @@ const emmaClarke: PreMeetingBrief = {
   durationMin: 60,
   meetingType: 'Annual review',
   bottomLine:
-    "Emma is your most engaged multi-product client. This meeting has two jobs: (1) deepen trust by catching the beneficiary gap before she finds it, and (2) open the fee-based planning conversation — she is ready but has not been asked directly.",
+    'Emma is your most engaged multi-product client. This meeting has two jobs: (1) deepen trust by catching the beneficiary gap before she finds it, and (2) open the fee-based planning conversation — she is ready but has not been asked directly.',
   client: {
     initials: 'EC',
     name: 'Emma Clarke',
@@ -1023,25 +1249,25 @@ const emmaClarke: PreMeetingBrief = {
     facts: ['Client since 2012', '3 products', 'Last contact: March 14', 'Referred Derek Okafor'],
   },
   productsHeld: [
-    { label: 'Whole life (2012)',    value: '$500K · current' },
-    { label: 'Term 20 (2018)',       value: '$1M · 14 yrs left' },
-    { label: 'Investment acct',      value: '$148K AUM' },
-    { label: 'DI coverage',          value: 'None', warn: true },
-    { label: 'LTC coverage',         value: 'None', warn: true },
+    { label: 'Whole life (2012)', value: '$500K · current' },
+    { label: 'Term 20 (2018)', value: '$1M · 14 yrs left' },
+    { label: 'Investment acct', value: '$148K AUM' },
+    { label: 'DI coverage', value: 'None', warn: true },
+    { label: 'LTC coverage', value: 'None', warn: true },
   ],
   household: [
-    { label: 'Occupation',    value: 'VP, Healthcare firm' },
-    { label: 'Est. HH income',value: '$310K' },
-    { label: 'Spouse',        value: 'Michael, 54, self-emp.' },
-    { label: 'Children',      value: '2 (ages 17, 14)' },
-    { label: 'Est. net worth',value: '$1.1M' },
+    { label: 'Occupation', value: 'VP, Healthcare firm' },
+    { label: 'Est. HH income', value: '$310K' },
+    { label: 'Spouse', value: 'Michael, 54, self-emp.' },
+    { label: 'Children', value: '2 (ages 17, 14)' },
+    { label: 'Est. net worth', value: '$1.1M' },
   ],
   needsAttention: [
     {
       id: 'beneficiary',
       icon: 'fix',
       title: 'Beneficiary on WL policy not updated since 2012',
-      body: "Still lists ex-husband as primary beneficiary. This is a compliance and relationship risk. Catch it before she does — this is what a great advisor looks like.",
+      body: 'Still lists ex-husband as primary beneficiary. This is a compliance and relationship risk. Catch it before she does — this is what a great advisor looks like.',
       badge: { label: 'Fix today', tone: 'urgent' },
     },
     {
@@ -1099,20 +1325,25 @@ const derekOkafor: PreMeetingBrief = {
     initials: 'DO',
     name: 'Derek Okafor',
     age: 44,
-    facts: ['Prospect · first meeting', 'Referred by Emma Clarke', 'Business owner, 12 yrs', 'Verbal confirm only — risk of no-show'],
+    facts: [
+      'Prospect · first meeting',
+      'Referred by Emma Clarke',
+      'Business owner, 12 yrs',
+      'Verbal confirm only — risk of no-show',
+    ],
   },
   productsHeld: [
-    { label: 'Life coverage',     value: 'None', warn: true },
+    { label: 'Life coverage', value: 'None', warn: true },
     { label: 'Disability income', value: 'None', warn: true },
     { label: 'Business overhead', value: 'None', warn: true },
-    { label: 'Retirement plan',   value: 'SEP-IRA · self-managed' },
-    { label: 'Investment acct',   value: 'Vanguard · ~$340K (per LinkedIn signal)' },
+    { label: 'Retirement plan', value: 'SEP-IRA · self-managed' },
+    { label: 'Investment acct', value: 'Vanguard · ~$340K (per LinkedIn signal)' },
   ],
   household: [
-    { label: 'Occupation',     value: 'Owner, mid-size logistics firm' },
+    { label: 'Occupation', value: 'Owner, mid-size logistics firm' },
     { label: 'Est. HH income', value: '$420K (variable)' },
-    { label: 'Spouse',         value: 'Sarah, 41, part-time educator' },
-    { label: 'Children',       value: '3 (ages 11, 9, 6)' },
+    { label: 'Spouse', value: 'Sarah, 41, part-time educator' },
+    { label: 'Children', value: '3 (ages 11, 9, 6)' },
     { label: 'Est. net worth', value: '$2.4M' },
   ],
   needsAttention: [
@@ -1120,7 +1351,7 @@ const derekOkafor: PreMeetingBrief = {
       id: 'no-life',
       icon: 'fix',
       title: 'No personal life coverage — 3 kids under 12, business with payroll',
-      body: 'The exposure is enormous. Don\'t hard-sell this — the gap will surface in his own answers if you ask the right discovery questions. Let him say it first.',
+      body: "The exposure is enormous. Don't hard-sell this — the gap will surface in his own answers if you ask the right discovery questions. Let him say it first.",
       badge: { label: 'Listen for', tone: 'urgent' },
     },
     {
@@ -1153,13 +1384,13 @@ const derekOkafor: PreMeetingBrief = {
     },
     {
       heading: 'End with a next step, not a pitch',
-      body: '"Based on what you\'ve shared, here\'s what I\'d want to look at together — but only if it\'s useful to you. Can we book 45 minutes next week?"',
+      body: "\"Based on what you've shared, here's what I'd want to look at together — but only if it's useful to you. Can we book 45 minutes next week?\"",
     },
   ],
   landmines: [
     'Don\'t lead with product. Emma told him "Marcus is different — he asks before he sells." Don\'t break that frame.',
-    'His prior advisor (someone at a wirehouse) burned him on a fee discussion. Don\'t raise fees in meeting 1.',
-    'Sarah is the household decision-maker for protection conversations. Don\'t close anything she\'s not in the room for.',
+    "His prior advisor (someone at a wirehouse) burned him on a fee discussion. Don't raise fees in meeting 1.",
+    "Sarah is the household decision-maker for protection conversations. Don't close anything she's not in the room for.",
   ],
   decisionToClose:
     "Get a second meeting on the calendar before he leaves. Confirm in writing. Don't pitch a product today — your win is earning meeting 2.",
@@ -1181,17 +1412,17 @@ const leelaPatel: PreMeetingBrief = {
     facts: ['Client since 2018', '2 products', 'Last contact: Feb 9', 'New baby · Feb 2026'],
   },
   productsHeld: [
-    { label: 'Term 20 (2018)',  value: '$1M · 12 yrs left', warn: true },
+    { label: 'Term 20 (2018)', value: '$1M · 12 yrs left', warn: true },
     { label: 'Whole life (2021)', value: '$250K · current' },
-    { label: '529 plan',         value: '$18K · child 1 only', warn: true },
-    { label: 'Investment acct',  value: '$92K AUM' },
-    { label: 'DI coverage',      value: 'Through employer · partial' },
+    { label: '529 plan', value: '$18K · child 1 only', warn: true },
+    { label: 'Investment acct', value: '$92K AUM' },
+    { label: 'DI coverage', value: 'Through employer · partial' },
   ],
   household: [
-    { label: 'Occupation',     value: 'Senior PM, fintech' },
+    { label: 'Occupation', value: 'Senior PM, fintech' },
     { label: 'Est. HH income', value: '$295K' },
-    { label: 'Spouse',         value: 'Arjun, 43, software lead' },
-    { label: 'Children',       value: '2 (ages 4, 0)' },
+    { label: 'Spouse', value: 'Arjun, 43, software lead' },
+    { label: 'Children', value: '2 (ages 4, 0)' },
     { label: 'Est. net worth', value: '$840K' },
   ],
   needsAttention: [
@@ -1199,7 +1430,7 @@ const leelaPatel: PreMeetingBrief = {
       id: 'right-size',
       icon: 'fix',
       title: 'Term is right-sized to her old household — second child arrived 3 months ago',
-      body: 'The $1M term was modeled for 1 dependent. Recommended need now: ~$1.8M total. This is the conversation she\'s already prepared for — having a new baby raises it for her.',
+      body: "The $1M term was modeled for 1 dependent. Recommended need now: ~$1.8M total. This is the conversation she's already prepared for — having a new baby raises it for her.",
       badge: { label: 'Right-size today', tone: 'urgent' },
     },
     {
@@ -1228,7 +1459,7 @@ const leelaPatel: PreMeetingBrief = {
     },
     {
       heading: 'Name the education number for both kids',
-      body: '"For two kids at private + state-flagship blend, you\'re looking at roughly $360K total. You\'re at $18K. Here\'s the monthly that closes the gap by college age." Specific beats vague.',
+      body: "\"For two kids at private + state-flagship blend, you're looking at roughly $360K total. You're at $18K. Here's the monthly that closes the gap by college age.\" Specific beats vague.",
     },
     {
       heading: 'End with the joint check-in',
@@ -1236,8 +1467,8 @@ const leelaPatel: PreMeetingBrief = {
     },
   ],
   landmines: [
-    'Don\'t over-index on permanent life today — she\'s cash-constrained with the new baby. Term right-sizing is the right move.',
-    'Arjun has been the slower yes historically. Don\'t pressure for a joint call today — earn it.',
+    "Don't over-index on permanent life today — she's cash-constrained with the new baby. Term right-sizing is the right move.",
+    "Arjun has been the slower yes historically. Don't pressure for a joint call today — earn it.",
     'Her 529 question last year felt like a sales push (her words). Lead with the gap, not the product.',
   ],
   decisionToClose:
@@ -1257,20 +1488,25 @@ const paulReyes: PreMeetingBrief = {
     initials: 'PR',
     name: 'Paul Reyes',
     age: 38,
-    facts: ['Prospect · first meeting', 'Referred by M. Rosenthal', 'Freelance designer · 6 yrs', 'No financial advisor today'],
+    facts: [
+      'Prospect · first meeting',
+      'Referred by M. Rosenthal',
+      'Freelance designer · 6 yrs',
+      'No financial advisor today',
+    ],
   },
   productsHeld: [
-    { label: 'Life coverage',     value: 'None', warn: true },
+    { label: 'Life coverage', value: 'None', warn: true },
     { label: 'Disability income', value: 'None', warn: true },
-    { label: 'Retirement plan',   value: 'Solo 401(k) · self-managed' },
-    { label: 'Emergency fund',    value: '~$28K (per his words)' },
-    { label: 'Health insurance',  value: 'Marketplace · bronze' },
+    { label: 'Retirement plan', value: 'Solo 401(k) · self-managed' },
+    { label: 'Emergency fund', value: '~$28K (per his words)' },
+    { label: 'Health insurance', value: 'Marketplace · bronze' },
   ],
   household: [
-    { label: 'Occupation',     value: 'Freelance designer · 6 yrs' },
+    { label: 'Occupation', value: 'Freelance designer · 6 yrs' },
     { label: 'Est. HH income', value: '$165K (variable)' },
-    { label: 'Spouse',         value: 'Lily, 36, ICU nurse' },
-    { label: 'Children',       value: '2 (ages 5, 2)' },
+    { label: 'Spouse', value: 'Lily, 36, ICU nurse' },
+    { label: 'Children', value: '2 (ages 5, 2)' },
     { label: 'Est. net worth', value: '$310K' },
   ],
   needsAttention: [
@@ -1278,7 +1514,7 @@ const paulReyes: PreMeetingBrief = {
       id: 'no-life',
       icon: 'fix',
       title: 'No life coverage — primary earner with two young kids',
-      body: 'Term-20 modeled at $1.2M lines up with his profile. Don\'t pitch it today — let him tell you what he wants Lily and the kids to be protected from.',
+      body: "Term-20 modeled at $1.2M lines up with his profile. Don't pitch it today — let him tell you what he wants Lily and the kids to be protected from.",
       badge: { label: 'Listen for', tone: 'urgent' },
     },
     {
@@ -1292,7 +1528,7 @@ const paulReyes: PreMeetingBrief = {
       id: 'roth',
       icon: 'discuss',
       title: 'Solo 401(k) is self-managed — likely under-optimized',
-      body: 'Mention it lightly. Don\'t take this on today — it\'s the door to meeting 2 if today goes well.',
+      body: "Mention it lightly. Don't take this on today — it's the door to meeting 2 if today goes well.",
       badge: { label: 'Discuss later', tone: 'discuss' },
     },
   ],
@@ -1316,7 +1552,7 @@ const paulReyes: PreMeetingBrief = {
   ],
   landmines: [
     "Don't pitch product today. Your win is a second meeting and a fact-finder completed.",
-    'Maria has told him he can ask hard questions — don\'t get defensive if he does.',
+    "Maria has told him he can ask hard questions — don't get defensive if he does.",
     'He has financial trauma from a parent who lost coverage. Be careful around "what if you couldn\'t work."',
   ],
   decisionToClose:

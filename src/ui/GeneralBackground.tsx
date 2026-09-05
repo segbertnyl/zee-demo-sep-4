@@ -8,11 +8,7 @@ export function GeneralBackground({ className, style }: { className?: string; st
       style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', ...style }}
       aria-hidden="true"
     >
-      <img
-        src={bgGeneral}
-        alt=""
-        style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
-      />
+      <img src={bgGeneral} alt="" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
     </div>
   )
 }

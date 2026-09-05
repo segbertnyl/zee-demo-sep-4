@@ -46,7 +46,10 @@ export const WithMeta: Story = {
 export const Playground: Story = {
   args: { tone: 'lapse', label: 'Lapse risk', meta: '' },
   argTypes: {
-    tone: { control: 'select', options: ['lapse', 'prep', 'opportunity', 'monitor', 'event'] satisfies StatusBadgeTone[] },
+    tone: {
+      control: 'select',
+      options: ['lapse', 'prep', 'opportunity', 'monitor', 'event'] satisfies StatusBadgeTone[],
+    },
     label: { control: 'text' },
     meta: { control: 'text' },
   },

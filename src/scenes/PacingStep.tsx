@@ -8,9 +8,22 @@ import { Button } from '@/ui/Button'
 
 function CheckCircle() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ flexShrink: 0 }}
+    >
       <circle cx="12" cy="12" r="10.5" stroke="var(--nyl-gray-300)" strokeWidth="1.5" />
-      <path d="M7.5 12.5l3 3 6-6.5" stroke="var(--nyl-gray-500)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M7.5 12.5l3 3 6-6.5"
+        stroke="var(--nyl-gray-500)"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   )
 }
@@ -34,21 +47,20 @@ function reveal(show: boolean) {
 
 function CalcRow({ show, children }: { show: boolean; children: React.ReactNode }) {
   return (
-    <motion.div
-      {...reveal(show)}
-      style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}
-    >
+    <motion.div {...reveal(show)} style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
       <CheckCircle />
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 8,
-        flexWrap: 'wrap',
-        fontFamily: 'var(--font-sans)',
-        fontSize: 16,
-        lineHeight: '24px',
-        letterSpacing: '0.2px',
-      }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          flexWrap: 'wrap',
+          fontFamily: 'var(--font-sans)',
+          fontSize: 16,
+          lineHeight: '24px',
+          letterSpacing: '0.2px',
+        }}
+      >
         {children}
       </div>
     </motion.div>
@@ -70,15 +82,11 @@ function Connector({ show }: { show: boolean }) {
 }
 
 function Muted({ children }: { children: React.ReactNode }) {
-  return (
-    <span style={{ color: 'var(--text-body-secondary)' }}>{children}</span>
-  )
+  return <span style={{ color: 'var(--text-body-secondary)' }}>{children}</span>
 }
 
 function Bold({ children }: { children: React.ReactNode }) {
-  return (
-    <span style={{ color: 'var(--text-heading)', fontWeight: 500 }}>{children}</span>
-  )
+  return <span style={{ color: 'var(--text-heading)', fontWeight: 500 }}>{children}</span>
 }
 
 // ── PacingStep ────────────────────────────────────────────────────────────────
@@ -98,7 +106,7 @@ const apptsChart = {
     { label: 'Q2', value: 2.0 },
     { label: 'Q3', value: 2.1 },
     { label: 'Q4', value: 2.3 },
-    { label: 'Q1\'26', value: 2.4 },
+    { label: "Q1'26", value: 2.4 },
   ],
   yMin: 1.5,
   yMax: 3.5,
@@ -173,174 +181,190 @@ export function PacingStep({ fyc, onContinue }: PacingStepProps) {
       }}
     >
       <div style={{ gridColumn: '2 / 9' }}>
-      {/* Heading */}
-      <motion.h2
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: DURATION['scene-in'], ease: EASE.settle as [number, number, number, number] }}
-        style={{
-          fontFamily: 'var(--font-serif)',
-          fontSize: 32,
-          lineHeight: '40px',
-          fontWeight: 300,
-          color: 'var(--nyl-blue-800)',
-          margin: '0 0 20px 0',
-        }}
-      >
-        Your FYC goal is within reach
-      </motion.h2>
-
-      {/* Body copy with inline DataTooltip */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: DURATION['scene-in'], delay: 0.12, ease: EASE.settle as [number, number, number, number] }}
-        style={{
-          fontFamily: 'var(--font-sans)',
-          fontSize: 16,
-          lineHeight: '32px',
-          letterSpacing: '0.2px',
-          color: 'var(--text-body-secondary)',
-          margin: '0 0 48px 0',
-        }}
-      >
-        You have a strong close rate, so achieving your FYC goal comes down to a small increase in your appointment volume. You currently average{' '}
-        <DataTooltip label="~8.5 appointments /wk" chart={apptsChart} />{' '}
-        ; taking <strong style={{ color: 'var(--text-heading)', fontWeight: 600 }}>3 more qualified appointments every 2 weeks</strong> would help close the gap.
-      </motion.div>
-
-      {/* Calculation block */}
-      <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-
-        {/* FYC goal card */}
-        <motion.div
-          {...reveal(phase >= 1)}
+        {/* Heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: DURATION['scene-in'], ease: EASE.settle as [number, number, number, number] }}
           style={{
-            background: 'white',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 4,
-            padding: '22px 32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: 32,
+            fontFamily: 'var(--font-serif)',
+            fontSize: 32,
+            lineHeight: '40px',
+            fontWeight: 300,
+            color: 'var(--nyl-blue-800)',
+            margin: '0 0 20px 0',
           }}
         >
-          <span style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: 14,
-            fontWeight: 500,
-            letterSpacing: '2px',
-            textTransform: 'uppercase',
-            color: 'var(--text-heading)',
-          }}>
-            Your FYC Goal
-          </span>
-          <span style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: 24,
-            fontWeight: 700,
-            color: 'var(--text-heading)',
-          }}>
-            ${fyc}
-          </span>
-        </motion.div>
+          Your FYC goal is within reach
+        </motion.h2>
 
-        {/* Row 1: FYC ÷ avg commission = closes/yr */}
-        <CalcRow show={phase >= 2}>
-          <Bold>${fmtK(fycNum)} FYC</Bold>
-          <Muted>÷</Muted>
-          <DataTooltip label={`~$${fmtK(avgCommission)} /policy`} chart={commissionChart} />
-          <Muted>=</Muted>
-          <Bold>~{fmtK(closesPerYear)} closes /yr</Bold>
-        </CalcRow>
-
-        <Connector show={phase >= 3} />
-
-        {/* Row 2: closes/yr ÷ close rate = appointments/yr */}
-        <CalcRow show={phase >= 3}>
-          <Bold>~{fmtK(closesPerYear)} closes /yr</Bold>
-          <Muted>÷</Muted>
-          <DataTooltip label={`${Math.round(closeRate * 100)}% close rate`} chart={closeRateChart} />
-          <Muted>=</Muted>
-          <Bold>~{fmtK(apptsPerYear)} appointments /yr</Bold>
-        </CalcRow>
-
-        <Connector show={phase >= 4} />
-
-        {/* Row 3: appointments/yr ÷ 52 weeks = appointments/wk */}
-        <CalcRow show={phase >= 4}>
-          <Bold>~{fmtK(apptsPerYear)} appointments /yr</Bold>
-          <Muted>÷</Muted>
-          <Bold>52 wks</Bold>
-          <Muted>=</Muted>
-          <Bold>{apptsPerWeek} appointments /wk</Bold>
-        </CalcRow>
-
-        {/* Purple result card */}
+        {/* Body copy with inline DataTooltip */}
         <motion.div
-          {...reveal(phase >= 5)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: DURATION['scene-in'],
+            delay: 0.12,
+            ease: EASE.settle as [number, number, number, number],
+          }}
           style={{
-            background: 'var(--nyl-purple-050)',
-            border: '1px solid var(--nyl-purple-200)',
-            borderRadius: 4,
-            padding: '22px 32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: 40,
+            fontFamily: 'var(--font-sans)',
+            fontSize: 16,
+            lineHeight: '32px',
+            letterSpacing: '0.2px',
+            color: 'var(--text-body-secondary)',
+            margin: '0 0 48px 0',
           }}
         >
-          <span style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: 14,
-            fontWeight: 500,
-            letterSpacing: '2px',
-            textTransform: 'uppercase',
-            color: 'var(--text-heading)',
-          }}>
-            Qualified Appointments per Week
-          </span>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-            <span style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: 24,
-              fontWeight: 700,
-              color: 'var(--text-heading)',
-            }}>
-              ~{apptsPerWeek}
-            </span>
-            <span style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: 16,
-              fontWeight: 400,
-              color: 'var(--text-body-secondary)',
-            }}>
-              /wk
-            </span>
-          </div>
+          You have a strong close rate, so achieving your FYC goal comes down to a small increase in your appointment
+          volume. You currently average <DataTooltip label="~8.5 appointments /wk" chart={apptsChart} /> ; taking{' '}
+          <strong style={{ color: 'var(--text-heading)', fontWeight: 600 }}>
+            3 more qualified appointments every 2 weeks
+          </strong>{' '}
+          would help close the gap.
         </motion.div>
-      </div>
 
-      {/* CTAs */}
-      <motion.div
-        {...reveal(phase >= 6)}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          gap: 24,
-          marginTop: 48,
-          paddingRight: 0,
-        }}
-      >
-        <Button variant="text" noArrow>
-          Adjust this
-        </Button>
-        <Button variant="primary" onClick={onContinue}>
-          Got it
-        </Button>
-      </motion.div>
+        {/* Calculation block */}
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+          {/* FYC goal card */}
+          <motion.div
+            {...reveal(phase >= 1)}
+            style={{
+              background: 'white',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 4,
+              padding: '22px 32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: 32,
+            }}
+          >
+            <span
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 14,
+                fontWeight: 500,
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                color: 'var(--text-heading)',
+              }}
+            >
+              Your FYC Goal
+            </span>
+            <span
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 24,
+                fontWeight: 700,
+                color: 'var(--text-heading)',
+              }}
+            >
+              ${fyc}
+            </span>
+          </motion.div>
+
+          {/* Row 1: FYC ÷ avg commission = closes/yr */}
+          <CalcRow show={phase >= 2}>
+            <Bold>${fmtK(fycNum)} FYC</Bold>
+            <Muted>÷</Muted>
+            <DataTooltip label={`~$${fmtK(avgCommission)} /policy`} chart={commissionChart} />
+            <Muted>=</Muted>
+            <Bold>~{fmtK(closesPerYear)} closes /yr</Bold>
+          </CalcRow>
+
+          <Connector show={phase >= 3} />
+
+          {/* Row 2: closes/yr ÷ close rate = appointments/yr */}
+          <CalcRow show={phase >= 3}>
+            <Bold>~{fmtK(closesPerYear)} closes /yr</Bold>
+            <Muted>÷</Muted>
+            <DataTooltip label={`${Math.round(closeRate * 100)}% close rate`} chart={closeRateChart} />
+            <Muted>=</Muted>
+            <Bold>~{fmtK(apptsPerYear)} appointments /yr</Bold>
+          </CalcRow>
+
+          <Connector show={phase >= 4} />
+
+          {/* Row 3: appointments/yr ÷ 52 weeks = appointments/wk */}
+          <CalcRow show={phase >= 4}>
+            <Bold>~{fmtK(apptsPerYear)} appointments /yr</Bold>
+            <Muted>÷</Muted>
+            <Bold>52 wks</Bold>
+            <Muted>=</Muted>
+            <Bold>{apptsPerWeek} appointments /wk</Bold>
+          </CalcRow>
+
+          {/* Purple result card */}
+          <motion.div
+            {...reveal(phase >= 5)}
+            style={{
+              background: 'var(--nyl-purple-050)',
+              border: '1px solid var(--nyl-purple-200)',
+              borderRadius: 4,
+              padding: '22px 32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: 40,
+            }}
+          >
+            <span
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 14,
+                fontWeight: 500,
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                color: 'var(--text-heading)',
+              }}
+            >
+              Qualified Appointments per Week
+            </span>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+              <span
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: 'var(--text-heading)',
+                }}
+              >
+                ~{apptsPerWeek}
+              </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: 16,
+                  fontWeight: 400,
+                  color: 'var(--text-body-secondary)',
+                }}
+              >
+                /wk
+              </span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* CTAs */}
+        <motion.div
+          {...reveal(phase >= 6)}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            gap: 24,
+            marginTop: 48,
+            paddingRight: 0,
+          }}
+        >
+          <Button variant="text" noArrow>
+            Adjust this
+          </Button>
+          <Button variant="primary" onClick={onContinue}>
+            Got it
+          </Button>
+        </motion.div>
       </div>
     </div>
   )

@@ -25,7 +25,14 @@ export function ButtonContainer({
 }: ButtonContainerProps) {
   return (
     <div
-      style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 'var(--space-24)', paddingBlock: 16, width: '100%' }}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        gap: 'var(--space-24)',
+        paddingBlock: 16,
+        width: '100%',
+      }}
       className={className}
     >
       {showSecondary && (
@@ -42,7 +49,7 @@ export function ButtonContainer({
           variant={'secondary'}
           noArrow={secondaryVariant === 'text'}
           onClick={onSecondary}
-          style={{border: 'none'}}
+          style={{ border: 'none' }}
         >
           {secondaryLabel}
         </Button>

@@ -21,27 +21,25 @@ const FOCUS_RING: Record<ButtonTheme, string> = {
 }
 
 const VARIANT_CLASS: Record<ButtonVariant, Record<ButtonTheme, string>> = {
-  primary:   { default: 'btn-primary',        dark: 'btn-primary-dark' },
-  secondary: { default: 'btn-secondary',      dark: 'btn-secondary-dark' },
-  text:      { default: 'btn-text group',     dark: 'btn-text-dark group' },
+  primary: { default: 'btn-primary', dark: 'btn-primary-dark' },
+  secondary: { default: 'btn-secondary', dark: 'btn-secondary-dark' },
+  text: { default: 'btn-text group', dark: 'btn-text-dark group' },
   // No dark variant for outlined/icon yet — btn-outlined uses brand-blue
   // which is sufficient on light backgrounds; add btn-outlined-dark if needed.
-  outlined:  { default: 'btn-outlined',       dark: 'btn-outlined' },
-  icon:      { default: 'btn-icon',           dark: 'btn-icon' },
+  outlined: { default: 'btn-outlined', dark: 'btn-outlined' },
+  icon: { default: 'btn-icon', dark: 'btn-icon' },
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = 'primary', theme = 'default', noArrow = false, className, children, ...props }, ref) => {
-    const cls = [BASE, FOCUS_RING[theme], VARIANT_CLASS[variant][theme], className]
-      .filter(Boolean)
-      .join(' ')
+    const cls = [BASE, FOCUS_RING[theme], VARIANT_CLASS[variant][theme], className].filter(Boolean).join(' ')
     return (
       <button ref={ref} type="button" className={cls} {...props}>
         {children}
         {variant === 'text' && !noArrow && <ArrowIcon />}
       </button>
     )
-  }
+  },
 )
 Button.displayName = 'Button'
 

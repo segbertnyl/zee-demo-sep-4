@@ -25,7 +25,10 @@ export function LeftRail() {
   const clearTrail = useAppStore((s) => s.clearTrail)
   /* Left-rail navigation is a top-level jump — it clears any in-progress
    * canvas breadcrumb trail. */
-  const setScene = (s: typeof scene) => { clearTrail(); setSceneRaw(s) }
+  const setScene = (s: typeof scene) => {
+    clearTrail()
+    setSceneRaw(s)
+  }
   const openCanvas = useAppStore((s) => s.openCanvas)
   const role = useAppStore((s) => s.role)
   const setRole = useAppStore((s) => s.setRole)
@@ -44,9 +47,12 @@ export function LeftRail() {
     }
     setExpanded(false)
   }
-  useEffect(() => () => {
-    if (expandTimer.current) clearTimeout(expandTimer.current)
-  }, [])
+  useEffect(
+    () => () => {
+      if (expandTimer.current) clearTimeout(expandTimer.current)
+    },
+    [],
+  )
 
   const primary: NavItem[] = [
     { id: 'briefing', label: 'Briefing', icon: <BriefingIcon />, scene: 'briefing' },
@@ -64,9 +70,7 @@ export function LeftRail() {
       onMouseLeave={endHover}
       animate={{
         width: expanded ? EXPANDED_WIDTH : COLLAPSED_WIDTH,
-        boxShadow: expanded
-          ? '0 24px 60px -20px rgba(0,10,98,0.18)'
-          : '0 0 0 0 rgba(0,0,0,0)',
+        boxShadow: expanded ? '0 24px 60px -20px rgba(0,10,98,0.18)' : '0 0 0 0 rgba(0,0,0,0)',
       }}
       transition={{ duration: DURATION.short, ease: EASE.settle }}
       style={{ width: COLLAPSED_WIDTH }}
@@ -144,7 +148,9 @@ export function LeftRail() {
                       transition={{ duration: 0.2 }}
                       className={[
                         'relative whitespace-nowrap text-[13.5px] font-medium tracking-tight',
-                        active ? 'text-white' : 'text-[var(--text-body-muted)] group-hover/nav:text-[var(--text-headline)]',
+                        active
+                          ? 'text-white'
+                          : 'text-[var(--text-body-muted)] group-hover/nav:text-[var(--text-headline)]',
                       ].join(' ')}
                     >
                       {it.label}
@@ -226,11 +232,7 @@ export function LeftRail() {
 
         <RecentActivityFlyout expanded={expanded} />
 
-        <div
-          aria-label="You"
-          title="You"
-          className="relative flex h-10 items-center gap-3 rounded-full"
-        >
+        <div aria-label="You" title="You" className="relative flex h-10 items-center gap-3 rounded-full">
           <span className="relative flex size-10 shrink-0 items-center justify-center rounded-full bg-[var(--nyl-blue-500)] text-[11px] font-semibold tracking-[0.04em] text-white">
             E
             <span
@@ -248,8 +250,12 @@ export function LeftRail() {
                 transition={{ duration: 0.2 }}
                 className="flex flex-col leading-tight"
               >
-                <span className="whitespace-nowrap text-[13px] font-medium text-[var(--text-headline)]">Eric Vienna</span>
-                <span className="whitespace-nowrap text-[10.5px] uppercase tracking-[0.18em] text-[var(--text-body-muted)]">Advisor</span>
+                <span className="whitespace-nowrap text-[13px] font-medium text-[var(--text-headline)]">
+                  Eric Vienna
+                </span>
+                <span className="whitespace-nowrap text-[10.5px] uppercase tracking-[0.18em] text-[var(--text-body-muted)]">
+                  Advisor
+                </span>
               </motion.span>
             )}
           </AnimatePresence>
@@ -370,7 +376,17 @@ function RecentActivityFlyout({ expanded = false }: { expanded?: boolean }) {
 
 function HistoryIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 22 22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M3 8 a8.5 8.5 0 1 1 -0.3 5" />
       <path d="M3 4 V8 H7" />
       <path d="M11 7 V11 L14 13" />
@@ -383,7 +399,17 @@ function HistoryIcon() {
 /* Network-graph icon — three nodes connected by lines, the Touch-Designer affordance. */
 function CanvasModeIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 18 18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <circle cx="4" cy="5" r="1.6" />
       <circle cx="14" cy="5" r="1.6" />
       <circle cx="9" cy="13" r="1.6" />
@@ -397,7 +423,17 @@ function CanvasModeIcon() {
 function BriefingIcon() {
   /* Morning check-in — a confident check over the day's baseline */
   return (
-    <svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 22 22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M4 10.5 L8.5 15 L18 4.5" />
       <path d="M4 19 H18" />
     </svg>
@@ -407,7 +443,17 @@ function BriefingIcon() {
 function PlanIcon() {
   /* List with a plus — the plan you add to (per the Exploration pt-II rail) */
   return (
-    <svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 22 22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M4 6 H14" />
       <path d="M4 11 H14" />
       <path d="M4 16 H9" />
@@ -420,7 +466,17 @@ function PlanIcon() {
 function ClientsIcon() {
   /* Person with check */
   return (
-    <svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 22 22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <circle cx="9" cy="7" r="3.5" />
       <path d="M3 19 c0-3.5 2.7-6 6-6 c1.4 0 2.6 0.4 3.7 1.1" />
       <path d="M14.5 17 L16.2 18.7 L20 14.5" />
@@ -440,7 +496,17 @@ function ActivesIcon() {
 function ProspectsIcon() {
   /* Network / org tree */
   return (
-    <svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 22 22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <circle cx="11" cy="4" r="2" />
       <circle cx="5" cy="17" r="2" />
       <circle cx="11" cy="17" r="2" />
@@ -454,11 +520,20 @@ function ProspectsIcon() {
 function BusinessIcon() {
   /* Briefcase */
   return (
-    <svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 22 22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <rect x="3" y="7" width="16" height="12" rx="1.5" />
       <path d="M8 7 V5.5 a1.5 1.5 0 0 1 1.5 -1.5 H12.5 a1.5 1.5 0 0 1 1.5 1.5 V7" />
       <path d="M3 12 H19" />
     </svg>
   )
 }
-

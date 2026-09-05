@@ -11,10 +11,10 @@ export interface DiscoveryTransitionProps {
   onSettled?: () => void
 }
 
-const HEADLINE = (name: string) =>
-  `Hi, ${name}. I'm Nyla. Let's build a plan for your practice, your way.`
+const HEADLINE = (name: string) => `Hi, ${name}. I'm Nyla. Let's build a plan for your practice, your way.`
 
-const BG = 'linear-gradient(145deg, var(--nyl-purple-900) 0%, var(--nyl-purple-600) 39%, var(--nyl-purple-500) 56%, var(--nyl-purple-400) 71%)'
+const BG =
+  'linear-gradient(145deg, var(--nyl-purple-900) 0%, var(--nyl-purple-600) 39%, var(--nyl-purple-500) 56%, var(--nyl-purple-400) 71%)'
 
 export function DiscoveryTransition({ phase, advisorName = 'Sarah', onSettled }: DiscoveryTransitionProps) {
   useEffect(() => {
@@ -31,10 +31,7 @@ export function DiscoveryTransition({ phase, advisorName = 'Sarah', onSettled }:
         <DriftingBlobs />
         <div className="absolute left-7 top-7 z-10 flex items-center gap-3">
           <NYLLogo pixelSize={40} className="rounded-md" />
-          <span
-            className="text-[15px] text-white/90"
-            style={{ fontFamily: 'var(--font-sans)', fontWeight: 400 }}
-          >
+          <span className="text-[15px] text-white/90" style={{ fontFamily: 'var(--font-sans)', fontWeight: 400 }}>
             Welcome, {advisorName}
           </span>
         </div>

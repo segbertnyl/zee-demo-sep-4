@@ -25,6 +25,7 @@ export function LandingChooser() {
   const openDiscoveryAt = useAppStore((s) => s.openDiscoveryAt)
   const openBriefingV6 = useAppStore((s) => s.openBriefingV6)
   const openClientFlow = useAppStore((s) => s.openClientFlow)
+  const openClientBrief = useAppStore((s) => s.openClientBriefing)
   const completed = hasCompletedOnboarding()
 
   function pickOnboarding() {
@@ -40,18 +41,24 @@ export function LandingChooser() {
         { label: 'Discovery', action: () => openDiscovery() },
         { label: 'Plan reveal', action: () => openDiscoveryAt('plan') },
         { label: 'Client', action: () => openClientFlow() },
+        { label: 'Brief', action: () => openClientBrief() },
       ],
       action: pickOnboarding,
     },
     {
       label: 'The briefing',
-      description: 'Nyla prepares everything you need to hit the ground running. Priorities ranked, meetings prepped, nothing missed.',
+      description:
+        'Nyla prepares everything you need to hit the ground running. Priorities ranked, meetings prepped, nothing missed.',
       action: () => openBriefingV6(),
     },
     {
       label: 'Year in review',
-      description: 'Reflect on what you accomplished, where you leveled against your goals, and what to carry into next year.',
-      action: () => { dismiss(); openYearInReview() },
+      description:
+        'Reflect on what you accomplished, where you leveled against your goals, and what to carry into next year.',
+      action: () => {
+        dismiss()
+        openYearInReview()
+      },
     },
   ]
 
@@ -73,7 +80,14 @@ export function LandingChooser() {
             src={bgIntroOverlay}
             alt=""
             aria-hidden="true"
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+            }}
           />
           <HighlightBlob />
           <DriftingBlobs />
@@ -120,7 +134,9 @@ export function LandingChooser() {
                     fontFeatureSettings: '"liga" 1, "dlig" 1, "calt" 1',
                   }}
                 >
-                  Prototype<br />menu
+                  Prototype
+                  <br />
+                  menu
                 </h1>
               </div>
 
@@ -159,8 +175,13 @@ export function LandingChooser() {
                   key={card.label}
                   role="button"
                   tabIndex={0}
-                  onClick={(e) => { if ((e.target as HTMLElement).closest('[data-quicklinks]')) return; card.action() }}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') card.action() }}
+                  onClick={(e) => {
+                    if ((e.target as HTMLElement).closest('[data-quicklinks]')) return
+                    card.action()
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') card.action()
+                  }}
                   className="group w-full cursor-pointer rounded-2xl text-left transition-shadow"
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
@@ -194,7 +215,9 @@ export function LandingChooser() {
                       >
                         {card.label}
                       </p>
-                      <p className="mt-3" style={{
+                      <p
+                        className="mt-3"
+                        style={{
                           color: 'var(--Text-text-secondary, #474952)',
                           fontFamily: 'var(--Font-family-font-family-roboto, Roboto)',
                           fontSize: 'var(--Font-size-Body-body-small, 16px)',
@@ -202,7 +225,8 @@ export function LandingChooser() {
                           fontWeight: 'var(--Font-weight-font-weight-regular, 400)',
                           lineHeight: 'var(--line-height-body-links-line-height-body-small, 24px)',
                           letterSpacing: '0.2px',
-                        }}>
+                        }}
+                      >
                         {card.description}
                       </p>
                       {card.quickLinks && (
@@ -247,7 +271,10 @@ export function LandingChooser() {
                     </div>
                     <span className="shrink-0 transition-transform group-hover:translate-x-2">
                       <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20.5239 6.94431L17.0966 10.388C16.7296 10.7567 16.7296 11.3546 17.0966 11.7234C17.4636 12.0922 18.0587 12.0922 18.4257 11.7234L24.1221 6L18.4257 0.276583C18.0587 -0.0921956 17.4636 -0.0921957 17.0966 0.276583C16.7296 0.645361 16.7296 1.24327 17.0966 1.61205L20.5239 5.05568L1.06192 5.05568C0.542856 5.05568 0.122072 5.47847 0.122072 6C0.122072 6.52153 0.542856 6.94431 1.06192 6.94431L20.5239 6.94431Z" fill="#0044CC"/>
+                        <path
+                          d="M20.5239 6.94431L17.0966 10.388C16.7296 10.7567 16.7296 11.3546 17.0966 11.7234C17.4636 12.0922 18.0587 12.0922 18.4257 11.7234L24.1221 6L18.4257 0.276583C18.0587 -0.0921956 17.4636 -0.0921957 17.0966 0.276583C16.7296 0.645361 16.7296 1.24327 17.0966 1.61205L20.5239 5.05568L1.06192 5.05568C0.542856 5.05568 0.122072 5.47847 0.122072 6C0.122072 6.52153 0.542856 6.94431 1.06192 6.94431L20.5239 6.94431Z"
+                          fill="#0044CC"
+                        />
                       </svg>
                     </span>
                   </div>

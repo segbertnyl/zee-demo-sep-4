@@ -7,8 +7,8 @@ import { LoadingBackground } from './LoadingBackground'
 export interface NylaAffirmationProps {
   headline?: string
   description?: string
-  headlineAccent?: string  // reserved for future design pass
-  duration?: number        // ms before onComplete fires, default 2500
+  headlineAccent?: string // reserved for future design pass
+  duration?: number // ms before onComplete fires, default 2500
   onComplete: () => void
   className?: string
 }
@@ -29,30 +29,31 @@ export function NylaAffirmation({
     <div className={className} style={{ position: 'relative', width: '100%', height: '100%' }}>
       <LoadingBackground style={{ position: 'absolute', inset: 0 }} />
 
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 32,
-      }}>
-        {/* Orb + caption centered together as a group */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 18, ease: 'linear', repeat: Infinity }}
-        >
-          <Nyla size={160} variant="on-light" />
-        </motion.div>
-
-        <div style={{
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: 24,
-          textAlign: 'center',
-        }}>
+          justifyContent: 'center',
+          gap: 32,
+        }}
+      >
+        {/* Orb + caption centered together as a group */}
+        <motion.div animate={{ rotate: 360 }} transition={{ duration: 18, ease: 'linear', repeat: Infinity }}>
+          <Nyla size={160} variant="on-light" />
+        </motion.div>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 24,
+            textAlign: 'center',
+          }}
+        >
           {/* Headline — each character blurs + fades in (organic typewriter, one line) */}
           {headline && (
             <p
@@ -72,7 +73,11 @@ export function NylaAffirmation({
                   style={{ display: 'inline-block', whiteSpace: 'pre' }}
                   initial={{ opacity: 0, filter: 'blur(10px)' }}
                   animate={{ opacity: 1, filter: 'blur(0px)' }}
-                  transition={{ duration: 0.5, delay: 0.4 + i * 0.03, ease: EASE.settle as [number, number, number, number] }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.4 + i * 0.03,
+                    ease: EASE.settle as [number, number, number, number],
+                  }}
                 >
                   {ch}
                 </motion.span>
@@ -85,7 +90,11 @@ export function NylaAffirmation({
             <motion.p
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: DURATION['scene-in'], ease: EASE.settle as [number, number, number, number] }}
+              transition={{
+                delay: 0.7,
+                duration: DURATION['scene-in'],
+                ease: EASE.settle as [number, number, number, number],
+              }}
               style={{
                 margin: 0,
                 fontFamily: 'var(--font-sans)',

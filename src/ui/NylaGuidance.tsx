@@ -66,37 +66,37 @@ export function NylaGuidance({ text, children, className }: NylaGuidanceProps) {
           paddingTop: '56px',
         }}
       >
-          {children ?? (
-            <div
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '16px',
-                lineHeight: '24px',
-                letterSpacing: '0.2px',
-                color: 'var(--text-headline)',
-              }}
-            >
-              {text && (
-                <p style={{ margin: 0, fontWeight: 400 }}>
-                  {text.split('').map((ch, i, arr) => (
-                    <motion.span
-                      key={i}
-                      style={{ display: 'inline', whiteSpace: 'pre-wrap' }}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 0.25,
-                        delay: LINE_DELAY + 0.15 + (i / Math.max(arr.length - 1, 1)) * 0.7,
-                        ease: 'easeOut',
-                      }}
-                    >
-                      {ch}
-                    </motion.span>
-                  ))}
-                </p>
-              )}
-            </div>
-          )}
+        {children ?? (
+          <div
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '16px',
+              lineHeight: '24px',
+              letterSpacing: '0.2px',
+              color: 'var(--text-headline)',
+            }}
+          >
+            {text && (
+              <p style={{ margin: 0, fontWeight: 400 }}>
+                {text.split('').map((ch, i, arr) => (
+                  <motion.span
+                    key={i}
+                    style={{ display: 'inline', whiteSpace: 'pre-wrap' }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 0.25,
+                      delay: LINE_DELAY + 0.15 + (i / Math.max(arr.length - 1, 1)) * 0.7,
+                      ease: 'easeOut',
+                    }}
+                  >
+                    {ch}
+                  </motion.span>
+                ))}
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )

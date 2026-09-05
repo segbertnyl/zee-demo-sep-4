@@ -169,53 +169,60 @@ function LiveDiscoveryFlowDemo() {
   const reached = STAGES.map((_, i) => i <= maxReached)
 
   return (
-      <div className="flex gap-12 bg-white p-6">
-        <div className="min-h-[500px] w-48">
-          <StageRail
-            stageIndex={current.stageIndex}
-            reached={reached}
-            onSelect={(_id: StageId) => {}}
-            onPrev={() => go(Math.max(0, stepIdx - 1))}
-            onNext={() => go(Math.min(DISCOVERY_STEPS.length - 1, stepIdx + 1))}
-            prevDisabled={stepIdx === 0}
-            nextDisabled={stepIdx === DISCOVERY_STEPS.length - 1}
-            introDelay={0}
-          />
-        </div>
-        <div className="flex flex-col justify-center gap-4">
-          <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-body-muted)' }}>
-            Current screen
-          </p>
-          <p style={{ fontFamily: 'var(--font-serif)', fontSize: 24, color: 'var(--text-headline)' }}>
-            {current.label}
-          </p>
-          <p style={{ fontFamily: 'var(--font-sans)', fontSize: 12, color: 'var(--text-body-muted)' }}>
-            Step {stepIdx + 1} of {DISCOVERY_STEPS.length} · stageIndex {current.stageIndex}
-          </p>
-          <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-            {DISCOVERY_STEPS.map((s, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => go(i)}
-                style={{
-                  padding: '4px 10px',
-                  borderRadius: 4,
-                  border: '1px solid var(--border-default)',
-                  background: i === stepIdx ? 'var(--action-primary)' : 'transparent',
-                  color: i === stepIdx ? 'white' : 'var(--text-body)',
-                  fontSize: 11,
-                  cursor: 'pointer',
-                  fontFamily: 'var(--font-sans)',
-                }}
-              >
-                {s.label}
-              </button>
-            ))}
-          </div>
+    <div className="flex gap-12 bg-white p-6">
+      <div className="min-h-[500px] w-48">
+        <StageRail
+          stageIndex={current.stageIndex}
+          reached={reached}
+          onSelect={(_id: StageId) => {}}
+          onPrev={() => go(Math.max(0, stepIdx - 1))}
+          onNext={() => go(Math.min(DISCOVERY_STEPS.length - 1, stepIdx + 1))}
+          prevDisabled={stepIdx === 0}
+          nextDisabled={stepIdx === DISCOVERY_STEPS.length - 1}
+          introDelay={0}
+        />
+      </div>
+      <div className="flex flex-col justify-center gap-4">
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            color: 'var(--text-body-muted)',
+          }}
+        >
+          Current screen
+        </p>
+        <p style={{ fontFamily: 'var(--font-serif)', fontSize: 24, color: 'var(--text-headline)' }}>{current.label}</p>
+        <p style={{ fontFamily: 'var(--font-sans)', fontSize: 12, color: 'var(--text-body-muted)' }}>
+          Step {stepIdx + 1} of {DISCOVERY_STEPS.length} · stageIndex {current.stageIndex}
+        </p>
+        <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+          {DISCOVERY_STEPS.map((s, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => go(i)}
+              style={{
+                padding: '4px 10px',
+                borderRadius: 4,
+                border: '1px solid var(--border-default)',
+                background: i === stepIdx ? 'var(--action-primary)' : 'transparent',
+                color: i === stepIdx ? 'white' : 'var(--text-body)',
+                fontSize: 11,
+                cursor: 'pointer',
+                fontFamily: 'var(--font-sans)',
+              }}
+            >
+              {s.label}
+            </button>
+          ))}
         </div>
       </div>
-    )
+    </div>
+  )
 }
 
 export const LiveDiscoveryFlow: Story = {

@@ -8,7 +8,11 @@ export function CreatingBriefing() {
   return (
     <div
       className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, var(--nyl-purple-900) 0%, var(--nyl-purple-700) 50%, var(--nyl-purple-700) 100%)', color: 'white' }}
+      style={{
+        background:
+          'linear-gradient(135deg, var(--nyl-purple-900) 0%, var(--nyl-purple-700) 50%, var(--nyl-purple-700) 100%)',
+        color: 'white',
+      }}
     >
       <DriftingBlobs />
       <div className="relative z-10 flex flex-col items-center px-8 text-center">

@@ -98,8 +98,14 @@ const FEATURED = {
 }
 
 const MORE_ACTIONS = [
-  { label: 'Compose an outreach message', seed: "Compose an outreach message to Sandra Kim about her WL policy that is 62 days past due." },
-  { label: 'Identify more opportunities for engagement', seed: 'Identify more opportunities for engagement across my book.' },
+  {
+    label: 'Compose an outreach message',
+    seed: 'Compose an outreach message to Sandra Kim about her WL policy that is 62 days past due.',
+  },
+  {
+    label: 'Identify more opportunities for engagement',
+    seed: 'Identify more opportunities for engagement across my book.',
+  },
   { label: 'Open collaboration space' },
 ]
 
@@ -131,7 +137,12 @@ const PRIORITIES: PriorityCard[] = [
     badge: 'Carried over from yesterday',
     title: 'NIGO: Marcus Chen needs a corrected form',
     metric: { label: 'Pending sale', value: 'Est. + $1,200 FYC' },
-    meta: ['WL app submitted May 28', 'NIGO returned Jun 4', 'Paramedical authorization rejected', '$2,100 FYC at placement risk'],
+    meta: [
+      'WL app submitted May 28',
+      'NIGO returned Jun 4',
+      'Paramedical authorization rejected',
+      '$2,100 FYC at placement risk',
+    ],
   },
 ]
 
@@ -162,8 +173,20 @@ const AT_A_GLANCE: {
   tag: { label: string; tone: 'ready' | 'needsPrep' }
   link: string
 }[] = [
-  { time: '9:30 AM', dur: '30 MIN', label: 'Emma C. Annual Review', tag: { label: 'Prep ready', tone: 'ready' }, link: 'Open meeting pack' },
-  { time: '3:30 PM', dur: '30 MIN', label: 'Emmeline P. Annual Review', tag: { label: 'Need to prep', tone: 'needsPrep' }, link: 'Create meeting pack' },
+  {
+    time: '9:30 AM',
+    dur: '30 MIN',
+    label: 'Emma C. Annual Review',
+    tag: { label: 'Prep ready', tone: 'ready' },
+    link: 'Open meeting pack',
+  },
+  {
+    time: '3:30 PM',
+    dur: '30 MIN',
+    label: 'Emmeline P. Annual Review',
+    tag: { label: 'Need to prep', tone: 'needsPrep' },
+    link: 'Create meeting pack',
+  },
 ]
 
 const STAY_ON_TRACK = [
@@ -301,13 +324,20 @@ function TopNav({
                 )}
               </button>
               {i === 0 && (
-                <span aria-hidden="true" className={['mx-2 h-4 w-px', dark ? 'bg-white/25' : 'bg-neutral-300'].join(' ')} />
+                <span
+                  aria-hidden="true"
+                  className={['mx-2 h-4 w-px', dark ? 'bg-white/25' : 'bg-neutral-300'].join(' ')}
+                />
               )}
             </span>
           )
         })}
         <span aria-hidden="true" className={['mx-2 h-4 w-px', dark ? 'bg-white/25' : 'bg-neutral-300'].join(' ')} />
-        <button type="button" onClick={onCalendar} className={['px-3 py-2 text-[13px] font-medium transition-colors', inactive].join(' ')}>
+        <button
+          type="button"
+          onClick={onCalendar}
+          className={['px-3 py-2 text-[13px] font-medium transition-colors', inactive].join(' ')}
+        >
           Calendar
         </button>
       </nav>
@@ -322,11 +352,7 @@ function TopNav({
           <BellGlyph />
           <span aria-hidden="true" className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-[#0468ff]" />
         </button>
-        <button
-          type="button"
-          aria-label="Nyla"
-          className={dark ? 'text-white' : 'text-[#0468ff]'}
-        >
+        <button type="button" aria-label="Nyla" className={dark ? 'text-white' : 'text-[#0468ff]'}>
           <Nyla size={24} variant={dark ? 'on-dark' : 'on-light'} />
         </button>
       </div>
@@ -343,9 +369,7 @@ function FeaturedCard() {
 
   return (
     <div className="relative rounded-md border border-neutral-200 bg-white p-6 shadow-[0_18px_40px_-26px_rgba(0,10,98,0.18)] md:p-7">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#c0362c]">
-        {FEATURED.eyebrow}
-      </p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#c0362c]">{FEATURED.eyebrow}</p>
       <h2
         className="mt-4 max-w-[26ch] font-serif text-[23px] leading-[1.3] tracking-tight text-neutral-900 md:text-[26px]"
         style={{ fontWeight: 400 }}
@@ -365,11 +389,7 @@ function FeaturedCard() {
 
         {/* "Something else…" — hovering reveals Nyla action stack
          * (mock shows a multiplayer-style "Y" cursor pinned to the affordance). */}
-        <div
-          className="relative"
-          onMouseEnter={() => setMoreOpen(true)}
-          onMouseLeave={() => setMoreOpen(false)}
-        >
+        <div className="relative" onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
           <button
             type="button"
             onClick={() => setMoreOpen((v) => !v)}
@@ -423,12 +443,9 @@ function PriorityRow({ data }: { data: PriorityCard }) {
   return (
     <li className="rounded-md border border-neutral-200 bg-white px-6 py-5 transition-shadow hover:shadow-[0_12px_30px_-20px_rgba(0,10,98,0.25)]">
       <div className="flex items-start justify-between gap-6">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#cf7911]">
-          {data.badge}
-        </p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#cf7911]">{data.badge}</p>
         <p className="shrink-0 text-[13px] text-neutral-700">
-          {data.metric.label}{' '}
-          <span className="font-semibold text-neutral-900">{data.metric.value}</span>
+          {data.metric.label} <span className="font-semibold text-neutral-900">{data.metric.value}</span>
         </p>
       </div>
       <h3
@@ -494,7 +511,9 @@ function WeekProgress() {
             className="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white/60 px-3.5 py-1.5 text-[12px]"
           >
             <span className="font-medium text-[#5b3da8]">{b.label}</span>
-            <span aria-hidden="true" className="text-neutral-400">·</span>
+            <span aria-hidden="true" className="text-neutral-400">
+              ·
+            </span>
             <span className="text-neutral-600">{b.status}</span>
             <span aria-hidden="true" className="inline-block size-2 rounded-full" style={{ background: b.dot }} />
           </span>
@@ -513,7 +532,9 @@ function WhileAway() {
           <li key={w}>
             <button type="button" className="text-left text-[14px] leading-[1.6] text-neutral-900">
               {w}{' '}
-              <span aria-hidden="true" className="font-medium text-[#0468ff]">›</span>
+              <span aria-hidden="true" className="font-medium text-[#0468ff]">
+                ›
+              </span>
             </button>
           </li>
         ))}
@@ -530,7 +551,11 @@ function AtAGlance() {
         {AT_A_GLANCE.map((e) => (
           <li key={e.label}>
             <p className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-neutral-500">
-              {e.time} <span aria-hidden="true" className="text-neutral-400">•</span> {e.dur}
+              {e.time}{' '}
+              <span aria-hidden="true" className="text-neutral-400">
+                •
+              </span>{' '}
+              {e.dur}
             </p>
             <p className="mt-1.5 text-[15px] text-neutral-900">{e.label}</p>
             <p className="mt-2.5 flex flex-wrap items-center gap-3">
@@ -560,9 +585,7 @@ function AtAGlance() {
  * -------------------------------------------------------------------------- */
 function PlanHero() {
   return (
-    <header
-      className="relative overflow-hidden px-10 pb-16 pt-12 text-white md:px-16 md:pb-20 md:pt-14"
-    >
+    <header className="relative overflow-hidden px-10 pb-16 pt-12 text-white md:px-16 md:pb-20 md:pt-14">
       <div className="grid grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-8">
           <p className="text-[11.5px] font-medium uppercase tracking-[0.26em] text-white/70">
@@ -577,16 +600,27 @@ function PlanHero() {
         </div>
         <div className="col-span-12 flex flex-wrap items-start justify-end gap-2 lg:col-span-4">
           {PLAN_TAGS.map((t) => (
-            <TagPill key={t.label} tone={t.tone} status={t.status}>{t.label}</TagPill>
+            <TagPill key={t.label} tone={t.tone} status={t.status}>
+              {t.label}
+            </TagPill>
           ))}
         </div>
       </div>
 
       <div className="mt-12 grid grid-cols-2 gap-4 md:mt-14 md:grid-cols-4 md:gap-6">
         {HERO_METRICS_PLAN.map((m) => (
-          <div key={m.k} className="rounded-md border border-white/15 px-5 py-5 md:px-6 md:py-6" style={{ background: 'rgba(255,255,255,0.14)' }}>
+          <div
+            key={m.k}
+            className="rounded-md border border-white/15 px-5 py-5 md:px-6 md:py-6"
+            style={{ background: 'rgba(255,255,255,0.14)' }}
+          >
             <p className="text-[10.5px] font-medium uppercase tracking-[0.24em] text-white/65">{m.k}</p>
-            <p className="mt-3 font-serif text-[32px] leading-none tracking-tight md:text-[36px]" style={{ fontWeight: 400 }}>{m.v}</p>
+            <p
+              className="mt-3 font-serif text-[32px] leading-none tracking-tight md:text-[36px]"
+              style={{ fontWeight: 400 }}
+            >
+              {m.v}
+            </p>
             <p className="mt-2 text-[11px] text-white/55">{m.sub}</p>
           </div>
         ))}
@@ -601,11 +635,16 @@ function PlanHero() {
   )
 }
 
-function TagPill({ children, tone, status }: { children: React.ReactNode; tone?: 'on-track' | 'stretch'; status?: string }) {
-  const dot =
-    tone === 'on-track' ? '#42de8a' :
-    tone === 'stretch' ? '#5aa9ff' :
-    'rgba(255,255,255,0.45)'
+function TagPill({
+  children,
+  tone,
+  status,
+}: {
+  children: React.ReactNode
+  tone?: 'on-track' | 'stretch'
+  status?: string
+}) {
+  const dot = tone === 'on-track' ? '#42de8a' : tone === 'stretch' ? '#5aa9ff' : 'rgba(255,255,255,0.45)'
   return (
     <span
       className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[12px] font-medium text-white"
@@ -626,9 +665,7 @@ function MyPlanBody() {
   return (
     <>
       <section>
-        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-neutral-600">
-          Overall average
-        </p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-neutral-600">Overall average</p>
         <p className="mt-5 max-w-[64ch] text-[16px] leading-[1.6] text-neutral-800">{PLAN_INTRO}</p>
         <PaceChart />
         <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -643,7 +680,11 @@ function MyPlanBody() {
               </p>
               <p className="mt-2.5 flex items-center justify-between gap-3 text-[12px] text-neutral-500">
                 {c.sub}
-                <span aria-hidden="true" className="inline-block size-2 shrink-0 rounded-full" style={{ background: c.dot }} />
+                <span
+                  aria-hidden="true"
+                  className="inline-block size-2 shrink-0 rounded-full"
+                  style={{ background: c.dot }}
+                />
               </p>
             </div>
           ))}
@@ -651,9 +692,7 @@ function MyPlanBody() {
       </section>
 
       <section className="mt-6">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-neutral-600">
-          Staying on track
-        </p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-neutral-600">Staying on track</p>
         <p className="mt-5 max-w-[64ch] text-[16px] leading-[1.6] text-neutral-800">{PLAN_STAYING_INTRO}</p>
         <ContributionBar />
 
@@ -749,37 +788,63 @@ function PaceChart() {
         {/* $100K / $50K reference lines */}
         <line x1="0" y1={y(100)} x2="720" y2={y(100)} stroke="#d7dadf" strokeDasharray="2 4" strokeWidth="1" />
         <line x1="0" y1={y(50)} x2="720" y2={y(50)} stroke="#d7dadf" strokeDasharray="2 4" strokeWidth="1" />
-        <text x="714" y={y(100) - 6} textAnchor="end" fill="#64748b" fontSize="11">$100K</text>
-        <text x="6" y={y(50) - 6} textAnchor="start" fill="#64748b" fontSize="11">$50K</text>
+        <text x="714" y={y(100) - 6} textAnchor="end" fill="#64748b" fontSize="11">
+          $100K
+        </text>
+        <text x="6" y={y(50) - 6} textAnchor="start" fill="#64748b" fontSize="11">
+          $50K
+        </text>
         {/* FYC goal dotted lines — $90K (blue) and $42K (purple) */}
         <line x1="0" y1={y(90)} x2="720" y2={y(90)} stroke="#9db9ff" strokeDasharray="2 5" strokeWidth="2" />
         <line x1="0" y1={y(42)} x2="720" y2={y(42)} stroke="#b79df0" strokeDasharray="2 5" strokeWidth="2" />
         {/* today marker */}
         <line x1="330" y1="20" x2="330" y2="240" stroke="#17181c" strokeWidth="1.2" />
-        <text x="330" y="12" textAnchor="middle" fill="#17181c" fontSize="11.5" fontWeight="600">Today, Dec 16</text>
+        <text x="330" y="12" textAnchor="middle" fill="#17181c" fontSize="11.5" fontWeight="600">
+          Today, Dec 16
+        </text>
         {/* actual — July through today */}
         <path
           d={`M 0 ${y(40)} L 60 ${y(42)} L 120 ${y(41)} L 180 ${y(45)} L 240 ${y(44)} L 300 ${y(49)} L 330 ${y(52.4)}`}
-          fill="none" stroke="#9ca3af" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"
+          fill="none"
+          stroke="#9ca3af"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
         />
         {/* current pace — projects gently */}
         <path
           d={`M 330 ${y(52.4)} L 450 ${y(54)} L 570 ${y(55.5)} L 720 ${y(56.5)}`}
-          fill="none" stroke="#9a6ee8" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"
+          fill="none"
+          stroke="#9a6ee8"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
         />
         {/* needed pace for EC — climbs to the $90K goal */}
         <path
           d={`M 330 ${y(52.4)} L 420 ${y(60)} L 480 ${y(72)} L 560 ${y(82)} L 640 ${y(87)} L 720 ${y(90)}`}
-          fill="none" stroke="#4a7dff" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"
+          fill="none"
+          stroke="#4a7dff"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
         />
         {/* today dot */}
         <circle cx="330" cy={y(52.4)} r="8" fill="#9a6ee8" opacity="0.35" />
         <circle cx="330" cy={y(52.4)} r="4.5" fill="#7b3aaa" />
         {/* x-axis labels */}
-        <text x="4" y="258" textAnchor="start" fill="#64748b" fontSize="11">July</text>
-        <text x="240" y="258" textAnchor="middle" fill="#64748b" fontSize="11">Nov</text>
-        <text x="480" y="258" textAnchor="middle" fill="#64748b" fontSize="11">Mar</text>
-        <text x="716" y="258" textAnchor="end" fill="#64748b" fontSize="11">Jun</text>
+        <text x="4" y="258" textAnchor="start" fill="#64748b" fontSize="11">
+          July
+        </text>
+        <text x="240" y="258" textAnchor="middle" fill="#64748b" fontSize="11">
+          Nov
+        </text>
+        <text x="480" y="258" textAnchor="middle" fill="#64748b" fontSize="11">
+          Mar
+        </text>
+        <text x="716" y="258" textAnchor="end" fill="#64748b" fontSize="11">
+          Jun
+        </text>
       </svg>
     </div>
   )
@@ -788,7 +853,17 @@ function PaceChart() {
 /* ============================== Glyphs ============================== */
 function ArrowGlyph() {
   return (
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M2 8 H13" />
       <path d="M9 4 L13 8 L9 12" />
     </svg>
@@ -796,7 +871,17 @@ function ArrowGlyph() {
 }
 function BellGlyph() {
   return (
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M18 9 a6 6 0 1 0 -12 0 c0 6 -2 7 -2 7 h16 s-2 -1 -2 -7" />
       <path d="M10.3 20 a2 2 0 0 0 3.4 0" />
     </svg>

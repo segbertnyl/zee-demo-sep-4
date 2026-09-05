@@ -88,7 +88,7 @@ export function Textarea({
       </div>
 
       {/* Bottom row — tags + mic */}
-      {(tags && tags.length > 0 || onMicClick !== undefined) && (
+      {((tags && tags.length > 0) || onMicClick !== undefined) && (
         <div
           style={{
             display: 'flex',
@@ -128,9 +128,21 @@ export function Textarea({
               }}
             >
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <rect x="13.75" y="8.5" width="4.5" height="8.5" rx="2.25" stroke="var(--action-primary)" strokeWidth="1.5"/>
-                <path d="M22 13.75V14.75C22 18.0637 19.3137 20.75 16 20.75C12.6863 20.75 10 18.0637 10 14.75V13.75" stroke="var(--action-primary)" strokeWidth="1.5"/>
-                <path d="M16 20.75V24.75" stroke="var(--action-primary)" strokeWidth="1.5"/>
+                <rect
+                  x="13.75"
+                  y="8.5"
+                  width="4.5"
+                  height="8.5"
+                  rx="2.25"
+                  stroke="var(--action-primary)"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M22 13.75V14.75C22 18.0637 19.3137 20.75 16 20.75C12.6863 20.75 10 18.0637 10 14.75V13.75"
+                  stroke="var(--action-primary)"
+                  strokeWidth="1.5"
+                />
+                <path d="M16 20.75V24.75" stroke="var(--action-primary)" strokeWidth="1.5" />
               </svg>
             </button>
           )}

@@ -14,13 +14,13 @@
 import savedViews from './nyla-views.json'
 
 export interface NylaOrbConfig {
-  dotScale: number       // baseD = size * dotScale — controls dot size
-  glowScale: number      // boxShadow blur = size * glowScale
-  minOpacity: number     // opacity of back-facing dots (0–1)
-  rotationSpeed: number  // yaw speed in rad/s (0 = still, 0.5 = reference speed)
-  purpleMix: number      // particle blue↔purple blend (0 = all blue, 1 = all purple)
-  haloStrength: number   // ambient background-glow intensity multiplier (0 = off, 1 = base, 2 = max)
-  points: number | null  // dot count; null = auto (recommendedPoints for the render size)
+  dotScale: number // baseD = size * dotScale — controls dot size
+  glowScale: number // boxShadow blur = size * glowScale
+  minOpacity: number // opacity of back-facing dots (0–1)
+  rotationSpeed: number // yaw speed in rad/s (0 = still, 0.5 = reference speed)
+  purpleMix: number // particle blue↔purple blend (0 = all blue, 1 = all purple)
+  haloStrength: number // ambient background-glow intensity multiplier (0 = off, 1 = base, 2 = max)
+  points: number | null // dot count; null = auto (recommendedPoints for the render size)
 }
 
 /* The size ramp — keep in sync with the Storybook Size Ramp story. */
@@ -32,7 +32,7 @@ export const DEFAULT_VIEW = 'default'
 const BASE: NylaOrbConfig = {
   dotScale: 0.07,
   glowScale: 0.022,
-  minOpacity: 0.40,
+  minOpacity: 0.4,
   rotationSpeed: 0.5,
   purpleMix: 0,
   haloStrength: 1,
@@ -61,7 +61,10 @@ export function nearestTier(size: number): NylaSizeTier {
   let bestDist = Infinity
   for (const t of NYLA_SIZE_TIERS) {
     const d = Math.abs(size - t)
-    if (d < bestDist) { bestDist = d; best = t }
+    if (d < bestDist) {
+      bestDist = d
+      best = t
+    }
   }
   return best
 }

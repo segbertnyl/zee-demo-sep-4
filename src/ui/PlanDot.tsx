@@ -8,7 +8,17 @@ export function PlanDot({ state }: PlanDotProps) {
   if (state === 'done') {
     return (
       <span aria-hidden="true" className="mt-0.5 inline-flex size-4 shrink-0 items-center justify-center">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--text-body-muted)]">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-[var(--text-body-muted)]"
+        >
           <path d="M3 7.5 L6 10.5 L11 4.5" />
         </svg>
       </span>

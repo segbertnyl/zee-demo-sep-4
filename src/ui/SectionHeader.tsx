@@ -26,9 +26,7 @@ export function SectionHeader({
   animated = false,
   nylaSequence = false,
 }: SectionHeaderProps) {
-  const cls = ['flex flex-col gap-6 items-start w-full', className]
-    .filter(Boolean)
-    .join(' ')
+  const cls = ['flex flex-col gap-6 items-start w-full', className].filter(Boolean).join(' ')
 
   // Sequenced entrance: the orb waits for the previous screen to clear, then fades/
   // scales in; the copy follows once the orb is in.
@@ -40,26 +38,39 @@ export function SectionHeader({
   if (variant === 'primary') {
     return (
       <div className={cls} style={nylaSequence ? { position: 'relative' } : undefined}>
-        {showNyla && (
-          nylaSequence ? (
+        {showNyla &&
+          (nylaSequence ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number], delay: orbDelay }}
-              style={{ transformOrigin: 'left center', position: 'absolute', bottom: '100%', left: 0, marginBottom: 24 }}
+              transition={{
+                duration: DURATION.deliberate,
+                ease: EASE.settle as [number, number, number, number],
+                delay: orbDelay,
+              }}
+              style={{
+                transformOrigin: 'left center',
+                position: 'absolute',
+                bottom: '100%',
+                left: 0,
+                marginBottom: 24,
+              }}
             >
               <Nyla size={orbSize} variant="on-light" align="left" />
             </motion.div>
           ) : (
             <Nyla size={orbSize} variant="on-light" align="left" />
-          )
-        )}
+          ))}
         {animated ? (
           <motion.div
             style={{ margin: 0 }}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: DURATION.quick, ease: EASE.settle as [number, number, number, number], delay: headingDelay }}
+            transition={{
+              duration: DURATION.quick,
+              ease: EASE.settle as [number, number, number, number],
+              delay: headingDelay,
+            }}
           >
             <h2
               style={{
@@ -88,13 +99,17 @@ export function SectionHeader({
             {heading}
           </h2>
         )}
-        {body && (
-          animated ? (
+        {body &&
+          (animated ? (
             <motion.div
               style={{ margin: 0 }}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: DURATION.quick, ease: EASE.settle as [number, number, number, number], delay: bodyDelay }}
+              transition={{
+                duration: DURATION.quick,
+                ease: EASE.settle as [number, number, number, number],
+                delay: bodyDelay,
+              }}
             >
               <p
                 style={{
@@ -122,8 +137,7 @@ export function SectionHeader({
             >
               {body}
             </p>
-          )
-        )}
+          ))}
       </div>
     )
   }
@@ -162,8 +176,8 @@ export function SectionHeader({
           {heading}
         </h2>
       )}
-      {body && (
-        animated ? (
+      {body &&
+        (animated ? (
           <motion.div
             style={{ margin: 0 }}
             initial={{ opacity: 0, y: 8 }}
@@ -196,8 +210,7 @@ export function SectionHeader({
           >
             {body}
           </p>
-        )
-      )}
+        ))}
     </div>
   )
 }

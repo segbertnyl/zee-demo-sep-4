@@ -56,9 +56,7 @@ function cy(value: number, yMin: number, yMinPx: number, yMax: number, yMaxPx: n
 }
 
 function toPath(pts: PacePoint[], cyFn: (v: number) => number): string {
-  return pts
-    .map(({ x, value }, i) => `${i === 0 ? 'M' : 'L'} ${x} ${cyFn(value)}`)
-    .join(' ')
+  return pts.map(({ x, value }, i) => `${i === 0 ? 'M' : 'L'} ${x} ${cyFn(value)}`).join(' ')
 }
 
 export function PaceChart({
@@ -114,12 +112,7 @@ export function PaceChart({
         ))}
       </div>
 
-      <svg
-        viewBox={`0 0 ${width} ${height}`}
-        className="mt-6 w-full"
-        role="img"
-        aria-label="Projected pace chart"
-      >
+      <svg viewBox={`0 0 ${width} ${height}`} className="mt-6 w-full" role="img" aria-label="Projected pace chart">
         {/* vertical gridlines */}
         {Array.from({ length: gridlineCount }, (_, i) => (
           <line
@@ -136,42 +129,85 @@ export function PaceChart({
         {/* horizontal reference lines */}
         <line x1="0" y1={ref2y} x2={width} y2={ref2y} stroke={refLineColor} strokeWidth="1" />
         <line x1="0" y1={ref1y} x2={width} y2={ref1y} stroke={refLineColor} strokeWidth="1" />
-        <text x="7" y={ref2y - 6} style={{ fill: 'var(--text-body-muted)' }} opacity="0.6" fontSize={labelFontSize}>{refLine2Label}</text>
-        <text x="7" y={ref1y - 6} style={{ fill: 'var(--text-body-muted)' }} opacity="0.6" fontSize={labelFontSize}>{refLine1Label}</text>
+        <text x="7" y={ref2y - 6} style={{ fill: 'var(--text-body-muted)' }} opacity="0.6" fontSize={labelFontSize}>
+          {refLine2Label}
+        </text>
+        <text x="7" y={ref1y - 6} style={{ fill: 'var(--text-body-muted)' }} opacity="0.6" fontSize={labelFontSize}>
+          {refLine1Label}
+        </text>
 
         {/* FYC goal — single dotted line */}
         <motion.line
-          x1="0" y1={cyFn(fycGoal)} x2={width} y2={cyFn(fycGoal)}
-          stroke={neededPaceColor} strokeWidth="2" strokeDasharray="4 4"
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          x1="0"
+          y1={cyFn(fycGoal)}
+          x2={width}
+          y2={cyFn(fycGoal)}
+          stroke={neededPaceColor}
+          strokeWidth="2"
+          strokeDasharray="4 4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: DURATION['scene-in'], delay: 0.7, ease: EASE.settle }}
         />
 
         {/* Today marker */}
-        <line x1={todayX} y1="18" x2={todayX} y2={yMinPx} style={{ stroke: 'var(--text-headline)' }} strokeWidth="1.2" />
-        <text x={todayX} y="10" textAnchor="middle" style={{ fill: 'var(--text-headline)' }} fontSize={labelFontSize} fontWeight="600">
+        <line
+          x1={todayX}
+          y1="18"
+          x2={todayX}
+          y2={yMinPx}
+          style={{ stroke: 'var(--text-headline)' }}
+          strokeWidth="1.2"
+        />
+        <text
+          x={todayX}
+          y="10"
+          textAnchor="middle"
+          style={{ fill: 'var(--text-headline)' }}
+          fontSize={labelFontSize}
+          fontWeight="600"
+        >
           {todayLabel}
         </text>
 
         {/* Historical line */}
         <motion.path
           d={toPath(actualPoints, cyFn)}
-          fill="none" stroke={actualColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
+          fill="none"
+          stroke={actualColor}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: DURATION.dramatic, ease: EASE.settle }}
         />
         {/* Current pace projection (orange, lower) */}
         <motion.path
           d={toPath(currentPacePoints, cyFn)}
-          fill="none" stroke={currentPaceColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
+          fill="none"
+          stroke={currentPaceColor}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: DURATION.dramatic, delay: 0.85, ease: EASE.settle }}
         />
         {/* Plan projection (purple, reaches goal) */}
         <motion.path
           d={toPath(neededPacePoints, cyFn)}
-          fill="none" stroke={neededPaceColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
+          fill="none"
+          stroke={neededPaceColor}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: DURATION.dramatic, delay: 0.85, ease: EASE.settle }}
         />
 

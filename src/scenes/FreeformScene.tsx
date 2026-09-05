@@ -2,7 +2,14 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useAppStore } from '@/state/useAppStore'
 import { Nyla } from '@/ui/Nyla'
-import { PROMPTS, type ActionTarget, type Block, type BulletItem, type Prompt, type RowContext } from './freeformContent'
+import {
+  PROMPTS,
+  type ActionTarget,
+  type Block,
+  type BulletItem,
+  type Prompt,
+  type RowContext,
+} from './freeformContent'
 
 /* Freeform / Chief-of-Staff Collab — generative-UI showpiece.
  *
@@ -64,9 +71,7 @@ export function FreeformScene() {
   }
 
   function updateLatest(patch: Partial<Turn>) {
-    setTurns((ts) =>
-      ts.map((t, i) => (i === ts.length - 1 ? { ...t, ...patch } : t))
-    )
+    setTurns((ts) => ts.map((t, i) => (i === ts.length - 1 ? { ...t, ...patch } : t)))
   }
 
   function startById(id: string, customLabel?: string) {
@@ -81,8 +86,7 @@ export function FreeformScene() {
     const matched =
       PROMPTS.find(
         (p) =>
-          p.shortLabel.toLowerCase().includes(q.toLowerCase()) ||
-          p.fullPrompt.toLowerCase().includes(q.toLowerCase())
+          p.shortLabel.toLowerCase().includes(q.toLowerCase()) || p.fullPrompt.toLowerCase().includes(q.toLowerCase()),
       ) ?? PROMPTS[0]
     pushTurn({ ...matched, fullPrompt: q })
   }
@@ -155,13 +159,7 @@ export function FreeformScene() {
         <div className="mx-auto max-w-[820px]">
           <AnimatePresence mode="wait">
             {turns.length === 0 ? (
-              <IdleState
-                key="idle"
-                query={query}
-                setQuery={setQuery}
-                onSubmit={submit}
-                onPickPrompt={pushTurn}
-              />
+              <IdleState key="idle" query={query} setQuery={setQuery} onSubmit={submit} onPickPrompt={pushTurn} />
             ) : (
               <motion.div
                 key="active"
@@ -257,7 +255,7 @@ export function FreeformScene() {
                 PROMPTS.find(
                   (p) =>
                     p.shortLabel.toLowerCase().includes(text.toLowerCase()) ||
-                    p.fullPrompt.toLowerCase().includes(text.toLowerCase())
+                    p.fullPrompt.toLowerCase().includes(text.toLowerCase()),
                 ) ?? PROMPTS[0]
               pushTurn({ ...matched, fullPrompt: text })
             }}
@@ -268,15 +266,7 @@ export function FreeformScene() {
   )
 }
 
-function CoachRail({
-  turns,
-  onClose,
-  onAsk,
-}: {
-  turns: Turn[]
-  onClose: () => void
-  onAsk: (text: string) => void
-}) {
+function CoachRail({ turns, onClose, onAsk }: { turns: Turn[]; onClose: () => void; onAsk: (text: string) => void }) {
   const [draft, setDraft] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
 
@@ -295,8 +285,7 @@ function CoachRail({
       transition={{ duration: 0.42, ease: [0.22, 0.65, 0.05, 1] }}
       className="fixed bottom-0 right-0 top-0 z-[140] flex w-[min(400px,92vw)] flex-col text-white shadow-[-24px_0_60px_-20px_rgba(0,10,98,0.32)]"
       style={{
-        background:
-          'linear-gradient(155deg, #122879 0%, #000a62 55%, #00084a 100%)',
+        background: 'linear-gradient(155deg, #122879 0%, #000a62 55%, #00084a 100%)',
       }}
     >
       {/* Header */}
@@ -426,9 +415,7 @@ function IdleState({
       transition={{ duration: 0.4 }}
       className="flex min-h-[calc(100vh-160px)] flex-col justify-center pt-6"
     >
-      <p className="text-[10.5px] font-medium uppercase tracking-[0.24em] text-neutral-400">
-        Nyla · ask
-      </p>
+      <p className="text-[10.5px] font-medium uppercase tracking-[0.24em] text-neutral-400">Nyla · ask</p>
       <h1
         className="mt-5 font-serif text-[44px] leading-[1.04] tracking-tight text-neutral-900 md:text-[64px]"
         style={{ fontWeight: 400, textWrap: 'balance' }}
@@ -460,7 +447,10 @@ function IdleState({
                 <Spark />
                 {p.shortLabel}
               </span>
-              <span aria-hidden="true" className="text-[12px] text-neutral-300 transition-transform group-hover:translate-x-0.5 group-hover:text-neutral-500">
+              <span
+                aria-hidden="true"
+                className="text-[12px] text-neutral-300 transition-transform group-hover:translate-x-0.5 group-hover:text-neutral-500"
+              >
                 →
               </span>
             </button>
@@ -475,16 +465,19 @@ function IdleState({
  * Turn view — one user-question + one streaming response
  * -------------------------------------------------------------------------- */
 
-const TurnView = ({ turn, isLatest, onAction, ref }: {
+const TurnView = ({
+  turn,
+  isLatest,
+  onAction,
+  ref,
+}: {
   turn: Turn
   isLatest: boolean
   onAction: (target: ActionTarget) => void
   ref?: React.Ref<HTMLDivElement>
 }) => {
   /* Non-latest turns dim + blur to push focus to the active turn */
-  const dimStyle = isLatest
-    ? { filter: 'blur(0px)', opacity: 1 }
-    : { filter: 'blur(3px)', opacity: 0.32 }
+  const dimStyle = isLatest ? { filter: 'blur(0px)', opacity: 1 } : { filter: 'blur(3px)', opacity: 0.32 }
 
   return (
     <motion.div
@@ -515,7 +508,10 @@ const TurnView = ({ turn, isLatest, onAction, ref }: {
               className="flex items-center gap-2.5 text-[12.5px] text-neutral-400"
             >
               {last ? <ThinkingDot /> : <CheckDot />}
-              <span>{line}{last ? '…' : ''}</span>
+              <span>
+                {line}
+                {last ? '…' : ''}
+              </span>
             </motion.div>
           )
         })}
@@ -552,13 +548,7 @@ const TurnView = ({ turn, isLatest, onAction, ref }: {
  * Block renderers
  * -------------------------------------------------------------------------- */
 
-function BlockRenderer({
-  block,
-  onAction,
-}: {
-  block: Block
-  onAction: (target: ActionTarget) => void
-}) {
+function BlockRenderer({ block, onAction }: { block: Block; onAction: (target: ActionTarget) => void }) {
   const baseAnim = {
     initial: { opacity: 0, y: 10, scale: 0.985 },
     animate: { opacity: 1, y: 0, scale: 1 },
@@ -592,7 +582,10 @@ function BlockRenderer({
       )
     case 'draft-preview':
       return (
-        <motion.div {...baseAnim} className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-[0_18px_40px_-22px_rgba(0,0,0,0.18)]">
+        <motion.div
+          {...baseAnim}
+          className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-[0_18px_40px_-22px_rgba(0,0,0,0.18)]"
+        >
           {/* Channel header */}
           <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-3">
             <div className="flex items-center gap-3">
@@ -615,9 +608,7 @@ function BlockRenderer({
             <div className="border-b border-neutral-100 px-5 py-3">
               {block.to && (
                 <div className="flex items-baseline gap-3">
-                  <p className="w-[64px] text-[10.5px] font-medium uppercase tracking-[0.22em] text-neutral-400">
-                    To
-                  </p>
+                  <p className="w-[64px] text-[10.5px] font-medium uppercase tracking-[0.22em] text-neutral-400">To</p>
                   <p className="text-[13px] text-neutral-700">{block.to}</p>
                 </div>
               )}
@@ -662,7 +653,10 @@ function BlockRenderer({
     case 'quote':
       return (
         <motion.figure {...baseAnim} className="border-l-2 border-neutral-900 pl-5">
-          <p className="font-serif text-[20px] leading-[1.32] tracking-tight text-neutral-900 md:text-[22px]" style={{ fontWeight: 400 }}>
+          <p
+            className="font-serif text-[20px] leading-[1.32] tracking-tight text-neutral-900 md:text-[22px]"
+            style={{ fontWeight: 400 }}
+          >
             "{block.text}"
           </p>
           {block.attribution && (
@@ -700,10 +694,7 @@ function BlockRenderer({
         <motion.div {...baseAnim} className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
           <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-400">Sources</p>
           {block.items.map((s) => (
-            <span
-              key={s}
-              className="rounded-full border border-neutral-200 px-2.5 py-0.5 text-[11px] text-neutral-600"
-            >
+            <span key={s} className="rounded-full border border-neutral-200 px-2.5 py-0.5 text-[11px] text-neutral-600">
               {s}
             </span>
           ))}
@@ -711,10 +702,7 @@ function BlockRenderer({
       )
     case 'actions':
       return (
-        <motion.div
-          {...baseAnim}
-          className="mt-2 flex flex-wrap items-center gap-3 border-t border-neutral-200 pt-6"
-        >
+        <motion.div {...baseAnim} className="mt-2 flex flex-wrap items-center gap-3 border-t border-neutral-200 pt-6">
           <button
             type="button"
             onClick={() => onAction(block.primary)}
@@ -781,7 +769,9 @@ function AskBar({
           aria-label="Submit"
           className="flex size-8 items-center justify-center rounded-full bg-[var(--nyl-blue-800)] text-white hover:bg-[var(--nyl-blue-600)]"
         >
-          <span aria-hidden="true" className="text-[14px]">↑</span>
+          <span aria-hidden="true" className="text-[14px]">
+            ↑
+          </span>
         </button>
       </div>
       {followups && followups.length > 0 && (
@@ -942,19 +932,12 @@ function RowContextPopover({
         <div
           className="overflow-hidden rounded-2xl p-4 text-white shadow-[0_24px_60px_-20px_rgba(0,10,98,0.45)]"
           style={{
-            background:
-              'linear-gradient(155deg, #122879 0%, #000a62 55%, #00084a 100%)',
+            background: 'linear-gradient(155deg, #122879 0%, #000a62 55%, #00084a 100%)',
           }}
         >
-          {context.echo && (
-            <p className="mb-3 text-[12.5px] leading-snug text-white/45">
-              "{context.echo}"
-            </p>
-          )}
+          {context.echo && <p className="mb-3 text-[12.5px] leading-snug text-white/45">"{context.echo}"</p>}
           <div className="rounded-lg bg-white/10 px-3.5 py-2.5 ring-1 ring-inset ring-white/8">
-            <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/60">
-              Suggested action
-            </p>
+            <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/60">Suggested action</p>
             <p className="mt-1 text-[13.5px] leading-snug text-white">{context.take}</p>
           </div>
         </div>
@@ -980,7 +963,14 @@ function RowContextPopover({
 
 function Spark() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="shrink-0 text-neutral-900">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className="shrink-0 text-neutral-900"
+    >
       <path d="M12 1.5 L13.6 9.2 L21 11 L13.6 12.8 L12 20.5 L10.4 12.8 L3 11 L10.4 9.2 Z" />
     </svg>
   )
@@ -998,7 +988,17 @@ function ThinkingDot() {
 function CheckDot() {
   return (
     <span className="inline-flex size-2 shrink-0 items-center justify-center rounded-full bg-neutral-300">
-      <svg width="6" height="6" viewBox="0 0 6 6" fill="none" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg
+        width="6"
+        height="6"
+        viewBox="0 0 6 6"
+        fill="none"
+        stroke="white"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
         <path d="M1 3 L2.5 4.5 L5 1.5" />
       </svg>
     </span>

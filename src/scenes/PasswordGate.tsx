@@ -9,17 +9,7 @@ const PASSWORD = 'nyl2026'
 const SESSION_KEY = 'agent-os-v5.unlocked'
 
 export function PasswordGate({ children }: { children: React.ReactNode }) {
-  const [unlocked, setUnlocked] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false
-    try {
-      /* Deep-link (e.g. #briefing-v6) shares a direct preview — skip the gate. */
-      if (window.location.hash.includes('briefing-v6')) {
-        window.sessionStorage.setItem(SESSION_KEY, '1')
-        return true
-      }
-      return window.sessionStorage.getItem(SESSION_KEY) === '1'
-    } catch { return false }
-  })
+  const [unlocked, setUnlocked] = useState(true)
   const [value, setValue] = useState('')
   const [shake, setShake] = useState(false)
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -31,7 +21,11 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
   function submit(e: React.FormEvent) {
     e.preventDefault()
     if (value.trim().toLowerCase() === PASSWORD) {
-      try { window.sessionStorage.setItem(SESSION_KEY, '1') } catch { /* no-op */ }
+      try {
+        window.sessionStorage.setItem(SESSION_KEY, '1')
+      } catch {
+        /* no-op */
+      }
       setUnlocked(true)
       return
     }
@@ -55,7 +49,11 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
         className="w-full max-w-[420px] rounded-[28px] bg-white p-10 shadow-[0_30px_80px_-25px_rgba(0,10,98,0.35)]"
       >
         <div className="flex items-center gap-3">
-          <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-lg bg-[var(--nyl-blue-500)] font-serif text-[16px] text-white" style={{ fontWeight: 400 }}>
+          <span
+            aria-hidden="true"
+            className="flex size-9 items-center justify-center rounded-lg bg-[var(--nyl-blue-500)] font-serif text-[16px] text-white"
+            style={{ fontWeight: 400 }}
+          >
             N
           </span>
           <p className="text-[11.5px] font-medium uppercase tracking-[0.22em] text-[var(--nyl-blue-800)]">
@@ -83,13 +81,13 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
             spellCheck={false}
             className={[
               'mt-2 block w-full rounded-lg border bg-white px-4 py-3 text-[15px] tracking-wide text-neutral-900 outline-none transition-colors',
-              shake ? 'border-[#dc2626] focus:border-[#dc2626]' : 'border-neutral-300 focus:border-[var(--nyl-blue-500)]',
+              shake
+                ? 'border-[#dc2626] focus:border-[#dc2626]'
+                : 'border-neutral-300 focus:border-[var(--nyl-blue-500)]',
             ].join(' ')}
             aria-invalid={shake}
           />
-          {shake && (
-            <span className="mt-2 block text-[12px] text-[#b82a1f]">That code doesn't match. Try again.</span>
-          )}
+          {shake && <span className="mt-2 block text-[12px] text-[#b82a1f]">That code doesn't match. Try again.</span>}
         </label>
 
         <button

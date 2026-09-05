@@ -44,7 +44,12 @@ export const Default: Story = {
   name: 'Onboarding tour (centered in isolation)',
   render: () => (
     <div style={{ position: 'relative', height: '100vh', background: 'var(--bg-canvas)' }}>
-      <BriefingTour steps={STEPS} onClose={() => { /* noop in story */ }} />
+      <BriefingTour
+        steps={STEPS}
+        onClose={() => {
+          /* noop in story */
+        }}
+      />
     </div>
   ),
 }

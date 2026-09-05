@@ -24,7 +24,15 @@ export interface NylaProps {
   className?: string
 }
 
-export function Nyla({ size, animate = true, variant, align = 'center', condense = true, spreadRef, className }: NylaProps) {
+export function Nyla({
+  size,
+  animate = true,
+  variant,
+  align = 'center',
+  condense = true,
+  spreadRef,
+  className,
+}: NylaProps) {
   return (
     <div
       className={className}
@@ -36,13 +44,7 @@ export function Nyla({ size, animate = true, variant, align = 'center', condense
         ...(align === 'left' ? { marginLeft: -Math.round(size * SPHERE_INSET) } : {}),
       }}
     >
-      <PointSphere
-        size={size}
-        animate={animate}
-        variant={variant}
-        condense={condense}
-        spreadRef={spreadRef}
-      />
+      <PointSphere size={size} animate={animate} variant={variant} condense={condense} spreadRef={spreadRef} />
     </div>
   )
 }

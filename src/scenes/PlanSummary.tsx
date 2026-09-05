@@ -9,7 +9,10 @@ import { PaceChart } from '@/ui/PaceChart'
 function PracticeIcon() {
   return (
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M26.104 4.504H18.964V3.5C18.9773 3.04818 18.9004 2.59823 18.7378 2.17648C18.5751 1.75474 18.33 1.36965 18.0168 1.04376C17.7036 0.717864 17.3285 0.457698 16.9135 0.27848C16.4985 0.0992624 16.052 0.00458986 15.6 0L12.316 0C11.8632 0.00298761 11.4155 0.0965115 10.9994 0.275069C10.5832 0.453627 10.207 0.713612 9.89277 1.03973C9.57858 1.36584 9.33278 1.75151 9.16985 2.17402C9.00691 2.59653 8.93012 3.04737 8.944 3.5V4.516H1.904C1.40279 4.51701 0.922107 4.7152 0.565831 5.06773C0.209556 5.42027 0.00630351 5.89883 0 6.4L0 9.42C0 9.56216 0.0564713 9.69849 0.156991 9.79901C0.25751 9.89953 0.393844 9.956 0.536 9.956C0.678156 9.956 0.81449 9.89953 0.915009 9.79901C1.01553 9.69849 1.072 9.56216 1.072 9.42V6.4C1.072 6.17897 1.15953 5.96693 1.31544 5.81027C1.47136 5.6536 1.68297 5.56506 1.904 5.564H4.668V26.764H1.904C1.79439 26.7641 1.68588 26.7421 1.58488 26.6996C1.48389 26.657 1.39246 26.5945 1.316 26.516C1.15993 26.3601 1.07217 26.1486 1.072 25.928V13.848C1.072 13.7058 1.01553 13.5695 0.915009 13.469C0.81449 13.3685 0.678156 13.312 0.536 13.312C0.393844 13.312 0.25751 13.3685 0.156991 13.469C0.0564713 13.5695 0 13.7058 0 13.848L0 25.936C-1.11049e-06 26.4413 0.200471 26.926 0.557425 27.2837C0.91438 27.6415 1.39866 27.8429 1.904 27.844H26.104C26.608 27.8408 27.0902 27.6384 27.4454 27.2809C27.8006 26.9235 28 26.44 28 25.936V6.4C27.9969 5.89812 27.7961 5.41769 27.4412 5.0628C27.0863 4.70791 26.6059 4.50715 26.104 4.504ZM18.248 5.576V26.776H9.66V5.576H18.248ZM18.964 26.776V5.576H22.564V26.776H18.964ZM10 3.5C9.99149 3.1909 10.0444 2.88318 10.1558 2.59469C10.2671 2.30621 10.4346 2.0427 10.6486 1.81945C10.8625 1.59619 11.1187 1.41764 11.4021 1.29414C11.6856 1.17064 11.9908 1.10465 12.3 1.1H15.6C15.9101 1.10596 16.2159 1.17296 16.5001 1.29719C16.7842 1.42142 17.0411 1.60044 17.256 1.824C17.4702 2.04905 17.6372 2.3147 17.7471 2.60529C17.857 2.89588 17.9076 3.20553 17.896 3.516V4.532H10V3.5ZM5.352 5.6H8.952V26.8H5.368L5.352 5.6ZM26.952 25.948C26.9518 26.1686 26.8641 26.3801 26.708 26.536C26.6315 26.6145 26.5401 26.677 26.4391 26.7195C26.3381 26.7621 26.2296 26.7841 26.12 26.784H23.256V5.584H26.104C26.3216 5.58498 26.5303 5.67077 26.6856 5.82314C26.841 5.97551 26.9308 6.18245 26.936 6.4L26.952 25.948Z" fill="var(--nyl-purple-700)"/>
+      <path
+        d="M26.104 4.504H18.964V3.5C18.9773 3.04818 18.9004 2.59823 18.7378 2.17648C18.5751 1.75474 18.33 1.36965 18.0168 1.04376C17.7036 0.717864 17.3285 0.457698 16.9135 0.27848C16.4985 0.0992624 16.052 0.00458986 15.6 0L12.316 0C11.8632 0.00298761 11.4155 0.0965115 10.9994 0.275069C10.5832 0.453627 10.207 0.713612 9.89277 1.03973C9.57858 1.36584 9.33278 1.75151 9.16985 2.17402C9.00691 2.59653 8.93012 3.04737 8.944 3.5V4.516H1.904C1.40279 4.51701 0.922107 4.7152 0.565831 5.06773C0.209556 5.42027 0.00630351 5.89883 0 6.4L0 9.42C0 9.56216 0.0564713 9.69849 0.156991 9.79901C0.25751 9.89953 0.393844 9.956 0.536 9.956C0.678156 9.956 0.81449 9.89953 0.915009 9.79901C1.01553 9.69849 1.072 9.56216 1.072 9.42V6.4C1.072 6.17897 1.15953 5.96693 1.31544 5.81027C1.47136 5.6536 1.68297 5.56506 1.904 5.564H4.668V26.764H1.904C1.79439 26.7641 1.68588 26.7421 1.58488 26.6996C1.48389 26.657 1.39246 26.5945 1.316 26.516C1.15993 26.3601 1.07217 26.1486 1.072 25.928V13.848C1.072 13.7058 1.01553 13.5695 0.915009 13.469C0.81449 13.3685 0.678156 13.312 0.536 13.312C0.393844 13.312 0.25751 13.3685 0.156991 13.469C0.0564713 13.5695 0 13.7058 0 13.848L0 25.936C-1.11049e-06 26.4413 0.200471 26.926 0.557425 27.2837C0.91438 27.6415 1.39866 27.8429 1.904 27.844H26.104C26.608 27.8408 27.0902 27.6384 27.4454 27.2809C27.8006 26.9235 28 26.44 28 25.936V6.4C27.9969 5.89812 27.7961 5.41769 27.4412 5.0628C27.0863 4.70791 26.6059 4.50715 26.104 4.504ZM18.248 5.576V26.776H9.66V5.576H18.248ZM18.964 26.776V5.576H22.564V26.776H18.964ZM10 3.5C9.99149 3.1909 10.0444 2.88318 10.1558 2.59469C10.2671 2.30621 10.4346 2.0427 10.6486 1.81945C10.8625 1.59619 11.1187 1.41764 11.4021 1.29414C11.6856 1.17064 11.9908 1.10465 12.3 1.1H15.6C15.9101 1.10596 16.2159 1.17296 16.5001 1.29719C16.7842 1.42142 17.0411 1.60044 17.256 1.824C17.4702 2.04905 17.6372 2.3147 17.7471 2.60529C17.857 2.89588 17.9076 3.20553 17.896 3.516V4.532H10V3.5ZM5.352 5.6H8.952V26.8H5.368L5.352 5.6ZM26.952 25.948C26.9518 26.1686 26.8641 26.3801 26.708 26.536C26.6315 26.6145 26.5401 26.677 26.4391 26.7195C26.3381 26.7621 26.2296 26.7841 26.12 26.784H23.256V5.584H26.104C26.3216 5.58498 26.5303 5.67077 26.6856 5.82314C26.841 5.97551 26.9308 6.18245 26.936 6.4L26.952 25.948Z"
+        fill="var(--nyl-purple-700)"
+      />
     </svg>
   )
 }
@@ -18,11 +21,32 @@ function ProductionIcon() {
   return (
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#prod-clip)">
-        <path d="M2.82031 25.7389L14.0009 12.3223L25.7405 25.7389" stroke="var(--nyl-purple-700)" strokeWidth="0.875" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M14 10.7926V8.41059M14 8.41059V2.82031H21.8264V8.41059H14Z" stroke="var(--nyl-purple-700)" strokeWidth="0.875" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M9.76953 19.5416L11.7625 21.2674L13.9986 19.0312L16.2347 21.2674L17.9362 19.5415" stroke="var(--nyl-purple-700)" strokeWidth="0.583333" strokeLinecap="round"/>
+        <path
+          d="M2.82031 25.7389L14.0009 12.3223L25.7405 25.7389"
+          stroke="var(--nyl-purple-700)"
+          strokeWidth="0.875"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M14 10.7926V8.41059M14 8.41059V2.82031H21.8264V8.41059H14Z"
+          stroke="var(--nyl-purple-700)"
+          strokeWidth="0.875"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9.76953 19.5416L11.7625 21.2674L13.9986 19.0312L16.2347 21.2674L17.9362 19.5415"
+          stroke="var(--nyl-purple-700)"
+          strokeWidth="0.583333"
+          strokeLinecap="round"
+        />
       </g>
-      <defs><clipPath id="prod-clip"><rect width="28" height="28" fill="white"/></clipPath></defs>
+      <defs>
+        <clipPath id="prod-clip">
+          <rect width="28" height="28" fill="white" />
+        </clipPath>
+      </defs>
     </svg>
   )
 }
@@ -30,7 +54,10 @@ function ProductionIcon() {
 function LifeBalanceIcon() {
   return (
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M11.8383 1.78492e-05H15.6015C15.6626 -0.000520178 15.7231 0.0111101 15.7796 0.0342299C15.8362 0.0573497 15.8875 0.0914958 15.9307 0.134675C15.9739 0.177855 16.008 0.229202 16.0311 0.285721C16.0543 0.34224 16.0659 0.402799 16.0653 0.463861C16.0659 0.524924 16.0543 0.585482 16.0311 0.642001C16.008 0.69852 15.9739 0.749868 15.9307 0.793047C15.8875 0.836227 15.8362 0.870373 15.7796 0.893492C15.7231 0.916612 15.6626 0.928243 15.6015 0.927705H11.8383C11.7153 0.927705 11.5973 0.878835 11.5103 0.791848C11.4233 0.70486 11.3745 0.58688 11.3745 0.463861C11.3745 0.340842 11.4233 0.222862 11.5103 0.135874C11.5973 0.0488869 11.7153 1.78492e-05 11.8383 1.78492e-05ZM28.0002 23.1438V26.9634C28.0002 27.0865 27.9514 27.2044 27.8644 27.2914C27.7774 27.3784 27.6594 27.4273 27.5364 27.4273C27.4134 27.4273 27.2954 27.3784 27.2084 27.2914C27.1214 27.2044 27.0725 27.0865 27.0725 26.9634V23.6036H0.92792V26.4915H23.5151C23.576 26.4915 23.6363 26.5035 23.6926 26.5268C23.7489 26.5501 23.8 26.5843 23.8431 26.6274C23.8861 26.6705 23.9203 26.7216 23.9436 26.7779C23.9669 26.8341 23.9789 26.8945 23.9789 26.9554C23.9789 27.0163 23.9669 27.0766 23.9436 27.1329C23.9203 27.1891 23.8861 27.2403 23.8431 27.2834C23.8 27.3264 23.7489 27.3606 23.6926 27.3839C23.6363 27.4072 23.576 27.4192 23.5151 27.4192H0.464077C0.342443 27.4192 0.225669 27.3715 0.13891 27.2862C0.0521505 27.201 0.00234916 27.085 0.000233786 26.9634V23.1438C0.001287 23.0211 0.0504942 22.9037 0.137254 22.817C0.224015 22.7302 0.341384 22.681 0.464077 22.6799H13.371V7.75628L5.47762 10.4385L8.66805 15.327C8.77252 15.3248 8.87635 15.3437 8.97336 15.3825C9.07038 15.4213 9.15858 15.4793 9.23273 15.5529C9.38079 15.7021 9.46473 15.9033 9.46667 16.1135C9.51104 18.5659 7.7565 19.6307 6.2964 19.6307H3.47301C3.01203 19.6265 2.55641 19.5314 2.13224 19.3508C1.70807 19.1702 1.32368 18.9078 1.0011 18.5784C0.678511 18.2491 0.42406 17.8594 0.252316 17.4316C0.0805724 17.0038 -0.00509041 16.5463 0.000233786 16.0853C0.00431953 15.8739 0.0912211 15.6726 0.242239 15.5247C0.394428 15.38 0.596996 15.3005 0.806918 15.3028L4.03365 10.4183C4.00271 10.3055 4.01594 10.1851 4.07064 10.0817C4.12535 9.97831 4.21741 9.89964 4.32809 9.86173L13.3751 6.78826V4.26334C13.3751 4.14032 13.4239 4.02234 13.5109 3.93536C13.5979 3.84837 13.7159 3.7995 13.8389 3.7995C13.9619 3.7995 14.0799 3.84837 14.1669 3.93536C14.2539 4.02234 14.3027 4.14032 14.3027 4.26334V6.45349L22.8617 3.54136C22.9783 3.50276 23.1054 3.51159 23.2156 3.56592C23.3258 3.62026 23.4102 3.71574 23.4505 3.83177C23.4747 3.92022 23.4747 4.01355 23.4505 4.10201L26.9394 9.40999H27.2984C27.4229 9.41211 27.5415 9.46332 27.6283 9.55246C27.7152 9.6416 27.7633 9.76146 27.7623 9.88593V10.5313C27.7666 11.3743 27.4366 12.1846 26.8447 12.7849C26.2528 13.3851 25.4471 13.7264 24.6041 13.7338H21.4782C20.6306 13.7253 19.821 13.3807 19.2274 12.7757C18.6337 12.1706 18.3044 11.3547 18.312 10.5071V9.8577C18.3161 9.7375 18.3669 9.62362 18.4534 9.54009C18.5399 9.45656 18.6555 9.40991 18.7758 9.40999H19.1106L22.1356 4.79172L14.3108 7.43361V22.6799H27.5364C27.6591 22.681 27.7765 22.7302 27.8632 22.817C27.95 22.9037 27.9992 23.0211 28.0002 23.1438ZM26.8305 10.3215H19.2396V10.5071C19.2343 11.1065 19.467 11.6836 19.8867 12.1116C20.3064 12.5396 20.8788 12.7836 21.4782 12.79H24.6041C25.2035 12.7836 25.7759 12.5396 26.1956 12.1116C26.6153 11.6836 26.848 11.1065 26.8426 10.5071V10.3215H26.8305ZM26.2175 9.40999L23.023 4.54568L19.8568 9.40999H26.2175ZM8.53092 16.2345H0.940021C0.9718 16.89 1.25238 17.5086 1.72456 17.9643C2.19673 18.42 2.82493 18.6784 3.48108 18.6869H6.30447C6.90322 18.6784 7.47438 18.4337 7.89362 18.0061C8.31287 17.5786 8.54627 17.0027 8.54302 16.4039V16.2345H8.53092ZM4.8726 10.6442L4.63867 10.7249C4.61328 10.7289 4.58742 10.7289 4.56203 10.7249L1.55713 15.327H7.91784L4.8726 10.6442Z" fill="var(--nyl-purple-700)"/>
+      <path
+        d="M11.8383 1.78492e-05H15.6015C15.6626 -0.000520178 15.7231 0.0111101 15.7796 0.0342299C15.8362 0.0573497 15.8875 0.0914958 15.9307 0.134675C15.9739 0.177855 16.008 0.229202 16.0311 0.285721C16.0543 0.34224 16.0659 0.402799 16.0653 0.463861C16.0659 0.524924 16.0543 0.585482 16.0311 0.642001C16.008 0.69852 15.9739 0.749868 15.9307 0.793047C15.8875 0.836227 15.8362 0.870373 15.7796 0.893492C15.7231 0.916612 15.6626 0.928243 15.6015 0.927705H11.8383C11.7153 0.927705 11.5973 0.878835 11.5103 0.791848C11.4233 0.70486 11.3745 0.58688 11.3745 0.463861C11.3745 0.340842 11.4233 0.222862 11.5103 0.135874C11.5973 0.0488869 11.7153 1.78492e-05 11.8383 1.78492e-05ZM28.0002 23.1438V26.9634C28.0002 27.0865 27.9514 27.2044 27.8644 27.2914C27.7774 27.3784 27.6594 27.4273 27.5364 27.4273C27.4134 27.4273 27.2954 27.3784 27.2084 27.2914C27.1214 27.2044 27.0725 27.0865 27.0725 26.9634V23.6036H0.92792V26.4915H23.5151C23.576 26.4915 23.6363 26.5035 23.6926 26.5268C23.7489 26.5501 23.8 26.5843 23.8431 26.6274C23.8861 26.6705 23.9203 26.7216 23.9436 26.7779C23.9669 26.8341 23.9789 26.8945 23.9789 26.9554C23.9789 27.0163 23.9669 27.0766 23.9436 27.1329C23.9203 27.1891 23.8861 27.2403 23.8431 27.2834C23.8 27.3264 23.7489 27.3606 23.6926 27.3839C23.6363 27.4072 23.576 27.4192 23.5151 27.4192H0.464077C0.342443 27.4192 0.225669 27.3715 0.13891 27.2862C0.0521505 27.201 0.00234916 27.085 0.000233786 26.9634V23.1438C0.001287 23.0211 0.0504942 22.9037 0.137254 22.817C0.224015 22.7302 0.341384 22.681 0.464077 22.6799H13.371V7.75628L5.47762 10.4385L8.66805 15.327C8.77252 15.3248 8.87635 15.3437 8.97336 15.3825C9.07038 15.4213 9.15858 15.4793 9.23273 15.5529C9.38079 15.7021 9.46473 15.9033 9.46667 16.1135C9.51104 18.5659 7.7565 19.6307 6.2964 19.6307H3.47301C3.01203 19.6265 2.55641 19.5314 2.13224 19.3508C1.70807 19.1702 1.32368 18.9078 1.0011 18.5784C0.678511 18.2491 0.42406 17.8594 0.252316 17.4316C0.0805724 17.0038 -0.00509041 16.5463 0.000233786 16.0853C0.00431953 15.8739 0.0912211 15.6726 0.242239 15.5247C0.394428 15.38 0.596996 15.3005 0.806918 15.3028L4.03365 10.4183C4.00271 10.3055 4.01594 10.1851 4.07064 10.0817C4.12535 9.97831 4.21741 9.89964 4.32809 9.86173L13.3751 6.78826V4.26334C13.3751 4.14032 13.4239 4.02234 13.5109 3.93536C13.5979 3.84837 13.7159 3.7995 13.8389 3.7995C13.9619 3.7995 14.0799 3.84837 14.1669 3.93536C14.2539 4.02234 14.3027 4.14032 14.3027 4.26334V6.45349L22.8617 3.54136C22.9783 3.50276 23.1054 3.51159 23.2156 3.56592C23.3258 3.62026 23.4102 3.71574 23.4505 3.83177C23.4747 3.92022 23.4747 4.01355 23.4505 4.10201L26.9394 9.40999H27.2984C27.4229 9.41211 27.5415 9.46332 27.6283 9.55246C27.7152 9.6416 27.7633 9.76146 27.7623 9.88593V10.5313C27.7666 11.3743 27.4366 12.1846 26.8447 12.7849C26.2528 13.3851 25.4471 13.7264 24.6041 13.7338H21.4782C20.6306 13.7253 19.821 13.3807 19.2274 12.7757C18.6337 12.1706 18.3044 11.3547 18.312 10.5071V9.8577C18.3161 9.7375 18.3669 9.62362 18.4534 9.54009C18.5399 9.45656 18.6555 9.40991 18.7758 9.40999H19.1106L22.1356 4.79172L14.3108 7.43361V22.6799H27.5364C27.6591 22.681 27.7765 22.7302 27.8632 22.817C27.95 22.9037 27.9992 23.0211 28.0002 23.1438ZM26.8305 10.3215H19.2396V10.5071C19.2343 11.1065 19.467 11.6836 19.8867 12.1116C20.3064 12.5396 20.8788 12.7836 21.4782 12.79H24.6041C25.2035 12.7836 25.7759 12.5396 26.1956 12.1116C26.6153 11.6836 26.848 11.1065 26.8426 10.5071V10.3215H26.8305ZM26.2175 9.40999L23.023 4.54568L19.8568 9.40999H26.2175ZM8.53092 16.2345H0.940021C0.9718 16.89 1.25238 17.5086 1.72456 17.9643C2.19673 18.42 2.82493 18.6784 3.48108 18.6869H6.30447C6.90322 18.6784 7.47438 18.4337 7.89362 18.0061C8.31287 17.5786 8.54627 17.0027 8.54302 16.4039V16.2345H8.53092ZM4.8726 10.6442L4.63867 10.7249C4.61328 10.7289 4.58742 10.7289 4.56203 10.7249L1.55713 15.327H7.91784L4.8726 10.6442Z"
+        fill="var(--nyl-purple-700)"
+      />
     </svg>
   )
 }
@@ -71,16 +98,18 @@ const CHART_LEGEND = [
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p style={{
-      margin: 0,
-      fontFamily: 'var(--font-sans)',
-      fontSize: 11,
-      lineHeight: '16px',
-      letterSpacing: '1.6px',
-      textTransform: 'uppercase',
-      color: 'white',
-      paddingBottom: 32,
-    }}>
+    <p
+      style={{
+        margin: 0,
+        fontFamily: 'var(--font-sans)',
+        fontSize: 11,
+        lineHeight: '16px',
+        letterSpacing: '1.6px',
+        textTransform: 'uppercase',
+        color: 'white',
+        paddingBottom: 32,
+      }}
+    >
       {children}
     </p>
   )
@@ -90,23 +119,27 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function StatItem({ label, value }: { label: string; value: string }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-      <span style={{
-        fontFamily: 'var(--font-sans)',
-        fontSize: 11,
-        lineHeight: '16px',
-        letterSpacing: '1.2px',
-        textTransform: 'uppercase',
-        color: '#dcd9d5',
-      }}>
+      <span
+        style={{
+          fontFamily: 'var(--font-sans)',
+          fontSize: 11,
+          lineHeight: '16px',
+          letterSpacing: '1.2px',
+          textTransform: 'uppercase',
+          color: '#dcd9d5',
+        }}
+      >
         {label}
       </span>
-      <span style={{
-        fontFamily: 'var(--font-serif)',
-        fontSize: 32,
-        lineHeight: '40px',
-        fontWeight: 400,
-        color: 'white',
-      }}>
+      <span
+        style={{
+          fontFamily: 'var(--font-serif)',
+          fontSize: 32,
+          lineHeight: '40px',
+          fontWeight: 400,
+          color: 'white',
+        }}
+      >
         {value}
       </span>
     </div>
@@ -128,24 +161,32 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
       <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden' }}>
         <PlanSummaryBackground style={{ width: '100%', height: '100%' }} />
       </div>
-    <div style={{ position: 'relative', zIndex: 1, padding: '150px max(40px, calc((100% - 272px - 898px) * 0.65)) 120px max(312px, calc(272px + (100% - 272px - 898px) * 0.35))' }}>
-
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          padding:
+            '150px max(40px, calc((100% - 272px - 898px) * 0.65)) 120px max(312px, calc(272px + (100% - 272px - 898px) * 0.35))',
+        }}
+      >
         {/* ── Hero ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: DURATION['scene-in'], ease: EASE.settle as [number, number, number, number] }}
         >
-          <h1 style={{
-            margin: 0,
-            fontFamily: 'var(--font-serif)',
-            fontSize: 56,
-            lineHeight: '64px',
-            fontWeight: 300,
-            letterSpacing: '-0.3px',
-            color: 'white',
-            whiteSpace: 'pre-line',
-          }}>
+          <h1
+            style={{
+              margin: 0,
+              fontFamily: 'var(--font-serif)',
+              fontSize: 56,
+              lineHeight: '64px',
+              fontWeight: 300,
+              letterSpacing: '-0.3px',
+              color: 'white',
+              whiteSpace: 'pre-line',
+            }}
+          >
             {`${advisorName}'s\n2026–2027 Plan`}
           </h1>
         </motion.div>
@@ -154,7 +195,11 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.15, duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+          transition={{
+            delay: 0.15,
+            duration: DURATION.deliberate,
+            ease: EASE.settle as [number, number, number, number],
+          }}
           style={{ height: 1, background: 'rgba(255,255,255,0.15)', margin: '48px 0' }}
         />
 
@@ -162,23 +207,30 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: DURATION['scene-in'], ease: EASE.settle as [number, number, number, number] }}
+          transition={{
+            delay: 0.2,
+            duration: DURATION['scene-in'],
+            ease: EASE.settle as [number, number, number, number],
+          }}
         >
           <SectionLabel>What you&apos;re working towards</SectionLabel>
 
           {/* Body copy left (602px) + stats right (204px), gap 92px — Figma measurements */}
           <div style={{ display: 'flex', gap: 92, alignItems: 'flex-start' }}>
-            <p style={{
-              margin: 0,
-              flex: '0 0 602px',
-              fontFamily: 'var(--font-serif)',
-              fontSize: 32,
-              lineHeight: '44px',
-              fontWeight: 300,
-              letterSpacing: '-0.2px',
-              color: 'white',
-            }}>
-              This is the year you reach President's Council, deliver holistic advice, and build the kind of practice that changes lives — without sacrificing your own.
+            <p
+              style={{
+                margin: 0,
+                flex: '0 0 602px',
+                fontFamily: 'var(--font-serif)',
+                fontSize: 32,
+                lineHeight: '44px',
+                fontWeight: 300,
+                letterSpacing: '-0.2px',
+                color: 'white',
+              }}
+            >
+              This is the year you reach President's Council, deliver holistic advice, and build the kind of practice
+              that changes lives — without sacrificing your own.
             </p>
 
             <div style={{ flex: '0 0 204px', display: 'flex', flexDirection: 'column', gap: 32, paddingTop: 4 }}>
@@ -196,19 +248,27 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: DURATION['scene-in'], ease: EASE.settle as [number, number, number, number] }}
+          transition={{
+            delay: 0.3,
+            duration: DURATION['scene-in'],
+            ease: EASE.settle as [number, number, number, number],
+          }}
         >
           <SectionLabel>Your pacing</SectionLabel>
 
           {/* rgba(0,10,98,0.2) = dark semi-transparent blue per Figma — no NYL token equivalent; design system gap */}
-          <div style={{
-            background: 'rgba(0,10,98,0.2)',
-            borderRadius: 12,
-            padding: 32,
-            '--text-body-muted': 'rgba(255,255,255,0.6)',
-            '--text-headline': 'white',
-            '--text-body': 'white',
-          } as React.CSSProperties}>
+          <div
+            style={
+              {
+                background: 'rgba(0,10,98,0.2)',
+                borderRadius: 12,
+                padding: 32,
+                '--text-body-muted': 'rgba(255,255,255,0.6)',
+                '--text-headline': 'white',
+                '--text-body': 'white',
+              } as React.CSSProperties
+            }
+          >
             <PaceChart
               actualPoints={CHART_ACTUAL}
               currentPacePoints={CHART_CURRENT_PACE}
@@ -250,7 +310,11 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: DURATION['scene-in'], ease: EASE.settle as [number, number, number, number] }}
+          transition={{
+            delay: 0.4,
+            duration: DURATION['scene-in'],
+            ease: EASE.settle as [number, number, number, number],
+          }}
         >
           <SectionLabel>How we&apos;ll get there</SectionLabel>
 
@@ -263,7 +327,8 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
               items={[
                 {
                   title: 'Add license to reduce referrals to others',
-                  description: "One more license this year opens planning conversations that you're currently referring out.",
+                  description:
+                    "One more license this year opens planning conversations that you're currently referring out.",
                   chips: [
                     { icon: 'growth', label: 'Go holistic' },
                     { icon: 'council', label: 'Reach Executive Council' },
@@ -271,7 +336,8 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
                 },
                 {
                   title: "Become a colleague's succession plan",
-                  description: "Position yourself as the best successor to take on a retiring colleague's book of business.",
+                  description:
+                    "Position yourself as the best successor to take on a retiring colleague's book of business.",
                   chips: [
                     { icon: 'succession', label: 'Succession' },
                     { icon: 'fyc', label: 'Boost FYC' },
@@ -300,10 +366,9 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
                 },
                 {
                   title: 'Prioritize existing clients',
-                  description: 'Reviews and check-ins with the clients you already have surface the easiest opportunities to grow.',
-                  chips: [
-                    { icon: 'client', label: 'Prioritize current clients' },
-                  ],
+                  description:
+                    'Reviews and check-ins with the clients you already have surface the easiest opportunities to grow.',
+                  chips: [{ icon: 'client', label: 'Prioritize current clients' }],
                 },
               ]}
               nylaItems={[
@@ -322,9 +387,7 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
                 {
                   title: 'Get vacation on the calendar',
                   description: "Blocking time off now protects the energy you'll need to carry the rest of the plan.",
-                  chips: [
-                    { icon: 'succession', label: 'Succession' },
-                  ],
+                  chips: [{ icon: 'succession', label: 'Succession' }],
                 },
               ]}
               nylaItems={[
@@ -339,7 +402,11 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.55, duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+          transition={{
+            delay: 0.55,
+            duration: DURATION.deliberate,
+            ease: EASE.settle as [number, number, number, number],
+          }}
           style={{
             marginTop: 80,
             borderTop: '1px solid rgba(255,255,255,0.15)',
@@ -352,24 +419,29 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
           }}
         >
           <div style={{ flex: 1 }}>
-            <p style={{
-              margin: '0 0 6px',
-              fontFamily: 'var(--font-sans)',
-              fontSize: 16,
-              lineHeight: '24px',
-              fontWeight: 600,
-              color: 'white',
-            }}>
+            <p
+              style={{
+                margin: '0 0 6px',
+                fontFamily: 'var(--font-sans)',
+                fontSize: 16,
+                lineHeight: '24px',
+                fontWeight: 600,
+                color: 'white',
+              }}
+            >
               Does this feel like your year?
             </p>
-            <p style={{
-              margin: 0,
-              fontFamily: 'var(--font-sans)',
-              fontSize: 14,
-              lineHeight: '20px',
-              color: 'rgba(255,255,255,0.7)',
-            }}>
-              Adjust any piece of the plan above, or accept the plan to see the moves you can start making today. Remember, you can revisit this at any time.
+            <p
+              style={{
+                margin: 0,
+                fontFamily: 'var(--font-sans)',
+                fontSize: 14,
+                lineHeight: '20px',
+                color: 'rgba(255,255,255,0.7)',
+              }}
+            >
+              Adjust any piece of the plan above, or accept the plan to see the moves you can start making today.
+              Remember, you can revisit this at any time.
             </p>
           </div>
           <button
@@ -393,8 +465,7 @@ export function PlanSummary({ advisorName = 'Sarah', onClose, onAccept }: PlanSu
             Yes, accept this plan
           </button>
         </motion.div>
-
-    </div>
+      </div>
     </div>
   )
 }

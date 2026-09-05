@@ -29,14 +29,29 @@ export function rows() {
     { id: 'retention', label: 'Retention' },
     { id: 'reactivation', label: 'Reactivation' },
     { id: 'referral', label: 'Referral' },
-  ].forEach(t => {
+  ].forEach((t) => {
     out.push(ob('nav', `actionboard.tabs.${t.id}`, 'label', t.label, { storage: 'constant' }))
   })
 
   ;[
-    ['actionboard.hero.crosssell.headline', 'hero', 'headline', 'Protect, expand, and prepare:\nThree opportunities stand out today.'],
-    ['actionboard.opportunity.henderson.headline', 'opportunity-card', 'headline', 'Janet Henderson has recently had a change of address to a high flood-risk coastal location.'],
-    ['actionboard.opportunity.garcia.headline', 'opportunity-card', 'headline', 'Helena Garcia is approaching her retirement income planning window.'],
+    [
+      'actionboard.hero.crosssell.headline',
+      'hero',
+      'headline',
+      'Protect, expand, and prepare:\nThree opportunities stand out today.',
+    ],
+    [
+      'actionboard.opportunity.henderson.headline',
+      'opportunity-card',
+      'headline',
+      'Janet Henderson has recently had a change of address to a high flood-risk coastal location.',
+    ],
+    [
+      'actionboard.opportunity.garcia.headline',
+      'opportunity-card',
+      'headline',
+      'Helena Garcia is approaching her retirement income planning window.',
+    ],
   ].forEach(([key, step, type, content]) => {
     out.push(ob(step, key, type, content, { storage: 'constant' }))
   })

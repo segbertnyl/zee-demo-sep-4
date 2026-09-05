@@ -18,16 +18,16 @@
   --nyl-gray-800: #313238;
   --nyl-gray-900: #17181c;
 
-  --nyl-blue-025: #f2f8ff;         /* Figma blue-025 */
-  --nyl-blue-050: #e5f1ff;         /* Lightest blue tint — selected state backgrounds */
+  --nyl-blue-025: #f2f8ff; /* Figma blue-025 */
+  --nyl-blue-050: #e5f1ff; /* Lightest blue tint — selected state backgrounds */
   --nyl-blue-100: #cce3ff;
-  --nyl-blue-200: #99c8ff;         /* Figma blue-200 */
-  --nyl-blue-250: #80baff;         /* Brand Light Blue — node base */
-  --nyl-blue-400: #3388ff;         /* Figma blue-400 */
-  --nyl-blue-500: #0468ff;         /* Brand Blue */
+  --nyl-blue-200: #99c8ff; /* Figma blue-200 */
+  --nyl-blue-250: #80baff; /* Brand Light Blue — node base */
+  --nyl-blue-400: #3388ff; /* Figma blue-400 */
+  --nyl-blue-500: #0468ff; /* Brand Blue */
   --nyl-blue-600: #0044cc;
-  --nyl-blue-700: #001e94;         /* Mid-dark blue — selected tag text, active states */
-  --nyl-blue-800: #000a62;         /* Brand Dark Blue */
+  --nyl-blue-700: #001e94; /* Mid-dark blue — selected tag text, active states */
+  --nyl-blue-800: #000a62; /* Brand Dark Blue */
 
   --nyl-green-50: #e9f9f1;
   --nyl-green-200: #a5efbf;
@@ -40,20 +40,20 @@
   --nyl-red-040: #ffbab8;
   --nyl-red-080: #c02321;
 
-  --nyl-orange-100: #ffe8cf;       /* Brand Light Orange — Pantone 155 */
-  --nyl-orange-400: #ff9522;       /* Brand Orange — Pantone 2013 */
-  --nyl-orange-500: #f2840d;       /* Custom darker hover; not in brand sheet */
-  --nyl-orange-700: #b45309;       /* Deep orange — status-pill text on light fill */
+  --nyl-orange-100: #ffe8cf; /* Brand Light Orange — Pantone 155 */
+  --nyl-orange-400: #ff9522; /* Brand Orange — Pantone 2013 */
+  --nyl-orange-500: #f2840d; /* Custom darker hover; not in brand sheet */
+  --nyl-orange-700: #b45309; /* Deep orange — status-pill text on light fill */
 
   --nyl-purple-025: #faf5ff;
   --nyl-purple-050: #f4e6ff;
   --nyl-purple-100: #eaccff;
   --nyl-purple-200: #d3a1f7;
-  --nyl-purple-400: #a552e0;       /* rgb(165,82,224) — gradient stop */
-  --nyl-purple-500: #8b37c8;       /* rgb(139,55,200) — gradient stop */
+  --nyl-purple-400: #a552e0; /* rgb(165,82,224) — gradient stop */
+  --nyl-purple-500: #8b37c8; /* rgb(139,55,200) — gradient stop */
   --nyl-purple-600: #7028a4;
-  --nyl-purple-700: #4d1773;       /* Brand Purple — Pantone 2607 */
-  --nyl-purple-900: #1c092b;       /* rgb(28,9,43)    — gradient stop */
+  --nyl-purple-700: #4d1773; /* Brand Purple — Pantone 2607 */
+  --nyl-purple-900: #1c092b; /* rgb(28,9,43)    — gradient stop */
 
   /* Brand "Light Gray" — Pantone Warm Gray 1 */
   --nyl-gray-warm: #e3e0dd;
@@ -79,9 +79,9 @@
   --trigger-business-sale: var(--dv-green-02);
 
   /* Typography */
-  --font-serif: "alverata", "Alverata", Georgia, ui-serif, serif;
-  --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: "Roboto Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-serif: 'alverata', 'Alverata', Georgia, ui-serif, serif;
+  --font-sans: 'Roboto', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   --weight-light: 300;
   --weight-regular: 400;
@@ -134,12 +134,12 @@
 :root {
   --bg-canvas: #ffffff;
   --bg-canvas-fog: #ffffff;
-  --bg-canvas-dark: var(--nyl-blue-800);   /* Brand Dark Blue field, used for hero bands & covers. */
+  --bg-canvas-dark: var(--nyl-blue-800); /* Brand Dark Blue field, used for hero bands & covers. */
   --bg-surface: var(--nyl-gray-025);
   --bg-surface-elevated: var(--nyl-white);
   --bg-surface-translucent: rgba(255, 255, 255, 0.78);
   --bg-inverse: var(--nyl-blue-800);
-  --bg-overlay-dark: #1a0a2e;              /* Deep-purple takeover overlays (welcome sequence, landing chooser). */
+  --bg-overlay-dark: #1a0a2e; /* Deep-purple takeover overlays (welcome sequence, landing chooser). */
 
   --text-headline: var(--nyl-gray-900);
   --text-headline-muted: var(--nyl-gray-700);
@@ -170,7 +170,7 @@
   --badge-lapse: var(--nyl-red-080);
   --badge-lapse-soft: rgba(192, 35, 33, 0.08);
   --badge-opportunity: var(--nyl-green-800);
-  --badge-opportunity-soft: rgba(1, 99, 85, 0.10);
+  --badge-opportunity-soft: rgba(1, 99, 85, 0.1);
   /* Ready (green) — fill green-50, dot green-600, text green-700. */
   --badge-ready: var(--nyl-green-700);
   --badge-ready-soft: var(--nyl-green-50);
@@ -222,15 +222,15 @@
 
   /* "Not built" page background — soft peach + lavender cloud on white
    * (Figma 1268-29002). Used behind the placeholder pages. */
-  --bg-notbuilt-warm:     rgba(255, 221, 209, 0.65);
+  --bg-notbuilt-warm: rgba(255, 221, 209, 0.65);
   --bg-notbuilt-lavender: rgba(214, 175, 244, 0.42);
 
   /* Onboarding ambient background blobs — primitives at alpha.
    * Warm = --nyl-orange-100 @ 55%, Cool = --nyl-blue-100 @ 50%, Accent = --nyl-blue-250 @ 40%
    * Lavender = --nyl-purple-700 family at 90% lightness @ 45% — tonally similar to cool/accent */
-  --bg-onboarding-blob-warm:     rgba(255, 232, 207, 0.65);
-  --bg-onboarding-blob-cool:     rgba(204, 227, 255, 0.50);
-  --bg-onboarding-blob-accent:   rgba(128, 186, 255, 0.40);
+  --bg-onboarding-blob-warm: rgba(255, 232, 207, 0.65);
+  --bg-onboarding-blob-cool: rgba(204, 227, 255, 0.5);
+  --bg-onboarding-blob-accent: rgba(128, 186, 255, 0.4);
   --bg-onboarding-blob-lavender: rgba(232, 214, 245, 0.45);
 }
 

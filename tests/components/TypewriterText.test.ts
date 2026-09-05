@@ -70,10 +70,9 @@ test.describe('TypewriterText — word spacing', () => {
     // Confirm no two words are concatenated (no token longer than the longest real word).
     const longestExpected = 'ambitions.'.length // longest word across all taglines
     for (const word of words) {
-      expect(
-        word.length,
-        `Word "${word}" looks like concatenated tokens in "${normalized}"`,
-      ).toBeLessThanOrEqual(longestExpected)
+      expect(word.length, `Word "${word}" looks like concatenated tokens in "${normalized}"`).toBeLessThanOrEqual(
+        longestExpected,
+      )
     }
   })
 

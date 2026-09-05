@@ -86,11 +86,25 @@ const STEP_STAGE: Record<StepId, StageId | null> = {
  * goals-intro). The data-driven profile review leads, then the rest. */
 const STEPS: StepId[] = [
   'profile',
-  'goals-intro', 'direction', 'fyc-target', 'council-level',
-  'activity-target', 'advisor-vision', 'outside-work',
-  'growth-intro', 'progress-areas', 'growth-focus', 'time-pulls', 'time-open',
-  'clients-intro', 'client-signals', 'client-activities', 'client-conversations',
-  'stay-in-front', 'life-events', 'plan',
+  'goals-intro',
+  'direction',
+  'fyc-target',
+  'council-level',
+  'activity-target',
+  'advisor-vision',
+  'outside-work',
+  'growth-intro',
+  'progress-areas',
+  'growth-focus',
+  'time-pulls',
+  'time-open',
+  'clients-intro',
+  'client-signals',
+  'client-activities',
+  'client-conversations',
+  'stay-in-front',
+  'life-events',
+  'plan',
 ]
 
 /* Steps that lead a new section — these land anchored at the TOP of the
@@ -117,12 +131,12 @@ const PROCESSING_COPY = [
 ]
 
 export type Goals = {
-  longTermTags: string[]                   /* e.g. "Holistic Advising", "Eagle Status" */
+  longTermTags: string[] /* e.g. "Holistic Advising", "Eagle Status" */
   fycTarget: number | null
   councilLevel: string | null
   approach: string | null
   clientApproach: { existing?: string; new?: string }
-  progressAreas: string[]                  /* picks from "How do you want to grow this year?" — drive the growth-focus follow-up */
+  progressAreas: string[] /* picks from "How do you want to grow this year?" — drive the growth-focus follow-up */
 }
 
 const EMPTY_GOALS: Goals = {
@@ -203,7 +217,9 @@ export function OnboardingFlow() {
       setCreating(false)
       setSectionVeil(false)
     }
-    const h = (e: KeyboardEvent) => { if (e.key === 'Escape') close() }
+    const h = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close()
+    }
     window.addEventListener('keydown', h)
     return () => window.removeEventListener('keydown', h)
   }, [open, close, mode])
@@ -239,16 +255,21 @@ export function OnboardingFlow() {
       } else {
         const nodeRect = node.getBoundingClientRect()
         const scrollerRect = scroller.getBoundingClientRect()
-        const offset = (nodeRect.top - scrollerRect.top) - (scroller.clientHeight - nodeRect.height) / 2
+        const offset = nodeRect.top - scrollerRect.top - (scroller.clientHeight - nodeRect.height) / 2
         target = scroller.scrollTop + offset
       }
       cancelFn = smoothScrollTo(scroller, Math.max(0, target), 820)
     })
-    const settle = window.setTimeout(() => { autoScrollingRef.current = false }, 900)
+    const settle = window.setTimeout(() => {
+      autoScrollingRef.current = false
+    }, 900)
 
     /* User interaction aborts the auto-scroll and hands focus tracking back
      * to the scroll position immediately. */
-    const abort = () => { autoScrollingRef.current = false; cancelFn?.() }
+    const abort = () => {
+      autoScrollingRef.current = false
+      cancelFn?.()
+    }
     scroller.addEventListener('wheel', abort, { passive: true })
     scroller.addEventListener('touchstart', abort, { passive: true })
     scroller.addEventListener('pointerdown', abort, { passive: true })
@@ -282,7 +303,10 @@ export function OnboardingFlow() {
         const el = child as HTMLElement
         const center = el.offsetTop + el.offsetHeight / 2
         const dist = Math.abs(center - mid)
-        if (dist < bestDist) { bestDist = dist; best = i }
+        if (dist < bestDist) {
+          bestDist = dist
+          best = i
+        }
       })
       setFocusedIndex(best)
     })
@@ -314,15 +338,24 @@ export function OnboardingFlow() {
     const target = node.offsetTop - (scroller.clientHeight - node.offsetHeight) / 2
     smoothScrollTo(scroller, Math.max(0, target), 820)
     setFocusedIndex(idx)
-    window.setTimeout(() => { autoScrollingRef.current = false }, 900)
+    window.setTimeout(() => {
+      autoScrollingRef.current = false
+    }, 900)
   }
 
   /* Onboarding wraps up onto the Plan page — the plan they just built is the
    * natural landing, not the briefing. */
-  function finish() { markOnboardingCompleted(); setScene('plan'); close() }
+  function finish() {
+    markOnboardingCompleted()
+    setScene('plan')
+    close()
+  }
 
   /* "Save and exit" — leave onboarding for the Briefing without finishing. */
-  function saveAndExit() { setScene('briefing'); close() }
+  function saveAndExit() {
+    setScene('briefing')
+    close()
+  }
 
   /* "Create my briefing" plays a short generative beat, then closes the
    * onboarding — the dialog's long exit fade dissolves the purple into the
@@ -337,9 +370,7 @@ export function OnboardingFlow() {
    * (activeIndex), so filled-out stages stay navigable in both directions. */
   const focusedStage = STEP_STAGE[STEPS[focusedIndex]]
   const stageIndex = focusedStage ? STAGES.findIndex((s) => s.id === focusedStage) : -1
-  const reachedStages = STAGES.map((s) =>
-    STEPS.some((id, i) => i <= activeIndex && STEP_STAGE[id] === s.id),
-  )
+  const reachedStages = STAGES.map((s) => STEPS.some((id, i) => i <= activeIndex && STEP_STAGE[id] === s.id))
   /* Top-right purple element progresses through three states: a minimized
    * square (before Goals) → a "processing" pill once the first Goals question
    * (direction) is answered, its copy cycling per input → the full "Building
@@ -348,7 +379,8 @@ export function OnboardingFlow() {
   const goalsComplete = activeIndex >= STEPS.indexOf('growth-intro')
   const businessDone = activeIndex >= STEPS.indexOf('clients-intro')
   const clientsDone = activeIndex >= STEPS.indexOf('plan')
-  const processingCopy = PROCESSING_COPY[Math.max(0, activeIndex - STEPS.indexOf('direction') - 1) % PROCESSING_COPY.length]
+  const processingCopy =
+    PROCESSING_COPY[Math.max(0, activeIndex - STEPS.indexOf('direction') - 1) % PROCESSING_COPY.length]
 
   /* "Save and exit" appears once the advisor has answered the first Goals
    * question (direction) and stays for the rest of the flow. */
@@ -416,13 +448,31 @@ export function OnboardingFlow() {
                           const node = innerRef.current?.children[prev] as HTMLElement | undefined
                           if (!scroller || !node) return
                           autoScrollingRef.current = true
-                          smoothScrollTo(scroller, Math.max(0, node.offsetTop - (scroller.clientHeight - node.offsetHeight) / 2), 600)
+                          smoothScrollTo(
+                            scroller,
+                            Math.max(0, node.offsetTop - (scroller.clientHeight - node.offsetHeight) / 2),
+                            600,
+                          )
                           setFocusedIndex(prev)
-                          window.setTimeout(() => { autoScrollingRef.current = false }, 700)
+                          window.setTimeout(() => {
+                            autoScrollingRef.current = false
+                          }, 700)
                         }}
                         className="flex size-7 items-center justify-center rounded-md border border-neutral-200 text-neutral-400 transition-colors hover:border-neutral-300 hover:text-neutral-700 disabled:cursor-default disabled:opacity-30"
                       >
-                        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 8.5 L6 5.5 L3 8.5" /></svg>
+                        <svg
+                          width="11"
+                          height="11"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M9 8.5 L6 5.5 L3 8.5" />
+                        </svg>
                       </button>
                       <button
                         type="button"
@@ -434,13 +484,31 @@ export function OnboardingFlow() {
                           const node = innerRef.current?.children[next] as HTMLElement | undefined
                           if (!scroller || !node) return
                           autoScrollingRef.current = true
-                          smoothScrollTo(scroller, Math.max(0, node.offsetTop - (scroller.clientHeight - node.offsetHeight) / 2), 600)
+                          smoothScrollTo(
+                            scroller,
+                            Math.max(0, node.offsetTop - (scroller.clientHeight - node.offsetHeight) / 2),
+                            600,
+                          )
                           setFocusedIndex(next)
-                          window.setTimeout(() => { autoScrollingRef.current = false }, 700)
+                          window.setTimeout(() => {
+                            autoScrollingRef.current = false
+                          }, 700)
                         }}
                         className="flex size-7 items-center justify-center rounded-md border border-neutral-200 text-neutral-400 transition-colors hover:border-neutral-300 hover:text-neutral-700 disabled:cursor-default disabled:opacity-30"
                       >
-                        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 4.5 L6 7.5 L9 4.5" /></svg>
+                        <svg
+                          width="11"
+                          height="11"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M3 4.5 L6 7.5 L9 4.5" />
+                        </svg>
                       </button>
                     </motion.div>
                   )}
@@ -474,48 +542,68 @@ export function OnboardingFlow() {
               style={{ scrollBehavior: 'auto' }}
             >
               <div ref={innerRef} className="mx-auto flex w-full max-w-[820px] flex-col items-stretch">
-                {stepsRevealed && (mode === 'revisit-goals' ? STEPS.slice(STEPS.indexOf('goals-intro'), activeIndex + 1) : STEPS.slice(0, activeIndex + 1)).map((id, i) => {
-                  const renderStart = mode === 'revisit-goals' ? STEPS.indexOf('goals-intro') : 0
-                  const isActive = i === activeIndex - renderStart
-                  const isFocused = i + renderStart === focusedIndex
-                  /* Section leads need a tall active block so the scroller can
-                   * actually bring their header to the very top of the page
-                   * (the last step has nothing below it to scroll against). */
-                  const isSectionLead = SECTION_LEAD_STEPS.has(id)
-                  return (
-                    <motion.div
-                      key={id}
-                      ref={isActive ? activeRef : undefined}
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: isFocused ? 1 : 0.5, y: 0 }}
-                      transition={{ duration: 0.55, ease: [0.22, 0.65, 0.05, 1] }}
-                      aria-hidden={!isActive}
-                      className={[
-                        'flex w-full flex-col items-start py-24',
-                        isActive
-                          ? (isSectionLead ? 'min-h-[92vh]' : 'min-h-[60vh]')
-                          : 'pointer-events-none select-none border-t border-neutral-200/60',
-                      ].join(' ')}
-                    >
-                      {isSectionLead ? (
-                        <div className="flex w-full flex-col items-stretch text-left">
-                          {renderStep(id, { advance, finish, goals, mode, prefilled: mode === 'revisit-goals', buildPlan: createBriefing })}
-                        </div>
-                      ) : (
-                        /* Question steps: the heading appears after a ~0.5s pause,
+                {stepsRevealed &&
+                  (mode === 'revisit-goals'
+                    ? STEPS.slice(STEPS.indexOf('goals-intro'), activeIndex + 1)
+                    : STEPS.slice(0, activeIndex + 1)
+                  ).map((id, i) => {
+                    const renderStart = mode === 'revisit-goals' ? STEPS.indexOf('goals-intro') : 0
+                    const isActive = i === activeIndex - renderStart
+                    const isFocused = i + renderStart === focusedIndex
+                    /* Section leads need a tall active block so the scroller can
+                     * actually bring their header to the very top of the page
+                     * (the last step has nothing below it to scroll against). */
+                    const isSectionLead = SECTION_LEAD_STEPS.has(id)
+                    return (
+                      <motion.div
+                        key={id}
+                        ref={isActive ? activeRef : undefined}
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: isFocused ? 1 : 0.5, y: 0 }}
+                        transition={{ duration: 0.55, ease: [0.22, 0.65, 0.05, 1] }}
+                        aria-hidden={!isActive}
+                        className={[
+                          'flex w-full flex-col items-start py-24',
+                          isActive
+                            ? isSectionLead
+                              ? 'min-h-[92vh]'
+                              : 'min-h-[60vh]'
+                            : 'pointer-events-none select-none border-t border-neutral-200/60',
+                        ].join(' ')}
+                      >
+                        {isSectionLead ? (
+                          <div className="flex w-full flex-col items-stretch text-left">
+                            {renderStep(id, {
+                              advance,
+                              finish,
+                              goals,
+                              mode,
+                              prefilled: mode === 'revisit-goals',
+                              buildPlan: createBriefing,
+                            })}
+                          </div>
+                        ) : (
+                          /* Question steps: the heading appears after a ~0.5s pause,
                            then the step's interactive block (RevealBody) follows. */
-                        <motion.div
-                          className="flex w-full flex-col items-stretch text-left"
-                          initial={{ opacity: 0, y: 18 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: Q_HEAD_DELAY, ease: Q_REVEAL_EASE }}
-                        >
-                          {renderStep(id, { advance, finish, goals, mode, prefilled: mode === 'revisit-goals', buildPlan: createBriefing })}
-                        </motion.div>
-                      )}
-                    </motion.div>
-                  )
-                })}
+                          <motion.div
+                            className="flex w-full flex-col items-stretch text-left"
+                            initial={{ opacity: 0, y: 18 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: Q_HEAD_DELAY, ease: Q_REVEAL_EASE }}
+                          >
+                            {renderStep(id, {
+                              advance,
+                              finish,
+                              goals,
+                              mode,
+                              prefilled: mode === 'revisit-goals',
+                              buildPlan: createBriefing,
+                            })}
+                          </motion.div>
+                        )}
+                      </motion.div>
+                    )
+                  })}
               </div>
             </div>
 
@@ -674,7 +762,6 @@ export function OnboardingFlow() {
   )
 }
 
-
 /* Custom RAF easing for the scroll — gives a heavier, slower entrance than
  * the browser default smooth scroll. Returns a cancel function so callers can
  * abort the animation (e.g. when the user starts scrolling manually). */
@@ -683,7 +770,7 @@ function smoothScrollTo(el: HTMLElement, target: number, durationMs: number): ()
   const delta = target - startTop
   if (Math.abs(delta) < 1) return () => {}
   const start = performance.now()
-  const ease = (t: number) => 1 - Math.pow(1 - t, 4)        /* easeOutQuart */
+  const ease = (t: number) => 1 - Math.pow(1 - t, 4) /* easeOutQuart */
   let cancelled = false
   let frameId = 0
   function step(now: number) {
@@ -724,26 +811,46 @@ type StepProps = {
 
 function renderStep(step: StepId, p: StepProps) {
   switch (step) {
-    case 'profile': return <Profile {...p} />
-    case 'goals-intro': return <GoalsIntro {...p} />
-    case 'advisor-vision': return <AdvisorVision {...p} />
-    case 'direction': return <Direction {...p} />
-    case 'fyc-target': return <FycTarget {...p} />
-    case 'council-level': return <CouncilLevel {...p} />
-    case 'activity-target': return <ActivityTarget {...p} />
-    case 'outside-work': return <OutsideWork {...p} />
-    case 'growth-intro': return <GrowthIntro {...p} />
-    case 'progress-areas': return <ProgressAreas {...p} />
-    case 'growth-focus': return <GrowthFocus {...p} />
-    case 'time-pulls': return <TimePulls {...p} />
-    case 'time-open': return <TimeOpen {...p} />
-    case 'clients-intro': return <ClientsIntro {...p} />
-    case 'client-signals': return <ClientSignals {...p} />
-    case 'client-activities': return <ClientActivities {...p} />
-    case 'client-conversations': return <ClientConversations {...p} />
-    case 'stay-in-front': return <StayInFront {...p} />
-    case 'life-events': return <LifeEvents {...p} />
-    case 'plan': return <PlanStep {...p} />
+    case 'profile':
+      return <Profile {...p} />
+    case 'goals-intro':
+      return <GoalsIntro {...p} />
+    case 'advisor-vision':
+      return <AdvisorVision {...p} />
+    case 'direction':
+      return <Direction {...p} />
+    case 'fyc-target':
+      return <FycTarget {...p} />
+    case 'council-level':
+      return <CouncilLevel {...p} />
+    case 'activity-target':
+      return <ActivityTarget {...p} />
+    case 'outside-work':
+      return <OutsideWork {...p} />
+    case 'growth-intro':
+      return <GrowthIntro {...p} />
+    case 'progress-areas':
+      return <ProgressAreas {...p} />
+    case 'growth-focus':
+      return <GrowthFocus {...p} />
+    case 'time-pulls':
+      return <TimePulls {...p} />
+    case 'time-open':
+      return <TimeOpen {...p} />
+    case 'clients-intro':
+      return <ClientsIntro {...p} />
+    case 'client-signals':
+      return <ClientSignals {...p} />
+    case 'client-activities':
+      return <ClientActivities {...p} />
+    case 'client-conversations':
+      return <ClientConversations {...p} />
+    case 'stay-in-front':
+      return <StayInFront {...p} />
+    case 'life-events':
+      return <LifeEvents {...p} />
+    case 'plan':
+      return <PlanStep {...p} />
   }
 }
 
@@ -770,16 +877,32 @@ type ProfileCard = {
 const PROFILE_ROWS: ProfileCard[] = [
   { k: 'Years with NYL', v: '5 years' },
   {
-    k: '3-year average FYC', v: '$37,000',
-    source: { title: 'Averaged from 2023–2025 FYC.', rows: ['2023 — $35,200', '2024 — $37,800', '2025 — $38,000'], src: 'Source: Salesforce' },
+    k: '3-year average FYC',
+    v: '$37,000',
+    source: {
+      title: 'Averaged from 2023–2025 FYC.',
+      rows: ['2023 — $35,200', '2024 — $37,800', '2025 — $38,000'],
+      src: 'Source: Salesforce',
+    },
   },
   {
-    k: 'Production pace', v: '-18%', sub: 'vs. last year',
-    source: { title: 'Production pace through Q2 2026.', rows: ['YTD FYC — $14,200', 'Same period last year — $17,300'], src: 'Source: Salesforce' },
+    k: 'Production pace',
+    v: '-18%',
+    sub: 'vs. last year',
+    source: {
+      title: 'Production pace through Q2 2026.',
+      rows: ['YTD FYC — $14,200', 'Same period last year — $17,300'],
+      src: 'Source: Salesforce',
+    },
   },
   {
-    k: 'Council standing', v: 'Quality Council',
-    source: { title: 'Most recent council qualification.', rows: ['2025 — Quality Council', '2024 — Quality Council'], src: 'Source: Salesforce' },
+    k: 'Council standing',
+    v: 'Quality Council',
+    source: {
+      title: 'Most recent council qualification.',
+      rows: ['2025 — Quality Council', '2024 — Quality Council'],
+      src: 'Source: Salesforce',
+    },
   },
   { k: 'Active client book', v: '303 clients' },
   { k: 'Primary product mix', v: 'Protection — transitioning to holistic', subBelow: true },
@@ -810,17 +933,21 @@ function Profile({ advance }: StepProps) {
     PROFILE_WAVES.forEach((wave, i) => {
       const linger = i === 0 ? PROFILE_LINGER_FIRST : PROFILE_LINGER_REST
       timers.push(setTimeout(() => setSourceLabel(wave.label), t))
-      timers.push(setTimeout(() => {
-        setRevealed((prev) => {
-          const next = new Set(prev)
-          wave.rows.forEach((r) => next.add(r))
-          return next
-        })
-      }, t + linger))
+      timers.push(
+        setTimeout(() => {
+          setRevealed((prev) => {
+            const next = new Set(prev)
+            wave.rows.forEach((r) => next.add(r))
+            return next
+          })
+        }, t + linger),
+      )
       t += linger
     })
     timers.push(setTimeout(() => setLoaded(true), t + 300))
-    return () => { timers.forEach(clearTimeout) }
+    return () => {
+      timers.forEach(clearTimeout)
+    }
   }, [])
 
   useEffect(() => {
@@ -839,12 +966,15 @@ function Profile({ advance }: StepProps) {
   return (
     <div className="flex w-full flex-col gap-6 text-left">
       <div>
-        <h2 className="font-serif text-[28px] leading-tight tracking-tight" style={{ fontWeight: 400, color: '#17181C' }}>
+        <h2
+          className="font-serif text-[28px] leading-tight tracking-tight"
+          style={{ fontWeight: 400, color: '#17181C' }}
+        >
           What we know
         </h2>
         <p className="mt-3 max-w-[64ch] text-[14.5px] leading-[1.55] text-neutral-600">
-          We've already gathered some information about your practice. Take a look, confirm what's
-          correct, and update anything that needs attention.
+          We've already gathered some information about your practice. Take a look, confirm what's correct, and update
+          anything that needs attention.
         </p>
       </div>
 
@@ -852,12 +982,22 @@ function Profile({ advance }: StepProps) {
       <div className="flex items-center gap-3 text-[13px] text-neutral-500">
         <AnimatePresence mode="wait">
           {loaded ? (
-            <motion.span key="loaded" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="inline-flex items-center gap-2">
+            <motion.span
+              key="loaded"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="inline-flex items-center gap-2"
+            >
               <CheckGlyphBlue />
               <span className="text-neutral-600">Profile loaded</span>
             </motion.span>
           ) : (
-            <motion.span key="loading" exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="inline-flex items-center gap-2">
+            <motion.span
+              key="loading"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="inline-flex items-center gap-2"
+            >
               <PercentLoader value={progress} />
               <AnimatePresence mode="wait">
                 <motion.span
@@ -912,7 +1052,10 @@ function ProfileTableRow({ data, revealed, isLast }: { data: ProfileCard; reveal
       initial={{ opacity: 0 }}
       animate={revealed ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 0.65, 0.05, 1] }}
-      className={['relative flex items-center justify-between gap-4 px-5 py-3.5', !isLast ? 'border-b border-neutral-100' : ''].join(' ')}
+      className={[
+        'relative flex items-center justify-between gap-4 px-5 py-3.5',
+        !isLast ? 'border-b border-neutral-100' : '',
+      ].join(' ')}
     >
       <p className="text-[14px] leading-snug text-neutral-500">{data.k}</p>
       <div className="flex shrink-0 items-center gap-2">
@@ -945,7 +1088,9 @@ function ProfileTableRow({ data, revealed, isLast }: { data: ProfileCard; reveal
           >
             <p className="text-[12.5px] font-semibold text-neutral-900">{data.source.title}</p>
             <ul className="mt-2 flex flex-col gap-0.5 text-[12px] text-neutral-600">
-              {data.source.rows.map((r) => <li key={r}>{r}</li>)}
+              {data.source.rows.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
             </ul>
             <p className="mt-2.5 text-[11.5px] italic text-neutral-400">{data.source.src}</p>
           </motion.div>
@@ -955,16 +1100,23 @@ function ProfileTableRow({ data, revealed, isLast }: { data: ProfileCard; reveal
   )
 }
 
-
-
 function CheckGlyphBlue() {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#0468ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="#0468ff"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M3 8.5 L6.5 12 L13 4.5" />
     </svg>
   )
 }
-
 
 /* Section-lead slides (goals / business / clients) share a clean entrance: the
  * heading, body, and CTA fade up with a short stagger, timed (via delayChildren)
@@ -991,7 +1143,15 @@ function SectionLead({ children, className }: { children: ReactNode; className?:
 /* Wraps a question's interactive block (selection inputs + CTA in their white
  * containment) so it builds in just after the heading — the heading rides the
  * step's own reveal (Q_HEAD_DELAY); this lands 300ms later (Q_BODY_DELAY). */
-function RevealBody({ children, className, delay = Q_BODY_DELAY }: { children: ReactNode; className?: string; delay?: number }) {
+function RevealBody({
+  children,
+  className,
+  delay = Q_BODY_DELAY,
+}: {
+  children: ReactNode
+  className?: string
+  delay?: number
+}) {
   return (
     <motion.div
       className={className}
@@ -1027,7 +1187,10 @@ function GoalsIntro({ advance, mode }: StepProps) {
   const isRevisit = mode === 'revisit-goals'
   return (
     <SectionLead>
-      <h2 className="font-serif text-[34px] leading-[1.12] tracking-tight text-[#4D1773] md:text-[42px]" style={{ fontWeight: 400, textWrap: 'balance' }}>
+      <h2
+        className="font-serif text-[34px] leading-[1.12] tracking-tight text-[#4D1773] md:text-[42px]"
+        style={{ fontWeight: 400, textWrap: 'balance' }}
+      >
         <TypewriterText
           text={isRevisit ? "Let's revisit your goals." : "Let's define your goals for 2026."}
           delayMs={isRevisit ? 300 : 950}
@@ -1048,11 +1211,18 @@ function GoalsIntro({ advance, mode }: StepProps) {
 }
 
 function AdvisorVision({ advance, prefilled }: StepProps) {
-  const [text, setText] = useState(prefilled ? 'I want to be a true financial partner to my clients — someone who helps them think about their whole picture, not just their policies.' : '')
+  const [text, setText] = useState(
+    prefilled
+      ? 'I want to be a true financial partner to my clients — someone who helps them think about their whole picture, not just their policies.'
+      : '',
+  )
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h2 className="font-serif text-[24px] leading-tight tracking-tight" style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}>
+        <h2
+          className="font-serif text-[24px] leading-tight tracking-tight"
+          style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}
+        >
           Anything else you want to share about your vision?
         </h2>
         <p className="mt-1.5 text-[13px] text-neutral-500">In your own words — no right answer.</p>
@@ -1085,11 +1255,36 @@ function AdvisorVision({ advance, prefilled }: StepProps) {
 
 function Direction({ advance, goals, prefilled }: StepProps) {
   const opts = [
-    { id: 'holistic', title: 'Become a holistic financial advisor', sub: 'Only planning, compliance, & processes', tag: 'Holistic Advising' },
-    { id: 'eagle', title: 'Build toward Eagle and Investment advisory', sub: 'Focus on the NYL, MFA, Eagle Path, or the licensed path', tag: 'Eagle Status' },
-    { id: 'referrals', title: 'Generate consistent, qualified referrals', sub: 'Build a trusted referral network without awkward selling', tag: 'Referral engine' },
-    { id: 'referral-practice', title: 'Transition to a referral-driven practice', sub: 'Protect clients while building for the future', tag: 'Referral engine' },
-    { id: 'team', title: 'Adopt a team-based model', sub: 'Grow through staffing, training, & shared clients', tag: 'Team-based' },
+    {
+      id: 'holistic',
+      title: 'Become a holistic financial advisor',
+      sub: 'Only planning, compliance, & processes',
+      tag: 'Holistic Advising',
+    },
+    {
+      id: 'eagle',
+      title: 'Build toward Eagle and Investment advisory',
+      sub: 'Focus on the NYL, MFA, Eagle Path, or the licensed path',
+      tag: 'Eagle Status',
+    },
+    {
+      id: 'referrals',
+      title: 'Generate consistent, qualified referrals',
+      sub: 'Build a trusted referral network without awkward selling',
+      tag: 'Referral engine',
+    },
+    {
+      id: 'referral-practice',
+      title: 'Transition to a referral-driven practice',
+      sub: 'Protect clients while building for the future',
+      tag: 'Referral engine',
+    },
+    {
+      id: 'team',
+      title: 'Adopt a team-based model',
+      sub: 'Grow through staffing, training, & shared clients',
+      tag: 'Team-based',
+    },
   ]
   const [picked, setPicked] = useState<string[]>(prefilled ? ['holistic', 'eagle'] : [])
   function toggle(id: string) {
@@ -1101,9 +1296,13 @@ function Direction({ advance, goals, prefilled }: StepProps) {
   }
   function submit() {
     const tags = picked.map((id) => opts.find((o) => o.id === id)?.tag).filter(Boolean) as string[]
-    const answer = picked.length === 0
-      ? 'Skipped'
-      : picked.map((id) => opts.find((o) => o.id === id)?.title).filter(Boolean).join(' · ')
+    const answer =
+      picked.length === 0
+        ? 'Skipped'
+        : picked
+            .map((id) => opts.find((o) => o.id === id)?.title)
+            .filter(Boolean)
+            .join(' · ')
     advance({
       answer: truncate(answer, 80),
       goals: {
@@ -1116,7 +1315,10 @@ function Direction({ advance, goals, prefilled }: StepProps) {
     <div className="flex gap-8">
       <div className="flex min-w-0 flex-1 flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <h2 className="font-serif text-[24px] leading-tight tracking-tight" style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}>
+          <h2
+            className="font-serif text-[24px] leading-tight tracking-tight"
+            style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}
+          >
             Choose up to 3 ways I can help your business grow in the next 2–3 years.
           </h2>
           <p className="text-[13.5px] leading-snug text-neutral-500">Select up to 3.</p>
@@ -1172,7 +1374,10 @@ function FycTarget({ advance, goals, prefilled }: StepProps) {
     <div className="flex gap-8">
       <div className="flex min-w-0 flex-1 flex-col gap-6">
         <div>
-          <h2 className="font-serif text-[26px] leading-tight tracking-tight text-neutral-900" style={{ fontWeight: 400, textWrap: 'balance' }}>
+          <h2
+            className="font-serif text-[26px] leading-tight tracking-tight text-neutral-900"
+            style={{ fontWeight: 400, textWrap: 'balance' }}
+          >
             Set your First Year Commission (FYC) target for 2026
           </h2>
           <p className="mt-2 text-[13.5px] leading-snug text-neutral-500">
@@ -1204,7 +1409,12 @@ function FycTarget({ advance, goals, prefilled }: StepProps) {
                 const raw = parseInt(val.replace(/[^0-9]/g, ''), 10) || 42000
                 advance({
                   answer: `Set my FYC target to $${(raw / 1000).toFixed(0)}K`,
-                  goals: { fycTarget: raw, longTermTags: goals.longTermTags.length ? goals.longTermTags : ['Holistic Advising', 'Eagle Status'] },
+                  goals: {
+                    fycTarget: raw,
+                    longTermTags: goals.longTermTags.length
+                      ? goals.longTermTags
+                      : ['Holistic Advising', 'Eagle Status'],
+                  },
                 })
               }}
             >
@@ -1228,39 +1438,92 @@ function CouncilLevel({ advance }: StepProps) {
       <div className="rounded-md border border-neutral-200/80 bg-white p-6 shadow-[0_18px_40px_-22px_rgba(0,10,98,0.12)]">
         <div className="flex items-baseline justify-between gap-4">
           <div>
-            <h3 className="font-serif text-[22px] leading-tight tracking-tight text-neutral-900" style={{ fontWeight: 400 }}>
+            <h3
+              className="font-serif text-[22px] leading-tight tracking-tight text-neutral-900"
+              style={{ fontWeight: 400 }}
+            >
               Executive Council Qualifications
             </h3>
             <p className="mt-0.5 text-[11px] text-neutral-500">Your standing as of 5/31/25</p>
           </div>
           <span className="text-[11px] text-neutral-500">
             Overall attainability:
-            <span className="ml-2 rounded-full bg-[rgba(246,142,72,0.18)] px-2 py-0.5 font-medium text-[#c47b1f]">Stretch</span>
+            <span className="ml-2 rounded-full bg-[rgba(246,142,72,0.18)] px-2 py-0.5 font-medium text-[#c47b1f]">
+              Stretch
+            </span>
           </span>
         </div>
         <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-          <CouncilCard label="Council Credits" value="46,800" tone="warn" progress={0.4} sub="40% complete of 90,000 target" tag="Stretch" />
-          <CouncilCard label="Protection FYC" value="$24,600" tone="good" progress={1} sub="100% complete of $21K minimum" tag="Complete" />
-          <CouncilCard label="Protection premium" value="$56,100" tone="warn" progress={0.65} sub="65% complete of $84K minimum" tag="Stretch" />
-          <CouncilCard label="Case rate bonus" value="46/50" tone="good" progress={0.92} sub="Level 1 achieved; reaching 50 adds another 2,500 council credits" tag="On track" />
+          <CouncilCard
+            label="Council Credits"
+            value="46,800"
+            tone="warn"
+            progress={0.4}
+            sub="40% complete of 90,000 target"
+            tag="Stretch"
+          />
+          <CouncilCard
+            label="Protection FYC"
+            value="$24,600"
+            tone="good"
+            progress={1}
+            sub="100% complete of $21K minimum"
+            tag="Complete"
+          />
+          <CouncilCard
+            label="Protection premium"
+            value="$56,100"
+            tone="warn"
+            progress={0.65}
+            sub="65% complete of $84K minimum"
+            tag="Stretch"
+          />
+          <CouncilCard
+            label="Case rate bonus"
+            value="46/50"
+            tone="good"
+            progress={0.92}
+            sub="Level 1 achieved; reaching 50 adds another 2,500 council credits"
+            tag="On track"
+          />
         </div>
       </div>
       <p className="text-[12.5px] text-neutral-600">
-        With 5 months left, you need to increase your pace earning council credits. Closing 4 more
-        life cases will help you earn a 5,000 bonus, so we'll focus on that.
+        With 5 months left, you need to increase your pace earning council credits. Closing 4 more life cases will help
+        you earn a 5,000 bonus, so we'll focus on that.
       </p>
       <div className="flex flex-wrap justify-end gap-2">
-        <PrimaryBtn onClick={() => advance({ answer: 'Go for Executive Council', goals: { councilLevel: 'Executive' } })}>
+        <PrimaryBtn
+          onClick={() => advance({ answer: 'Go for Executive Council', goals: { councilLevel: 'Executive' } })}
+        >
           Go for Executive Council
         </PrimaryBtn>
-        <SecondaryBtn onClick={() => advance({ answer: 'See other council levels' })}>See other council levels</SecondaryBtn>
-        <SecondaryBtn onClick={() => advance({ answer: "Don't set council goal" })}>Don't set council goal</SecondaryBtn>
+        <SecondaryBtn onClick={() => advance({ answer: 'See other council levels' })}>
+          See other council levels
+        </SecondaryBtn>
+        <SecondaryBtn onClick={() => advance({ answer: "Don't set council goal" })}>
+          Don't set council goal
+        </SecondaryBtn>
       </div>
     </div>
   )
 }
 
-function CouncilCard({ label, value, tone, progress, sub, tag }: { label: string; value: string; tone: 'good' | 'warn'; progress: number; sub: string; tag: string }) {
+function CouncilCard({
+  label,
+  value,
+  tone,
+  progress,
+  sub,
+  tag,
+}: {
+  label: string
+  value: string
+  tone: 'good' | 'warn'
+  progress: number
+  sub: string
+  tag: string
+}) {
   const color = tone === 'good' ? '#1ab382' : '#ff9522'
   const tagBg = tone === 'good' ? 'rgba(26,179,130,0.18)' : 'rgba(246,142,72,0.18)'
   const tagFg = tone === 'good' ? '#0f7a4a' : '#c47b1f'
@@ -1268,11 +1531,24 @@ function CouncilCard({ label, value, tone, progress, sub, tag }: { label: string
     <div>
       <div className="flex items-center justify-between gap-2">
         <p className="text-[12px] font-medium text-neutral-500">{label}</p>
-        <span className="rounded-full px-2 py-0.5 text-[10.5px] font-medium" style={{ background: tagBg, color: tagFg }}>{tag}</span>
+        <span
+          className="rounded-full px-2 py-0.5 text-[10.5px] font-medium"
+          style={{ background: tagBg, color: tagFg }}
+        >
+          {tag}
+        </span>
       </div>
-      <p className="mt-1 font-serif text-[24px] leading-none tracking-tight text-neutral-900" style={{ fontWeight: 400 }}>{value}</p>
+      <p
+        className="mt-1 font-serif text-[24px] leading-none tracking-tight text-neutral-900"
+        style={{ fontWeight: 400 }}
+      >
+        {value}
+      </p>
       <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-neutral-100">
-        <div className="h-full rounded-full" style={{ width: `${Math.min(100, progress * 100)}%`, background: color }} />
+        <div
+          className="h-full rounded-full"
+          style={{ width: `${Math.min(100, progress * 100)}%`, background: color }}
+        />
       </div>
       <p className="mt-1.5 text-[10.5px] text-neutral-500">{sub}</p>
     </div>
@@ -1291,7 +1567,10 @@ function ActivityTarget({ advance, prefilled }: StepProps) {
   return (
     <div className="flex w-full max-w-[820px] flex-col gap-6 text-left">
       <div className="flex flex-col gap-3">
-        <h2 className="font-serif text-[24px] leading-tight tracking-tight" style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}>
+        <h2
+          className="font-serif text-[24px] leading-tight tracking-tight"
+          style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}
+        >
           What are your weekly activity targets?
         </h2>
         <p className="max-w-[64ch] text-[14px] leading-[1.55] text-neutral-700">
@@ -1300,9 +1579,30 @@ function ActivityTarget({ advance, prefilled }: StepProps) {
       </div>
 
       <div className="rounded-md border border-neutral-200/80 bg-white px-8 py-2 shadow-[0_8px_24px_-20px_rgba(0,10,98,0.18)]">
-        <SliderRow label="New prospects to contact" unit="per week" max={15} rec={[5, 10]} value={prospects} onChange={setProspects} />
-        <SliderRow label="Client appointments" unit="per week" max={10} rec={[4, 8]} value={appts} onChange={setAppts} />
-        <SliderRow label="Client reviews" unit="per quarter" max={20} rec={[9, 16]} value={reviews} onChange={setReviews} />
+        <SliderRow
+          label="New prospects to contact"
+          unit="per week"
+          max={15}
+          rec={[5, 10]}
+          value={prospects}
+          onChange={setProspects}
+        />
+        <SliderRow
+          label="Client appointments"
+          unit="per week"
+          max={10}
+          rec={[4, 8]}
+          value={appts}
+          onChange={setAppts}
+        />
+        <SliderRow
+          label="Client reviews"
+          unit="per quarter"
+          max={20}
+          rec={[9, 16]}
+          value={reviews}
+          onChange={setReviews}
+        />
         <p className="py-5 text-[14px] leading-[1.55] text-neutral-700">
           I've suggested a comfortable starting point based on your historic performance and current goals.
         </p>
@@ -1310,9 +1610,11 @@ function ActivityTarget({ advance, prefilled }: StepProps) {
 
       <div className="flex justify-end">
         <PrimaryBtn
-          onClick={() => advance({
-            answer: `Set: ${prospects} prospects · ${appts} appts · ${reviews} reviews`,
-          })}
+          onClick={() =>
+            advance({
+              answer: `Set: ${prospects} prospects · ${appts} appts · ${reviews} reviews`,
+            })
+          }
         >
           Next
         </PrimaryBtn>
@@ -1354,7 +1656,10 @@ function SliderRow({
     <div className="border-b border-neutral-200/80 py-6">
       <div className="flex items-baseline justify-between gap-4">
         <p className="text-[15px] font-semibold tracking-tight text-neutral-900">{label}</p>
-        <p className="whitespace-nowrap font-serif text-[22px] tracking-tight text-neutral-900 md:text-[24px]" style={{ fontWeight: 400 }}>
+        <p
+          className="whitespace-nowrap font-serif text-[22px] tracking-tight text-neutral-900 md:text-[24px]"
+          style={{ fontWeight: 400 }}
+        >
           {value} {unit}
         </p>
       </div>
@@ -1370,16 +1675,30 @@ function SliderRow({
           aria-valuemax={max}
           aria-valuenow={value}
           aria-valuetext={`${value} ${unit}`}
-          onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); setFromClientX(e.clientX) }}
-          onPointerMove={(e) => { if (e.buttons === 1) setFromClientX(e.clientX) }}
+          onPointerDown={(e) => {
+            e.currentTarget.setPointerCapture(e.pointerId)
+            setFromClientX(e.clientX)
+          }}
+          onPointerMove={(e) => {
+            if (e.buttons === 1) setFromClientX(e.clientX)
+          }}
           onKeyDown={(e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); onChange(Math.max(0, value - 1)) }
-            if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); onChange(Math.min(max, value + 1)) }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+              e.preventDefault()
+              onChange(Math.max(0, value - 1))
+            }
+            if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+              e.preventDefault()
+              onChange(Math.min(max, value + 1))
+            }
           }}
           className="relative h-6 flex-1 cursor-pointer touch-none rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0468ff]/40"
         >
           <div className="absolute top-1/2 h-[6px] w-full -translate-y-1/2 rounded-full bg-[#e2e8f0]" />
-          <div className="absolute top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-[#8b37c8]" style={{ width: `${pct}%` }} />
+          <div
+            className="absolute top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-[#8b37c8]"
+            style={{ width: `${pct}%` }}
+          />
           <div
             className="absolute top-1/2 size-[18px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8b37c8] shadow-[0_1px_4px_rgba(0,0,0,0.25)] ring-[3px] ring-white"
             style={{ left: `${pct}%` }}
@@ -1391,7 +1710,9 @@ function SliderRow({
       {/* Recommended-range pill + orange stretch zone — mirror the track's flex
           geometry with invisible end labels so the percentages line up. */}
       <div className="mt-2 flex items-center gap-4">
-        <span aria-hidden="true" className="invisible w-5 text-[13px]">0</span>
+        <span aria-hidden="true" className="invisible w-5 text-[13px]">
+          0
+        </span>
         <div className="relative h-[21px] flex-1">
           <div
             className="absolute flex h-full items-center justify-center overflow-hidden rounded-full bg-[#eaccff]/70"
@@ -1404,30 +1725,38 @@ function SliderRow({
             style={{ left: `calc(${recHi}% + 6px)`, right: 0 }}
           />
         </div>
-        <span aria-hidden="true" className="invisible w-6 text-[13px]">{max}</span>
+        <span aria-hidden="true" className="invisible w-6 text-[13px]">
+          {max}
+        </span>
       </div>
     </div>
   )
 }
 
 function OutsideWork({ advance, prefilled }: StepProps) {
-  const opts = ['Time with family', 'Travel', 'A wellness and fitness goal', 'A passion project', 'Financial independence', 'More free time']
+  const opts = [
+    'Time with family',
+    'Travel',
+    'A wellness and fitness goal',
+    'A passion project',
+    'Financial independence',
+    'More free time',
+  ]
   const [picked, setPicked] = useState<string[]>(prefilled ? ['Time with family', 'Financial independence'] : [])
   const [free, setFree] = useState('')
   function toggle(o: string) {
     setPicked((arr) => (arr.includes(o) ? arr.filter((x) => x !== o) : [...arr, o]))
   }
   function submit() {
-    const answer = free.trim()
-      ? truncate(free, 64)
-      : picked.length
-        ? truncate(picked.join(' · '), 64)
-        : 'Skipped'
+    const answer = free.trim() ? truncate(free, 64) : picked.length ? truncate(picked.join(' · '), 64) : 'Skipped'
     advance({ answer })
   }
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="font-serif text-[24px] leading-tight tracking-tight" style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}>
+      <h2
+        className="font-serif text-[24px] leading-tight tracking-tight"
+        style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}
+      >
         What are you making time for outside of work this year?
       </h2>
       <p className="max-w-[60ch] text-[13.5px] leading-snug text-neutral-500">
@@ -1475,7 +1804,12 @@ function OutsideWork({ advance, prefilled }: StepProps) {
               placeholder="Tell me in your own words..."
               className="flex-1 bg-transparent text-[14px] text-neutral-800 placeholder:text-neutral-400 outline-none"
             />
-            <button type="button" aria-label="Voice input" className="flex size-7 shrink-0 items-center justify-center rounded-full text-white" style={{ background: '#0468ff' }}>
+            <button
+              type="button"
+              aria-label="Voice input"
+              className="flex size-7 shrink-0 items-center justify-center rounded-full text-white"
+              style={{ background: '#0468ff' }}
+            >
               <MicGlyph />
             </button>
           </div>
@@ -1510,13 +1844,20 @@ function NylaTip({ text }: { text: string }) {
 function GrowthIntro({ advance }: StepProps) {
   return (
     <SectionLead>
-      <h2 className="font-serif text-[34px] leading-[1.12] tracking-tight text-[#4D1773] md:text-[42px]" style={{ fontWeight: 400, textWrap: 'balance' }}>
-        <TypewriterText text="You've got goals. Now I'll help you build around how you actually work." delayMs={950} perWordMs={54} duration={0.42} />
+      <h2
+        className="font-serif text-[34px] leading-[1.12] tracking-tight text-[#4D1773] md:text-[42px]"
+        style={{ fontWeight: 400, textWrap: 'balance' }}
+      >
+        <TypewriterText
+          text="You've got goals. Now I'll help you build around how you actually work."
+          delayMs={950}
+          perWordMs={54}
+          duration={0.42}
+        />
       </h2>
       <motion.p variants={sectionLeadItem} className="max-w-[60ch] text-[14px] leading-[1.55] text-neutral-700">
-        The best plan fits your practice, not a template. A few more questions and we'll shape
-        everything around how you run your business — so the right opportunities show up when
-        you need them.
+        The best plan fits your practice, not a template. A few more questions and we'll shape everything around how you
+        run your business — so the right opportunities show up when you need them.
       </motion.p>
       <motion.div variants={sectionLeadItem} className="flex justify-end gap-3">
         <SecondaryBtn onClick={() => advance({ answer: 'Skip' })}>Skip</SecondaryBtn>
@@ -1623,11 +1964,14 @@ function GrowthFocus({ advance, goals, prefilled }: StepProps) {
   }
   function submit() {
     const first = opts.find((o) => o.id === picked[0])?.title
-    advance({ answer: truncate(free.trim() ? free : first ?? 'Noted', 80) })
+    advance({ answer: truncate(free.trim() ? free : (first ?? 'Noted'), 80) })
   }
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="font-serif text-[24px] leading-tight tracking-tight" style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}>
+      <h2
+        className="font-serif text-[24px] leading-tight tracking-tight"
+        style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}
+      >
         What's most important to helping you achieve that?
       </h2>
       <p className="max-w-[60ch] text-[14px] leading-[1.55] text-neutral-700">Select all that apply</p>
@@ -1693,7 +2037,11 @@ function TimePulls({ advance, prefilled }: StepProps) {
     { id: 'nigo', title: 'Chasing case status and NIGO updates', sub: 'Delays that kill momentum' },
     { id: 'service', title: 'Client service issues pulling me away', sub: 'From prospecting and growth' },
     { id: 'systems', title: 'Finding the right system, form, or answer', sub: 'Too much hunting' },
-    { id: 'meeting-prep', title: 'Preparing for meetings across product lines', sub: 'More complex than pure protection' },
+    {
+      id: 'meeting-prep',
+      title: 'Preparing for meetings across product lines',
+      sub: 'More complex than pure protection',
+    },
     { id: 'admin', title: 'Admin after meetings', sub: 'Notes, next steps, follow-up emails' },
     { id: 'workflows', title: 'Managing multi-product workflows', sub: 'Life + investments + planning' },
   ]
@@ -1730,9 +2078,12 @@ function TimeOpen({ advance, prefilled }: StepProps) {
   return (
     <div className="flex w-full flex-col gap-6">
       <div className="text-left">
-        <h2 className="font-serif text-[24px] leading-snug tracking-tight" style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}>
-          What's the one thing in your week that consistently pulls you away from the work that
-          actually grows your business?
+        <h2
+          className="font-serif text-[24px] leading-snug tracking-tight"
+          style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}
+        >
+          What's the one thing in your week that consistently pulls you away from the work that actually grows your
+          business?
         </h2>
         <p className="mt-1.5 text-[13px] text-neutral-500">Pick a suggestion below — or type your own.</p>
       </div>
@@ -1783,7 +2134,7 @@ function TimeOpen({ advance, prefilled }: StepProps) {
         />
         <div className="flex justify-end">
           <CTAReveal show={!!sel || text.trim().length > 0}>
-            <PrimaryBtn onClick={() => advance({ answer: text.trim() ? truncate(text, 64) : sel ?? 'Skipped' })}>
+            <PrimaryBtn onClick={() => advance({ answer: text.trim() ? truncate(text, 64) : (sel ?? 'Skipped') })}>
               Next
             </PrimaryBtn>
           </CTAReveal>
@@ -1804,12 +2155,16 @@ function ClientsIntro({ advance }: StepProps) {
         className="font-serif text-[34px] leading-[1.18] tracking-tight md:text-[42px]"
         style={{ fontWeight: 400, color: '#4D1773', textWrap: 'balance' }}
       >
-        <TypewriterText text="You've told us where you're headed. Now let's understand how you're spending your time with clients." delayMs={950} perWordMs={54} duration={0.42} />
+        <TypewriterText
+          text="You've told us where you're headed. Now let's understand how you're spending your time with clients."
+          delayMs={950}
+          perWordMs={54}
+          duration={0.42}
+        />
       </h2>
       <motion.p variants={sectionLeadItem} className="text-[14px] leading-[1.6] text-neutral-700">
-        This is about how you engage clients, where you want support, and what earns your attention.
-        I'll use those signals to surface the right opportunities, conversations, and next steps at
-        the right time.
+        This is about how you engage clients, where you want support, and what earns your attention. I'll use those
+        signals to surface the right opportunities, conversations, and next steps at the right time.
       </motion.p>
       <motion.div variants={sectionLeadItem} className="flex justify-end">
         <PrimaryBtn onClick={() => advance({ answer: "Let's do it" })}>Let's do it</PrimaryBtn>
@@ -1852,7 +2207,9 @@ function ClientActivities({ advance, prefilled }: StepProps) {
         { id: 'pace', title: 'My production pace vs. goal', sub: 'What I need to do this week' },
       ]}
       answer="Clients ready for a holistic conversation"
-      goalsOnSubmit={{ clientApproach: { existing: 'Prioritize deepening your existing relationships in the long term' } }}
+      goalsOnSubmit={{
+        clientApproach: { existing: 'Prioritize deepening your existing relationships in the long term' },
+      }}
       defaultPicked={prefilled ? ['holistic', 'life-events'] : []}
     />
   )
@@ -1896,7 +2253,9 @@ function StayInFront({ advance, prefilled }: StepProps) {
         { id: 'system', title: 'I want to do more but lack a system', sub: 'Would like help building one' },
       ]}
       answer="Selected outreach habits"
-      goalsOnSubmit={{ clientApproach: { new: 'Explore new long term prospects and discover events to broaden your branded reach' } }}
+      goalsOnSubmit={{
+        clientApproach: { new: 'Explore new long term prospects and discover events to broaden your branded reach' },
+      }}
       defaultPicked={prefilled ? ['emails', 'referrals', 'content'] : []}
     />
   )
@@ -1931,12 +2290,15 @@ function PlanStep({ goals, buildPlan }: StepProps) {
   const fyc = goals.fycTarget != null ? `$${Math.round(goals.fycTarget / 1000)}K` : '$42K'
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="font-serif text-[24px] leading-tight tracking-tight" style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}>
+      <h2
+        className="font-serif text-[24px] leading-tight tracking-tight"
+        style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}
+      >
         Here's how your goals become a plan.
       </h2>
       <p className="max-w-[68ch] text-[14px] leading-[1.55] text-neutral-700">
-        You set a goal of {fyc}. Let's do the math to figure out a weekly cadence of how many cases
-        and appointments you need to take to get you there.
+        You set a goal of {fyc}. Let's do the math to figure out a weekly cadence of how many cases and appointments you
+        need to take to get you there.
       </p>
       <div className="flex justify-end">
         <PrimaryBtn onClick={buildPlan}>Build my plan</PrimaryBtn>
@@ -1966,7 +2328,12 @@ function SelectionGrid({
 }) {
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="font-serif text-[24px] leading-tight tracking-tight" style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}>{title}</h2>
+      <h2
+        className="font-serif text-[24px] leading-tight tracking-tight"
+        style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}
+      >
+        {title}
+      </h2>
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <p className="max-w-[60ch] text-[14px] leading-[1.55] text-neutral-700">{sub}</p>
         {max && (
@@ -2002,7 +2369,11 @@ function SelectionGrid({
                   {active && <CheckSmallGlyph />}
                 </span>
                 <p className="mt-3 text-[13.5px] font-semibold leading-tight">{o.title}</p>
-                {o.sub && <p className={['mt-1 text-[11.5px]', active ? 'text-white/70' : 'text-neutral-500'].join(' ')}>{o.sub}</p>}
+                {o.sub && (
+                  <p className={['mt-1 text-[11.5px]', active ? 'text-white/70' : 'text-neutral-500'].join(' ')}>
+                    {o.sub}
+                  </p>
+                )}
               </button>
             )
           })}
@@ -2048,7 +2419,12 @@ function ListPicker({
   }
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="font-serif text-[24px] leading-tight tracking-tight" style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}>{title}</h2>
+      <h2
+        className="font-serif text-[24px] leading-tight tracking-tight"
+        style={{ fontWeight: 400, color: '#17181C', textWrap: 'balance' }}
+      >
+        {title}
+      </h2>
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <p className="max-w-[60ch] text-[14px] leading-[1.55] text-neutral-700">{sub}</p>
         {max && (
@@ -2086,16 +2462,20 @@ function ListPicker({
                   {on && <CheckSmallGlyph />}
                 </span>
                 <p className="mt-5 text-[14px] font-semibold leading-tight">{o.title}</p>
-                {o.sub && <p className={['mt-1.5 text-[12px] leading-snug', on ? 'text-white/75' : 'text-neutral-500'].join(' ')}>{o.sub}</p>}
+                {o.sub && (
+                  <p
+                    className={['mt-1.5 text-[12px] leading-snug', on ? 'text-white/75' : 'text-neutral-500'].join(' ')}
+                  >
+                    {o.sub}
+                  </p>
+                )}
               </button>
             )
           })}
         </div>
         <div className="flex justify-end">
           <CTAReveal show={picked.length > 0}>
-            <PrimaryBtn onClick={() => advance({ answer, goals: goalsOnSubmit })}>
-              Save and continue
-            </PrimaryBtn>
+            <PrimaryBtn onClick={() => advance({ answer, goals: goalsOnSubmit })}>Save and continue</PrimaryBtn>
           </CTAReveal>
         </div>
       </RevealBody>
@@ -2118,9 +2498,7 @@ function PrimaryBtn({ children, onClick, disabled }: { children: ReactNode; onCl
       disabled={disabled}
       className={[
         'rounded-md px-5 py-2.5 text-[13.5px] font-semibold transition-colors',
-        disabled
-          ? 'bg-neutral-200 text-neutral-400'
-          : 'bg-[#0468ff] text-white hover:bg-[#0044cc]',
+        disabled ? 'bg-neutral-200 text-neutral-400' : 'bg-[#0468ff] text-white hover:bg-[#0044cc]',
       ].join(' ')}
     >
       {children}
@@ -2148,7 +2526,9 @@ export function AiBtn({ children, onClick }: { children: ReactNode; onClick: () 
       className="inline-flex items-center gap-2 rounded-md px-5 py-2.5 text-[13.5px] font-semibold text-white"
       style={{ background: '#4D1773', boxShadow: '0 10px 24px -14px rgba(77,23,115,0.5)' }}
     >
-      <span aria-hidden="true" className="grid size-3.5 place-items-center"><Nyla size={24} variant="on-dark" /></span>
+      <span aria-hidden="true" className="grid size-3.5 place-items-center">
+        <Nyla size={24} variant="on-dark" />
+      </span>
       {children}
     </button>
   )
@@ -2158,14 +2538,34 @@ export function AiBtn({ children, onClick }: { children: ReactNode; onClick: () 
 
 function CheckSmallGlyph() {
   return (
-    <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M3 8.5 L6.5 12 L13 4.5" />
     </svg>
   )
 }
 export function MicGlyph() {
   return (
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <rect x="6" y="2.5" width="4" height="7" rx="2" />
       <path d="M4 9 a4 4 0 0 0 8 0" />
       <path d="M8 13 V14.5" />
@@ -2178,17 +2578,24 @@ export function MicGlyph() {
  * "Create my briefing", before the dialog dissolves into the briefing scene.
  * -------------------------------------------------------------------------- */
 
-
 /* ============================== Persistence ============================== */
 
 const COMPLETED_KEY = 'agent-os-v55.onboarding-completed'
 
 export function hasCompletedOnboarding(): boolean {
   if (typeof window === 'undefined') return false
-  try { return window.localStorage.getItem(COMPLETED_KEY) === '1' } catch { return false }
+  try {
+    return window.localStorage.getItem(COMPLETED_KEY) === '1'
+  } catch {
+    return false
+  }
 }
 function markOnboardingCompleted() {
-  try { window.localStorage.setItem(COMPLETED_KEY, '1') } catch { /* no-op */ }
+  try {
+    window.localStorage.setItem(COMPLETED_KEY, '1')
+  } catch {
+    /* no-op */
+  }
 }
 
 /* ============================== Helpers ============================== */

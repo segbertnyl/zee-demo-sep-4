@@ -33,7 +33,9 @@ export function NavTrailBar() {
         className="sticky top-0 z-[120] flex items-center gap-2 border-b border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)]/90 px-6 py-2 backdrop-blur-sm md:px-8"
       >
         <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-[var(--text-body-muted)]">Trail</p>
-        <span aria-hidden="true" className="text-[var(--text-body-faint)]">·</span>
+        <span aria-hidden="true" className="text-[var(--text-body-faint)]">
+          ·
+        </span>
         <ol className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
           {trail.map((c, i) => {
             const isLast = i === trail.length - 1
@@ -53,7 +55,11 @@ export function NavTrailBar() {
                 >
                   {c.label}
                 </button>
-                {!isLast && <span aria-hidden="true" className="text-[var(--text-body-faint)]">›</span>}
+                {!isLast && (
+                  <span aria-hidden="true" className="text-[var(--text-body-faint)]">
+                    ›
+                  </span>
+                )}
               </li>
             )
           })}

@@ -21,9 +21,15 @@ export function nylaConfigSync(): Plugin {
         if (req.method === 'POST') {
           // Same-origin only — blocks cross-site pages from rewriting the config
           const site = req.headers['sec-fetch-site']
-          if (site && site !== 'same-origin') { res.statusCode = 403; res.end('forbidden'); return }
+          if (site && site !== 'same-origin') {
+            res.statusCode = 403
+            res.end('forbidden')
+            return
+          }
           let body = ''
-          req.on('data', (chunk) => { body += chunk })
+          req.on('data', (chunk) => {
+            body += chunk
+          })
           req.on('end', () => {
             try {
               const parsed = JSON.parse(body) // validate before writing

@@ -1,7 +1,4 @@
-import {
-  AnimatePresence,
-  motion,
-} from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import {
   createContext,
   lazy,
@@ -18,7 +15,9 @@ import { useAppStore } from '@/state/useAppStore'
 import { LoadingBackground } from '@/ui/LoadingBackground'
 import { SectionHeader } from '@/ui/SectionHeader'
 import { CouncilStatCard } from '@/ui/CouncilStatCard'
-const CouncilCreditsChart = lazy(() => import('@/ui/CouncilCreditsChart').then(m => ({ default: m.CouncilCreditsChart })))
+const CouncilCreditsChart = lazy(() =>
+  import('@/ui/CouncilCreditsChart').then((m) => ({ default: m.CouncilCreditsChart })),
+)
 import { OptionTileGroup } from '@/ui/OptionTile'
 import { ButtonContainer } from '@/ui/ButtonContainer'
 import { NylaGuidance } from '@/ui/NylaGuidance'
@@ -215,8 +214,18 @@ const HISTORY_ROWS: Array<{
     tooltip: (
       <div className="text-[16px] leading-6 text-[var(--text-headline)]">
         <p className="m-0">This result is averaged from your recorded FYC from 2023–2025.</p>
-        <p className="m-0 mt-4">2024 FYC — $157,000<br />2025 FYC — $160,000<br />2026 FYC — $165,000</p>
-        <p className="m-0 mt-4 italic">Data source: Salesforce<br />Not right? <span className="not-italic text-[var(--action-primary)]">Flag this</span></p>
+        <p className="m-0 mt-4">
+          2024 FYC — $157,000
+          <br />
+          2025 FYC — $160,000
+          <br />
+          2026 FYC — $165,000
+        </p>
+        <p className="m-0 mt-4 italic">
+          Data source: Salesforce
+          <br />
+          Not right? <span className="not-italic text-[var(--action-primary)]">Flag this</span>
+        </p>
       </div>
     ),
   },
@@ -226,8 +235,16 @@ const HISTORY_ROWS: Array<{
     dotted: true,
     tooltip: (
       <div className="text-[16px] leading-6 text-[var(--text-headline)]">
-        <p className="m-0">Your production pace is higher than 2025 — when setting goals, I'll ask about how we can continue this growth.</p>
-        <p className="m-0 mt-4">2024 FYC — $157,000<br />2025 FYC — $160,000<br />2026 FYC — $165,000</p>
+        <p className="m-0">
+          Your production pace is higher than 2025 — when setting goals, I'll ask about how we can continue this growth.
+        </p>
+        <p className="m-0 mt-4">
+          2024 FYC — $157,000
+          <br />
+          2025 FYC — $160,000
+          <br />
+          2026 FYC — $165,000
+        </p>
         <p className="m-0 mt-4 italic">Data source: Salesforce</p>
       </div>
     ),
@@ -240,7 +257,11 @@ const HISTORY_ROWS: Array<{
     tooltip: (
       <div className="text-[16px] leading-6 text-[var(--text-headline)]">
         <p className="m-0">Clients with at least one in-force policy or open case in the last 24 months.</p>
-        <p className="m-0 mt-4 italic">Data source: Salesforce<br />Not right? <span className="not-italic text-[var(--action-primary)]">Flag this</span></p>
+        <p className="m-0 mt-4 italic">
+          Data source: Salesforce
+          <br />
+          Not right? <span className="not-italic text-[var(--action-primary)]">Flag this</span>
+        </p>
       </div>
     ),
   },
@@ -250,7 +271,9 @@ const HISTORY_ROWS: Array<{
     dotted: true,
     tooltip: (
       <div className="text-[16px] leading-6 text-[var(--text-headline)]">
-        <p className="m-0">Based on case submissions in 2025–2026. Life protection accounts for 40% annually and annuity for 54%.</p>
+        <p className="m-0">
+          Based on case submissions in 2025–2026. Life protection accounts for 40% annually and annuity for 54%.
+        </p>
         <p className="m-0 mt-4 italic">Data source: Salesforce</p>
       </div>
     ),
@@ -262,7 +285,11 @@ const HISTORY_ROWS: Array<{
     tooltip: (
       <div className="text-[16px] leading-6 text-[var(--text-headline)]">
         <p className="m-0">You are licensed for Life Insurance, Long Term Care, Investments and Annuities</p>
-        <p className="m-0 mt-4 italic">Data source: FINRA<br />Not right? <span className="not-italic text-[var(--action-primary)]">Flag this</span></p>
+        <p className="m-0 mt-4 italic">
+          Data source: FINRA
+          <br />
+          Not right? <span className="not-italic text-[var(--action-primary)]">Flag this</span>
+        </p>
       </div>
     ),
   },
@@ -270,9 +297,21 @@ const HISTORY_ROWS: Array<{
 ]
 
 const GROWTH_OPTIONS = [
-  { id: 'holistic', title: 'Become a holistic accumulation advisor advisor', sub: 'Unify planning, investments, & protection.' },
-  { id: 'referrals', title: 'Generate consistent, qualified referrals', sub: 'Build a reliable pipeline before expanding further.' },
-  { id: 'referral-practice', title: 'Transition to a referral-driven practice', sub: 'Less cold outreach, more warm leads.' },
+  {
+    id: 'holistic',
+    title: 'Become a holistic accumulation advisor advisor',
+    sub: 'Unify planning, investments, & protection.',
+  },
+  {
+    id: 'referrals',
+    title: 'Generate consistent, qualified referrals',
+    sub: 'Build a reliable pipeline before expanding further.',
+  },
+  {
+    id: 'referral-practice',
+    title: 'Transition to a referral-driven practice',
+    sub: 'Less cold outreach, more warm leads.',
+  },
   { id: 'team', title: 'Adopt a team-based model', sub: 'Grow through staffing, teaming, & shared clients.' },
 ]
 
@@ -321,27 +360,26 @@ const TIME_DRAINS_OPTIONS = [
 ]
 
 const OPTIONS_BRAND_1 = [
-  { id: 'warm', title: 'Warm', sub: "I prioritize relationships" },
-  { id: 'dep', title: 'Dependable', sub: "You can always count on me to be there" },
-  { id: 'approach', title: 'Approachable', sub: "People want to chat with me all the time" },
-  { id: 'flex', title: 'Flexible', sub: "I can work with or without a plan" },
-  { id: 'outgoing', title: 'Outgoing', sub: "I can talk to anyone" },
+  { id: 'warm', title: 'Warm', sub: 'I prioritize relationships' },
+  { id: 'dep', title: 'Dependable', sub: 'You can always count on me to be there' },
+  { id: 'approach', title: 'Approachable', sub: 'People want to chat with me all the time' },
+  { id: 'flex', title: 'Flexible', sub: 'I can work with or without a plan' },
+  { id: 'outgoing', title: 'Outgoing', sub: 'I can talk to anyone' },
 ]
 
 const OPTIONS_BRAND_2 = [
-  { id: 'listings', title: "Local Listings", sub: 'Show my profile within local listing applications' },
-  { id: 'web', title: 'Personal Website', sub: "Create a personal online web presence" },
-  { id: 'leads', title: 'Lead Generation', sub: "Opt me into NYL.com lead pools" },
-  { id: 'dba', title: 'DBA', sub: "Help me establish a DBA" },
+  { id: 'listings', title: 'Local Listings', sub: 'Show my profile within local listing applications' },
+  { id: 'web', title: 'Personal Website', sub: 'Create a personal online web presence' },
+  { id: 'leads', title: 'Lead Generation', sub: 'Opt me into NYL.com lead pools' },
+  { id: 'dba', title: 'DBA', sub: 'Help me establish a DBA' },
 ]
 
 const OPTIONS_BRAND_3 = [
-  { id: 'sports', title: "Live sporting events", sub: 'I love cheering for my favorite team' },
-  { id: 'ent', title: 'Entertainment', sub: "I follow the stars on television" },
-  { id: 'travel', title: 'Travel', sub: "I love to travel and visit places." },
-  { id: 'politics', title: 'Politics', sub: "I like to talk about govt affairs." },
-  { id: 'fashion', title: 'Fashion', sub: "I love following the latest styles" },
-
+  { id: 'sports', title: 'Live sporting events', sub: 'I love cheering for my favorite team' },
+  { id: 'ent', title: 'Entertainment', sub: 'I follow the stars on television' },
+  { id: 'travel', title: 'Travel', sub: 'I love to travel and visit places.' },
+  { id: 'politics', title: 'Politics', sub: 'I like to talk about govt affairs.' },
+  { id: 'fashion', title: 'Fashion', sub: 'I love following the latest styles' },
 ]
 
 const StepCollapsedContext = createContext(false)
@@ -413,7 +451,10 @@ export function DiscoveryFlow() {
   const historyEligible = open && !introOpen && activeStep === 'history'
   const [historyDelayed, setHistoryDelayed] = useState(false)
   useEffect(() => {
-    if (!historyEligible) { setHistoryDelayed(false); return }
+    if (!historyEligible) {
+      setHistoryDelayed(false)
+      return
+    }
     const t = window.setTimeout(() => setHistoryDelayed(true), 500)
     return () => window.clearTimeout(t)
   }, [historyEligible])
@@ -421,10 +462,13 @@ export function DiscoveryFlow() {
   const historyReveal = useReplayTrigger(historyActive)
   const stageIndex = STEP_TO_STAGE[activeStep]
   const planSubStep: 0 | 1 | 2 | 3 =
-    activeStep === 'plan-summary' ? 3
-    : activeStep === 'plan-pacing' || activeStep === 'plan-pacing-adjust' || activeStep === 'plan-pacing-affirmation' ? 2
-    : activeStep === 'plan-reveal' ? 1
-    : 0
+    activeStep === 'plan-summary'
+      ? 3
+      : activeStep === 'plan-pacing' || activeStep === 'plan-pacing-adjust' || activeStep === 'plan-pacing-affirmation'
+        ? 2
+        : activeStep === 'plan-reveal'
+          ? 1
+          : 0
   const maxStageReached = STEPS.reduce((max, currentStep, index) => {
     if (index > Math.max(collapsedUpTo, focusedIndex)) return max
     return Math.max(max, STEP_TO_STAGE[currentStep])
@@ -434,26 +478,32 @@ export function DiscoveryFlow() {
   // scrollStep retained as noop — positioning is now CSS/motion-driven
   const scrollStep = useCallback((_index: number) => {}, [])
 
-  const focusIndex = useCallback((index: number) => {
-    const futureLimit = Math.min(collapsedUpTo + 1, lastIndex)
-    const next = Math.max(0, Math.min(index, futureLimit))
-    setActiveIndex(next)
-    window.setTimeout(() => scrollStep(next), 0)
-  }, [collapsedUpTo, lastIndex, scrollStep])
+  const focusIndex = useCallback(
+    (index: number) => {
+      const futureLimit = Math.min(collapsedUpTo + 1, lastIndex)
+      const next = Math.max(0, Math.min(index, futureLimit))
+      setActiveIndex(next)
+      window.setTimeout(() => scrollStep(next), 0)
+    },
+    [collapsedUpTo, lastIndex, scrollStep],
+  )
 
-  const advanceFromIndex = useCallback((stepIndex: number) => {
-    const step = STEPS[stepIndex]
-    const nextIndex = Math.min(stepIndex + 1, STEPS.length)
+  const advanceFromIndex = useCallback(
+    (stepIndex: number) => {
+      const step = STEPS[stepIndex]
+      const nextIndex = Math.min(stepIndex + 1, STEPS.length)
 
-    setCollapsedUpTo((prev) => Math.max(prev, stepIndex))
-    setDirtySteps((prev) => ({ ...prev, [step]: false }))
-    setSubmittedSteps((prev) => ({ ...prev, [step]: true }))
-    setActiveIndex(nextIndex)
+      setCollapsedUpTo((prev) => Math.max(prev, stepIndex))
+      setDirtySteps((prev) => ({ ...prev, [step]: false }))
+      setSubmittedSteps((prev) => ({ ...prev, [step]: true }))
+      setActiveIndex(nextIndex)
 
-    window.setTimeout(() => {
-      if (nextIndex <= lastIndex) scrollStep(nextIndex)
-    }, 0)
-  }, [lastIndex, scrollStep])
+      window.setTimeout(() => {
+        if (nextIndex <= lastIndex) scrollStep(nextIndex)
+      }, 0)
+    },
+    [lastIndex, scrollStep],
+  )
 
   function makeAdvance(stepIndex: number) {
     return () => advanceFromIndex(stepIndex)
@@ -512,7 +562,8 @@ export function DiscoveryFlow() {
       let node = target instanceof Element ? target : null
       while (node && node !== el) {
         const style = window.getComputedStyle(node)
-        const scrollable = (style.overflowY === 'auto' || style.overflowY === 'scroll') && node.scrollHeight > node.clientHeight + 1
+        const scrollable =
+          (style.overflowY === 'auto' || style.overflowY === 'scroll') && node.scrollHeight > node.clientHeight + 1
         if (scrollable) {
           const atTop = node.scrollTop <= 0
           const atBottom = node.scrollTop + node.clientHeight >= node.scrollHeight - 1
@@ -531,7 +582,9 @@ export function DiscoveryFlow() {
       wheelLockedRef.current = true
       if (e.deltaY > 0) focusNext()
       else focusPrevious()
-      window.setTimeout(() => { wheelLockedRef.current = false }, 1100)
+      window.setTimeout(() => {
+        wheelLockedRef.current = false
+      }, 1100)
     }
     el.addEventListener('wheel', onWheel, { passive: false })
     return () => el.removeEventListener('wheel', onWheel)
@@ -604,11 +657,14 @@ export function DiscoveryFlow() {
   useEffect(() => {
     if (!open || introOpen || activeStep !== 'transition') return
     const transitionIndex = STEPS.indexOf('transition')
-    setTransitionExiting(false)  // reset on entering (not on leaving — keep orb/text hidden as it slides away)
+    setTransitionExiting(false) // reset on entering (not on leaving — keep orb/text hidden as it slides away)
     // Play the exit sequence (orb out, then text) in place, THEN advance (slide).
     const exitT = window.setTimeout(() => setTransitionExiting(true), 2000)
     const advT = window.setTimeout(() => advanceFromIndex(transitionIndex), 3200)
-    return () => { window.clearTimeout(exitT); window.clearTimeout(advT) }
+    return () => {
+      window.clearTimeout(exitT)
+      window.clearTimeout(advT)
+    }
   }, [activeStep, advanceFromIndex, introOpen, open])
 
   useEffect(() => {
@@ -628,11 +684,20 @@ export function DiscoveryFlow() {
   useEffect(() => {
     if (!open) return
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') { closeDiscovery(); return }
+      if (e.key === 'Escape') {
+        closeDiscovery()
+        return
+      }
       const tag = (e.target as HTMLElement).tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA') return
-      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); focusNext() }
-      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); focusPrevious() }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault()
+        focusNext()
+      }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault()
+        focusPrevious()
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -672,7 +737,7 @@ export function DiscoveryFlow() {
       {/* Plan summary background — fades in for affirmation + summary steps */}
       <motion.div
         initial={false}
-        animate={{ opacity: (activeStep === 'plan-pacing-affirmation' || activeStep === 'plan-summary') ? 1 : 0 }}
+        animate={{ opacity: activeStep === 'plan-pacing-affirmation' || activeStep === 'plan-summary' ? 1 : 0 }}
         transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
         style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1 }}
       >
@@ -701,16 +766,15 @@ export function DiscoveryFlow() {
         />
       </motion.div>
 
-        <div
-          ref={scrollContainerRef}
-          className="absolute inset-0 overflow-hidden"
+      <div ref={scrollContainerRef} className="absolute inset-0 overflow-hidden">
+        <ThreadStep
+          index={0}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[0] = node
+          }}
         >
-          <ThreadStep
-            index={0}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[0] = node }}
-          >
           <div style={CONTENT_COLUMN_STYLE}>
             <motion.div
               key={historyReveal.playKey}
@@ -748,15 +812,17 @@ export function DiscoveryFlow() {
           <ActiveOnly>
             <HistoryTooltip hoveredRow={hoveredHistoryRow} tooltipY={historyTooltipY} />
           </ActiveOnly>
-          </ThreadStep>
+        </ThreadStep>
 
-          <ThreadStep
-            index={1}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[1] = node }}
-            background="loading"
-          >
+        <ThreadStep
+          index={1}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[1] = node
+          }}
+          background="loading"
+        >
           <div style={CONTENT_COLUMN_STYLE}>
             {/* Re-mount on arrival so the orb replays its scatter→form, then the copy sequences in */}
             <ActiveOnly>
@@ -782,14 +848,16 @@ export function DiscoveryFlow() {
               </motion.div>
             </RevealBody>
           </div>
-          </ThreadStep>
+        </ThreadStep>
 
-          <ThreadStep
-            index={2}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[2] = node }}
-          >
+        <ThreadStep
+          index={2}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[2] = node
+          }}
+        >
           <div style={CONTENT_COLUMN_STYLE}>
             <SectionHeader
               animated
@@ -810,34 +878,42 @@ export function DiscoveryFlow() {
                   cols={2}
                   className="mt-8"
                 />
-              <div className="relative">
-                <TextInput
-                  variant="text"
-                  value={personalGoalText}
-                  onChange={(value) => {
-                    setPersonalGoalText(value)
-                    markDirty(5)
-                  }}
-                  placeholder="Tell me in your own words..."
-                  className="mt-3"
-                />
-        </div>
+                <div className="relative">
+                  <TextInput
+                    variant="text"
+                    value={personalGoalText}
+                    onChange={(value) => {
+                      setPersonalGoalText(value)
+                      markDirty(5)
+                    }}
+                    placeholder="Tell me in your own words..."
+                    className="mt-3"
+                  />
+                </div>
               </motion.div>
               <motion.div {...fadeUp(0, true)}>
                 <CTAReveal show={showCta(2, true)}>
-                  <ButtonContainer primaryLabel={ctaLabel(2)} onPrimary={makeAdvance(2)} primaryDisabled={growthSelections.length === 0} showSecondary={false} className="mt-8" />
+                  <ButtonContainer
+                    primaryLabel={ctaLabel(2)}
+                    onPrimary={makeAdvance(2)}
+                    primaryDisabled={growthSelections.length === 0}
+                    showSecondary={false}
+                    className="mt-8"
+                  />
                 </CTAReveal>
               </motion.div>
             </RevealBody>
           </div>
-          </ThreadStep>
+        </ThreadStep>
 
-          <ThreadStep
-            index={3}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[3] = node }}
-          >
+        <ThreadStep
+          index={3}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[3] = node
+          }}
+        >
           <div style={CONTENT_COLUMN_STYLE}>
             <SectionHeader
               animated
@@ -851,25 +927,36 @@ export function DiscoveryFlow() {
               </motion.div>
               <motion.div {...fadeUp(0, true)}>
                 <CTAReveal show={showCta(3)}>
-                  <ButtonContainer primaryLabel={ctaLabel(3, 'Got it')} showSecondary={false} onPrimary={makeAdvance(3)} className="mt-8" />
+                  <ButtonContainer
+                    primaryLabel={ctaLabel(3, 'Got it')}
+                    showSecondary={false}
+                    onPrimary={makeAdvance(3)}
+                    className="mt-8"
+                  />
                 </CTAReveal>
               </motion.div>
             </RevealBody>
           </div>
-          </ThreadStep>
+        </ThreadStep>
 
-          <ThreadStep
-            index={4}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[4] = node }}
-          >
+        <ThreadStep
+          index={4}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[4] = node
+          }}
+        >
           <div style={CONTENT_COLUMN_STYLE}>
             <SectionHeader
               animated
               variant="secondary"
               heading="Set your First Year Commission (FYC) target for 2027"
-              body={<>Last year you earned <strong>$165,000</strong>. You can also adjust this at any time.</>}
+              body={
+                <>
+                  Last year you earned <strong>$165,000</strong>. You can also adjust this at any time.
+                </>
+              }
             />
             <RevealBody className="mt-9">
               <motion.div {...fadeUp(0)}>
@@ -884,7 +971,12 @@ export function DiscoveryFlow() {
               </motion.div>
               <motion.div {...fadeUp(0, true)}>
                 <CTAReveal show={showCta(4)}>
-                  <ButtonContainer primaryLabel={ctaLabel(4)} showSecondary={false} onPrimary={makeAdvance(4)} className="mt-6" />
+                  <ButtonContainer
+                    primaryLabel={ctaLabel(4)}
+                    showSecondary={false}
+                    onPrimary={makeAdvance(4)}
+                    className="mt-6"
+                  />
                 </CTAReveal>
               </motion.div>
             </RevealBody>
@@ -892,14 +984,16 @@ export function DiscoveryFlow() {
           <ActiveOnly>
             <FycGuidance fycTarget={fycTarget} />
           </ActiveOnly>
-          </ThreadStep>
+        </ThreadStep>
 
-          <ThreadStep
-            index={5}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[5] = node }}
-          >
+        <ThreadStep
+          index={5}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[5] = node
+          }}
+        >
           <div style={CONTENT_COLUMN_STYLE}>
             <SectionHeader
               animated
@@ -935,34 +1029,44 @@ export function DiscoveryFlow() {
               </motion.div>
               <motion.div {...fadeUp(0, true)}>
                 <CTAReveal show={showCta(5)}>
-                  <ButtonContainer primaryLabel={ctaLabel(5)} onPrimary={makeAdvance(5)} onSecondary={makeAdvance(5)} primaryDisabled={objectivesSelections.length === 0 && personalGoalText.trim().length === 0} className="mt-6" />
+                  <ButtonContainer
+                    primaryLabel={ctaLabel(5)}
+                    onPrimary={makeAdvance(5)}
+                    onSecondary={makeAdvance(5)}
+                    primaryDisabled={objectivesSelections.length === 0 && personalGoalText.trim().length === 0}
+                    className="mt-6"
+                  />
                 </CTAReveal>
               </motion.div>
             </RevealBody>
           </div>
-          </ThreadStep>
+        </ThreadStep>
 
-          <ThreadStep
-            index={6}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[6] = node }}
-            background="loading"
-          >
+        <ThreadStep
+          index={6}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[6] = node
+          }}
+          background="loading"
+        >
           {/* Orb + caption centered together as a group */}
           <div className="relative flex flex-col items-center gap-8">
             <TransitionOrb exiting={transitionExiting} />
             <TransitionText exiting={transitionExiting} text="Synthesizing your goals and priorities..." />
           </div>
-          </ThreadStep>
+        </ThreadStep>
 
-          <ThreadStep
-            index={7}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[7] = node }}
-            background="loading"
-          >
+        <ThreadStep
+          index={7}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[7] = node
+          }}
+          background="loading"
+        >
           <div style={CONTENT_COLUMN_STYLE}>
             {/* Re-mount on arrival so the orb replays its scatter→form, then the copy sequences in */}
             <ActiveOnly>
@@ -988,16 +1092,18 @@ export function DiscoveryFlow() {
               </motion.div>
             </RevealBody>
           </div>
-          </ThreadStep>
+        </ThreadStep>
 
-          <QuestionStep
-            index={8}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[8] = node }}
-            heading="Which client activities do you typically prioritize?"
-            body="This is how I'll determine what's most important to show you."
-          >
+        <QuestionStep
+          index={8}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[8] = node
+          }}
+          heading="Which client activities do you typically prioritize?"
+          body="This is how I'll determine what's most important to show you."
+        >
           <motion.div {...fadeUp(0)}>
             <OptionTileGroup
               options={ACTIVITIES_OPTIONS}
@@ -1013,19 +1119,27 @@ export function DiscoveryFlow() {
           </motion.div>
           <motion.div {...fadeUp(0, true)}>
             <CTAReveal show={showCta(8, true)}>
-              <ButtonContainer primaryLabel={ctaLabel(8)} onPrimary={makeAdvance(8)} primaryDisabled={activitiesSelections.length === 0} showSecondary={false} className="mt-8" />
+              <ButtonContainer
+                primaryLabel={ctaLabel(8)}
+                onPrimary={makeAdvance(8)}
+                primaryDisabled={activitiesSelections.length === 0}
+                showSecondary={false}
+                className="mt-8"
+              />
             </CTAReveal>
           </motion.div>
-          </QuestionStep>
+        </QuestionStep>
 
-          <QuestionStep
-            index={9}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[9] = node }}
-            heading="How do you currently stay connected with clients and prospects between meetings?"
-            body="Select up to 3 methods you use the most today."
-          >
+        <QuestionStep
+          index={9}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[9] = node
+          }}
+          heading="How do you currently stay connected with clients and prospects between meetings?"
+          body="Select up to 3 methods you use the most today."
+        >
           <motion.div {...fadeUp(0)}>
             <OptionTileGroup
               options={CONNECTIONS_OPTIONS}
@@ -1042,19 +1156,27 @@ export function DiscoveryFlow() {
           </motion.div>
           <motion.div {...fadeUp(0, true)}>
             <CTAReveal show={showCta(9, true)}>
-              <ButtonContainer primaryLabel={ctaLabel(9)} onPrimary={makeAdvance(9)} primaryDisabled={connectionsSelections.length === 0} showSecondary={false} className="mt-8" />
+              <ButtonContainer
+                primaryLabel={ctaLabel(9)}
+                onPrimary={makeAdvance(9)}
+                primaryDisabled={connectionsSelections.length === 0}
+                showSecondary={false}
+                className="mt-8"
+              />
             </CTAReveal>
           </motion.div>
-          </QuestionStep>
+        </QuestionStep>
 
-          <QuestionStep
-            index={10}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[10] = node }}
-            heading="Which client conversations do you want more support with?"
-            body="Select up to 3."
-          >
+        <QuestionStep
+          index={10}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[10] = node
+          }}
+          heading="Which client conversations do you want more support with?"
+          body="Select up to 3."
+        >
           <motion.div {...fadeUp(0)}>
             <OptionTileGroup
               options={CONVERSATIONS_OPTIONS}
@@ -1071,19 +1193,27 @@ export function DiscoveryFlow() {
           </motion.div>
           <motion.div {...fadeUp(0, true)}>
             <CTAReveal show={showCta(10, true)}>
-              <ButtonContainer primaryLabel={ctaLabel(10)} onPrimary={makeAdvance(10)} primaryDisabled={conversationsSelections.length === 0} showSecondary={false} className="mt-8" />
+              <ButtonContainer
+                primaryLabel={ctaLabel(10)}
+                onPrimary={makeAdvance(10)}
+                primaryDisabled={conversationsSelections.length === 0}
+                showSecondary={false}
+                className="mt-8"
+              />
             </CTAReveal>
           </motion.div>
-          </QuestionStep>
+        </QuestionStep>
 
-          <QuestionStep
-            index={11}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[11] = node }}
-            heading="What are the top things that take time away from your highest priorities?"
-            body="Select up to 3."
-          >
+        <QuestionStep
+          index={11}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[11] = node
+          }}
+          heading="What are the top things that take time away from your highest priorities?"
+          body="Select up to 3."
+        >
           <motion.div {...fadeUp(0)}>
             <OptionTileGroup
               options={TIME_DRAINS_OPTIONS}
@@ -1110,19 +1240,27 @@ export function DiscoveryFlow() {
           </motion.div>
           <motion.div {...fadeUp(0, true)}>
             <CTAReveal show={showCta(11, true)}>
-              <ButtonContainer primaryLabel={ctaLabel(11)} onPrimary={makeAdvance(11)} primaryDisabled={timeDrainsSelections.length === 0 && timeDrainsText.length === 0} showSecondary={false} className="mt-6" />
+              <ButtonContainer
+                primaryLabel={ctaLabel(11)}
+                onPrimary={makeAdvance(11)}
+                primaryDisabled={timeDrainsSelections.length === 0 && timeDrainsText.length === 0}
+                showSecondary={false}
+                className="mt-6"
+              />
             </CTAReveal>
           </motion.div>
-          </QuestionStep>
+        </QuestionStep>
 
-          <QuestionStep
-            index={12}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[12] = node }}
-            heading="Let's talk close rate."
-            body="Your close rate has improved in each of the last 3 years.  How can I help you support continued growth?"
-          >
+        <QuestionStep
+          index={12}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[12] = node
+          }}
+          heading="Let's talk close rate."
+          body="Your close rate has improved in each of the last 3 years.  How can I help you support continued growth?"
+        >
           <motion.div {...fadeUp(0)}>
             <Textarea
               value={closeRateText}
@@ -1133,9 +1271,12 @@ export function DiscoveryFlow() {
               placeholder="Describe in your own words..."
               tags={['Strong lead quality', 'Competitive pricing', 'Setting personal goals']}
               chipSentences={{
-                'Poor lead quality lately': "My close rate has been impacted by poor lead quality lately — the prospects I've been working with haven't been as qualified as in previous years.",
-                'Uncompetitive pricing': "Uncompetitive pricing has been a factor in some of my lost deals, with clients finding better rates elsewhere.",
-                'This is news to me': "This is honestly news to me — I wasn't aware my close rate had dipped and would appreciate any additional context.",
+                'Poor lead quality lately':
+                  "My close rate has been impacted by poor lead quality lately — the prospects I've been working with haven't been as qualified as in previous years.",
+                'Uncompetitive pricing':
+                  'Uncompetitive pricing has been a factor in some of my lost deals, with clients finding better rates elsewhere.',
+                'This is news to me':
+                  "This is honestly news to me — I wasn't aware my close rate had dipped and would appreciate any additional context.",
               }}
               onMicClick={() => {}}
               className="mt-8"
@@ -1152,15 +1293,17 @@ export function DiscoveryFlow() {
               />
             </CTAReveal>
           </motion.div>
-          </QuestionStep>
+        </QuestionStep>
 
-          <ThreadStep
-            index={13}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[13] = node }}
-            background="loading"
-          >
+        <ThreadStep
+          index={13}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[13] = node
+          }}
+          background="loading"
+        >
           <div style={CONTENT_COLUMN_STYLE}>
             {/* Re-mount on arrival so the orb replays its scatter→form, then the copy sequences in */}
             <ActiveOnly>
@@ -1186,17 +1329,18 @@ export function DiscoveryFlow() {
               </motion.div>
             </RevealBody>
           </div>
-          </ThreadStep>
+        </ThreadStep>
 
-          
-          <QuestionStep
-            index={14}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[14] = node }}
-            heading="How would your friends and clients describe you?"
-            body="Select up to 3."
-          >
+        <QuestionStep
+          index={14}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[14] = node
+          }}
+          heading="How would your friends and clients describe you?"
+          body="Select up to 3."
+        >
           <motion.div {...fadeUp(0)}>
             <OptionTileGroup
               options={OPTIONS_BRAND_1}
@@ -1223,18 +1367,25 @@ export function DiscoveryFlow() {
           </motion.div>
           <motion.div {...fadeUp(0, true)}>
             <CTAReveal show={showCta(14, true)}>
-              <ButtonContainer primaryLabel={ctaLabel(14)} onPrimary={makeAdvance(14)} showSecondary={false} className="mt-6" />
+              <ButtonContainer
+                primaryLabel={ctaLabel(14)}
+                onPrimary={makeAdvance(14)}
+                showSecondary={false}
+                className="mt-6"
+              />
             </CTAReveal>
           </motion.div>
-          </QuestionStep>
-          <QuestionStep
-            index={15}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[15] = node }}
-            heading="How can I support your marketing efforts?"
-            body="Select all that apply."
-          >
+        </QuestionStep>
+        <QuestionStep
+          index={15}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[15] = node
+          }}
+          heading="How can I support your marketing efforts?"
+          body="Select all that apply."
+        >
           <motion.div {...fadeUp(0)}>
             <OptionTileGroup
               options={OPTIONS_BRAND_2}
@@ -1261,18 +1412,25 @@ export function DiscoveryFlow() {
           </motion.div>
           <motion.div {...fadeUp(0, true)}>
             <CTAReveal show={showCta(15, true)}>
-              <ButtonContainer primaryLabel={ctaLabel(15)} onPrimary={makeAdvance(15)} showSecondary={false} className="mt-6" />
+              <ButtonContainer
+                primaryLabel={ctaLabel(15)}
+                onPrimary={makeAdvance(15)}
+                showSecondary={false}
+                className="mt-6"
+              />
             </CTAReveal>
           </motion.div>
-          </QuestionStep>
-          <QuestionStep
-            index={16}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[16] = node }}
-            heading="What are your interests?"
-            body="Select all that apply."
-          >
+        </QuestionStep>
+        <QuestionStep
+          index={16}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[16] = node
+          }}
+          heading="What are your interests?"
+          body="Select all that apply."
+        >
           <motion.div {...fadeUp(0)}>
             <OptionTileGroup
               options={OPTIONS_BRAND_3}
@@ -1299,18 +1457,25 @@ export function DiscoveryFlow() {
           </motion.div>
           <motion.div {...fadeUp(0, true)}>
             <CTAReveal show={showCta(16, true)}>
-              <ButtonContainer primaryLabel={ctaLabel(16)} onPrimary={makeAdvance(16)} showSecondary={false} className="mt-6" />
+              <ButtonContainer
+                primaryLabel={ctaLabel(16)}
+                onPrimary={makeAdvance(16)}
+                showSecondary={false}
+                className="mt-6"
+              />
             </CTAReveal>
           </motion.div>
-          </QuestionStep>
-          <QuestionStep
-            index={17}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[17] = node }}
-            heading="Anything else you want me to know about you?"
-            body="Feel free to tell me anything of interest and i'll use it to draft your profile."
-          >
+        </QuestionStep>
+        <QuestionStep
+          index={17}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[17] = node
+          }}
+          heading="Anything else you want me to know about you?"
+          body="Feel free to tell me anything of interest and i'll use it to draft your profile."
+        >
           <motion.div {...fadeUp(0)}>
             <Textarea
               value={brand4Text}
@@ -1335,15 +1500,17 @@ export function DiscoveryFlow() {
               />
             </CTAReveal>
           </motion.div>
-          </QuestionStep>
+        </QuestionStep>
 
-          <ThreadStep
-            index={18}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[18] = node }}
-            background="loading"
-          >
+        <ThreadStep
+          index={18}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[18] = node
+          }}
+          background="loading"
+        >
           <div className="relative flex flex-col items-center gap-8">
             <motion.div
               initial={{ opacity: 0, scale: 0.6 }}
@@ -1356,15 +1523,17 @@ export function DiscoveryFlow() {
             </motion.div>
             <TransitionText text="Pulling it all together..." exiting={false} active startDelay={0.5} />
           </div>
-          </ThreadStep>
+        </ThreadStep>
 
-          <ThreadStep
-            index={19}
-            activeIndex={activeIndex}
-            collapsedUpTo={collapsedUpTo}
-            setRef={(node) => { stepRefs.current[19] = node }}
-            compact
-          >
+        <ThreadStep
+          index={19}
+          activeIndex={activeIndex}
+          collapsedUpTo={collapsedUpTo}
+          setRef={(node) => {
+            stepRefs.current[19] = node
+          }}
+          compact
+        >
           <div style={CONTENT_COLUMN_STYLE}>
             <RevealBody>
               <motion.div {...fadeUp(0)}>
@@ -1372,14 +1541,18 @@ export function DiscoveryFlow() {
               </motion.div>
               <motion.div {...fadeUp(0, true)}>
                 <CTAReveal show={showCta(19)}>
-                  <ButtonContainer primaryLabel={ctaLabel(19)} onPrimary={makeAdvance(19)} showSecondary={false} className="mt-6" />
+                  <ButtonContainer
+                    primaryLabel={ctaLabel(19)}
+                    onPrimary={makeAdvance(19)}
+                    showSecondary={false}
+                    className="mt-6"
+                  />
                 </CTAReveal>
               </motion.div>
             </RevealBody>
           </div>
-          </ThreadStep>
-        </div>
-
+        </ThreadStep>
+      </div>
 
       {/* Intro overlay — on "I'm ready" it fades out (and its content blurs
           out) rather than sliding up, cross-dissolving into step 0 as History
@@ -1392,7 +1565,16 @@ export function DiscoveryFlow() {
         style={{ zIndex: 50, pointerEvents: introOpen ? 'auto' : 'none' }}
       >
         <LoadingBackground style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
-        <div aria-hidden="true" style={{ position: 'absolute', inset: '60% 0 0 0', background: 'linear-gradient(to bottom, transparent, #fff)', zIndex: 1, pointerEvents: 'none' }} />
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: '60% 0 0 0',
+            background: 'linear-gradient(to bottom, transparent, #fff)',
+            zIndex: 1,
+            pointerEvents: 'none',
+          }}
+        />
         {/* Content group — on exit the orb + copy blur + drift out together, on a
             slow cinematic dissolve. */}
         <motion.div
@@ -1432,8 +1614,8 @@ export function DiscoveryFlow() {
               transition={{ duration: DURATION['scene-in'], ease: EASE.settle, delay: introRevealed ? 0.92 : 0 }}
               className="mt-6 text-[16px] text-[var(--text-body)]"
             >
-              Every agent is different, and I want to hear what makes your style your own. As we go through this,
-              keep in mind: the plan is always changeable.
+              Every agent is different, and I want to hear what makes your style your own. As we go through this, keep
+              in mind: the plan is always changeable.
             </motion.p>
             <motion.p
               initial={introHasEntrance ? { opacity: 0, y: 8 } : false}
@@ -1497,8 +1679,8 @@ export function DiscoveryFlow() {
       </AnimatePresence>
 
       {/* Plan sub-steps (reveal → pacing → adjust) — slide up/down matching ThreadStep */}
-      {((['plan-reveal', 'plan-pacing', 'plan-pacing-adjust'] as const).map((s, i, arr) => {
-        const planActiveIndex = arr.indexOf(activeStep as typeof arr[number])
+      {(['plan-reveal', 'plan-pacing', 'plan-pacing-adjust'] as const).map((s, i, arr) => {
+        const planActiveIndex = arr.indexOf(activeStep as (typeof arr)[number])
         if (planActiveIndex === -1) return null
         const isActive = i === planActiveIndex
         const yTarget = isActive ? '0%' : i < planActiveIndex ? '-100%' : '100%'
@@ -1509,14 +1691,30 @@ export function DiscoveryFlow() {
             initial={false}
             animate={{ y: yTarget }}
             transition={{ duration: DURATION.dramatic, ease: EASE.settle as [number, number, number, number] }}
-            style={{ zIndex: 21, pointerEvents: isActive ? 'auto' : 'none', marginLeft: 272, overflowY: isActive ? 'auto' : 'hidden' }}
+            style={{
+              zIndex: 21,
+              pointerEvents: isActive ? 'auto' : 'none',
+              marginLeft: 272,
+              overflowY: isActive ? 'auto' : 'hidden',
+            }}
           >
             {s === 'plan-reveal' && <WhatIHeard onContinue={() => advanceFromIndex(STEPS.indexOf('plan-reveal'))} />}
-            {s === 'plan-pacing' && <PacingStep fyc={fycTarget} onContinue={() => advanceFromIndex(STEPS.indexOf('plan-pacing'))} onAdjust={() => setActiveIndex(STEPS.indexOf('plan-pacing-adjust'))} />}
-            {s === 'plan-pacing-adjust' && <PacingAdjust onSkip={() => advanceFromIndex(STEPS.indexOf('plan-pacing-adjust'))} onConfirm={() => advanceFromIndex(STEPS.indexOf('plan-pacing-adjust'))} />}
+            {s === 'plan-pacing' && (
+              <PacingStep
+                fyc={fycTarget}
+                onContinue={() => advanceFromIndex(STEPS.indexOf('plan-pacing'))}
+                onAdjust={() => setActiveIndex(STEPS.indexOf('plan-pacing-adjust'))}
+              />
+            )}
+            {s === 'plan-pacing-adjust' && (
+              <PacingAdjust
+                onSkip={() => advanceFromIndex(STEPS.indexOf('plan-pacing-adjust'))}
+                onConfirm={() => advanceFromIndex(STEPS.indexOf('plan-pacing-adjust'))}
+              />
+            )}
           </motion.div>
         )
-      }))}
+      })}
 
       {/* Affirmation + summary — own transitions, not in slide stack (auto-timers must not fire off-screen) */}
       <AnimatePresence>
@@ -1530,7 +1728,10 @@ export function DiscoveryFlow() {
             transition={{ duration: DURATION['scene-in'], ease: EASE.settle as [number, number, number, number] }}
             style={{ zIndex: 21 }}
           >
-            <NylaAffirmation headline="Let's put everything together into your plan..." onComplete={() => advanceFromIndex(STEPS.indexOf('plan-pacing-affirmation'))} />
+            <NylaAffirmation
+              headline="Let's put everything together into your plan..."
+              onComplete={() => advanceFromIndex(STEPS.indexOf('plan-pacing-affirmation'))}
+            />
           </motion.div>
         )}
       </AnimatePresence>
@@ -1546,11 +1747,7 @@ export function DiscoveryFlow() {
             transition={{ duration: DURATION['scene-in'], ease: EASE.settle as [number, number, number, number] }}
             style={{ zIndex: 21, overflowY: 'auto' }}
           >
-            <PlanSummary
-              advisorName="Sarah"
-              onClose={closeDiscovery}
-              onAccept={() => setPlanAccepting(true)}
-            />
+            <PlanSummary advisorName="Sarah" onClose={closeDiscovery} onAccept={() => setPlanAccepting(true)} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -1734,7 +1931,17 @@ function TransitionOrb({ exiting }: { exiting: boolean }) {
 /* Transition-screen caption: each character blurs + fades in on arrival (organic
  * typewriter, one line); on exit the whole line fades and blurs out (bigger blur)
  * a beat after the orb, as the section hands off. */
-function TransitionText({ text, exiting, active: activeProp, startDelay = 0 }: { text: string; exiting: boolean; active?: boolean; startDelay?: number }) {
+function TransitionText({
+  text,
+  exiting,
+  active: activeProp,
+  startDelay = 0,
+}: {
+  text: string
+  exiting: boolean
+  active?: boolean
+  startDelay?: number
+}) {
   const stepActive = useStepActive()
   const active = activeProp ?? stepActive
 
@@ -1743,19 +1950,28 @@ function TransitionText({ text, exiting, active: activeProp, startDelay = 0 }: {
       className="whitespace-nowrap text-center font-serif text-[24px] tracking-normal text-[var(--nyl-purple-700)]"
       initial={{ opacity: 1, filter: 'blur(0px)' }}
       animate={exiting ? { opacity: 0, filter: 'blur(28px)' } : { opacity: 1, filter: 'blur(0px)' }}
-      transition={{ duration: DURATION.dramatic, ease: EASE.settle as [number, number, number, number], delay: exiting ? 0.15 : 0 }}
+      transition={{
+        duration: DURATION.dramatic,
+        ease: EASE.settle as [number, number, number, number],
+        delay: exiting ? 0.15 : 0,
+      }}
     >
-      {active && text.split('').map((ch, i) => (
-        <motion.span
-          key={i}
-          style={{ display: 'inline-block', whiteSpace: 'pre' }}
-          initial={{ opacity: 0, filter: 'blur(10px)' }}
-          animate={{ opacity: 1, filter: 'blur(0px)' }}
-          transition={{ duration: 0.5, delay: startDelay + i * 0.03, ease: EASE.settle as [number, number, number, number] }}
-        >
-          {ch}
-        </motion.span>
-      ))}
+      {active &&
+        text.split('').map((ch, i) => (
+          <motion.span
+            key={i}
+            style={{ display: 'inline-block', whiteSpace: 'pre' }}
+            initial={{ opacity: 0, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, filter: 'blur(0px)' }}
+            transition={{
+              duration: 0.5,
+              delay: startDelay + i * 0.03,
+              ease: EASE.settle as [number, number, number, number],
+            }}
+          >
+            {ch}
+          </motion.span>
+        ))}
     </motion.p>
   )
 }
@@ -1844,80 +2060,85 @@ function HistoryTooltip({ hoveredRow, tooltipY }: { hoveredRow: string | null; t
 function CheckBox() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-<g clip-path="url(#clip0_289_4733)">
-<path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM9.29 16.29L5.7 12.7C5.31 12.31 5.31 11.68 5.7 11.29C6.09 10.9 6.72 10.9 7.11 11.29L10 14.17L16.88 7.29C17.27 6.9 17.9 6.9 18.29 7.29C18.68 7.68 18.68 8.31 18.29 8.7L10.7 16.29C10.32 16.68 9.68 16.68 9.29 16.29Z" fill="#0044CC"/>
-</g>
-<defs>
-<clipPath id="clip0_289_4733">
-<rect width="24" height="24" fill="white"/>
-</clipPath>
-</defs>
-</svg>
+      <g clip-path="url(#clip0_289_4733)">
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM9.29 16.29L5.7 12.7C5.31 12.31 5.31 11.68 5.7 11.29C6.09 10.9 6.72 10.9 7.11 11.29L10 14.17L16.88 7.29C17.27 6.9 17.9 6.9 18.29 7.29C18.68 7.68 18.68 8.31 18.29 8.7L10.7 16.29C10.32 16.68 9.68 16.68 9.29 16.29Z"
+          fill="#0044CC"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_289_4733">
+          <rect width="24" height="24" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
   )
 }
 
 function CouncilSnapshot() {
   return (
     <div className="flex flex-col border border-[#DCD9D5] p-6 pl-8 pt-0">
-    <div className="flex flex-row font-semibold border-b border-[#DcD9d5] gap-8 -ml-8 -mr-6 pl-8 pr-6 cursor-pointer items-center">
+      <div className="flex flex-row font-semibold border-b border-[#DcD9d5] gap-8 -ml-8 -mr-6 pl-8 pr-6 cursor-pointer items-center">
         <div className="py-6">Quality Council</div>
         <div className="py-6">Executive Council</div>
-        <div className="py-6 -mb-px bg-white text-[#0044CC] flex flex-row gap-2 border-b-2 border-b-[#0044cc] pr-2"><CheckBox/>President's Council</div>
+        <div className="py-6 -mb-px bg-white text-[#0044CC] flex flex-row gap-2 border-b-2 border-b-[#0044cc] pr-2">
+          <CheckBox />
+          President's Council
+        </div>
         <div className="py-6">Chairman's council</div>
       </div>
-    <div className="flex items-start gap-6 mt-6">
-
-      <div className="shrink-0">
-        <div className="mb-1 flex items-baseline justify-between">
-          <div>
-            <p className="m-0 text-[12px] text-[var(--text-body)]">Council Credits</p>
-            <p className="m-0 text-[22px] font-medium text-[var(--text-headline)]">46,800</p>
+      <div className="flex items-start gap-6 mt-6">
+        <div className="shrink-0">
+          <div className="mb-1 flex items-baseline justify-between">
+            <div>
+              <p className="m-0 text-[12px] text-[var(--text-body)]">Council Credits</p>
+              <p className="m-0 text-[22px] font-medium text-[var(--text-headline)]">46,800</p>
+            </div>
+            <span className="rounded-full border border-[var(--nyl-orange-400)] bg-[var(--nyl-orange-100)] px-2 py-0.5 text-[11px] text-[var(--nyl-orange-500)]">
+              Stretch
+            </span>
           </div>
-          <span className="rounded-full border border-[var(--nyl-orange-400)] bg-[var(--nyl-orange-100)] px-2 py-0.5 text-[11px] text-[var(--nyl-orange-500)]">
-            Stretch
-          </span>
+          <Suspense fallback={<div style={{ width: 300, height: 214 }} />}>
+            <CouncilCreditsChart width={300} height={214} />
+          </Suspense>
+          <p className="mt-2 text-[11px] text-[var(--text-body-muted)]">
+            40% complete of <strong>90,000 target</strong>
+          </p>
         </div>
-        <Suspense fallback={<div style={{ width: 300, height: 214 }} />}>
-                    <CouncilCreditsChart width={300} height={214} />
-                  </Suspense>
-        <p className="mt-2 text-[11px] text-[var(--text-body-muted)]">
-          40% complete of <strong>90,000 target</strong>
-        </p>
-      </div>
 
-      <div className="w-px shrink-0 self-stretch bg-[var(--border-subtle)]" />
+        <div className="w-px shrink-0 self-stretch bg-[var(--border-subtle)]" />
 
-      <div className="flex flex-1 flex-col">
-        <CouncilStatCard
-          label="Protection FYC"
-          value="$24.6K"
-          status="complete"
-          progress={1}
-          caption="100% complete of $21K minimum"
-          captionBold="$21K minimum"
-        />
-        <CouncilStatCard
-          label="Protection premium"
-          value="$56,100"
-          status="stretch"
-          progress={0.65}
-          caption="65% complete of 84K minimum"
-          captionBold="84K minimum"
-          dimmed
-        />
-        <CouncilStatCard
-          label="Case rate bonus"
-          value="46"
-          valueSuffix="/50"
-          status="on-track"
-          progress={0.92}
-          caption="Level 1 achieved; reaching 50 adds another 2,500 council credits"
-          captionBold="50"
-          noBorder
-        />
-        <p className="mt-2 text-right text-[11px] text-[var(--text-body-muted)]">Your standing as of 5/31/25</p>
+        <div className="flex flex-1 flex-col">
+          <CouncilStatCard
+            label="Protection FYC"
+            value="$24.6K"
+            status="complete"
+            progress={1}
+            caption="100% complete of $21K minimum"
+            captionBold="$21K minimum"
+          />
+          <CouncilStatCard
+            label="Protection premium"
+            value="$56,100"
+            status="stretch"
+            progress={0.65}
+            caption="65% complete of 84K minimum"
+            captionBold="84K minimum"
+            dimmed
+          />
+          <CouncilStatCard
+            label="Case rate bonus"
+            value="46"
+            valueSuffix="/50"
+            status="on-track"
+            progress={0.92}
+            caption="Level 1 achieved; reaching 50 adds another 2,500 council credits"
+            captionBold="50"
+            noBorder
+          />
+          <p className="mt-2 text-right text-[11px] text-[var(--text-body-muted)]">Your standing as of 5/31/25</p>
+        </div>
       </div>
-    </div>
     </div>
   )
 }

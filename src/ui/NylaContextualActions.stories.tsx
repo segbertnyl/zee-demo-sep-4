@@ -13,10 +13,7 @@ type Story = StoryObj<typeof NylaContextualActions>
 export const Default: Story = {
   name: 'Default (2 actions)',
   args: {
-    actions: [
-      { label: 'How did you get this' },
-      { label: 'Make a change' },
-    ],
+    actions: [{ label: 'How did you get this' }, { label: 'Make a change' }],
   },
 }
 

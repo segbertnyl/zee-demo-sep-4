@@ -44,18 +44,14 @@ export function OptionTile({
         padding,
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         className,
-      ].filter(Boolean).join(' ')}
+      ]
+        .filter(Boolean)
+        .join(' ')}
     >
       {/* Text — left side */}
       <div className="flex flex-col flex-1 min-w-0">
-        <p className={`font-semibold ${titleClass}`}>
-          {title}
-        </p>
-        {sub && (
-          <p className={['option-tile-sub mt-1', subClass].join(' ')}>
-            {sub}
-          </p>
-        )}
+        <p className={`font-semibold ${titleClass}`}>{title}</p>
+        {sub && <p className={['option-tile-sub mt-1', subClass].join(' ')}>{sub}</p>}
       </div>
 
       {/* Radio indicator — right side */}
@@ -99,9 +95,7 @@ export function OptionTileGroup({
     }
   }
 
-  const gridCols = cols === 3
-    ? 'grid-cols-1 md:grid-cols-3'
-    : 'grid-cols-1 md:grid-cols-2'
+  const gridCols = cols === 3 ? 'grid-cols-1 md:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'
 
   return (
     <div className={className}>
@@ -129,7 +123,14 @@ function RadioIcon({ checked }: { checked: boolean; disabled: boolean }) {
     return (
       <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
         <circle cx="8" cy="8" r="8" fill="var(--action-primary, #0468ff)" />
-        <path d="M4.5 8.5L6.5 10.5L11 5.5" style={{ stroke: 'var(--action-on-primary)' }} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <path
+          d="M4.5 8.5L6.5 10.5L11 5.5"
+          style={{ stroke: 'var(--action-on-primary)' }}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
       </svg>
     )
   }

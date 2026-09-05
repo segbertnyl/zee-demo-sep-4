@@ -5,7 +5,9 @@ plus the open decisions per §9 of the brief. Nothing here is silently finalized
 each item is yours to confirm/tune.
 
 ## Update 5 — main navigation (latest)
+
 Rebuilt the left rail to Figma 1002-12213:
+
 - Logo (NY Life mark, doubles as back-to-menu), then six nav items — Briefing
   (active, blue), Clients, Prospects, Network, Business, Action Board — then two
   bottom utilities above the avatar: Notifications + Calendar, each with a blue
@@ -14,11 +16,12 @@ Rebuilt the left rail to Figma 1002-12213:
   labels (and the advisor name by the avatar).
 - Pulled the nav glyphs from Figma into the icon library (navBriefing, personCheck,
   tag, orgChart, briefcase, listAdd, bell, calendar) — all in the Storybook
-  *Design System / Icons* gallery. Notification dots render as a separate badge so
+  _Design System / Icons_ gallery. Notification dots render as a separate badge so
   the bell/calendar icons stay reusable.
 - Nav items are visual for now (don't switch scenes); wire to real destinations next.
 
 ## Update 4 — expand interaction, glow, full page
+
 - **Footer expand toggle**: the bottom-left "Outreach approach" / "Prep ready for
   review" (expand icon) now toggles the card's expanded section, with hover
   states on the icon + text. The hero card and the Nyla-suggested card default
@@ -38,7 +41,9 @@ Rebuilt the left rail to Figma 1002-12213:
   the left-rail nav glyphs are approximate; date chevrons are non-functional.
 
 ## Update 3 — task-card refinements
+
 Closely referenced Figma 943-27088, 979-15140, and 943-25993 (expanded):
+
 - **Links + CTAs use Blue-500** throughout (name, Mark as done, Dismiss, Add to
   queue, View request / Review drafts, and all primary buttons). The suggested
   card's actions + "Review and submit" are now blue (not purple).
@@ -55,9 +60,10 @@ Closely referenced Figma 943-27088, 979-15140, and 943-25993 (expanded):
   "Prep ready for review" footer.
 
 ## Update 2 — icons, client preview, glow
+
 - **Icon library** (`src/ui/icons/`) — extracted verbatim from Figma 943-29146 +
   the shared icon set, normalized to `currentColor`. In Storybook under
-  *Design System / Icons 🆕* (gallery / sizes / color). Used across the card now
+  _Design System / Icons 🆕_ (gallery / sizes / color). Used across the card now
   (person, $, phone, email, doc, book, expand, caret, check) — use these going forward.
 - **Client preview** rebuilt to match Figma 943-29146 exactly (the "Sandy ·
   Client since 2021 · Last touch" line, blurb + Score box, tag pills, file chips
@@ -71,6 +77,7 @@ Closely referenced Figma 943-27088, 979-15140, and 943-25993 (expanded):
   (`--nyl-blue-500` / `--nyl-purple-300/400/500/700`). Reduced-motion → static ring.
 
 ## What shipped in this slice
+
 A new, **non-destructive** `BriefingV6Scene` (the active V5.5 briefing is untouched).
 It mounts as a full-screen overlay opened from the prototype menu → **“Briefing v6 🆕”**
 (press **M** for the menu). Implemented end-to-end and verified in the browser:
@@ -99,10 +106,11 @@ Files: `src/scenes/BriefingV6Scene.tsx`, `src/ui/BriefingTaskCard.tsx`,
 motion demo) and the headline.
 
 ## 1 — Content suggestions (current → proposed, all editable in `briefingV6Content.ts`)
+
 - **Sandra card** copy is verbatim from Figma and kept as-is.
 - **Headlines** are Coach-voice and time-of-day aware. The morning top headline
   matches Figma (“Today you’ve got $2K in FYC…”). The midday/afternoon/evening
-  sequences are **proposed** — please review tone. *Suggestion:* if you want the
+  sequences are **proposed** — please review tone. _Suggestion:_ if you want the
   headline to name the next concrete action (more Coach-direct), say so and I’ll
   swap e.g. midday[0] → “Lapse risk cleared — Emma’s 10:00 review is next; brief’s loaded.”
 - **Generated follow-ups** (Emma / Patricia / Marcus) are seeded from the tone
@@ -111,15 +119,16 @@ motion demo) and the headline.
 - **Phone numbers** for Laura/Patricia/Marcus are placeholders.
 
 ## 2 — Unaccounted states (not in the Figma flow; recommendations)
-- **Empty / no-tasks-left** — after everything’s done. *Rec:* a calm Coach end-state
+
+- **Empty / no-tasks-left** — after everything’s done. _Rec:_ a calm Coach end-state
   (“You’re clear for the morning — next brief builds at …”).
 - **Agent action failed** — the suggested service-request can’t be pre-filled.
-  *Rec:* keep the card, swap acknowledgement check → amber “couldn’t complete —
+  _Rec:_ keep the card, swap acknowledgement check → amber “couldn’t complete —
   retry / do it manually”. Currently always succeeds.
 - **Loading / skeleton** for the initial briefing build (the repo has
   `CreatingBriefing.tsx` — wire it as the entry transition).
 - **Dismiss confirmation / undo** — Dismiss currently removes the suggestion with
-  no undo; Mark-done has Undo. *Rec:* give Dismiss a brief undo too.
+  no undo; Mark-done has Undo. _Rec:_ give Dismiss a brief undo too.
 - **Long-content overflow** in the client preview and very long headlines
   (`text-wrap: balance` is applied; not stress-tested).
 - **Many-cards scroll** — works; the left column is sticky. Confirm that’s the
@@ -130,11 +139,13 @@ motion demo) and the headline.
 - **Snooze / Add-to-queue** menus are visual only (options don’t change behavior yet).
 
 ## 3 — Motion values (the new `NYLA` set in `src/motion.ts`) — flagged for tuning
+
 Figma `get_motion_context` returned **no keyframe data** for the suggest nodes.
 Rather than invent numbers, the `NYLA` set now **pulls from the documented
 motion system** (the `EASE.*` / `DURATION.*` scale, shown in Storybook →
-*Design System / Motion*, where a new “Nyla Suggest set · briefing-v6” section
+_Design System / Motion_, where a new “Nyla Suggest set · briefing-v6” section
 demos each one):
+
 - `cardEnter` → `DURATION[‘scene-in’]` (520ms), `settle` — the documented
   scene-enter pattern (y+16 / scale .98 / blur 8px).
 - `glow.rampIn` / `rampOut` → `DURATION.deliberate` (600ms); peak shadow =
@@ -145,14 +156,16 @@ demos each one):
 Two values are intentionally **outside** the one-shot scale (which only covers
 transitions, not loops/dwells), so they remain explicit and are the most likely
 to want tuning:
+
 - `thinkingBorder.loopDuration` 2.2s, linear, repeating (ambient perimeter trace).
 - `settle.holdMs` 2000ms (per the brief’s “~2 seconds” dwell).
-Glow intensity + border thickness are also worth a look on a real display.
+  Glow intensity + border thickness are also worth a look on a real display.
 
 ## 4 — Assumptions to confirm
+
 - **Personas:** Sarah = advisor (the draft is signed “It’s Sarah”), Nyla = AI
-  assistant. The brief’s “for the agent, Sarah, to review” reads as *Nyla drafted
-  it; Sarah reviews*. Confirm.
+  assistant. The brief’s “for the agent, Sarah, to review” reads as _Nyla drafted
+  it; Sarah reviews_. Confirm.
 - **cc folder / claude.ai project:** I could not open the linked claude.ai project
   (HTTP 403 — no tool can authenticate to it) and found no folder literally named
   “NYL360 cc folder”. Content was generated from the tone-of-voice doc, the Figma
@@ -168,6 +181,7 @@ Glow intensity + border thickness are also worth a look on a real display.
   someone types those params).
 
 ## Not yet done (next slices)
+
 - Per-meeting brief / pre-meeting view wiring from “Your day”.
 - Real Snooze/queue behavior; dismiss-undo.
 - Playwright tests per `tests/AGENT_TEMPLATE.md` (repo convention).
@@ -175,12 +189,13 @@ Glow intensity + border thickness are also worth a look on a real display.
 - Team announcement (see below) — confirm channel.
 
 ## Update — layout, date carousel, succession + agent preview
+
 - **Grid split:** left/right are now **5 / 7** columns (was 4/8 → 6/6 → 5/7).
 - **Headline ↔ card alignment:** scroll-focus now probes just below the top edge
   (container top + 56px, with a straddle test) so the headline reflects the card
-  *snapped at the top*, not the one below it. NOTE: smooth-scroll + programmatic
+  _snapped at the top_, not the one below it. NOTE: smooth-scroll + programmatic
   scroll don't fire events in the headless preview, so this was verified by logic
-  + top-card detection, not E2E — confirm with a real wheel/drag scroll.
+  - top-card detection, not E2E — confirm with a real wheel/drag scroll.
 - **Date carousel (future days):** the top chevrons step the date. Forward days
   (`dayOffset > 0`) render the same layout with a forward-looking set
   (`FUTURE_TASKS`: Harrington / Khoury / Brooks) and a headline that acknowledges
@@ -197,6 +212,7 @@ Glow intensity + border thickness are also worth a look on a real display.
   replace native smooth scroll + add the snap "stretch"); past-day layout.
 
 ## Update — preview kinds, purple rule, date-carousel alignment, headline polish
+
 - **Purple is reserved for Nyla AI** (suggestions/insights). David Okafor's handoff-notes box is now neutral gray. Gloria's "Why you" box stays purple (it's a Nyla insight).
 - **Name-link glyphs by category** (Figma 1250-35072/104/125/088): Clients/Prospects → person, NYL agents → domain, License → workspace_premium (new `LicenseIcon`), Events → location. New `kind: 'practice'` preview added (Series 65 credential card).
 - **Date carousel** now shares the page's 12-col grid: "Briefing" spans the left 5 cols; the date toggle spans the right 7 cols (same column as the task-card stack), chevrons pinned to the stack's left/right edges, date centered between. Verified left/right deltas = 0.

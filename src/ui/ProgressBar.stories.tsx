@@ -24,11 +24,13 @@ export const AllTones: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <div className="flex flex-col gap-8 w-64">
-      {([
-        { tone: 'good', value: 0.78 },
-        { tone: 'warn', value: 0.43 },
-        { tone: 'neutral', value: 0.55 },
-      ] as { tone: ProgressBarTone; value: number }[]).map(({ tone, value }) => (
+      {(
+        [
+          { tone: 'good', value: 0.78 },
+          { tone: 'warn', value: 0.43 },
+          { tone: 'neutral', value: 0.55 },
+        ] as { tone: ProgressBarTone; value: number }[]
+      ).map(({ tone, value }) => (
         <div key={tone}>
           <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.08em] text-neutral-400">{tone}</p>
           <ProgressBar value={value} tone={tone} />

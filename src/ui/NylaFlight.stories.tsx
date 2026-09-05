@@ -158,10 +158,7 @@ function FlightStage({
             </div>
           )}
         </div>
-        <motion.h1
-          {...cascade(0)}
-          className="mt-6 font-serif text-[32px] leading-[1.2] text-[var(--nyl-blue-800)]"
-        >
+        <motion.h1 {...cascade(0)} className="mt-6 font-serif text-[32px] leading-[1.2] text-[var(--nyl-blue-800)]">
           Hi, Sarah. I'm Nyla.
         </motion.h1>
         <motion.p {...cascade(0.12)} className="mt-4 text-[15px] text-[var(--text-body)]">
@@ -258,8 +255,8 @@ export const Flight: Story = {
   args: {
     flightMs: 1100,
     scatterMax: 2.9,
-    cascadeAtFraction: 0.6
-  }
+    cascadeAtFraction: 0.6,
+  },
 }
 
 /** Menu quick-link entry — no travel; she gathers in place at the landing. */

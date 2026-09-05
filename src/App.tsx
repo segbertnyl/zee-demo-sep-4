@@ -35,8 +35,16 @@ import { WelcomeToDiscoveryProto } from '@/proto/WelcomeToDiscoveryProto'
  * active pill glides to the new destination in sync (see LeftRail). */
 
 const SCENE_ORDER: Scene[] = [
-  'briefing', 'clients', 'actives', 'prospects', 'business', 'plan',
-  'calendar', 'actionboard', 'freeform', 'canvas',
+  'briefing',
+  'clients',
+  'actives',
+  'prospects',
+  'business',
+  'plan',
+  'calendar',
+  'actionboard',
+  'freeform',
+  'canvas',
 ]
 
 const SCENE_TITLES: Record<Scene, string> = {
@@ -183,7 +191,14 @@ function GridOverlay() {
       }}
     >
       {/* Sidebar zone */}
-      <div style={{ width: SIDEBAR, flexShrink: 0, background: 'rgba(112, 40, 164, 0.08)', borderRight: '1px solid rgba(112,40,164,0.3)' }} />
+      <div
+        style={{
+          width: SIDEBAR,
+          flexShrink: 0,
+          background: 'rgba(112, 40, 164, 0.08)',
+          borderRight: '1px solid rgba(112,40,164,0.3)',
+        }}
+      />
 
       {/* Column zone */}
       <div
@@ -198,13 +213,29 @@ function GridOverlay() {
         {cols.map((_, i) => (
           <div
             key={i}
-            style={{ flex: 1, background: 'rgba(112, 40, 164, 0.07)', borderLeft: '1px solid rgba(112,40,164,0.2)', borderRight: '1px solid rgba(112,40,164,0.2)' }}
+            style={{
+              flex: 1,
+              background: 'rgba(112, 40, 164, 0.07)',
+              borderLeft: '1px solid rgba(112,40,164,0.2)',
+              borderRight: '1px solid rgba(112,40,164,0.2)',
+            }}
           />
         ))}
       </div>
 
       {/* Label */}
-      <div style={{ position: 'absolute', top: 6, left: SIDEBAR + MARGIN, fontFamily: 'var(--font-mono)', fontSize: 9, color: 'rgba(112,40,164,0.7)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: 6,
+          left: SIDEBAR + MARGIN,
+          fontFamily: 'var(--font-mono)',
+          fontSize: 9,
+          color: 'rgba(112,40,164,0.7)',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+        }}
+      >
         Grid · sidebar {SIDEBAR}px · {cols.length} col · {MARGIN}px margin · {GUTTER}px gutter · G to hide
       </div>
     </div>

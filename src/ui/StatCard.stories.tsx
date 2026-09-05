@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import {
-  StatCard, StatCardTooltip,
-  MetricTile,
-  GoalsCard,
-  ProgressCard,
-} from './StatCard'
+import { StatCard, StatCardTooltip, MetricTile, GoalsCard, ProgressCard } from './StatCard'
 import type { StatCardSource } from './StatCard'
 
 export default {
@@ -32,7 +27,18 @@ function CardWrap({ children }: { children: React.ReactNode }) {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-body-muted)', marginTop: 32, marginBottom: 12 }}>
+    <p
+      style={{
+        fontFamily: 'var(--font-sans)',
+        fontSize: 10.5,
+        fontWeight: 500,
+        letterSpacing: '0.22em',
+        textTransform: 'uppercase',
+        color: 'var(--text-body-muted)',
+        marginTop: 32,
+        marginBottom: 12,
+      }}
+    >
       {children}
     </p>
   )
@@ -59,12 +65,7 @@ export const AllStatCards: StoryObj = {
       <SectionLabel>With source tooltip — hover the ⓘ icon</SectionLabel>
       <Row>
         <CardWrap>
-          <StatCard
-            label="Active clients"
-            value="213"
-            sub="in your book"
-            source={SOURCE_SALESFORCE}
-          />
+          <StatCard label="Active clients" value="213" sub="in your book" source={SOURCE_SALESFORCE} />
         </CardWrap>
         <CardWrap>
           <StatCard
@@ -152,11 +153,31 @@ export const TooltipPlaceholder: StoryObj = {
   parameters: { layout: 'centered' },
   render: () => (
     <div style={{ position: 'relative', padding: '60px 40px 40px' }}>
-      <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, color: 'var(--text-body-muted)', marginBottom: 12, fontStyle: 'italic' }}>
-        Tooltip is triggered by hovering the ⓘ icon on a StatCard with a source prop. Shown here in always-open state for documentation.
+      <p
+        style={{
+          fontFamily: 'var(--font-sans)',
+          fontSize: 11,
+          color: 'var(--text-body-muted)',
+          marginBottom: 12,
+          fontStyle: 'italic',
+        }}
+      >
+        Tooltip is triggered by hovering the ⓘ icon on a StatCard with a source prop. Shown here in always-open state
+        for documentation.
       </p>
       {/* Positioned relative to a fake card outline */}
-      <div style={{ width: 240, minHeight: 150, borderRadius: 4, border: '1px dashed var(--border-default)', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div
+        style={{
+          width: 240,
+          minHeight: 150,
+          borderRadius: 4,
+          border: '1px dashed var(--border-default)',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <span style={{ fontFamily: 'var(--font-sans)', fontSize: 11, color: 'var(--text-body-faint)' }}>StatCard</span>
         <StatCardTooltip source={SOURCE_SALESFORCE} />
       </div>
@@ -223,19 +244,31 @@ export const AllGoalsCards: StoryObj = {
       <SectionLabel>Goals rail — lavender style</SectionLabel>
       <Row>
         {[
-          { label: 'FYC target', status: 'On track', dot: '#1ab382', value: '$47,200', sub: '< $42K minimum · 56% to EC' },
-          { label: 'Projected year-end', status: 'On track', dot: '#1ab382', value: '$94,400', sub: 'EC to be secured · $9.4K buffer' },
+          {
+            label: 'FYC target',
+            status: 'On track',
+            dot: '#1ab382',
+            value: '$47,200',
+            sub: '< $42K minimum · 56% to EC',
+          },
+          {
+            label: 'Projected year-end',
+            status: 'On track',
+            dot: '#1ab382',
+            value: '$94,400',
+            sub: 'EC to be secured · $9.4K buffer',
+          },
           { label: 'EC credits', status: 'Stretch', dot: '#ff9522', value: '$52,400', sub: '< $32K min' },
-          { label: 'Protection FYC', status: 'On track', dot: '#1ab382', value: '$24,600', sub: '100% of $21K minimum' },
+          {
+            label: 'Protection FYC',
+            status: 'On track',
+            dot: '#1ab382',
+            value: '$24,600',
+            sub: '100% of $21K minimum',
+          },
         ].map((c) => (
           <CardWrap key={c.label}>
-            <GoalsCard
-              label={c.label}
-              status={c.status}
-              dot={c.dot}
-              value={c.value}
-              sub={c.sub}
-            />
+            <GoalsCard label={c.label} status={c.status} dot={c.dot} value={c.value} sub={c.sub} />
           </CardWrap>
         ))}
       </Row>

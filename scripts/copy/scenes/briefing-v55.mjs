@@ -28,7 +28,7 @@ export function rows() {
     { id: 'week', label: 'Week' },
     { id: 'month', label: 'Month' },
     { id: 'year', label: 'Year' },
-  ].forEach(h => {
+  ].forEach((h) => {
     out.push(ob('nav', `briefing.horizons.${h.id}`, 'label', h.label, { storage: 'constant' }))
   })
 
@@ -36,7 +36,12 @@ export function rows() {
     ['briefing.hero.day.eyebrow', 'hero', 'eyebrow', "Today's top priorities"],
     ['briefing.hero.day.headline', 'hero', 'headline', 'A couple of quick actions that will set you up for the week.'],
     ['briefing.hero.plan.eyebrow', 'hero', 'eyebrow', 'Your 2026 trajectory'],
-    ['briefing.hero.plan.headline', 'hero', 'headline', "You're hitting your Executive Council pace — let's make sure it holds."],
+    [
+      'briefing.hero.plan.headline',
+      'hero',
+      'headline',
+      "You're hitting your Executive Council pace — let's make sure it holds.",
+    ],
     ['briefing.featured.eyebrow', 'featured-card', 'eyebrow', 'Needs attention before 10AM'],
     ['briefing.featured.cta', 'featured-card', 'cta', 'Draft a message'],
   ].forEach(([key, step, type, content]) => {

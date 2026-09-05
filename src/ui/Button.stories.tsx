@@ -37,8 +37,12 @@ function Pair({ variant, theme = 'default' }: { variant: ButtonVariant; theme?: 
   const bg = theme === 'dark' ? 'bg-[var(--nyl-blue-800)]' : ''
   return (
     <div className={`flex items-center gap-6 rounded-xl p-6 ${bg}`}>
-      <Button variant={variant} theme={theme}>Button text</Button>
-      <Button variant={variant} theme={theme} disabled>Button text</Button>
+      <Button variant={variant} theme={theme}>
+        Button text
+      </Button>
+      <Button variant={variant} theme={theme} disabled>
+        Button text
+      </Button>
     </div>
   )
 }
@@ -93,7 +97,9 @@ export const OutlinedDefault: Story = {
   render: () => (
     <div className="flex items-center gap-6 rounded-xl p-6">
       <Button variant="outlined">Button text</Button>
-      <Button variant="outlined" disabled>Button text</Button>
+      <Button variant="outlined" disabled>
+        Button text
+      </Button>
     </div>
   ),
 }
@@ -104,15 +110,37 @@ export const OutlinedDefault: Story = {
 
 function UpArrow() {
   return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M2 7 L7 2 L12 7" /><path d="M7 2 V12" />
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M2 7 L7 2 L12 7" />
+      <path d="M7 2 V12" />
     </svg>
   )
 }
 function DownArrow() {
   return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M2 7 L7 12 L12 7" /><path d="M7 12 V2" />
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M2 7 L7 12 L12 7" />
+      <path d="M7 12 V2" />
     </svg>
   )
 }
@@ -122,9 +150,15 @@ export const IconDefault: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <div className="flex items-center gap-6 rounded-xl p-6">
-      <Button variant="icon" aria-label="Previous"><UpArrow /></Button>
-      <Button variant="icon" aria-label="Next"><DownArrow /></Button>
-      <Button variant="icon" disabled aria-label="Previous (disabled)"><UpArrow /></Button>
+      <Button variant="icon" aria-label="Previous">
+        <UpArrow />
+      </Button>
+      <Button variant="icon" aria-label="Next">
+        <DownArrow />
+      </Button>
+      <Button variant="icon" disabled aria-label="Previous (disabled)">
+        <UpArrow />
+      </Button>
     </div>
   ),
 }
@@ -139,7 +173,18 @@ export const AllVariants: Story = {
   render: () => {
     const variants: ButtonVariant[] = ['primary', 'secondary', 'text', 'outlined']
     const label = (text: string) => (
-      <p key={text} style={{ fontFamily: 'var(--font-sans)', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase' as const, color: 'var(--text-body-muted)', marginBottom: 8 }}>
+      <p
+        key={text}
+        style={{
+          fontFamily: 'var(--font-sans)',
+          fontSize: 10.5,
+          fontWeight: 500,
+          letterSpacing: '0.22em',
+          textTransform: 'uppercase' as const,
+          color: 'var(--text-body-muted)',
+          marginBottom: 8,
+        }}
+      >
         {text}
       </p>
     )
@@ -148,8 +193,12 @@ export const AllVariants: Story = {
         {label('Default theme — enabled / disabled')}
         <div className="flex flex-wrap items-center gap-x-8 gap-y-4 rounded-xl border border-neutral-200 bg-white p-6">
           {variants.flatMap((v) => [
-            <Button key={v} variant={v}>Button text</Button>,
-            <Button key={`${v}-off`} variant={v} disabled>Button text</Button>,
+            <Button key={v} variant={v}>
+              Button text
+            </Button>,
+            <Button key={`${v}-off`} variant={v} disabled>
+              Button text
+            </Button>,
           ])}
         </div>
 
@@ -157,8 +206,12 @@ export const AllVariants: Story = {
         {label('Dark theme — enabled / disabled')}
         <div className="flex flex-wrap items-center gap-x-8 gap-y-4 rounded-xl bg-[var(--nyl-blue-800)] p-6">
           {variants.flatMap((v) => [
-            <Button key={v} variant={v} theme="dark">Button text</Button>,
-            <Button key={`${v}-off`} variant={v} theme="dark" disabled>Button text</Button>,
+            <Button key={v} variant={v} theme="dark">
+              Button text
+            </Button>,
+            <Button key={`${v}-off`} variant={v} theme="dark" disabled>
+              Button text
+            </Button>,
           ])}
         </div>
       </div>

@@ -109,7 +109,7 @@ function LineChart({ data, currentValue, yMin, yMax, width = 287, height = 135, 
       })}
 
       {/* Current value reference line (if not already a tick) */}
-      {isRefInRange && !ticks.some(t => Math.abs(t - currentValue) < tickStep * 0.1) && (
+      {isRefInRange && !ticks.some((t) => Math.abs(t - currentValue) < tickStep * 0.1) && (
         <>
           <line
             x1={paddingLeft}
@@ -147,15 +147,7 @@ function LineChart({ data, currentValue, yMin, yMax, width = 287, height = 135, 
 
       {/* Dots */}
       {data.map((d, i) => (
-        <circle
-          key={i}
-          cx={xPos(i)}
-          cy={yPos(d.value)}
-          r={3.5}
-          fill="white"
-          stroke="#3d6eff"
-          strokeWidth={1.5}
-        />
+        <circle key={i} cx={xPos(i)} cy={yPos(d.value)} r={3.5} fill="white" stroke="#3d6eff" strokeWidth={1.5} />
       ))}
 
       {/* X-axis labels */}
@@ -204,21 +196,36 @@ export interface DataTooltipProps {
   className?: string
 }
 
-export function DataTooltip({ label, icon = 'bar', chart, state: controlledState, flyoutDirection, className }: DataTooltipProps) {
+export function DataTooltip({
+  label,
+  icon = 'bar',
+  chart,
+  state: controlledState,
+  flyoutDirection,
+  className,
+}: DataTooltipProps) {
   const [open, setOpen] = useState(false)
   const [autoDirection, setAutoDirection] = useState<'up' | 'down'>('up')
   const ref = useRef<HTMLDivElement>(null)
   const closeTimer = useRef<number | null>(null)
 
   // Controlled state (Storybook) overrides the hover behavior.
-  const isActive = controlledState ? (controlledState === 'hover' || controlledState === 'clicked') : open
-  const isOpen = controlledState ? controlledState === 'clicked' : (open && !!chart)
+  const isActive = controlledState ? controlledState === 'hover' || controlledState === 'clicked' : open
+  const isOpen = controlledState ? controlledState === 'clicked' : open && !!chart
 
   // Resolved direction: explicit prop wins; otherwise auto-detect on open
   const direction = flyoutDirection ?? autoDirection
 
-  const cancelClose = () => { if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null } }
-  const scheduleClose = () => { cancelClose(); closeTimer.current = window.setTimeout(() => setOpen(false), 120) }
+  const cancelClose = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+  }
+  const scheduleClose = () => {
+    cancelClose()
+    closeTimer.current = window.setTimeout(() => setOpen(false), 120)
+  }
   function openNow() {
     cancelClose()
     if (!chart) return
@@ -231,8 +238,8 @@ export function DataTooltip({ label, icon = 'bar', chart, state: controlledState
     setOpen(true)
   }
 
-  const yMin = chart?.yMin ?? (chart ? Math.floor(Math.min(...chart.data.map(d => d.value)) / 25) * 25 : 0)
-  const yMax = chart?.yMax ?? (chart ? Math.ceil(Math.max(...chart.data.map(d => d.value)) / 25) * 25 : 100)
+  const yMin = chart?.yMin ?? (chart ? Math.floor(Math.min(...chart.data.map((d) => d.value)) / 25) * 25 : 0)
+  const yMax = chart?.yMax ?? (chart ? Math.ceil(Math.max(...chart.data.map((d) => d.value)) / 25) * 25 : 100)
 
   return (
     <div ref={ref} style={{ position: 'relative', display: 'inline-block' }} className={className}>
@@ -260,9 +267,11 @@ export function DataTooltip({ label, icon = 'bar', chart, state: controlledState
           transition: 'border-color 120ms ease, background 120ms ease',
         }}
       >
-        {icon === 'calendar'
-          ? <CalendarIcon color="var(--action-primary, #0468ff)" />
-          : <BarChartIcon color="var(--action-primary, #0468ff)" />}
+        {icon === 'calendar' ? (
+          <CalendarIcon color="var(--action-primary, #0468ff)" />
+        ) : (
+          <BarChartIcon color="var(--action-primary, #0468ff)" />
+        )}
         {label}
       </button>
 
@@ -273,9 +282,7 @@ export function DataTooltip({ label, icon = 'bar', chart, state: controlledState
           onMouseLeave={scheduleClose}
           style={{
             position: 'absolute',
-            ...(direction === 'up'
-              ? { bottom: 'calc(100% + 18px)' }
-              : { top: 'calc(100% + 18px)' }),
+            ...(direction === 'up' ? { bottom: 'calc(100% + 18px)' } : { top: 'calc(100% + 18px)' }),
             left: '50%',
             transform: 'translateX(-50%)',
             width: 338,
@@ -291,18 +298,29 @@ export function DataTooltip({ label, icon = 'bar', chart, state: controlledState
         >
           {/* Chart header */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <p style={{
-              margin: 0,
-              fontFamily: 'var(--font-sans)',
-              fontSize: 14,
-              fontWeight: 600,
-              lineHeight: '20px',
-              letterSpacing: '0.2px',
-              color: '#111',
-            }}>
+            <p
+              style={{
+                margin: 0,
+                fontFamily: 'var(--font-sans)',
+                fontSize: 14,
+                fontWeight: 600,
+                lineHeight: '20px',
+                letterSpacing: '0.2px',
+                color: '#111',
+              }}
+            >
               {chart.title}
             </p>
-            <p style={{ margin: 0, fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: '20px', letterSpacing: '0.2px', color: '#111' }}>
+            <p
+              style={{
+                margin: 0,
+                fontFamily: 'var(--font-sans)',
+                fontSize: 14,
+                lineHeight: '20px',
+                letterSpacing: '0.2px',
+                color: '#111',
+              }}
+            >
               ~{chart.currentValue.toLocaleString()} /policy
               {chart.adjustLabel && (
                 <button
@@ -341,34 +359,38 @@ export function DataTooltip({ label, icon = 'bar', chart, state: controlledState
 
           {/* Source */}
           {chart.source && (
-            <p style={{
-              margin: 0,
-              fontFamily: 'var(--font-sans)',
-              fontSize: 14,
-              fontStyle: 'italic',
-              fontWeight: 400,
-              lineHeight: '20px',
-              letterSpacing: '0.2px',
-              color: '#17181c',
-              whiteSpace: 'nowrap',
-            }}>
+            <p
+              style={{
+                margin: 0,
+                fontFamily: 'var(--font-sans)',
+                fontSize: 14,
+                fontStyle: 'italic',
+                fontWeight: 400,
+                lineHeight: '20px',
+                letterSpacing: '0.2px',
+                color: '#17181c',
+                whiteSpace: 'nowrap',
+              }}
+            >
               Source: {chart.source}
             </p>
           )}
 
           {/* Caret arrow */}
-          <div style={{
-            position: 'absolute',
-            ...(direction === 'up'
-              ? { bottom: -9, boxShadow: '2px 2px 3px rgba(0,0,0,0.1)' }
-              : { top: -9, boxShadow: '-2px -2px 3px rgba(0,0,0,0.1)' }),
-            left: '50%',
-            transform: 'translateX(-50%) rotate(45deg)',
-            width: 18,
-            height: 18,
-            background: 'white',
-            borderRadius: 1,
-          }} />
+          <div
+            style={{
+              position: 'absolute',
+              ...(direction === 'up'
+                ? { bottom: -9, boxShadow: '2px 2px 3px rgba(0,0,0,0.1)' }
+                : { top: -9, boxShadow: '-2px -2px 3px rgba(0,0,0,0.1)' }),
+              left: '50%',
+              transform: 'translateX(-50%) rotate(45deg)',
+              width: 18,
+              height: 18,
+              background: 'white',
+              borderRadius: 1,
+            }}
+          />
         </div>
       )}
     </div>

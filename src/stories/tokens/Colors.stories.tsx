@@ -10,7 +10,17 @@ export default {
 function Group({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <section style={{ marginBottom: 40 }}>
-      <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-body-muted)', marginBottom: 16 }}>
+      <p
+        style={{
+          fontFamily: 'var(--font-sans)',
+          fontSize: 10.5,
+          fontWeight: 500,
+          letterSpacing: '0.22em',
+          textTransform: 'uppercase',
+          color: 'var(--text-body-muted)',
+          marginBottom: 16,
+        }}
+      >
         {label}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 8 }}>
@@ -22,24 +32,62 @@ function Group({ label, children }: { label: string; children: React.ReactNode }
 
 function Swatch({ token, label, hex }: { token: string; label?: string; hex?: string }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '8px 12px', borderRadius: 8, border: '1px solid var(--border-subtle)' }}>
-      <div style={{
-        width: 36, height: 36, borderRadius: 6, flexShrink: 0,
-        background: `var(${token})`,
-        border: '1px solid rgba(0,0,0,0.08)',
-        boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.1)',
-      }} />
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 12,
+        padding: '8px 12px',
+        borderRadius: 8,
+        border: '1px solid var(--border-subtle)',
+      }}
+    >
+      <div
+        style={{
+          width: 36,
+          height: 36,
+          borderRadius: 6,
+          flexShrink: 0,
+          background: `var(${token})`,
+          border: '1px solid rgba(0,0,0,0.08)',
+          boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.1)',
+        }}
+      />
       <div style={{ minWidth: 0 }}>
-        <code style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-body)', lineHeight: 1.4 }}>
+        <code
+          style={{
+            display: 'block',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 11,
+            color: 'var(--text-body)',
+            lineHeight: 1.4,
+          }}
+        >
           {token}
         </code>
         {label && (
-          <span style={{ display: 'block', fontFamily: 'var(--font-sans)', fontSize: 11, color: 'var(--text-body-muted)', marginTop: 2 }}>
+          <span
+            style={{
+              display: 'block',
+              fontFamily: 'var(--font-sans)',
+              fontSize: 11,
+              color: 'var(--text-body-muted)',
+              marginTop: 2,
+            }}
+          >
             {label}
           </span>
         )}
         {hex && (
-          <code style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-body-faint)', marginTop: 1 }}>
+          <code
+            style={{
+              display: 'block',
+              fontFamily: 'var(--font-mono)',
+              fontSize: 10,
+              color: 'var(--text-body-faint)',
+              marginTop: 1,
+            }}
+          >
             {hex}
           </code>
         )}

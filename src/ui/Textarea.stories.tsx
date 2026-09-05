@@ -18,8 +18,7 @@ export const Empty: Story = {
 
 export const WithValue: Story = {
   args: {
-    value:
-      'My close rate dropped because we lost two large pending cases in Q3.',
+    value: 'My close rate dropped because we lost two large pending cases in Q3.',
   },
 }
 

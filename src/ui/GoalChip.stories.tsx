@@ -9,7 +9,18 @@ export default {
   argTypes: {
     icon: {
       control: 'select',
-      options: ['client', 'council', 'email', 'followup', 'fyc', 'growth', 'network', 'protect', 'succession', 'support'] satisfies GoalIconName[],
+      options: [
+        'client',
+        'council',
+        'email',
+        'followup',
+        'fyc',
+        'growth',
+        'network',
+        'protect',
+        'succession',
+        'support',
+      ] satisfies GoalIconName[],
     },
   },
   args: { icon: 'client', label: 'Goal chip' },
@@ -24,7 +35,20 @@ export const AllIcons: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', maxWidth: 600 }}>
-      {(['client', 'council', 'email', 'followup', 'fyc', 'growth', 'network', 'protect', 'succession', 'support'] satisfies GoalIconName[]).map(name => (
+      {(
+        [
+          'client',
+          'council',
+          'email',
+          'followup',
+          'fyc',
+          'growth',
+          'network',
+          'protect',
+          'succession',
+          'support',
+        ] satisfies GoalIconName[]
+      ).map((name) => (
         <GoalChip key={name} icon={name} label={name} />
       ))}
     </div>

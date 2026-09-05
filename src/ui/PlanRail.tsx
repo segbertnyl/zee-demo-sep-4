@@ -35,10 +35,9 @@ export function PlanRail({ goals, businessDone, clientsDone }: PlanRailProps) {
       ...goals.longTermTags,
     ]),
   ]
-  const businessSummary = BUSINESS_SUMMARY[goals.progressAreas[0]] ?? 'Focus your week on the work that grows your practice.'
-  const clients = [goals.clientApproach.existing, goals.clientApproach.new].filter(
-    (c): c is string => Boolean(c),
-  )
+  const businessSummary =
+    BUSINESS_SUMMARY[goals.progressAreas[0]] ?? 'Focus your week on the work that grows your practice.'
+  const clients = [goals.clientApproach.existing, goals.clientApproach.new].filter((c): c is string => Boolean(c))
 
   return (
     <>
@@ -75,7 +74,11 @@ export function PlanRail({ goals, businessDone, clientsDone }: PlanRailProps) {
           <PlanSection title="Your clients" divider={false}>
             <div className="flex flex-col gap-2">
               {clients.map((c) => (
-                <p key={c} className="text-[14px] leading-[1.35] tracking-[0.3px]" style={{ color: 'var(--nyl-purple-050)' }}>
+                <p
+                  key={c}
+                  className="text-[14px] leading-[1.35] tracking-[0.3px]"
+                  style={{ color: 'var(--nyl-purple-050)' }}
+                >
                   {c}
                 </p>
               ))}

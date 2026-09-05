@@ -16,12 +16,20 @@ export default {
 type Story = StoryObj
 
 export const Opening: Story = {
-  render: () => <div className="max-w-[460px]"><BriefingHeadline text={HEADLINES.opening} /></div>,
+  render: () => (
+    <div className="max-w-[460px]">
+      <BriefingHeadline text={HEADLINES.opening} />
+    </div>
+  ),
 }
 
 export const ReducedMotion: Story = {
   name: 'Reduced motion (no typing/blur)',
-  render: () => <div className="max-w-[460px]"><BriefingHeadline text={HEADLINES.opening} reducedMotion /></div>,
+  render: () => (
+    <div className="max-w-[460px]">
+      <BriefingHeadline text={HEADLINES.opening} reducedMotion />
+    </div>
+  ),
 }
 
 /* Cycle through the headline states (opening → each task's focus/done → new task). */

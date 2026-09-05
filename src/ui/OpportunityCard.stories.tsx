@@ -113,9 +113,7 @@ export const AllVariants: Story = {
       <OpportunityCard {...monitorCard} index={1} />
       <OpportunityCard
         id="tom-referral"
-        badges={[
-          { label: 'Referral', tone: 'opportunity' },
-        ]}
+        badges={[{ label: 'Referral', tone: 'opportunity' }]}
         confidence={68}
         headline="Tom Keiser referred two colleagues who haven't been contacted since initial outreach."
         body='Both referrals have household income above $180K and children under 10 — high fit for 20-year term. Tom flagged them as "ready to talk" in your last meeting. Reaching out now closes the loop and keeps Tom engaged.'
@@ -124,7 +122,7 @@ export const AllVariants: Story = {
           { label: 'Engagement', value: 0.53, tone: 'neutral' },
           { label: 'FYC potential', value: 0.77, tone: 'good' },
         ]}
-        fycEstimate='~$6,100 potential FYC · 20-yr term × 2'
+        fycEstimate="~$6,100 potential FYC · 20-yr term × 2"
         plan={[
           {
             label: 'Review referral intake notes',

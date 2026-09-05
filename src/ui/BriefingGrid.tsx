@@ -40,13 +40,19 @@ export function BriefingGrid({
   return (
     <div className="relative w-full overflow-hidden rounded-lg border border-[var(--border-subtle)]" style={{ height }}>
       {/* Rail */}
-      <div className="absolute inset-y-0 left-0 flex flex-col items-center pt-5" style={{ width: railWidth, background: 'var(--nyl-blue-700)' }}>
+      <div
+        className="absolute inset-y-0 left-0 flex flex-col items-center pt-5"
+        style={{ width: railWidth, background: 'var(--nyl-blue-700)' }}
+      >
         <div className="size-7 rounded-md bg-white/90" />
       </div>
 
       {/* Content area — centered, capped at contentMax + margins */}
       <div className="absolute inset-y-0 flex justify-center" style={{ left: railWidth, right: 0 }}>
-        <div className="flex w-full" style={{ maxWidth: contentMax + margin * 2, paddingLeft: margin, paddingRight: margin, gap: gutter }}>
+        <div
+          className="flex w-full"
+          style={{ maxWidth: contentMax + margin * 2, paddingLeft: margin, paddingRight: margin, gap: gutter }}
+        >
           {cols.map((_, i) => (
             <div
               key={i}
@@ -71,10 +77,21 @@ export function BriefingGrid({
             <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-white/90">Rail</p>
             <p className="text-[10px] text-white/70">{railWidth}px</p>
           </div>
-          <div className="absolute top-4 flex flex-col items-center gap-0.5 text-center" style={{ left: railWidth, right: 0 }}>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--nyl-purple-700)]">Content · {columns} columns</p>
-            <p className="text-[11px] text-[var(--nyl-purple-600)]">{contentMax}px max · {gutter}px gutter · {margin}px margin</p>
-            {showSplit && <p className="mt-0.5 text-[11px] text-[var(--nyl-blue-700)]">Editorial split — left 5 cols · right 7 cols</p>}
+          <div
+            className="absolute top-4 flex flex-col items-center gap-0.5 text-center"
+            style={{ left: railWidth, right: 0 }}
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--nyl-purple-700)]">
+              Content · {columns} columns
+            </p>
+            <p className="text-[11px] text-[var(--nyl-purple-600)]">
+              {contentMax}px max · {gutter}px gutter · {margin}px margin
+            </p>
+            {showSplit && (
+              <p className="mt-0.5 text-[11px] text-[var(--nyl-blue-700)]">
+                Editorial split — left 5 cols · right 7 cols
+              </p>
+            )}
           </div>
         </>
       )}

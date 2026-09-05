@@ -24,10 +24,10 @@ const ACTUAL_DATA: [number, number][] = [
 const TOTAL_MONTHS = 12
 
 const X_LABELS: { label: string; month: number; anchor: 'start' | 'middle' | 'end' }[] = [
-  { label: 'Jul', month: 0,            anchor: 'start'  },
-  { label: 'Nov', month: 4,            anchor: 'middle' },
-  { label: 'Mar', month: 8,            anchor: 'middle' },
-  { label: 'Jul', month: TOTAL_MONTHS, anchor: 'end'    },
+  { label: 'Jul', month: 0, anchor: 'start' },
+  { label: 'Nov', month: 4, anchor: 'middle' },
+  { label: 'Mar', month: 8, anchor: 'middle' },
+  { label: 'Jul', month: TOTAL_MONTHS, anchor: 'end' },
 ]
 
 // Solid gridlines at Nov only; today (Mar) gets its own dashed line
@@ -66,7 +66,10 @@ export function CouncilCreditsChart({
     .curve(d3.curveMonotoneX)
 
   // Goal line spans full fiscal year
-  const goalLine = lineGen([[0, 0], [TOTAL_MONTHS, targetCredits]])
+  const goalLine = lineGen([
+    [0, 0],
+    [TOTAL_MONTHS, targetCredits],
+  ])
 
   // Actual data only through currentMonth
   const visibleActual = ACTUAL_DATA.filter((d) => d[0] <= currentMonth)
@@ -98,14 +101,10 @@ export function CouncilCreditsChart({
       ))}
 
       {/* Diagonal goal line — full year */}
-      {goalLine && (
-        <path d={goalLine} fill="none" stroke="#d1d5db" strokeWidth={1} />
-      )}
+      {goalLine && <path d={goalLine} fill="none" stroke="#d1d5db" strokeWidth={1} />}
 
       {/* Orange area fill under actual */}
-      {areaPath && (
-        <path d={areaPath} fill="rgba(255,149,34,0.12)" stroke="none" />
-      )}
+      {areaPath && <path d={areaPath} fill="rgba(255,149,34,0.12)" stroke="none" />}
 
       {/* Actual performance line — stops at today */}
       {actualPath && (
@@ -132,7 +131,7 @@ export function CouncilCreditsChart({
 
       {/* Halo + dot at current position */}
       <circle cx={dotX} cy={dotY} r={10} fill="rgba(255,149,34,0.15)" />
-      <circle cx={dotX} cy={dotY} r={5}  fill="var(--nyl-orange-400, #ff9522)" />
+      <circle cx={dotX} cy={dotY} r={5} fill="var(--nyl-orange-400, #ff9522)" />
 
       {/* X-axis labels */}
       {X_LABELS.map(({ label, month, anchor }) => (

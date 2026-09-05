@@ -108,7 +108,11 @@ function Hero() {
         <div
           className="absolute"
           style={{
-            left: '-14%', bottom: '-60%', width: '72%', height: '120%', borderRadius: '50%',
+            left: '-14%',
+            bottom: '-60%',
+            width: '72%',
+            height: '120%',
+            borderRadius: '50%',
             background: 'radial-gradient(circle at 50% 50%, rgba(150,92,196,0.38) 0%, rgba(150,92,196,0) 65%)',
             filter: 'blur(52px)',
           }}
@@ -116,7 +120,11 @@ function Hero() {
         <div
           className="absolute"
           style={{
-            right: '-10%', top: '-34%', width: '54%', height: '85%', borderRadius: '50%',
+            right: '-10%',
+            top: '-34%',
+            width: '54%',
+            height: '85%',
+            borderRadius: '50%',
             background: 'radial-gradient(circle at 50% 50%, rgba(40,14,68,0.55) 0%, rgba(40,14,68,0) 62%)',
             filter: 'blur(46px)',
           }}
@@ -136,9 +144,7 @@ function Hero() {
           transition={{ duration: 0.6, ease: HOUSE_EASE }}
           className="max-w-[741px]"
         >
-          <p className="text-[14px] font-medium uppercase leading-[26px] tracking-[2px] text-white">
-            Your trajectory
-          </p>
+          <p className="text-[14px] font-medium uppercase leading-[26px] tracking-[2px] text-white">Your trajectory</p>
           <h1
             className="mt-6 font-serif text-[34px] leading-[1.16] tracking-[-0.3px] md:text-[42px] md:leading-[48px]"
             style={{ fontWeight: 400, color: '#99c8ff', textWrap: 'balance' }}
@@ -206,17 +212,31 @@ const cy = (v: number) => 164 - v * 1.28
 const TODAY_X = 395
 
 const ACTUAL_PTS: [number, number][] = [
-  [0, 40], [71.5, 42.5], [143, 41], [214.5, 45.5], [286, 44], [357.5, 48.5], [TODAY_X, 52.4],
+  [0, 40],
+  [71.5, 42.5],
+  [143, 41],
+  [214.5, 45.5],
+  [286, 44],
+  [357.5, 48.5],
+  [TODAY_X, 52.4],
 ]
 const CURRENT_PTS: [number, number][] = [
-  [TODAY_X, 52.4], [500, 53], [620, 54.5], [740, 55], [858, 55.5],
+  [TODAY_X, 52.4],
+  [500, 53],
+  [620, 54.5],
+  [740, 55],
+  [858, 55.5],
 ]
 const NEEDED_PTS: [number, number][] = [
-  [TODAY_X, 52.4], [470, 57], [540, 67], [640, 75], [740, 82], [858, 88],
+  [TODAY_X, 52.4],
+  [470, 57],
+  [540, 67],
+  [640, 75],
+  [740, 82],
+  [858, 88],
 ]
 
-const toPath = (pts: [number, number][]) =>
-  pts.map(([x, v], i) => `${i === 0 ? 'M' : 'L'} ${x} ${cy(v)}`).join(' ')
+const toPath = (pts: [number, number][]) => pts.map(([x, v], i) => `${i === 0 ? 'M' : 'L'} ${x} ${cy(v)}`).join(' ')
 
 const CHART_LEGEND = [
   { label: 'Actual · $52.4K', color: '#9b9997' },
@@ -231,7 +251,10 @@ function PaceChart() {
     <div className="mt-7">
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
         {CHART_LEGEND.map((l) => (
-          <span key={l.label} className="inline-flex items-center gap-2 text-[12px] leading-[16px] tracking-[0.2px] text-[#474952]">
+          <span
+            key={l.label}
+            className="inline-flex items-center gap-2 text-[12px] leading-[16px] tracking-[0.2px] text-[#474952]"
+          >
             <span
               aria-hidden="true"
               className="inline-block h-0 w-4"
@@ -242,7 +265,12 @@ function PaceChart() {
         ))}
       </div>
 
-      <svg viewBox={`0 0 ${CW} ${CH}`} className="mt-6 w-full" role="img" aria-label="Projected pace, July through June">
+      <svg
+        viewBox={`0 0 ${CW} ${CH}`}
+        className="mt-6 w-full"
+        role="img"
+        aria-label="Projected pace, July through June"
+      >
         {/* month gridlines */}
         {Array.from({ length: 13 }, (_, i) => (
           <line key={i} x1={i * 71.5} y1="14" x2={i * 71.5} y2="164" stroke="#efedf2" strokeWidth="1" />
@@ -250,18 +278,38 @@ function PaceChart() {
         {/* $100K / $50K reference */}
         <line x1="0" y1={cy(100)} x2={CW} y2={cy(100)} stroke="#e8e6e4" strokeWidth="1" />
         <line x1="0" y1={cy(50)} x2={CW} y2={cy(50)} stroke="#e8e6e4" strokeWidth="1" />
-        <text x="7" y={cy(100) - 5} fill="#76757a" opacity="0.6" fontSize="12">$100K</text>
-        <text x="7" y={cy(50) - 5} fill="#76757a" opacity="0.6" fontSize="12">$50K</text>
+        <text x="7" y={cy(100) - 5} fill="#76757a" opacity="0.6" fontSize="12">
+          $100K
+        </text>
+        <text x="7" y={cy(50) - 5} fill="#76757a" opacity="0.6" fontSize="12">
+          $50K
+        </text>
 
         {/* FYC goal dotted lines — $90K (blue) / $42K (purple) */}
         <motion.line
-          x1="0" y1={cy(90)} x2={CW} y2={cy(90)} stroke="#66a8ff" strokeWidth="2" strokeDasharray="2 5"
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          x1="0"
+          y1={cy(90)}
+          x2={CW}
+          y2={cy(90)}
+          stroke="#66a8ff"
+          strokeWidth="2"
+          strokeDasharray="2 5"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.7, ease: HOUSE_EASE }}
         />
         <motion.line
-          x1="0" y1={cy(42)} x2={CW} y2={cy(42)} stroke="#bc79ec" strokeWidth="2" strokeDasharray="2 5"
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          x1="0"
+          y1={cy(42)}
+          x2={CW}
+          y2={cy(42)}
+          stroke="#bc79ec"
+          strokeWidth="2"
+          strokeDasharray="2 5"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.7, ease: HOUSE_EASE }}
         />
 
@@ -273,24 +321,47 @@ function PaceChart() {
 
         {/* series — drawn in with pathLength */}
         <motion.path
-          d={toPath(ACTUAL_PTS)} fill="none" stroke="#9b9997" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
+          d={toPath(ACTUAL_PTS)}
+          fill="none"
+          stroke="#9b9997"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.9, ease: HOUSE_EASE }}
         />
         <motion.path
-          d={toPath(CURRENT_PTS)} fill="none" stroke="#bc79ec" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
+          d={toPath(CURRENT_PTS)}
+          fill="none"
+          stroke="#bc79ec"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.9, delay: 0.85, ease: HOUSE_EASE }}
         />
         <motion.path
-          d={toPath(NEEDED_PTS)} fill="none" stroke="#66a8ff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
+          d={toPath(NEEDED_PTS)}
+          fill="none"
+          stroke="#66a8ff"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.9, delay: 0.85, ease: HOUSE_EASE }}
         />
 
         {/* highlighted point where actual meets today */}
         <motion.g
-          initial={{ opacity: 0, scale: 0.5 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.45, delay: 0.9, ease: HOUSE_EASE }}
           style={{ transformOrigin: `${TODAY_X}px ${cy(52.4)}px` }}
         >
@@ -301,10 +372,18 @@ function PaceChart() {
         </motion.g>
 
         {/* x-axis */}
-        <text x="2" y="188" fill="#76757a" opacity="0.6" fontSize="12">July</text>
-        <text x={4 * 71.5} y="188" textAnchor="middle" fill="#76757a" opacity="0.6" fontSize="12">Nov</text>
-        <text x={8 * 71.5} y="188" textAnchor="middle" fill="#76757a" opacity="0.6" fontSize="12">Mar</text>
-        <text x={CW - 2} y="188" textAnchor="end" fill="#76757a" opacity="0.6" fontSize="12">Jun</text>
+        <text x="2" y="188" fill="#76757a" opacity="0.6" fontSize="12">
+          July
+        </text>
+        <text x={4 * 71.5} y="188" textAnchor="middle" fill="#76757a" opacity="0.6" fontSize="12">
+          Nov
+        </text>
+        <text x={8 * 71.5} y="188" textAnchor="middle" fill="#76757a" opacity="0.6" fontSize="12">
+          Mar
+        </text>
+        <text x={CW - 2} y="188" textAnchor="end" fill="#76757a" opacity="0.6" fontSize="12">
+          Jun
+        </text>
       </svg>
     </div>
   )
@@ -341,7 +420,10 @@ function StayingOnTrack() {
 
         <div className="mt-6 flex flex-wrap items-center gap-6">
           {CONTRIBUTION.map((seg) => (
-            <span key={seg.label} className="inline-flex items-center gap-2 text-[12px] leading-[16px] tracking-[0.2px] text-[#474952]">
+            <span
+              key={seg.label}
+              className="inline-flex items-center gap-2 text-[12px] leading-[16px] tracking-[0.2px] text-[#474952]"
+            >
               <span aria-hidden="true" className="inline-block size-4 rounded-[1px]" style={{ background: seg.bg }} />
               {seg.label}
             </span>
@@ -470,11 +552,7 @@ function Reveal({ children, className }: { children: ReactNode; className?: stri
 }
 
 function SectionEyebrow({ children }: { children: ReactNode }) {
-  return (
-    <p className="text-[14px] font-medium uppercase leading-[26px] tracking-[2px] text-[#474952]">
-      {children}
-    </p>
-  )
+  return <p className="text-[14px] font-medium uppercase leading-[26px] tracking-[2px] text-[#474952]">{children}</p>
 }
 
 function SerifHeading({ children }: { children: ReactNode }) {
@@ -487,7 +565,17 @@ function SerifHeading({ children }: { children: ReactNode }) {
 
 function PencilGlyph() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M12 20h9" />
       <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
     </svg>
@@ -496,7 +584,16 @@ function PencilGlyph() {
 
 function PlusGlyph() {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
       <path d="M9 4v10" />
       <path d="M4 9h10" />
     </svg>

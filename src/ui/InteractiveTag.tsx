@@ -13,12 +13,9 @@ export function InteractiveTag({
   className,
   variant = 'default',
 }: InteractiveTagProps) {
-  const borderColor = variant === 'purple'
-    ? 'var(--nyl-purple-100)'
-    : 'var(--border-default, #c3bfbb)'
-  const textColor = variant === 'purple'
-    ? 'var(--nyl-purple-700)'
-    : selected ? 'var(--nyl-blue-700)' : 'var(--text-body)'
+  const borderColor = variant === 'purple' ? 'var(--nyl-purple-100)' : 'var(--border-default, #c3bfbb)'
+  const textColor =
+    variant === 'purple' ? 'var(--nyl-purple-700)' : selected ? 'var(--nyl-blue-700)' : 'var(--text-body)'
 
   return (
     <button

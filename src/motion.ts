@@ -10,11 +10,11 @@ export type EaseCurve = [number, number, number, number]
 /* Named easing curves ─────────────────────────────────────────────────────── */
 export const EASE = {
   /** Primary enter easing. Fast out, gentle arrival. Default for nearly all reveals. */
-  settle:   [0.22, 0.65, 0.05, 1] as EaseCurve,
+  settle: [0.22, 0.65, 0.05, 1] as EaseCurve,
   /** Exit easing. Slow start, accelerates out. Scene exits and departures only. */
-  lift:     [0.55, 0.06, 0.68, 0.19] as EaseCurve,
+  lift: [0.55, 0.06, 0.68, 0.19] as EaseCurve,
   /** Panel easing. Sharp acceleration, clean stop. Business scene panels. */
-  slide:    [0.32, 0.72, 0, 1] as EaseCurve,
+  slide: [0.32, 0.72, 0, 1] as EaseCurve,
   /** Material-style symmetric ease. Deliberate, weighty transitions. */
   standard: [0.4, 0, 0.2, 1] as EaseCurve,
 } as const
@@ -23,14 +23,14 @@ export type EaseName = keyof typeof EASE
 
 /* Duration scale (seconds) ────────────────────────────────────────────────── */
 export const DURATION = {
-  micro:      0.18,  // 180ms — label fades, icon swaps
-  quick:      0.26,  // 260ms — scene exit, drawer close
-  short:      0.32,  // 320ms — tab swap, list item enter
-  standard:   0.42,  // 420ms — card entry, stagger base
-  'scene-in': 0.52,  // 520ms — scene enter transition
-  deliberate: 0.60,  // 600ms — panel slide, section reveal
-  dramatic:   0.90,  // 900ms — hero panels, Wrapped reveals
-  cinematic:  1.40,  // 1400ms — slow dissolves (e.g. intro fade/blur build-out)
+  micro: 0.18, // 180ms — label fades, icon swaps
+  quick: 0.26, // 260ms — scene exit, drawer close
+  short: 0.32, // 320ms — tab swap, list item enter
+  standard: 0.42, // 420ms — card entry, stagger base
+  'scene-in': 0.52, // 520ms — scene enter transition
+  deliberate: 0.6, // 600ms — panel slide, section reveal
+  dramatic: 0.9, // 900ms — hero panels, Wrapped reveals
+  cinematic: 1.4, // 1400ms — slow dissolves (e.g. intro fade/blur build-out)
 } as const
 
 export type DurationName = keyof typeof DURATION
@@ -38,7 +38,7 @@ export type DurationName = keyof typeof DURATION
 /* Spring configs ──────────────────────────────────────────────────────────── */
 export const SPRING = {
   /** LeftRail active pill. Snappy, minimal overshoot. */
-  'nav-pill':      { stiffness: 420, damping: 38 },
+  'nav-pill': { stiffness: 420, damping: 38 },
   /** BriefingScene time-tab indicator. Slightly softer. */
   'tab-indicator': { stiffness: 380, damping: 32 },
 } as const
@@ -66,18 +66,18 @@ export const NYLA = {
   /** Elegant card appearance — the documented "scene enter" pattern (y + scale
    *  + blur), at the scene-in duration. */
   cardEnter: {
-    duration: DURATION['scene-in'],   // 520ms — matches the scene-enter pattern
+    duration: DURATION['scene-in'], // 520ms — matches the scene-enter pattern
     ease: EASE.settle,
     from: { opacity: 0, y: 16, scale: 0.98, filter: 'blur(8px)' },
-    to:   { opacity: 1, y: 0,  scale: 1,    filter: 'blur(0px)' },
+    to: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
   },
   /** Subtle purple glow ramp around the suggested card (box-shadow spread).
    *  Ramps in/out on the `deliberate` step so the glow reads as a soft swell. */
   glow: {
-    rampIn:  DURATION.deliberate,     // 600ms ramp to full glow
-    rampOut: DURATION.deliberate,     // 600ms ramp back down on settle
+    rampIn: DURATION.deliberate, // 600ms ramp to full glow
+    rampOut: DURATION.deliberate, // 600ms ramp back down on settle
     /* Peak shadow + resting (post-settle) shadow — purple, low intensity. */
-    peakShadow:    '0 0 0 1px rgba(139,55,200,0.45), 0 8px 40px -8px rgba(139,55,200,0.40)',
+    peakShadow: '0 0 0 1px rgba(139,55,200,0.45), 0 8px 40px -8px rgba(139,55,200,0.40)',
     restingShadow: '0 0 0 1px rgba(139,55,200,0.00), 0 8px 28px -14px rgba(23,24,28,0.16)',
   },
   /** Rotating purple/blue glow border while Nyla "thinks". Implemented in CSS
@@ -86,20 +86,20 @@ export const NYLA = {
    *  keyframe's duration — ~4x slower than the reference for a softer feel.
    *  Ambient loop: intentionally OUTSIDE the one-shot DURATION scale. */
   thinkingBorder: {
-    loopDuration: 5.2,                // 5.2s per rotation — slow, eased sparkle sweep; keep in sync with globals.css
+    loopDuration: 5.2, // 5.2s per rotation — slow, eased sparkle sweep; keep in sync with globals.css
     ease: 'ease-in-out' as const,
   },
   /** Hold the suggested state, then fade the animated border into focus card. */
   settle: {
-    holdMs: 2000,                     // ~2s dwell (per §4 / step 4) — not on the scale
-    borderFade: DURATION.deliberate,  // 600ms fade of the thinking border + glow
+    holdMs: 2000, // ~2s dwell (per §4 / step 4) — not on the scale
+    borderFade: DURATION.deliberate, // 600ms fade of the thinking border + glow
   },
   /** Mark-as-done / agent-complete transition for a task card. Slowed from the
    *  420ms card-entry step to a deliberate beat so completion reads clearly and
    *  doesn't feel abrupt. Also used for the card's layout collapse into the
    *  compact DONE bar. */
   taskComplete: {
-    duration: DURATION.dramatic,      // 900ms — a clear, unhurried completion
+    duration: DURATION.dramatic, // 900ms — a clear, unhurried completion
     ease: EASE.settle,
   },
   /** Completed-task → Nyla-suggests sequence dwell timings (ms). These are
@@ -107,11 +107,11 @@ export const NYLA = {
    *  settle.holdMs) rather than on the DURATION scale. Tuned for an unhurried,
    *  "Nyla is thinking" cadence. `doneHoldMs` applies to ALL completed tasks. */
   sequence: {
-    doneHoldMs: 2200,       // a completed card holds its DONE state before archiving into Completed
-    beforeSuggestMs: 1500,  // pause after a card is marked done, before the suggested card appears
-    loadMs: 1800,           // loading / "thinking" dwell before the suggested card appears
-    fillMs: 3600,           // suggesting window (glow lead + typewriter) before the card auto-expands
-    expandDwellMs: 1100,    // dwell after auto-expand before the glow settles off
+    doneHoldMs: 2200, // a completed card holds its DONE state before archiving into Completed
+    beforeSuggestMs: 1500, // pause after a card is marked done, before the suggested card appears
+    loadMs: 1800, // loading / "thinking" dwell before the suggested card appears
+    fillMs: 3600, // suggesting window (glow lead + typewriter) before the card auto-expands
+    expandDwellMs: 1100, // dwell after auto-expand before the glow settles off
   },
   /** Per-block "typewriter" fill of a suggested card's content (headline →
    *  description → tags). The card mounts already wrapped in the rotating glow
@@ -119,9 +119,9 @@ export const NYLA = {
    *  BEFORE any content types in. Blocks are then spaced and slowed so each
    *  section lands separately — like Nyla thinking it through, one line at a time. */
   fill: {
-    startDelay: 1.15,   // s of glowing-border "thinking" before the first block reveals (~1s lead)
-    perBlock: 0.75,     // s between successive blocks — the "sectioned out" pause
-    duration: 0.7,      // s each block takes to blur/settle in (slowed to emphasize the reveal)
+    startDelay: 1.15, // s of glowing-border "thinking" before the first block reveals (~1s lead)
+    perBlock: 0.75, // s between successive blocks — the "sectioned out" pause
+    duration: 0.7, // s each block takes to blur/settle in (slowed to emphasize the reveal)
   },
 } as const
 
@@ -137,15 +137,15 @@ export const NYLA = {
  * Demoed in Storybook "Design System / Scroll Motion 🆕"; do NOT inline these. */
 export const SCROLL = {
   /** Glide — a clean ease-out to a card's snap point, no overshoot (default). */
-  glide: { duration: 0.62, ease: [0.22, 1, 0.30, 1] as EaseCurve },
+  glide: { duration: 0.62, ease: [0.22, 1, 0.3, 1] as EaseCurve },
   /** Stretch — overshoot the target, then ease back over a LONGER (~2x) settle.
    *  Two-phase: rise to the peak (riseMs), then a slow eased return (settleMs). */
   stretch: {
-    overshoot: 0.045,                                // peak = target + 4.5% of the travel distance
-    riseMs: 360,                                     // time to reach the overshoot peak
-    settleMs: 720,                                   // ~2x the rise — the slow, eased return
-    riseEase:   [0.22, 1, 0.30, 1] as EaseCurve,     // ease-out up to the peak
-    settleEase: [0.45, 0, 0.25, 1] as EaseCurve,     // eased return from peak → target
+    overshoot: 0.045, // peak = target + 4.5% of the travel distance
+    riseMs: 360, // time to reach the overshoot peak
+    settleMs: 720, // ~2x the rise — the slow, eased return
+    riseEase: [0.22, 1, 0.3, 1] as EaseCurve, // ease-out up to the peak
+    settleEase: [0.45, 0, 0.25, 1] as EaseCurve, // eased return from peak → target
   },
 } as const
 

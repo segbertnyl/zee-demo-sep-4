@@ -22,7 +22,10 @@ export const Gallery: Story = {
       {names.map((name) => {
         const Icon = ICONS[name]
         return (
-          <div key={name} className="flex flex-col items-center gap-3 rounded-xl border border-[var(--border-subtle)] bg-white p-5">
+          <div
+            key={name}
+            className="flex flex-col items-center gap-3 rounded-xl border border-[var(--border-subtle)] bg-white p-5"
+          >
             <Icon size={24} className="text-[var(--text-headline)]" />
             <code className="text-[11px] text-[var(--text-body-muted)]">{name}</code>
           </div>

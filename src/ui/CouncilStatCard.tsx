@@ -37,9 +37,7 @@ function statusLabel(status: CouncilStatus): string {
 }
 
 function fillColor(status: CouncilStatus): string {
-  return status === 'stretch'
-    ? 'var(--nyl-orange-400, #ff9522)'
-    : 'var(--nyl-green-800, #016355)'
+  return status === 'stretch' ? 'var(--nyl-orange-400, #ff9522)' : 'var(--nyl-green-800, #016355)'
 }
 
 function renderCaption(caption: string, captionBold?: string) {

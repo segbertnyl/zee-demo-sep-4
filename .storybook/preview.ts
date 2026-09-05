@@ -12,7 +12,7 @@ const preview: Preview = {
         icon: 'play',
         items: [
           { value: 'playing', title: 'Motion playing', icon: 'play' },
-          { value: 'paused',  title: 'Motion paused',  icon: 'stop' },
+          { value: 'paused', title: 'Motion paused', icon: 'stop' },
         ],
         showName: true,
         dynamicTitle: true,
@@ -30,9 +30,9 @@ const preview: Preview = {
     backgrounds: {
       default: 'canvas',
       values: [
-        { name: 'canvas',  value: '#ffffff' },
+        { name: 'canvas', value: '#ffffff' },
         { name: 'surface', value: '#faf9f8' },
-        { name: 'dark',    value: '#000a62' },
+        { name: 'dark', value: '#000a62' },
       ],
     },
   },

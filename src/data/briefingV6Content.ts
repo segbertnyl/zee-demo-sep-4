@@ -52,7 +52,8 @@ export const HEADLINES = {
   newTask: 'Great job connecting with Sandra. Let’s track those new asks she raised.',
   /* Brief transitional line the moment the Sandra follow-up is completed —
    * acknowledges it, then hands off to Clementine's review. */
-  sandraHandled: 'Sandra’s handled. Next, Clementine’s review turns on one fix — the beneficiary gap, caught before she notices.',
+  sandraHandled:
+    'Sandra’s handled. Next, Clementine’s review turns on one fix — the beneficiary gap, caught before she notices.',
 }
 
 /* Sub-line template under the headline. {time} and {done}/{total} are filled
@@ -196,7 +197,13 @@ export const YOUR_DAY = {
   items: [
     { id: 'eric', time: '10:00 AM', label: 'Call Eric Ellis', dot: 'ready' },
     { id: 'patrick', time: '11:30 AM', label: 'Patrick Soto Annual Review', dot: 'ready' },
-    { id: 'clementine', time: '1:45 PM', label: 'Clementine Park Annual Review', cta: 'Ready for review', dot: 'review' },
+    {
+      id: 'clementine',
+      time: '1:45 PM',
+      label: 'Clementine Park Annual Review',
+      cta: 'Ready for review',
+      dot: 'review',
+    },
   ] satisfies DayItem[],
 }
 
@@ -215,7 +222,13 @@ export const YOUR_DAY_2 = {
   items: [
     { id: 'eric', time: '09:00 AM', label: 'Run Eric Ellis Analysis', dot: 'ready' },
     { id: 'patrick', time: '11:30 AM', label: 'Patrick Soto Annual Review', dot: 'ready' },
-    { id: 'clementine', time: '1:45 PM', label: 'Clementine Park Annual Review', cta: 'Ready for review', dot: 'review' },
+    {
+      id: 'clementine',
+      time: '1:45 PM',
+      label: 'Clementine Park Annual Review',
+      cta: 'Ready for review',
+      dot: 'review',
+    },
   ] satisfies DayItem[],
 }
 
@@ -233,7 +246,13 @@ export const YOUR_DAY_3 = {
   items: [
     { id: 'eric', time: '10:00 AM', label: 'Eric Ellis presentation', dot: 'ready' },
     { id: 'patrick', time: '11:30 AM', label: 'Patrick Soto Annual Review', dot: 'ready' },
-    { id: 'clementine', time: '1:45 PM', label: 'Clementine Park Annual Review', cta: 'Ready for review', dot: 'review' },
+    {
+      id: 'clementine',
+      time: '1:45 PM',
+      label: 'Clementine Park Annual Review',
+      cta: 'Ready for review',
+      dot: 'review',
+    },
   ] satisfies DayItem[],
 }
 
@@ -251,7 +270,13 @@ export const YOUR_DAY_4 = {
   items: [
     { id: 'eric', time: '10:00 AM', label: 'Charles started his assessment', dot: 'ready' },
     { id: 'patrick', time: '11:30 AM', label: 'Patrick Soto Annual Review', dot: 'ready' },
-    { id: 'clementine', time: '1:45 PM', label: 'Clementine Park Annual Review', cta: 'Ready for review', dot: 'review' },
+    {
+      id: 'clementine',
+      time: '1:45 PM',
+      label: 'Clementine Park Annual Review',
+      cta: 'Ready for review',
+      dot: 'review',
+    },
   ] satisfies DayItem[],
 }
 
@@ -291,8 +316,7 @@ export const SANDRA_PREVIEW: ClientPreview = {
   clientSince: 'Referred Sept 2026',
   lastTouch: 'New lead · 1 day ago',
   grade: 'A',
-  blurb:
-    'Eric is 42 and married living in New Jersey. He may be interested in early retirement',
+  blurb: 'Eric is 42 and married living in New Jersey. He may be interested in early retirement',
   tags: ['Pre-retirement', 'Multi-policy', 'Estate planning'],
   files: ['Bank Accounts', 'Website Articles', 'Chat Themes'],
   email: 'eellis@gmail.com',
@@ -304,8 +328,7 @@ export const ERIC_PREVIEW: ClientPreview = {
   clientSince: 'Referred Sept 2026',
   lastTouch: 'New lead · 1 day ago',
   grade: 'A',
-  blurb:
-    'Eric is 42 and married living in New Jersey. He may be interested in early retirement',
+  blurb: 'Eric is 42 and married living in New Jersey. He may be interested in early retirement',
   tags: ['Pre-retirement', 'Multi-policy', 'Estate planning'],
   files: ['Bank Accounts', 'Website Articles', 'Chat Themes'],
   email: 'eellis@gmail.com',
@@ -411,7 +434,12 @@ export const SUNSHINE_PREVIEW: ClientPreview = {
   tags: ['Prospecting', 'Local', 'Pre-retirement'],
   files: [],
   events: [
-    { name: 'Sunshine Country Club — member mixer', when: 'Sat, Dec 17', venue: '14 Heathcote Rd, Scarsdale', featured: true },
+    {
+      name: 'Sunshine Country Club — member mixer',
+      when: 'Sat, Dec 17',
+      venue: '14 Heathcote Rd, Scarsdale',
+      featured: true,
+    },
     { name: 'Westchester Estate Planning Forum', when: 'Thu, Jan 9', venue: 'Crowne Plaza, White Plains' },
     { name: 'Scarsdale Chamber business lunch', when: 'Wed, Jan 22', venue: 'Heathcote Tavern' },
   ],
@@ -437,15 +465,19 @@ export const DRAFT_LABELS: Record<DraftKind, string> = {
   email: 'For an email',
 }
 export interface DraftContent {
-  context: string  // CONCIERGE framing line under the selector
-  body: string     // the draft itself — BRAND ADVOCATE (Sarah's voice)
-  meta: string     // "Draft generated · Last updated 9:56 AM"
+  context: string // CONCIERGE framing line under the selector
+  body: string // the draft itself — BRAND ADVOCATE (Sarah's voice)
+  meta: string // "Draft generated · Last updated 9:56 AM"
 }
 
 export interface TaskCardModel {
   id: string
   kind: CardKind
-  badge: { label: string; tone: 'lapse' | 'opportunity' | 'monitor' | 'prep' | 'event' | 'ready' | 'growth'; meta?: string }
+  badge: {
+    label: string
+    tone: 'lapse' | 'opportunity' | 'monitor' | 'prep' | 'event' | 'ready' | 'growth'
+    meta?: string
+  }
   /** Headline with the client name highlighted as a link. Split so the name
    *  can render as a blue link with a person glyph + hover preview. */
   headlinePrefix: string
@@ -514,8 +546,7 @@ export const SANDRA_TASK: TaskCardModel = {
   clientPreview: ERIC_PREVIEW,
   headlineSuffix: 'a lead from NYL.com to introduce yourself.',
   doneSummary: 'Call Sandra Kim to reactivate WL policy',
-  description:
-    'Completing this within 30 minutes gives you a 75% higher chance of closing the deal',
+  description: 'Completing this within 30 minutes gives you a 75% higher chance of closing the deal',
   tags: ['Lead', 'Potential High FYC'],
   footerLabel: 'Outreach approach',
   primaryCta: 'Plan a call',
@@ -525,21 +556,19 @@ export const SANDRA_TASK: TaskCardModel = {
   defaultDraft: 'call',
   drafts: {
     call: {
-      context: 'Sandy is direct — lead with the policy, skip the warmup, and address the WL lapse (16d left in grace period).',
-      body:
-        'Hi Sandy, it’s Sarah. Your WL policy has a payment past due and I want to make sure we get this resolved before it affects your coverage. Can we connect today?',
+      context:
+        'Sandy is direct — lead with the policy, skip the warmup, and address the WL lapse (16d left in grace period).',
+      body: 'Hi Sandy, it’s Sarah. Your WL policy has a payment past due and I want to make sure we get this resolved before it affects your coverage. Can we connect today?',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
     text: {
       context: 'Short SMS — clear about the deadline, easy to reply to.',
-      body:
-        'Hi Sandy, it’s Sarah from New York Life. Your WL policy payment is past due — 16 days left in the grace period. Can we hop on a quick call today to sort it before it affects your coverage?',
+      body: 'Hi Sandy, it’s Sarah from New York Life. Your WL policy payment is past due — 16 days left in the grace period. Can we hop on a quick call today to sort it before it affects your coverage?',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
     email: {
       context: 'A short, warm email — policy first, with the payment link ready.',
-      body:
-        'Subject: A quick fix on your WL policy\n\nHi Sandy,\n\nYour whole life policy has a payment past due, and I’d like to help you clear it before it affects your coverage — there are 16 days left in the grace period. It’s a quick fix; I can send a secure payment link or walk you through it on a short call.\n\nWhat works best for you this week?\n\nBest,\nSarah Ferreira\nNew York Life',
+      body: 'Subject: A quick fix on your WL policy\n\nHi Sandy,\n\nYour whole life policy has a payment past due, and I’d like to help you clear it before it affects your coverage — there are 16 days left in the grace period. It’s a quick fix; I can send a secure payment link or walk you through it on a short call.\n\nWhat works best for you this week?\n\nBest,\nSarah Ferreira\nNew York Life',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
   },
@@ -554,8 +583,7 @@ export const SANDRA_TASK2: TaskCardModel = {
   clientPreview: ERIC_PREVIEW,
   headlineSuffix: 'needs & risk analysis',
   doneSummary: 'Call Sandra Kim to reactivate WL policy',
-  description:
-    'Completing this within the next 3 days gives you a 60^ higher chance of closing the deal.',
+  description: 'Completing this within the next 3 days gives you a 60^ higher chance of closing the deal.',
   tags: ['Lead', 'Potential High FYC'],
   footerLabel: 'Follow up approach',
   primaryCta: 'View analysis',
@@ -565,21 +593,19 @@ export const SANDRA_TASK2: TaskCardModel = {
   defaultDraft: 'call',
   drafts: {
     call: {
-      context: 'Sandy is direct — lead with the policy, skip the warmup, and address the WL lapse (16d left in grace period).',
-      body:
-        'Hi Sandy, it’s Sarah. Your WL policy has a payment past due and I want to make sure we get this resolved before it affects your coverage. Can we connect today?',
+      context:
+        'Sandy is direct — lead with the policy, skip the warmup, and address the WL lapse (16d left in grace period).',
+      body: 'Hi Sandy, it’s Sarah. Your WL policy has a payment past due and I want to make sure we get this resolved before it affects your coverage. Can we connect today?',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
     text: {
       context: 'Short SMS — clear about the deadline, easy to reply to.',
-      body:
-        'Hi Sandy, it’s Sarah from New York Life. Your WL policy payment is past due — 16 days left in the grace period. Can we hop on a quick call today to sort it before it affects your coverage?',
+      body: 'Hi Sandy, it’s Sarah from New York Life. Your WL policy payment is past due — 16 days left in the grace period. Can we hop on a quick call today to sort it before it affects your coverage?',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
     email: {
       context: 'A short, warm email — policy first, with the payment link ready.',
-      body:
-        'Subject: A quick fix on your WL policy\n\nHi Sandy,\n\nYour whole life policy has a payment past due, and I’d like to help you clear it before it affects your coverage — there are 16 days left in the grace period. It’s a quick fix; I can send a secure payment link or walk you through it on a short call.\n\nWhat works best for you this week?\n\nBest,\nSarah Ferreira\nNew York Life',
+      body: 'Subject: A quick fix on your WL policy\n\nHi Sandy,\n\nYour whole life policy has a payment past due, and I’d like to help you clear it before it affects your coverage — there are 16 days left in the grace period. It’s a quick fix; I can send a secure payment link or walk you through it on a short call.\n\nWhat works best for you this week?\n\nBest,\nSarah Ferreira\nNew York Life',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
   },
@@ -594,8 +620,7 @@ export const SANDRA_TASK3: TaskCardModel = {
   clientPreview: ERIC_PREVIEW,
   headlineSuffix: 'scenarios for his fiancial plan',
   doneSummary: 'Call Sandra Kim to reactivate WL policy',
-  description:
-    'You are one step closer to increasing your client base.',
+  description: 'You are one step closer to increasing your client base.',
   tags: ['Lead', 'Potential High FYC'],
   footerLabel: 'Financial scenarios',
   primaryCta: 'Start the meeting',
@@ -605,21 +630,19 @@ export const SANDRA_TASK3: TaskCardModel = {
   defaultDraft: 'call',
   drafts: {
     call: {
-      context: 'Sandy is direct — lead with the policy, skip the warmup, and address the WL lapse (16d left in grace period).',
-      body:
-        'Hi Sandy, it’s Sarah. Your WL policy has a payment past due and I want to make sure we get this resolved before it affects your coverage. Can we connect today?',
+      context:
+        'Sandy is direct — lead with the policy, skip the warmup, and address the WL lapse (16d left in grace period).',
+      body: 'Hi Sandy, it’s Sarah. Your WL policy has a payment past due and I want to make sure we get this resolved before it affects your coverage. Can we connect today?',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
     text: {
       context: 'Short SMS — clear about the deadline, easy to reply to.',
-      body:
-        'Hi Sandy, it’s Sarah from New York Life. Your WL policy payment is past due — 16 days left in the grace period. Can we hop on a quick call today to sort it before it affects your coverage?',
+      body: 'Hi Sandy, it’s Sarah from New York Life. Your WL policy payment is past due — 16 days left in the grace period. Can we hop on a quick call today to sort it before it affects your coverage?',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
     email: {
       context: 'A short, warm email — policy first, with the payment link ready.',
-      body:
-        'Subject: A quick fix on your WL policy\n\nHi Sandy,\n\nYour whole life policy has a payment past due, and I’d like to help you clear it before it affects your coverage — there are 16 days left in the grace period. It’s a quick fix; I can send a secure payment link or walk you through it on a short call.\n\nWhat works best for you this week?\n\nBest,\nSarah Ferreira\nNew York Life',
+      body: 'Subject: A quick fix on your WL policy\n\nHi Sandy,\n\nYour whole life policy has a payment past due, and I’d like to help you clear it before it affects your coverage — there are 16 days left in the grace period. It’s a quick fix; I can send a secure payment link or walk you through it on a short call.\n\nWhat works best for you this week?\n\nBest,\nSarah Ferreira\nNew York Life',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
   },
@@ -634,8 +657,7 @@ export const SANDRA_TASK4: TaskCardModel = {
   clientPreview: ERIC_PREVIEW,
   headlineSuffix: 'to complete his applications.',
   doneSummary: 'Call Sandra Kim to reactivate WL policy',
-  description:
-    'Completing this within 30 minutes gives you a 75% higher chance of closing the deal',
+  description: 'Completing this within 30 minutes gives you a 75% higher chance of closing the deal',
   tags: ['Lead', 'Potential High FYC'],
   footerLabel: 'Outreach approach',
   primaryCta: 'Send him a reminder',
@@ -645,21 +667,19 @@ export const SANDRA_TASK4: TaskCardModel = {
   defaultDraft: 'call',
   drafts: {
     call: {
-      context: 'Sandy is direct — lead with the policy, skip the warmup, and address the WL lapse (16d left in grace period).',
-      body:
-        'Hi Sandy, it’s Sarah. Your WL policy has a payment past due and I want to make sure we get this resolved before it affects your coverage. Can we connect today?',
+      context:
+        'Sandy is direct — lead with the policy, skip the warmup, and address the WL lapse (16d left in grace period).',
+      body: 'Hi Sandy, it’s Sarah. Your WL policy has a payment past due and I want to make sure we get this resolved before it affects your coverage. Can we connect today?',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
     text: {
       context: 'Short SMS — clear about the deadline, easy to reply to.',
-      body:
-        'Hi Sandy, it’s Sarah from New York Life. Your WL policy payment is past due — 16 days left in the grace period. Can we hop on a quick call today to sort it before it affects your coverage?',
+      body: 'Hi Sandy, it’s Sarah from New York Life. Your WL policy payment is past due — 16 days left in the grace period. Can we hop on a quick call today to sort it before it affects your coverage?',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
     email: {
       context: 'A short, warm email — policy first, with the payment link ready.',
-      body:
-        'Subject: A quick fix on your WL policy\n\nHi Sandy,\n\nYour whole life policy has a payment past due, and I’d like to help you clear it before it affects your coverage — there are 16 days left in the grace period. It’s a quick fix; I can send a secure payment link or walk you through it on a short call.\n\nWhat works best for you this week?\n\nBest,\nSarah Ferreira\nNew York Life',
+      body: 'Subject: A quick fix on your WL policy\n\nHi Sandy,\n\nYour whole life policy has a payment past due, and I’d like to help you clear it before it affects your coverage — there are 16 days left in the grace period. It’s a quick fix; I can send a secure payment link or walk you through it on a short call.\n\nWhat works best for you this week?\n\nBest,\nSarah Ferreira\nNew York Life',
       meta: 'Draft generated · Last updated 9:56 AM',
     },
   },
@@ -685,20 +705,17 @@ export const LAURA_TASK: TaskCardModel = {
   drafts: {
     email: {
       context: 'A fuller email — lead with the home, cover both gaps, propose a time.',
-      body:
-        'Subject: Quick coverage check on the new home\n\nHi Laura,\n\nCongratulations on the new home in Westchester — a wonderful milestone for the family. A move like this is a good moment to make sure two things are squared away: that the new property is properly protected, and that Daniel is added to your coverage so the household is protected together.\n\nBoth are quick to review. Would you have 15 minutes this week for a short call? I’ll walk you through the options and keep it simple.\n\nWarmly,\nSarah Ferreira\nNew York Life',
+      body: 'Subject: Quick coverage check on the new home\n\nHi Laura,\n\nCongratulations on the new home in Westchester — a wonderful milestone for the family. A move like this is a good moment to make sure two things are squared away: that the new property is properly protected, and that Daniel is added to your coverage so the household is protected together.\n\nBoth are quick to review. Would you have 15 minutes this week for a short call? I’ll walk you through the options and keep it simple.\n\nWarmly,\nSarah Ferreira\nNew York Life',
       meta: 'Draft generated · Last updated 9:41 AM',
     },
     call: {
       context: 'Warm and brief — congratulate first, then the two gaps.',
-      body:
-        'Hi Laura, it’s Sarah — congratulations on the new home! With the move, I’d love to make sure it’s properly covered and look at adding Daniel to your policy. Do you have 15 minutes this week?',
+      body: 'Hi Laura, it’s Sarah — congratulations on the new home! With the move, I’d love to make sure it’s properly covered and look at adding Daniel to your policy. Do you have 15 minutes this week?',
       meta: 'Draft generated · Last updated 9:41 AM',
     },
     text: {
       context: 'Short, friendly SMS.',
-      body:
-        'Hi Laura! Congrats on the new place 🎉 With the move it’s a good moment to make sure it’s covered and add Daniel to your policy. Got 15 min this week for a quick call?',
+      body: 'Hi Laura! Congrats on the new place 🎉 With the move it’s a good moment to make sure it’s covered and add Daniel to your policy. Got 15 min this week for a quick call?',
       meta: 'Draft generated · Last updated 9:41 AM',
     },
   },
@@ -714,8 +731,7 @@ export const SUNSHINE_TASK: TaskCardModel = {
   clientIcon: 'location',
   clientPreview: SUNSHINE_PREVIEW,
   headlineSuffix: '. Register this week to set up a booth and unlock more prospects.',
-  description:
-    'A booth costs $240 and other colleagues with similar profiles have added est. $3,400 FYC.',
+  description: 'A booth costs $240 and other colleagues with similar profiles have added est. $3,400 FYC.',
   tags: ['Broader network'],
   footerLabel: 'Event details',
   primaryCta: 'Register for an event',
@@ -741,8 +757,7 @@ export const THOMAS_TASK: TaskCardModel = {
   clientName: 'Thomas Reyes',
   clientPreview: THOMAS_PREVIEW,
   headlineSuffix: 'to discuss a WL conversion.',
-  description:
-    'Term window closes in 4 months. After that, conversion requires new underwriting.',
+  description: 'Term window closes in 4 months. After that, conversion requires new underwriting.',
   tags: ['Existing client focus', 'Higher FYC'],
   footerLabel: 'Outreach approach',
   primaryCta: 'Review draft',
@@ -753,20 +768,17 @@ export const THOMAS_TASK: TaskCardModel = {
   drafts: {
     email: {
       context: 'A fuller email — frame the deadline and the benefit of converting now.',
-      body:
-        'Subject: A timely option on your term policy\n\nHi Thomas,\n\nI was reviewing your coverage and wanted to flag something time-sensitive: your 20-year term policy is entering its conversion window, which closes in about four months. Converting now lets you move to permanent coverage without new medical underwriting — after the window, that option requires requalifying.\n\nIt’s worth a short conversation to see whether converting some or all of it makes sense for you. Do you have 20 minutes this week or next?\n\nBest,\nSarah Ferreira\nNew York Life',
+      body: 'Subject: A timely option on your term policy\n\nHi Thomas,\n\nI was reviewing your coverage and wanted to flag something time-sensitive: your 20-year term policy is entering its conversion window, which closes in about four months. Converting now lets you move to permanent coverage without new medical underwriting — after the window, that option requires requalifying.\n\nIt’s worth a short conversation to see whether converting some or all of it makes sense for you. Do you have 20 minutes this week or next?\n\nBest,\nSarah Ferreira\nNew York Life',
       meta: 'Draft generated · Last updated 9:18 AM',
     },
     call: {
       context: 'Lead with the deadline — converting now skips new underwriting.',
-      body:
-        'Hi Thomas, it’s Sarah. Your term policy’s conversion window closes in about four months — converting now means no new medical underwriting. Worth a quick call this week to see if it makes sense?',
+      body: 'Hi Thomas, it’s Sarah. Your term policy’s conversion window closes in about four months — converting now means no new medical underwriting. Worth a quick call this week to see if it makes sense?',
       meta: 'Draft generated · Last updated 9:18 AM',
     },
     text: {
       context: 'Short SMS — deadline-forward.',
-      body:
-        'Hi Thomas, it’s Sarah from New York Life. Your term conversion window closes in ~4 months — converting now avoids new medical underwriting. Worth a quick call to review your options?',
+      body: 'Hi Thomas, it’s Sarah from New York Life. Your term conversion window closes in ~4 months — converting now avoids new medical underwriting. Worth a quick call to review your options?',
       meta: 'Draft generated · Last updated 9:18 AM',
     },
   },
@@ -796,20 +808,17 @@ export const NEW_LEADS_TASK: TaskCardModel = {
   drafts: {
     email: {
       context: 'A warm first touch — name how they came in, keep it short, propose a quick call.',
-      body:
-        'Subject: Glad you reached out\n\nHi Jennifer,\n\nThanks for the introduction from Marcus — he speaks highly of you. I help business owners protect what they’ve built, and I’d love to learn what matters most to you. Would 15 minutes this week work for a quick call?\n\nWarmly,\nSarah Ferreira\nNew York Life',
+      body: 'Subject: Glad you reached out\n\nHi Jennifer,\n\nThanks for the introduction from Marcus — he speaks highly of you. I help business owners protect what they’ve built, and I’d love to learn what matters most to you. Would 15 minutes this week work for a quick call?\n\nWarmly,\nSarah Ferreira\nNew York Life',
       meta: 'Draft generated · Last updated 9:12 AM',
     },
     call: {
       context: 'Brief, friendly opener — reference the referral, then ask for a short fact-find.',
-      body:
-        'Hi Jennifer, it’s Sarah Ferreira with New York Life — Marcus Webb suggested I reach out. I’d love to hear what’s on your mind around coverage. Do you have 15 minutes this week?',
+      body: 'Hi Jennifer, it’s Sarah Ferreira with New York Life — Marcus Webb suggested I reach out. I’d love to hear what’s on your mind around coverage. Do you have 15 minutes this week?',
       meta: 'Draft generated · Last updated 9:12 AM',
     },
     text: {
       context: 'Short SMS first-touch.',
-      body:
-        'Hi Jennifer, it’s Sarah with New York Life — Marcus Webb connected us. Would love a quick 15-min call this week to learn what you’re looking for. What day works?',
+      body: 'Hi Jennifer, it’s Sarah with New York Life — Marcus Webb connected us. Would love a quick 15-min call this week to learn what you’re looking for. What day works?',
       meta: 'Draft generated · Last updated 9:12 AM',
     },
   },
@@ -839,14 +848,12 @@ export const SUCCESSION_TASK: TaskCardModel = {
   drafts: {
     email: {
       context: 'A warm handoff note — reference David by name, reassure continuity, ask for a short intro call.',
-      body:
-        'Subject: A warm introduction from David Okafor’s team\n\nHi Gloria,\n\nDavid Okafor has spoken so highly of you, and as he moves into a well-earned retirement, he’s asked me to look after your accounts personally. I want to make this transition seamless — nothing about your coverage changes, and I’m here whenever you need me.\n\nCould we find 20 minutes this week for a quick introduction? I’d love to hear what matters most to you heading into retirement.\n\nWarmly,\nSarah Ferreira\nNew York Life',
+      body: 'Subject: A warm introduction from David Okafor’s team\n\nHi Gloria,\n\nDavid Okafor has spoken so highly of you, and as he moves into a well-earned retirement, he’s asked me to look after your accounts personally. I want to make this transition seamless — nothing about your coverage changes, and I’m here whenever you need me.\n\nCould we find 20 minutes this week for a quick introduction? I’d love to hear what matters most to you heading into retirement.\n\nWarmly,\nSarah Ferreira\nNew York Life',
       meta: 'Draft generated · Last updated 9:04 AM',
     },
     call: {
       context: 'Reassuring opener — name David, stress continuity, keep it brief.',
-      body:
-        'Hi Gloria, it’s Sarah Ferreira with New York Life. David Okafor is retiring and asked me to personally look after your accounts. Nothing changes on your end — I just wanted to introduce myself. Do you have 20 minutes this week to connect?',
+      body: 'Hi Gloria, it’s Sarah Ferreira with New York Life. David Okafor is retiring and asked me to personally look after your accounts. Nothing changes on your end — I just wanted to introduce myself. Do you have 20 minutes this week to connect?',
       meta: 'Draft generated · Last updated 9:04 AM',
     },
   },
@@ -908,15 +915,14 @@ export const CLEMENTINE_TASK: TaskCardModel = {
   defaultDraft: 'email',
   drafts: {
     email: {
-      context: 'A short confirmation the morning of — reconfirm 1:45 and hint at the beneficiary update so it isn’t a surprise.',
-      body:
-        'Subject: See you at 1:45 today\n\nHi Clementine,\n\nLooking forward to our review at 1:45. I’ll bring a quick summary of your three policies, and there’s one small housekeeping item on a beneficiary designation we can update in a few minutes.\n\nSee you soon,\nSarah Ferreira\nNew York Life',
+      context:
+        'A short confirmation the morning of — reconfirm 1:45 and hint at the beneficiary update so it isn’t a surprise.',
+      body: 'Subject: See you at 1:45 today\n\nHi Clementine,\n\nLooking forward to our review at 1:45. I’ll bring a quick summary of your three policies, and there’s one small housekeeping item on a beneficiary designation we can update in a few minutes.\n\nSee you soon,\nSarah Ferreira\nNew York Life',
       meta: 'Draft generated · Last updated 9:22 AM',
     },
     call: {
       context: 'If you’d rather call — warm, brief, reconfirm the time.',
-      body:
-        'Hi Clementine, it’s Sarah — just confirming our 1:45 review today. I’ll walk you through your policies and we’ll take care of a quick beneficiary update. See you then!',
+      body: 'Hi Clementine, it’s Sarah — just confirming our 1:45 review today. I’ll walk you through your policies and we’ll take care of a quick beneficiary update. See you then!',
       meta: 'Draft generated · Last updated 9:22 AM',
     },
   },
@@ -955,11 +961,25 @@ export const HARRINGTON_TASK: TaskCardModel = {
   focusHeadline: 'The Harrington review rewards prep — walk in knowing all three policies cold.',
   doneHeadline: 'Harrington’s prepped. Nadia’s renewal is the next clock ticking.',
   review: {
-    documents: ['Harrington-Trust-Agreement.pdf', 'Q1-2025-Review-Notes.pdf', 'Annuity-Statement-2025.pdf', 'Policy-Summary-3up.pdf'],
+    documents: [
+      'Harrington-Trust-Agreement.pdf',
+      'Q1-2025-Review-Notes.pdf',
+      'Annuity-Statement-2025.pdf',
+      'Policy-Summary-3up.pdf',
+    ],
     recap: [
-      { date: 'Q1 review', note: 'Robert asked to revisit the survivorship policy’s funding after Diane’s retirement — flagged to model at the next review.' },
-      { date: 'Nov call', note: 'Claire joined; wants to understand how the fixed annuity feeds the trust before she becomes trustee.' },
-      { date: 'Sep email', note: 'Requested a consolidated statement across all three policies — the reason for the 3-policy walkthrough this quarter.' },
+      {
+        date: 'Q1 review',
+        note: 'Robert asked to revisit the survivorship policy’s funding after Diane’s retirement — flagged to model at the next review.',
+      },
+      {
+        date: 'Nov call',
+        note: 'Claire joined; wants to understand how the fixed annuity feeds the trust before she becomes trustee.',
+      },
+      {
+        date: 'Sep email',
+        note: 'Requested a consolidated statement across all three policies — the reason for the 3-policy walkthrough this quarter.',
+      },
     ],
   },
 }
@@ -998,14 +1018,12 @@ export const KHOURY_TASK: TaskCardModel = {
   drafts: {
     call: {
       context: 'Lead with the deadline — the rate locks this week; a quick call protects the premium.',
-      body:
-        'Hi Nadia, it’s Sarah from New York Life. Your 10-year term renews this week — I’d love to review your options before the rate locks so you keep the best premium. Do you have 15 minutes today or tomorrow?',
+      body: 'Hi Nadia, it’s Sarah from New York Life. Your 10-year term renews this week — I’d love to review your options before the rate locks so you keep the best premium. Do you have 15 minutes today or tomorrow?',
       meta: 'Draft generated · Last updated 9:15 AM',
     },
     email: {
       context: 'A short email if she prefers — deadline-forward, easy to reply to.',
-      body:
-        'Subject: A quick check before your renewal\n\nHi Nadia,\n\nYour 10-year term is up for renewal this week. A short conversation now lets us lock the best available rate and make sure the coverage still fits. Would 15 minutes this week work?\n\nWarmly,\nSarah Ferreira\nNew York Life',
+      body: 'Subject: A quick check before your renewal\n\nHi Nadia,\n\nYour 10-year term is up for renewal this week. A short conversation now lets us lock the best available rate and make sure the coverage still fits. Would 15 minutes this week work?\n\nWarmly,\nSarah Ferreira\nNew York Life',
       meta: 'Draft generated · Last updated 9:15 AM',
     },
   },
@@ -1059,11 +1077,31 @@ export const LICENSE_TASK: TaskCardModel = {
       'Economic factors & business fundamentals',
     ],
     steps: [
-      { label: 'Enroll in a prep course', detail: 'Self-paced online, ~40–60 hours of material — no sponsor needed.', when: 'Week 1' },
-      { label: 'Study around your calendar', detail: 'Nyla protects 2–3 prep blocks a week so it fits your book.', when: 'Weeks 1–6' },
-      { label: 'Schedule the exam', detail: 'Register through FINRA (~$187); take it at a Prometric center or online-proctored.', when: 'Week 6' },
-      { label: 'Pass the exam', detail: '130 scored questions · 180 minutes · 72% to pass (94 correct).', when: 'Week 7' },
-      { label: 'Register as an IAR', detail: 'File with your state — then you’re cleared to advise on investments.', when: 'Week 8' },
+      {
+        label: 'Enroll in a prep course',
+        detail: 'Self-paced online, ~40–60 hours of material — no sponsor needed.',
+        when: 'Week 1',
+      },
+      {
+        label: 'Study around your calendar',
+        detail: 'Nyla protects 2–3 prep blocks a week so it fits your book.',
+        when: 'Weeks 1–6',
+      },
+      {
+        label: 'Schedule the exam',
+        detail: 'Register through FINRA (~$187); take it at a Prometric center or online-proctored.',
+        when: 'Week 6',
+      },
+      {
+        label: 'Pass the exam',
+        detail: '130 scored questions · 180 minutes · 72% to pass (94 correct).',
+        when: 'Week 7',
+      },
+      {
+        label: 'Register as an IAR',
+        detail: 'File with your state — then you’re cleared to advise on investments.',
+        when: 'Week 8',
+      },
     ],
   },
 }
@@ -1071,23 +1109,37 @@ export const LICENSE_TASK: TaskCardModel = {
 /* Convenience bundle for the scene's initial stack — today's 10 priorities.
  * Clementine sits right after Sandra (aligns with the two "Your day" reviews). */
 export const INITIAL_TASKS: TaskCardModel[] = [
-  SANDRA_TASK, CLEMENTINE_TASK, LAURA_TASK, SUNSHINE_TASK, THOMAS_TASK, NEW_LEADS_TASK,
-  SUCCESSION_TASK, HARRINGTON_TASK, KHOURY_TASK, LICENSE_TASK,
+  SANDRA_TASK,
+  CLEMENTINE_TASK,
+  LAURA_TASK,
+  SUNSHINE_TASK,
+  THOMAS_TASK,
+  NEW_LEADS_TASK,
+  SUCCESSION_TASK,
+  HARRINGTON_TASK,
+  KHOURY_TASK,
+  LICENSE_TASK,
 ]
 
 export const DAY2_GROUP_TASKS: TaskCardModel[] = [
-  SUNSHINE_TASK, THOMAS_TASK, NEW_LEADS_TASK,
-  SUCCESSION_TASK, HARRINGTON_TASK, KHOURY_TASK, LICENSE_TASK,
+  SUNSHINE_TASK,
+  THOMAS_TASK,
+  NEW_LEADS_TASK,
+  SUCCESSION_TASK,
+  HARRINGTON_TASK,
+  KHOURY_TASK,
+  LICENSE_TASK,
 ]
 
 export const DAY3_GROUP_TASKS: TaskCardModel[] = [
-   NEW_LEADS_TASK,
-  SUCCESSION_TASK, HARRINGTON_TASK, KHOURY_TASK, LICENSE_TASK,
+  NEW_LEADS_TASK,
+  SUCCESSION_TASK,
+  HARRINGTON_TASK,
+  KHOURY_TASK,
+  LICENSE_TASK,
 ]
 
-export const DAY4_GROUP_TASKS: TaskCardModel[] = [
-  HARRINGTON_TASK, KHOURY_TASK, LICENSE_TASK,
-]
+export const DAY4_GROUP_TASKS: TaskCardModel[] = [HARRINGTON_TASK, KHOURY_TASK, LICENSE_TASK]
 
 /* Day 2/3/4 task tracks — copies of Day 1's for now, content to be individualized per day.
  * Each day leads with its own Sandra task variant in place of Day 1's. */
@@ -1148,8 +1200,17 @@ export const FUTURE_TASKS: TaskCardModel[] = [
 /* ── Horizon views (Day / Week / Month / Quarter) ───────────────────────────
  * Day shows the live briefing. The longer horizons swap to a Coach-voice summary
  * + a few aggregate stats so the time-scope switch is meaningful. */
-export interface HorizonStat { label: string; value: string; sub: string; tone?: 'good' | 'warn' | 'neutral' }
-export interface HorizonView { headline: string; note: string; stats: HorizonStat[] }
+export interface HorizonStat {
+  label: string
+  value: string
+  sub: string
+  tone?: 'good' | 'warn' | 'neutral'
+}
+export interface HorizonView {
+  headline: string
+  note: string
+  stats: HorizonStat[]
+}
 
 export const HORIZON_VIEWS: Record<'Week' | 'Month' | 'Quarter', HorizonView> = {
   Week: {
@@ -1193,22 +1254,26 @@ export interface NavPlaceholderMeta {
 export const NAV_PLACEHOLDER: Record<string, NavPlaceholderMeta> = {
   Clients: {
     title: 'Clients',
-    valueProp: 'Your book, seen the way top agents see it. Nyla analyzes life signals, coverage gaps, and patterns across similar advisors to show you who\'s ready and why.',
+    valueProp:
+      "Your book, seen the way top agents see it. Nyla analyzes life signals, coverage gaps, and patterns across similar advisors to show you who's ready and why.",
     example: 'Dig into a client segment to find overlooked households Nyla flagged for follow-up.',
   },
   Actives: {
     title: 'Actives',
-    valueProp: 'Nothing stalls. Nothing slips. Nyla tracks every open case, surfaces blockers, and connects the dots across your pipeline — no chasing required.',
+    valueProp:
+      'Nothing stalls. Nothing slips. Nyla tracks every open case, surfaces blockers, and connects the dots across your pipeline — no chasing required.',
     example: 'Pull up an active case to see exactly where it stands and what clears it with a click.',
   },
   Prospects: {
     title: 'Prospects',
-    valueProp: 'Find the clients you didn\'t know to look for. Nyla learns from your niche, your history, and agents like you to surface prospects that actually fit, with the context to reach them well.',
+    valueProp:
+      "Find the clients you didn't know to look for. Nyla learns from your niche, your history, and agents like you to surface prospects that actually fit, with the context to reach them well.",
     example: 'Explore a new prospect segment to see who Nyla surfaced and why they fit your book.',
   },
   Planning: {
     title: 'Business',
-    valueProp: 'Your numbers, turned into a plan. Nyla benchmarks your production against peers, finds the real gaps, and maps the moves that matter most to your goals.',
+    valueProp:
+      'Your numbers, turned into a plan. Nyla benchmarks your production against peers, finds the real gaps, and maps the moves that matter most to your goals.',
     example: 'Open council pacing to see where you stand and what Nyla recommends to close the gap.',
   },
   Notifications: {

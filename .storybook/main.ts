@@ -3,10 +3,7 @@ import path from 'node:path'
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-  ],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],
   framework: {
     name: '@storybook/react-vite',
     options: {},
@@ -19,7 +16,7 @@ const config: StorybookConfig = {
     config.plugins = [...(config.plugins ?? []), tailwindcss(), nylaConfigSync()]
     config.resolve ??= {}
     config.resolve.alias = {
-      ...(config.resolve.alias as Record<string, string> ?? {}),
+      ...((config.resolve.alias as Record<string, string>) ?? {}),
       '@': path.resolve(__dirname, '../src'),
     }
     return config

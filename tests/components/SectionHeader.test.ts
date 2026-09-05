@@ -29,20 +29,14 @@ test.describe('SectionHeader', () => {
     const root = await gotoStory(page, SECONDARY_ID)
     const heading = root.locator('h2').first()
     await heading.waitFor({ state: 'visible', timeout: 8_000 })
-    await assertTextSpacing(
-      heading,
-      'Where do you want your practice to head in the next two to three years?'
-    )
+    await assertTextSpacing(heading, 'Where do you want your practice to head in the next two to three years?')
   })
 
   test('primary — heading text renders with correct spacing', async ({ page }) => {
     const root = await gotoStory(page, PRIMARY_ID)
     const heading = root.locator('h2').first()
     await heading.waitFor({ state: 'visible', timeout: 8_000 })
-    await assertTextSpacing(
-      heading,
-      "You've got goals. Now let's build around how you actually work."
-    )
+    await assertTextSpacing(heading, "You've got goals. Now let's build around how you actually work.")
   })
 
   test('AllVariants — visual snapshot', async ({ page }) => {

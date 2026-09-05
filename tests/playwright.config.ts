@@ -10,13 +10,15 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     // reducedMotion is a BrowserContext option — set it per-project via contextOptions below
   },
-  projects: [{
-    name: 'chromium',
-    use: {
-      ...devices['Desktop Chrome'],
-      contextOptions: { reducedMotion: 'reduce' },
+  projects: [
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        contextOptions: { reducedMotion: 'reduce' },
+      },
     },
-  }],
+  ],
   webServer: {
     command: 'npm run storybook',
     url: 'http://localhost:6006',

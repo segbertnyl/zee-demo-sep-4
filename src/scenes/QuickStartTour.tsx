@@ -11,31 +11,31 @@ type Step = {
   eyebrow: string
   title: string
   body: string
-  artHint: string  /* describes the focal area, no DOM-anchored highlight for now */
+  artHint: string /* describes the focal area, no DOM-anchored highlight for now */
 }
 
 const STEPS: Step[] = [
   {
     eyebrow: '1 of 4 · Morning briefing',
-    title: "Your morning briefing lives here.",
+    title: 'Your morning briefing lives here.',
     body: "Every day around 8am, Nyla posts what to read, what to act on, and what's running in the background. Open it from the left rail anytime.",
     artHint: 'briefing',
   },
   {
     eyebrow: '2 of 4 · Refine your plan',
-    title: "Your plan stays alive.",
-    body: "Open the briefcase in the left rail to see your plan. Edit your FYC goal, your case mix, your activity — the OS rebuilds the pace and the math instantly. Re-onboard from the home menu whenever life changes.",
+    title: 'Your plan stays alive.',
+    body: 'Open the briefcase in the left rail to see your plan. Edit your FYC goal, your case mix, your activity — the OS rebuilds the pace and the math instantly. Re-onboard from the home menu whenever life changes.',
     artHint: 'business',
   },
   {
     eyebrow: '3 of 4 · Calendar + meeting prep',
-    title: "Every meeting comes with a brief.",
-    body: "The calendar icon shows today and the week. Tap any meeting — the OS already wrote the pre-meeting brief: client context, life events, the question to lead with.",
+    title: 'Every meeting comes with a brief.',
+    body: 'The calendar icon shows today and the week. Tap any meeting — the OS already wrote the pre-meeting brief: client context, life events, the question to lead with.',
     artHint: 'calendar',
   },
   {
     eyebrow: '4 of 4 · Make it yours',
-    title: "Drag, drop, reorganize.",
+    title: 'Drag, drop, reorganize.',
     body: "The order of cards in your briefing is yours. Drag what matters to the top. Ask the AI assistant 'show me the tour' anytime to come back here.",
     artHint: 'briefing',
   },
@@ -143,7 +143,8 @@ export function QuickStartTour() {
             </div>
 
             <p className="mt-4 text-[11px] italic leading-snug text-neutral-500">
-              Replay anytime — ask the AI assistant <span className="not-italic font-medium text-neutral-700">"show me the tour."</span>
+              Replay anytime — ask the AI assistant{' '}
+              <span className="not-italic font-medium text-neutral-700">"show me the tour."</span>
             </p>
           </motion.div>
         </motion.div>

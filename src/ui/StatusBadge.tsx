@@ -20,9 +20,23 @@ const TONE: Record<StatusBadgeTone, string> = {
 
 export function StatusBadge({ tone, label, meta }: { tone: StatusBadgeTone; label: string; meta?: string }) {
   return (
-    <span className={['inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[10.5px] font-medium uppercase tracking-[0.1em]', TONE[tone]].join(' ')}>
+    <span
+      className={[
+        'inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[10.5px] font-medium uppercase tracking-[0.1em]',
+        TONE[tone],
+      ].join(' ')}
+    >
       <span className="inline-flex items-center gap-1.5">
-        <span className={['size-1.5 rounded-full', tone === 'event' ? 'bg-[var(--badge-event-dot)]' : tone === 'ready' ? 'bg-[var(--badge-ready-dot)]' : 'bg-current'].join(' ')} />
+        <span
+          className={[
+            'size-1.5 rounded-full',
+            tone === 'event'
+              ? 'bg-[var(--badge-event-dot)]'
+              : tone === 'ready'
+                ? 'bg-[var(--badge-ready-dot)]'
+                : 'bg-current',
+          ].join(' ')}
+        />
         {label}
       </span>
       {meta && (

@@ -17,11 +17,16 @@ export interface TourStep {
   targets?: string[]
 }
 
-interface Rect { top: number; left: number; width: number; height: number }
+interface Rect {
+  top: number
+  left: number
+  width: number
+  height: number
+}
 
-const VPAD = 6       // vertical padding around the spotlighted icon(s)
+const VPAD = 6 // vertical padding around the spotlighted icon(s)
 const CARD_W = 356
-const GAP = 22       // gap between the spotlight and the card
+const GAP = 22 // gap between the spotlight and the card
 const SCRIM = 'rgba(12, 18, 48, 0.42)'
 
 /* Spotlight rect for nav-anchored steps: vertical extent from the target
@@ -32,10 +37,12 @@ function spotlightRect(targets: string[]): Rect | null {
     .map((t) => document.querySelector<HTMLElement>(`[data-tour-target="${t}"]`))
     .filter((el): el is HTMLElement => !!el)
   if (!els.length) return null
-  let top = Infinity, bottom = -Infinity
+  let top = Infinity,
+    bottom = -Infinity
   els.forEach((el) => {
     const r = el.getBoundingClientRect()
-    top = Math.min(top, r.top); bottom = Math.max(bottom, r.bottom)
+    top = Math.min(top, r.top)
+    bottom = Math.max(bottom, r.bottom)
   })
   const rail = document.querySelector<HTMLElement>('[data-tour-rail]')?.getBoundingClientRect()
   const left = rail ? rail.left : Math.min(...els.map((e) => e.getBoundingClientRect().left))
@@ -43,7 +50,11 @@ function spotlightRect(targets: string[]): Rect | null {
   return { top, left, width, height: bottom - top }
 }
 
-export function BriefingTour({ steps, onClose, reducedMotion = false }: {
+export function BriefingTour({
+  steps,
+  onClose,
+  reducedMotion = false,
+}: {
   steps: TourStep[]
   onClose: () => void
   reducedMotion?: boolean
@@ -64,7 +75,11 @@ export function BriefingTour({ steps, onClose, reducedMotion = false }: {
     const t1 = window.setTimeout(measure, 80)
     const t2 = window.setTimeout(measure, 360)
     window.addEventListener('resize', measure)
-    return () => { window.clearTimeout(t1); window.clearTimeout(t2); window.removeEventListener('resize', measure) }
+    return () => {
+      window.clearTimeout(t1)
+      window.clearTimeout(t2)
+      window.removeEventListener('resize', measure)
+    }
   }, [measure])
 
   const next = () => (isLast ? onClose() : setIdx((i) => i + 1))
@@ -109,7 +124,12 @@ export function BriefingTour({ steps, onClose, reducedMotion = false }: {
           transition={{ duration: DURATION.deliberate, ease: EASE.settle }}
         >
           {/* pointer toward the spotlighted nav item */}
-          {rect && <span aria-hidden="true" className="absolute -left-1.5 top-1/2 size-3.5 -translate-y-1/2 rotate-45 rounded-[3px] bg-white" />}
+          {rect && (
+            <span
+              aria-hidden="true"
+              className="absolute -left-1.5 top-1/2 size-3.5 -translate-y-1/2 rotate-45 rounded-[3px] bg-white"
+            />
+          )}
 
           <div className="flex items-start justify-between gap-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--nyl-blue-500)]">
@@ -124,7 +144,10 @@ export function BriefingTour({ steps, onClose, reducedMotion = false }: {
             </button>
           </div>
 
-          <h2 className="mt-3 font-serif text-[26px] leading-[1.12] tracking-[-0.01em] text-[var(--text-headline)]" style={{ fontWeight: 400 }}>
+          <h2
+            className="mt-3 font-serif text-[26px] leading-[1.12] tracking-[-0.01em] text-[var(--text-headline)]"
+            style={{ fontWeight: 400 }}
+          >
             {step.title}
           </h2>
           <p className="mt-2.5 text-[14px] leading-[1.55] text-[var(--text-body-muted)]">{step.body}</p>
@@ -134,7 +157,10 @@ export function BriefingTour({ steps, onClose, reducedMotion = false }: {
               {steps.map((_, i) => (
                 <span
                   key={i}
-                  className={['h-1.5 rounded-full transition-all', i === idx ? 'w-5 bg-[var(--nyl-blue-500)]' : 'w-1.5 bg-[var(--nyl-gray-100)]'].join(' ')}
+                  className={[
+                    'h-1.5 rounded-full transition-all',
+                    i === idx ? 'w-5 bg-[var(--nyl-blue-500)]' : 'w-1.5 bg-[var(--nyl-gray-100)]',
+                  ].join(' ')}
                 />
               ))}
             </div>

@@ -12,7 +12,7 @@ export const STAGES: { id: StageId; label: string; sub: string }[] = [
 ]
 
 export const PLAN_SUB_STEPS = ['What I heard', 'Pacing', 'Summary'] as const
-export type PlanSubStep = 0 | 1 | 2 | 3  // 0 = loading (no active sub), 1–3 = sub-items
+export type PlanSubStep = 0 | 1 | 2 | 3 // 0 = loading (no active sub), 1–3 = sub-items
 
 /* Intro animation timing — edit these to tune the build-in sequence.
  * introDelay: seconds before children start animating (default matches
@@ -59,17 +59,14 @@ function StepRow({
   dark?: boolean
 }) {
   // #80baff = global/blue/blue-250 — no NYL token equivalent; design system gap
-  const dotColor = dark ? (active ? 'white' : '#80baff') : (active ? 'var(--action-primary)' : 'var(--nyl-gray-250)')
+  const dotColor = dark ? (active ? 'white' : '#80baff') : active ? 'var(--action-primary)' : 'var(--nyl-gray-250)'
   const connectorColor = dark ? '#80baff' : 'var(--nyl-gray-250)'
-  const textColor = dark ? (active ? 'white' : '#dcd9d5') : (active ? 'var(--action-primary)' : 'var(--nyl-gray-500)')
+  const textColor = dark ? (active ? 'white' : '#dcd9d5') : active ? 'var(--action-primary)' : 'var(--nyl-gray-500)'
 
   return (
     <div className="flex w-full items-start gap-[8px]">
       <div className="flex w-[12px] shrink-0 flex-col items-center">
-        <span
-          className="mt-[6px] shrink-0 rounded-full"
-          style={{ width: 8, height: 8, background: dotColor }}
-        />
+        <span className="mt-[6px] shrink-0 rounded-full" style={{ width: 8, height: 8, background: dotColor }} />
         {showConnector && (
           <span className="mt-[6px] w-[2px] flex-1" style={{ background: connectorColor, minHeight: 12 }} />
         )}
@@ -112,11 +109,25 @@ function NavArrows({
         disabled={prevDisabled}
         className="flex size-[40px] items-center justify-center rounded-[8px] border-[1.5px] transition-opacity"
         style={{ opacity: prevDisabled ? 0.4 : 1, borderColor, background: 'transparent' }}
-        onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = hoverBg }}
-        onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent' }}
+        onMouseEnter={(e) => {
+          ;(e.currentTarget as HTMLButtonElement).style.background = hoverBg
+        }}
+        onMouseLeave={(e) => {
+          ;(e.currentTarget as HTMLButtonElement).style.background = 'transparent'
+        }}
         aria-label="Previous"
       >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={strokeColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          stroke={strokeColor}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
           <path d="M2 7 L7 2 L12 7" />
           <path d="M7 2 V12" />
         </svg>
@@ -127,11 +138,25 @@ function NavArrows({
         disabled={nextDisabled}
         className="flex size-[40px] items-center justify-center rounded-[8px] border-[1.5px] transition-opacity"
         style={{ opacity: nextDisabled ? 0.4 : 1, borderColor, background: 'transparent' }}
-        onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = hoverBg }}
-        onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent' }}
+        onMouseEnter={(e) => {
+          ;(e.currentTarget as HTMLButtonElement).style.background = hoverBg
+        }}
+        onMouseLeave={(e) => {
+          ;(e.currentTarget as HTMLButtonElement).style.background = 'transparent'
+        }}
         aria-label="Next"
       >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={strokeColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          stroke={strokeColor}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
           <path d="M2 7 L7 12 L12 7" />
           <path d="M7 12 V2" />
         </svg>
@@ -156,8 +181,8 @@ export function StageRail({
   const aayActive = !inPlan && stageIndex >= 0
 
   // #808299 = approx global/neutral/500 in dark — no NYL token equivalent; design system gap
-  const aayLabelColor = dark ? '#808299' : (aayActive ? 'var(--action-primary)' : 'var(--nyl-gray-300)')
-  const planLabelColor = dark ? 'white' : (inPlan ? 'var(--nyl-blue-800)' : 'var(--nyl-gray-500)')
+  const aayLabelColor = dark ? '#808299' : aayActive ? 'var(--action-primary)' : 'var(--nyl-gray-300)'
+  const planLabelColor = dark ? 'white' : inPlan ? 'var(--nyl-blue-800)' : 'var(--nyl-gray-500)'
   const dividerColor = dark ? 'rgba(255,255,255,0.15)' : 'var(--nyl-gray-250)'
 
   return (

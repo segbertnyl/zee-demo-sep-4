@@ -57,8 +57,7 @@ export const PROMPTS: Prompt[] = [
   {
     id: 'henderson',
     shortLabel: 'Turn the Henderson household into a multi-gen client',
-    fullPrompt:
-      'Turn Janet Henderson\'s household into a multi-generational client.',
+    fullPrompt: "Turn Janet Henderson's household into a multi-generational client.",
     thinking: [
       'Reading the Henderson household profile',
       'Cross-checking beneficiary records and household composition',
@@ -66,11 +65,11 @@ export const PROMPTS: Prompt[] = [
       'Drafting',
     ],
     narrative: [
-      "The Hendersons are the highest-probability multi-gen play in your book right now. Janet trusts you, the spouse is uninsured but already named as beneficiary, and you have an annual review on the calendar this month.",
-      "Use the review to plant the seed for two policies — Frances first, the adult children second. The script is in the right place. The math is in your favor.",
+      'The Hendersons are the highest-probability multi-gen play in your book right now. Janet trusts you, the spouse is uninsured but already named as beneficiary, and you have an annual review on the calendar this month.',
+      'Use the review to plant the seed for two policies — Frances first, the adult children second. The script is in the right place. The math is in your favor.',
     ],
     response: [
-      { kind: 'headline', text: 'Turn Janet Henderson\'s household into a multi-generational client.' },
+      { kind: 'headline', text: "Turn Janet Henderson's household into a multi-generational client." },
       {
         kind: 'subhead',
         text: 'You already have the door open. The opening expires when Frances calls her own broker.',
@@ -96,7 +95,7 @@ export const PROMPTS: Prompt[] = [
             text: '4-member household. Frances is named beneficiary but uninsured.',
             context: {
               echo: 'What does her current coverage actually look like?',
-              take: 'Frances has nothing in force. Janet\'s policies list her as primary on both.',
+              take: "Frances has nothing in force. Janet's policies list her as primary on both.",
               quickActions: [
                 { label: 'Open household builder' },
                 { label: 'Show coverage timeline' },
@@ -105,13 +104,13 @@ export const PROMPTS: Prompt[] = [
             },
           },
           {
-            text: 'Two adult children (23, 26) — lifetime rates locked at lowest they\'ll ever see.',
+            text: "Two adult children (23, 26) — lifetime rates locked at lowest they'll ever see.",
             context: {
               echo: 'How do parents usually take this conversation?',
               take: 'Frame it as a gift, not a referral ask. Conversion is 3.4× higher.',
               quickActions: [
                 { label: 'Show me a script that lands' },
-                { label: 'Find similar conversations I\'ve won' },
+                { label: "Find similar conversations I've won" },
                 { label: 'Draft a soft intro to the kids', promptId: 'draft-outreach' },
               ],
             },
@@ -129,8 +128,7 @@ export const PROMPTS: Prompt[] = [
       },
       {
         kind: 'quote',
-        text:
-          "As part of your annual review, I noticed Frances isn’t currently covered. I’d like to make sure your whole household is protected the way you are.",
+        text: 'As part of your annual review, I noticed Frances isn’t currently covered. I’d like to make sure your whole household is protected the way you are.',
         attribution: 'Suggested opener · in your voice',
       },
       {
@@ -152,11 +150,7 @@ export const PROMPTS: Prompt[] = [
     id: 'powell',
     shortLabel: 'Show me my Powell call card',
     fullPrompt: 'Show me the Powell call card.',
-    thinking: [
-      'Pulling Powell\'s file',
-      'Checking last touch + renewal pattern',
-      'Composing the call card',
-    ],
+    thinking: ["Pulling Powell's file", 'Checking last touch + renewal pattern', 'Composing the call card'],
     narrative: [
       "Cesar has renewed within a 90-day window the last two times you called him. You are at day 84. This is the call most likely to land — and the one most likely to slip if you don't make it today.",
       "He doesn't respond to sold-to language. Lead with his family, anchor on his daughter just starting college, and let him bring up coverage when he's ready.",
@@ -165,7 +159,7 @@ export const PROMPTS: Prompt[] = [
       { kind: 'headline', text: 'Cesar Powell · Queens · term expires September' },
       {
         kind: 'subhead',
-        text: 'He renewed within a 90-day window the last two times you called him. You\'re at day 84.',
+        text: "He renewed within a 90-day window the last two times you called him. You're at day 84.",
       },
       {
         kind: 'metric-row',
@@ -179,7 +173,7 @@ export const PROMPTS: Prompt[] = [
         kind: 'bullets',
         items: [
           { text: 'Lead with the family — his daughter just started Queens College.' },
-          { text: "Don’t pitch term-vs-WL on the call. He pushes back when he feels sold to." },
+          { text: 'Don’t pitch term-vs-WL on the call. He pushes back when he feels sold to.' },
           { text: 'If he says "let me think about it," book a follow-up. He always returns the call.' },
         ],
       },
@@ -187,7 +181,7 @@ export const PROMPTS: Prompt[] = [
         kind: 'sparkline',
         label: 'Powell touch rhythm · last 24 months',
         series: [3, 8, 4, 10, 6, 9, 4, 12, 5, 11, 7, 14, 8, 16, 9, 18, 10, 21, 12, 30, 18, 40, 60, 84],
-        note: 'Day 84 is past your usual cadence — that\'s why this is the top of your day.',
+        note: "Day 84 is past your usual cadence — that's why this is the top of your day.",
       },
       {
         kind: 'actions',
@@ -202,7 +196,7 @@ export const PROMPTS: Prompt[] = [
   {
     id: 'recovery',
     shortLabel: 'Fastest path to recovery this month',
-    fullPrompt: 'I\'m behind. What\'s the fastest path to recovery this month?',
+    fullPrompt: "I'm behind. What's the fastest path to recovery this month?",
     thinking: [
       'Comparing your pace to your own history',
       'Identifying the highest-yield levers',
@@ -210,7 +204,7 @@ export const PROMPTS: Prompt[] = [
       'Compressing',
     ],
     response: [
-      { kind: 'headline', text: "You’re behind by 1.4 cases. Two moves close the gap." },
+      { kind: 'headline', text: 'You’re behind by 1.4 cases. Two moves close the gap.' },
       {
         kind: 'subhead',
         text: 'I checked your last six months. The fastest pattern for you is conversions + a workshop, not net-new prospecting.',
@@ -223,7 +217,7 @@ export const PROMPTS: Prompt[] = [
             emphasis: true,
           },
           { text: 'Run one cross-sell workshop with a multi-gen household.' },
-          { text: 'Skip prospecting this month. You\'ll lose more time than you\'d gain.' },
+          { text: "Skip prospecting this month. You'll lose more time than you'd gain." },
         ],
       },
       {
@@ -236,8 +230,7 @@ export const PROMPTS: Prompt[] = [
       },
       {
         kind: 'quote',
-        text:
-          'Recovery is almost always behind you, not ahead of you. The fastest case is the one where your client already trusts you.',
+        text: 'Recovery is almost always behind you, not ahead of you. The fastest case is the one where your client already trusts you.',
         attribution: 'Coach memo · drawn from your own pattern',
       },
       {
@@ -270,7 +263,7 @@ export const PROMPTS: Prompt[] = [
         kind: 'bullets',
         items: [
           { text: 'Open with the daughter — Aanya turns 18 in September.' },
-          { text: 'Don\'t bring up beneficiaries until after the legacy frame lands.' },
+          { text: "Don't bring up beneficiaries until after the legacy frame lands." },
           { text: 'If Mira asks "do we even need this?" — pause, then ask what she\'s thinking about.' },
         ],
       },
@@ -284,7 +277,7 @@ export const PROMPTS: Prompt[] = [
       },
       {
         kind: 'sources',
-        items: ['Last meeting notes', 'Coach\'s drill library', 'Patel household record'],
+        items: ['Last meeting notes', "Coach's drill library", 'Patel household record'],
       },
       {
         kind: 'actions',
@@ -298,8 +291,8 @@ export const PROMPTS: Prompt[] = [
   },
   {
     id: 'clarke',
-    shortLabel: 'How do I handle Emily Clarke\'s review today?',
-    fullPrompt: 'How should I approach Emily Clarke\'s annual review at 9?',
+    shortLabel: "How do I handle Emily Clarke's review today?",
+    fullPrompt: "How should I approach Emily Clarke's annual review at 9?",
     thinking: [
       'Reading the Clarke file',
       'Scanning recent signals',
@@ -325,7 +318,7 @@ export const PROMPTS: Prompt[] = [
         kind: 'bullets',
         items: [
           {
-            text: 'Client recently turned 58 and there\'s a spike in retirement-related content engagement detected.',
+            text: "Client recently turned 58 and there's a spike in retirement-related content engagement detected.",
             emphasis: true,
             context: {
               echo: 'Where do I see those signals?',
@@ -379,7 +372,7 @@ export const PROMPTS: Prompt[] = [
     id: 'clarke-warm',
     shortLabel: 'View the warm outreach draft',
     fullPrompt: 'Show me the warm outreach approach.',
-    thinking: ['Pulling Emily\'s tone preferences', 'Drafting in your voice'],
+    thinking: ["Pulling Emily's tone preferences", 'Drafting in your voice'],
     response: [
       { kind: 'headline', text: 'A warm outreach approach.' },
       {
@@ -392,8 +385,7 @@ export const PROMPTS: Prompt[] = [
         to: 'emily.clarke@example.com',
         subject: 'A planning-readiness check-in',
         tone: 'Warm · in your voice',
-        body:
-          "Hi Emily,\n\nIt's been a while since we sat down on the bigger picture. The next chapter — the years where you're winding into retirement rather than away from it — is the part of planning that tends to need fresher conversations, not bigger numbers.\n\nProvide often-evolve over time. Promises often-evolve over time, and a quick walk-through helps make sure your existing strategy is still built for what's ahead.\n\nWould you have a 20-minute slot in the next two weeks? Looking forward to catching up.",
+        body: "Hi Emily,\n\nIt's been a while since we sat down on the bigger picture. The next chapter — the years where you're winding into retirement rather than away from it — is the part of planning that tends to need fresher conversations, not bigger numbers.\n\nProvide often-evolve over time. Promises often-evolve over time, and a quick walk-through helps make sure your existing strategy is still built for what's ahead.\n\nWould you have a 20-minute slot in the next two weeks? Looking forward to catching up.",
         primary: { label: 'Send', promptId: 'sent-confirmation' },
         secondary: [
           { label: 'Schedule for Tuesday 9 am', promptId: 'sent-confirmation' },
@@ -403,7 +395,11 @@ export const PROMPTS: Prompt[] = [
       },
       {
         kind: 'sources',
-        items: ['Your last 12 outreaches to Emily', 'Clarke channel preference · email', 'Retirement-planning playbook'],
+        items: [
+          'Your last 12 outreaches to Emily',
+          'Clarke channel preference · email',
+          'Retirement-planning playbook',
+        ],
       },
     ],
   },
@@ -437,7 +433,7 @@ export const PROMPTS: Prompt[] = [
   {
     id: 'open-record',
     shortLabel: 'Open his record',
-    fullPrompt: 'Open Cesar Powell\'s record.',
+    fullPrompt: "Open Cesar Powell's record.",
     thinking: ['Pulling the file', 'Stitching the last six interactions'],
     response: [
       { kind: 'headline', text: 'Cesar Powell · Queens · since 2018.' },
@@ -473,17 +469,13 @@ export const PROMPTS: Prompt[] = [
       { kind: 'subhead', text: 'In your voice, 117 characters — under the read-rate inflection.' },
       {
         kind: 'quote',
-        text:
-          "Hey Cesar — quick one. Your term renews in Sept and I'd love to catch up before that. Got 15 minutes Friday?",
+        text: "Hey Cesar — quick one. Your term renews in Sept and I'd love to catch up before that. Got 15 minutes Friday?",
         attribution: 'Suggested · iMessage',
       },
       {
         kind: 'actions',
         primary: { label: 'Send now', promptId: 'sent-confirmation' },
-        secondary: [
-          { label: 'Tighten by 30%' },
-          { label: 'Schedule for tomorrow 9 am' },
-        ],
+        secondary: [{ label: 'Tighten by 30%' }, { label: 'Schedule for tomorrow 9 am' }],
       },
     ],
   },
@@ -510,10 +502,7 @@ export const PROMPTS: Prompt[] = [
       {
         kind: 'actions',
         primary: { label: 'Send to my iPad', promptId: 'sent-confirmation' },
-        secondary: [
-          { label: 'Open in presenter mode' },
-          { label: 'Print the pack' },
-        ],
+        secondary: [{ label: 'Open in presenter mode' }, { label: 'Print the pack' }],
       },
     ],
   },
@@ -534,8 +523,7 @@ export const PROMPTS: Prompt[] = [
         to: 'janet.henderson@example.com',
         subject: 'Quick beneficiary review before our annual',
         tone: 'Warm · in your voice',
-        body:
-          "Hi Janet,\n\nAs I'm prepping for our review later this month, I noticed something worth a quick conversation. Frances is listed as a beneficiary on your policies but doesn't have any coverage of her own — and that's a gap most households don't realize they have until it matters.\n\nI'd love to walk through it together. A 20-minute beneficiary review with both of you, no pricing talk yet. Just a conversation about whether Frances should be covered the same way you are.\n\nDo you have time the week of June 9? I can come to you or do it virtually — whatever works best.\n\nWarmly,\nSarah",
+        body: "Hi Janet,\n\nAs I'm prepping for our review later this month, I noticed something worth a quick conversation. Frances is listed as a beneficiary on your policies but doesn't have any coverage of her own — and that's a gap most households don't realize they have until it matters.\n\nI'd love to walk through it together. A 20-minute beneficiary review with both of you, no pricing talk yet. Just a conversation about whether Frances should be covered the same way you are.\n\nDo you have time the week of June 9? I can come to you or do it virtually — whatever works best.\n\nWarmly,\nSarah",
         primary: { label: 'Send now', promptId: 'sent-confirmation' },
         secondary: [
           { label: 'Schedule for Tuesday 9 am', promptId: 'sent-confirmation' },
@@ -604,10 +592,7 @@ export const PROMPTS: Prompt[] = [
       {
         kind: 'actions',
         primary: { label: 'Book Wed 2:30 pm', promptId: 'sent-confirmation' },
-        secondary: [
-          { label: 'Show me next week instead' },
-          { label: 'Block this off for Henderson outreach' },
-        ],
+        secondary: [{ label: 'Show me next week instead' }, { label: 'Block this off for Henderson outreach' }],
       },
     ],
   },
@@ -620,7 +605,7 @@ export const PROMPTS: Prompt[] = [
       { kind: 'headline', text: 'Recovery plan · 30 days · two paths.' },
       {
         kind: 'subhead',
-        text: 'I sequenced the two highest-yield conversion paths. You can drop either; I\'ll rebuild.',
+        text: "I sequenced the two highest-yield conversion paths. You can drop either; I'll rebuild.",
       },
       {
         kind: 'bullets',
@@ -686,8 +671,8 @@ export const PROMPTS: Prompt[] = [
       {
         kind: 'bullets',
         items: [
-          { text: 'I\'ll measure hedging language, latency, and filler.' },
-          { text: 'If you freeze on the legacy question, I\'ll prompt you with a recovery line.' },
+          { text: "I'll measure hedging language, latency, and filler." },
+          { text: "If you freeze on the legacy question, I'll prompt you with a recovery line." },
         ],
       },
       {
@@ -707,7 +692,7 @@ export const PROMPTS: Prompt[] = [
       {
         kind: 'bullets',
         items: [
-          { text: 'Lead with Aanya — she\'s in her senior year.' },
+          { text: "Lead with Aanya — she's in her senior year." },
           { text: 'Skip the rate comparison. Mira pushed back last time.' },
           { text: 'Land the legacy frame before anything product-shaped.' },
         ],

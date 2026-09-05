@@ -100,9 +100,7 @@ export const BothBreakpoints: Story = {
       <div className="flex flex-col gap-3">
         <div>
           <p className="text-[13px] font-semibold text-neutral-800">Mobile</p>
-          <p className="text-[12px] text-neutral-500">
-            Width: 375px · 4 columns · 24px margin · 16px gutter
-          </p>
+          <p className="text-[12px] text-neutral-500">Width: 375px · 4 columns · 24px margin · 16px gutter</p>
         </div>
         <MobileGrid columns={4} margin={24} gutter={16} height={420} showLabels={false} />
       </div>

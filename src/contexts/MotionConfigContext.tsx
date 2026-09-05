@@ -29,11 +29,7 @@ export function useMotionConfig(): MotionConfig {
   return useContext(MotionConfigContext)
 }
 
-export function buildMotionConfig(
-  enabled: boolean,
-  easeName: EaseName,
-  durationName: DurationName,
-): MotionConfig {
+export function buildMotionConfig(enabled: boolean, easeName: EaseName, durationName: DurationName): MotionConfig {
   const ease = EASE[easeName]
   const duration = DURATION[durationName]
   return {

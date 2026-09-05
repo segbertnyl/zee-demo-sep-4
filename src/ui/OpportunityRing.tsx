@@ -41,7 +41,10 @@ export function OpportunityRing({
             transform="rotate(-90 40 40)"
           />
         </svg>
-        <p className="absolute font-serif text-[20px] tracking-tight text-[var(--text-headline)]" style={{ fontWeight: 400 }}>
+        <p
+          className="absolute font-serif text-[20px] tracking-tight text-[var(--text-headline)]"
+          style={{ fontWeight: 400 }}
+        >
           {pct}%
         </p>
       </div>
@@ -52,7 +55,9 @@ export function OpportunityRing({
           <span>YTD {fycToDateLabel}</span>
           {streak && (
             <>
-              <span aria-hidden="true" className="text-[var(--text-body-faint)]">·</span>
+              <span aria-hidden="true" className="text-[var(--text-body-faint)]">
+                ·
+              </span>
               <span className="text-[var(--nyl-green-800)]">{streak}</span>
             </>
           )}

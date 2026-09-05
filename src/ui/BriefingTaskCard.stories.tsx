@@ -1,9 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { BriefingTaskCard, type CardState } from './BriefingTaskCard'
-import {
-  SANDRA_TASK, LAURA_TASK, SANDRA_FOLLOWUP_SUGGESTED,
-} from '@/data/briefingV6Content'
+import { SANDRA_TASK, LAURA_TASK, SANDRA_FOLLOWUP_SUGGESTED } from '@/data/briefingV6Content'
 import { NYLA } from '@/motion'
 
 /* 🆕 NEW (briefing-v6) — the v6 task card, every state in isolation. */
@@ -85,13 +83,14 @@ function Sequence() {
   useEffect(() => {
     const settle = window.setTimeout(() => setState('settled'), NYLA.settle.holdMs)
     const loop = window.setTimeout(() => setState('suggesting'), NYLA.settle.holdMs + 3000)
-    return () => { window.clearTimeout(settle); window.clearTimeout(loop) }
+    return () => {
+      window.clearTimeout(settle)
+      window.clearTimeout(loop)
+    }
   }, [state])
   return frame(
     <div>
-      <p className="mb-3 text-[12px] uppercase tracking-[0.14em] text-[var(--text-body-muted)]">
-        State: {state}
-      </p>
+      <p className="mb-3 text-[12px] uppercase tracking-[0.14em] text-[var(--text-body-muted)]">State: {state}</p>
       <BriefingTaskCard model={SANDRA_FOLLOWUP_SUGGESTED} state={state} expanded />
     </div>,
   )

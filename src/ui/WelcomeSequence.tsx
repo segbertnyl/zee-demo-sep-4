@@ -28,7 +28,6 @@ import { DURATION, EASE, NYLA_FLIGHT } from '@/motion'
  * (Figma: global/purple-900 → purple-600 → purple-500 → purple-400)
  * -------------------------------------------------------------------------- */
 
-
 const TAGLINES = [
   'makes the most of your time',
   'simplifies your day',
@@ -38,14 +37,14 @@ const TAGLINES = [
   'powers your growth & ambitions.',
 ] as const
 
-const OPENING_MS  = 2000
-const HOLD_MS     = 1200   // extra hold for slide 1 ("Let's build one for you.")
-const TAGLINE_MS  = 2600
+const OPENING_MS = 2000
+const HOLD_MS = 1200 // extra hold for slide 1 ("Let's build one for you.")
+const TAGLINE_MS = 2600
 /* The star renders as <Nyla size={160}> scaled 0.85 — the flight captures its
  * VISUAL size (so scale eases 0.85→1 en route to the 160px landing), the
  * wrapper's current rotation (unwound during the flight), and its drop-shadow
  * (faded out during the scatter). Together these make the swap seamless. */
-const STAR_SIZE  = 160
+const STAR_SIZE = 160
 const STAR_SCALE = 0.85
 /* Star entrance settle time — DURATION.deliberate, in ms (guards early clicks). */
 const STAR_ENTER_MS = DURATION.deliberate * 1000
@@ -104,16 +103,20 @@ export function WelcomeSequence({ onStart, advisorName = 'Sarah' }: WelcomeSeque
           src={bgIntroOverlay}
           alt=""
           aria-hidden="true"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+          }}
         />
         <HighlightBlob />
         <DriftingBlobs />
         <div className="absolute left-7 top-7 z-10 flex items-center gap-3">
           <NYLLogo pixelSize={40} className="rounded-md" />
-          <span
-            className="text-[15px] text-white/90"
-            style={{ fontFamily: 'var(--font-sans)', fontWeight: 400 }}
-          >
+          <span className="text-[15px] text-white/90" style={{ fontFamily: 'var(--font-sans)', fontWeight: 400 }}>
             Welcome, {advisorName}
           </span>
         </div>
@@ -165,7 +168,13 @@ export function WelcomeSequence({ onStart, advisorName = 'Sarah' }: WelcomeSeque
                 exit={{ opacity: 0, transition: { duration: 0.5, ease: EASE.settle } }}
                 transition={{ duration: 0.75, delay: 0.4, ease: EASE.settle }}
                 className="text-center text-white"
-                style={{ fontFamily: 'var(--font-serif)', fontWeight: 300, fontSize: 42, lineHeight: 1.14, letterSpacing: '-0.3px' }}
+                style={{
+                  fontFamily: 'var(--font-serif)',
+                  fontWeight: 300,
+                  fontSize: 42,
+                  lineHeight: 1.14,
+                  letterSpacing: '-0.3px',
+                }}
               >
                 You build plans for everyone.
               </motion.h1>
@@ -179,7 +188,13 @@ export function WelcomeSequence({ onStart, advisorName = 'Sarah' }: WelcomeSeque
                 exit={{ opacity: 0 }}
                 transition={{ duration: DURATION.deliberate, ease: EASE.settle }}
                 className="text-center text-white"
-                style={{ fontFamily: 'var(--font-serif)', fontWeight: 300, fontSize: 42, lineHeight: 1.14, letterSpacing: '-0.3px' }}
+                style={{
+                  fontFamily: 'var(--font-serif)',
+                  fontWeight: 300,
+                  fontSize: 42,
+                  lineHeight: 1.14,
+                  letterSpacing: '-0.3px',
+                }}
               >
                 Let&apos;s build one for you.
               </motion.h1>
@@ -198,7 +213,13 @@ export function WelcomeSequence({ onStart, advisorName = 'Sarah' }: WelcomeSeque
                 {/* "A plan that" — fades in once, never re-renders */}
                 <h1
                   className="text-center text-white"
-                  style={{ fontFamily: 'var(--font-serif)', fontWeight: 300, fontSize: 42, lineHeight: 1.14, letterSpacing: '-0.3px' }}
+                  style={{
+                    fontFamily: 'var(--font-serif)',
+                    fontWeight: 300,
+                    fontSize: 42,
+                    lineHeight: 1.14,
+                    letterSpacing: '-0.3px',
+                  }}
                 >
                   A plan that
                 </h1>
@@ -208,7 +229,14 @@ export function WelcomeSequence({ onStart, advisorName = 'Sarah' }: WelcomeSeque
                   <motion.h2
                     key={`tag-${slide}`}
                     className="text-center"
-                    style={{ fontFamily: 'var(--font-serif)', fontWeight: 300, fontSize: 42, lineHeight: 1.14, letterSpacing: '-0.3px', color: 'var(--nyl-blue-250)' }}
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontWeight: 300,
+                      fontSize: 42,
+                      lineHeight: 1.14,
+                      letterSpacing: '-0.3px',
+                      color: 'var(--nyl-blue-250)',
+                    }}
                     exit={{ opacity: 0, transition: { duration: 0.2 } }}
                   >
                     {TAGLINES[slide - 2].split('').map((char, i) => (

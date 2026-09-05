@@ -40,32 +40,232 @@ function gridPos(col: number, row: number) {
 const CLIENTS: ClientNode[] = [
   /* Row 0 — top priority. Each card opens its own deep-dive canvas; ids match
    * SPECS / CONTENT_BY_ID / FALLBACK_CLIENTS keys in ActionDeepDive. */
-  { id: 'janet',     name: 'Janet Henderson',  initials: 'JH', segment: 'Coastal household',   signal: 'New address · flood-risk',         metric: '+$1.2K FYC',   tier: 'top',  ...gridPos(0, 0), canvasId: 'janet' },
-  { id: 'tom',       name: 'Tom Anderson',     initials: 'TA', segment: 'Stalled application', signal: 'Day 11 in underwriting',           metric: '$4.2K FYC',    tier: 'top',  ...gridPos(1, 0), canvasId: 'tom-anderson' },
-  { id: 'helena',    name: 'Helena Garcia',    initials: 'HG', segment: 'Pre-retirement',      signal: 'Retirement content spike',         metric: '+$2.8K FYC',   tier: 'top',  ...gridPos(2, 0), canvasId: 'helena-1' },
-  { id: 'emma',      name: 'Emma Clarke',      initials: 'EC', segment: 'Annual review',       signal: '9:30 AM today',                    metric: 'Prep ready',   tier: 'top',  ...gridPos(3, 0), canvasId: 'emma-clarke' },
-  { id: 'jon',       name: 'Jon Owen',         initials: 'JO', segment: 'Warm referral',       signal: 'Close tomorrow',                   metric: '$6.8K FYC',    tier: 'top',  ...gridPos(4, 0), canvasId: 'jon-owen' },
+  {
+    id: 'janet',
+    name: 'Janet Henderson',
+    initials: 'JH',
+    segment: 'Coastal household',
+    signal: 'New address · flood-risk',
+    metric: '+$1.2K FYC',
+    tier: 'top',
+    ...gridPos(0, 0),
+    canvasId: 'janet',
+  },
+  {
+    id: 'tom',
+    name: 'Tom Anderson',
+    initials: 'TA',
+    segment: 'Stalled application',
+    signal: 'Day 11 in underwriting',
+    metric: '$4.2K FYC',
+    tier: 'top',
+    ...gridPos(1, 0),
+    canvasId: 'tom-anderson',
+  },
+  {
+    id: 'helena',
+    name: 'Helena Garcia',
+    initials: 'HG',
+    segment: 'Pre-retirement',
+    signal: 'Retirement content spike',
+    metric: '+$2.8K FYC',
+    tier: 'top',
+    ...gridPos(2, 0),
+    canvasId: 'helena-1',
+  },
+  {
+    id: 'emma',
+    name: 'Emma Clarke',
+    initials: 'EC',
+    segment: 'Annual review',
+    signal: '9:30 AM today',
+    metric: 'Prep ready',
+    tier: 'top',
+    ...gridPos(3, 0),
+    canvasId: 'emma-clarke',
+  },
+  {
+    id: 'jon',
+    name: 'Jon Owen',
+    initials: 'JO',
+    segment: 'Warm referral',
+    signal: 'Close tomorrow',
+    metric: '$6.8K FYC',
+    tier: 'top',
+    ...gridPos(4, 0),
+    canvasId: 'jon-owen',
+  },
 
   /* Row 1 — mid focus */
-  { id: 'andrew',    name: 'Andrew Cooper',    initials: 'AC', segment: 'Service · benef',     signal: 'Awaiting e-sign · day 6',          metric: '90s call',     tier: 'mid',  ...gridPos(0, 1), canvasId: 'andrew-cooper' },
-  { id: 'chloe',     name: 'Chloe Abrams',     initials: 'CA', segment: 'Milestone planning',  signal: '45th birthday · 6 mo',             metric: '2.4× window',  tier: 'mid',  ...gridPos(1, 1), canvasId: 'chloe-abrams' },
-  { id: 'cesar',     name: 'Cesar Powell',     initials: 'CP', segment: 'Term renewal',        signal: 'No-touch 84d',                     metric: 'Sept expiry',  tier: 'mid',  ...gridPos(2, 1), canvasId: 'cesar-powell' },
-  { id: 'frances',   name: 'Frances Carter',   initials: 'FC', segment: 'Uninsured spouse',    signal: 'Beneficiary on Janet',             metric: 'Open intro',   tier: 'mid',  ...gridPos(3, 1), canvasId: 'frances-carter' },
-  { id: 'maria',     name: 'Maria Diaz',       initials: 'MD', segment: 'WL conversion',       signal: 'APS stalled · 18d',                metric: '$3.4K/yr',     tier: 'mid',  ...gridPos(4, 1), canvasId: 'maria-diaz' },
+  {
+    id: 'andrew',
+    name: 'Andrew Cooper',
+    initials: 'AC',
+    segment: 'Service · benef',
+    signal: 'Awaiting e-sign · day 6',
+    metric: '90s call',
+    tier: 'mid',
+    ...gridPos(0, 1),
+    canvasId: 'andrew-cooper',
+  },
+  {
+    id: 'chloe',
+    name: 'Chloe Abrams',
+    initials: 'CA',
+    segment: 'Milestone planning',
+    signal: '45th birthday · 6 mo',
+    metric: '2.4× window',
+    tier: 'mid',
+    ...gridPos(1, 1),
+    canvasId: 'chloe-abrams',
+  },
+  {
+    id: 'cesar',
+    name: 'Cesar Powell',
+    initials: 'CP',
+    segment: 'Term renewal',
+    signal: 'No-touch 84d',
+    metric: 'Sept expiry',
+    tier: 'mid',
+    ...gridPos(2, 1),
+    canvasId: 'cesar-powell',
+  },
+  {
+    id: 'frances',
+    name: 'Frances Carter',
+    initials: 'FC',
+    segment: 'Uninsured spouse',
+    signal: 'Beneficiary on Janet',
+    metric: 'Open intro',
+    tier: 'mid',
+    ...gridPos(3, 1),
+    canvasId: 'frances-carter',
+  },
+  {
+    id: 'maria',
+    name: 'Maria Diaz',
+    initials: 'MD',
+    segment: 'WL conversion',
+    signal: 'APS stalled · 18d',
+    metric: '$3.4K/yr',
+    tier: 'mid',
+    ...gridPos(4, 1),
+    canvasId: 'maria-diaz',
+  },
 
   /* Row 2 — mid watch */
-  { id: 'rachel',    name: 'Rachel Lim',       initials: 'RL', segment: 'LTC research',        signal: 'Web signal · 2d',                  metric: 'Watch',        tier: 'mid',  ...gridPos(0, 2), canvasId: 'rachel-lim' },
-  { id: 'paul',      name: 'Paul Reyes',       initials: 'PR', segment: 'Fact-finding',        signal: '11:00 AM today',                   metric: 'Virtual',      tier: 'mid',  ...gridPos(1, 2), canvasId: 'paul-reyes' },
-  { id: 'leela',     name: 'Leela Patel',      initials: 'LP', segment: 'Term life',           signal: 'Annual review window',             metric: '$1.2M face',   tier: 'mid',  ...gridPos(2, 2), canvasId: 'leela-patel' },
-  { id: 'wei',       name: 'Wei Chen',         initials: 'WC', segment: 'Cross-sell open',     signal: 'Score 23 → 41 after life event',   metric: '$2.1K FYC',    tier: 'mid',  ...gridPos(3, 2), canvasId: 'wei-chen' },
-  { id: 'noor',      name: 'Noor Yehya',       initials: 'NY', segment: 'New dependent',       signal: 'Birth signal · 12d',               metric: 'Open intro',   tier: 'mid',  ...gridPos(4, 2), canvasId: 'noor-yehya' },
+  {
+    id: 'rachel',
+    name: 'Rachel Lim',
+    initials: 'RL',
+    segment: 'LTC research',
+    signal: 'Web signal · 2d',
+    metric: 'Watch',
+    tier: 'mid',
+    ...gridPos(0, 2),
+    canvasId: 'rachel-lim',
+  },
+  {
+    id: 'paul',
+    name: 'Paul Reyes',
+    initials: 'PR',
+    segment: 'Fact-finding',
+    signal: '11:00 AM today',
+    metric: 'Virtual',
+    tier: 'mid',
+    ...gridPos(1, 2),
+    canvasId: 'paul-reyes',
+  },
+  {
+    id: 'leela',
+    name: 'Leela Patel',
+    initials: 'LP',
+    segment: 'Term life',
+    signal: 'Annual review window',
+    metric: '$1.2M face',
+    tier: 'mid',
+    ...gridPos(2, 2),
+    canvasId: 'leela-patel',
+  },
+  {
+    id: 'wei',
+    name: 'Wei Chen',
+    initials: 'WC',
+    segment: 'Cross-sell open',
+    signal: 'Score 23 → 41 after life event',
+    metric: '$2.1K FYC',
+    tier: 'mid',
+    ...gridPos(3, 2),
+    canvasId: 'wei-chen',
+  },
+  {
+    id: 'noor',
+    name: 'Noor Yehya',
+    initials: 'NY',
+    segment: 'New dependent',
+    signal: 'Birth signal · 12d',
+    metric: 'Open intro',
+    tier: 'mid',
+    ...gridPos(4, 2),
+    canvasId: 'noor-yehya',
+  },
 
   /* Row 3 — quiet */
-  { id: 'aanya',     name: 'Aanya Patel',      initials: 'AP', segment: 'Next-gen',            signal: 'Turning 18 · Sept',                metric: 'Locked rate',  tier: 'cool', ...gridPos(0, 3), canvasId: 'aanya-patel' },
-  { id: 'sam',       name: 'Sam Bennett',      initials: 'SB', segment: 'Stable',              signal: 'NPS 9 last review',                metric: '8 yrs',        tier: 'cool', ...gridPos(1, 3), canvasId: 'sam-bennett' },
-  { id: 'omar',      name: 'Omar Hadi',        initials: 'OH', segment: 'Stable',              signal: 'No-touch 30d',                     metric: '6 yrs',        tier: 'cool', ...gridPos(2, 3), canvasId: 'omar-hadi' },
-  { id: 'tara',      name: "Tara O'Donnell",   initials: 'TO', segment: 'Annual review',       signal: 'Scheduled · Tue 2pm',              metric: 'Prepped',      tier: 'cool', ...gridPos(3, 3), canvasId: 'tara-odonnell' },
-  { id: 'kai',       name: 'Kai Park',         initials: 'KP', segment: 'New household',       signal: 'Move-in detected',                 metric: 'Activate',     tier: 'cool', ...gridPos(4, 3), canvasId: 'kai-park' },
+  {
+    id: 'aanya',
+    name: 'Aanya Patel',
+    initials: 'AP',
+    segment: 'Next-gen',
+    signal: 'Turning 18 · Sept',
+    metric: 'Locked rate',
+    tier: 'cool',
+    ...gridPos(0, 3),
+    canvasId: 'aanya-patel',
+  },
+  {
+    id: 'sam',
+    name: 'Sam Bennett',
+    initials: 'SB',
+    segment: 'Stable',
+    signal: 'NPS 9 last review',
+    metric: '8 yrs',
+    tier: 'cool',
+    ...gridPos(1, 3),
+    canvasId: 'sam-bennett',
+  },
+  {
+    id: 'omar',
+    name: 'Omar Hadi',
+    initials: 'OH',
+    segment: 'Stable',
+    signal: 'No-touch 30d',
+    metric: '6 yrs',
+    tier: 'cool',
+    ...gridPos(2, 3),
+    canvasId: 'omar-hadi',
+  },
+  {
+    id: 'tara',
+    name: "Tara O'Donnell",
+    initials: 'TO',
+    segment: 'Annual review',
+    signal: 'Scheduled · Tue 2pm',
+    metric: 'Prepped',
+    tier: 'cool',
+    ...gridPos(3, 3),
+    canvasId: 'tara-odonnell',
+  },
+  {
+    id: 'kai',
+    name: 'Kai Park',
+    initials: 'KP',
+    segment: 'New household',
+    signal: 'Move-in detected',
+    metric: 'Activate',
+    tier: 'cool',
+    ...gridPos(4, 3),
+    canvasId: 'kai-park',
+  },
 ]
 
 /* Influence lines — pairs of node ids that connect on the canvas */
@@ -197,7 +397,11 @@ export function MyBookCanvas() {
   }
   function onPointerUp(e: React.PointerEvent) {
     panDrag.current = null
-    try { e.currentTarget.releasePointerCapture(e.pointerId) } catch { /* no-op */ }
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId)
+    } catch {
+      /* no-op */
+    }
   }
 
   function nodeById(id: string) {
@@ -237,13 +441,23 @@ export function MyBookCanvas() {
           <ToolButton label="Annotate">
             <AnnotateIcon />
           </ToolButton>
-          <ToolButton label="Reset view" onClick={() => { setZoom(DEFAULT_ZOOM); centerView(DEFAULT_ZOOM) }}>
+          <ToolButton
+            label="Reset view"
+            onClick={() => {
+              setZoom(DEFAULT_ZOOM)
+              centerView(DEFAULT_ZOOM)
+            }}
+          >
             <RefreshIcon />
           </ToolButton>
         </div>
         <div className="pointer-events-auto flex items-center gap-0.5 rounded-full bg-white px-1.5 py-1 shadow-[0_12px_32px_-18px_rgba(0,10,98,0.32)]">
-          <ToolButton label="List view"><ListIcon /></ToolButton>
-          <ToolButton active label="Canvas view"><CanvasIcon /></ToolButton>
+          <ToolButton label="List view">
+            <ListIcon />
+          </ToolButton>
+          <ToolButton active label="Canvas view">
+            <CanvasIcon />
+          </ToolButton>
         </div>
       </div>
 
@@ -337,43 +551,45 @@ export function MyBookCanvas() {
               >
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2.5">
-                    <span className={[
-                      'flex size-9 items-center justify-center rounded-full text-[11px] font-semibold',
-                      c.tier === 'top'
-                        ? 'bg-[var(--nyl-blue-500)] text-white'
-                        : c.tier === 'mid'
-                        ? 'bg-[var(--nyl-blue-100)] text-[var(--nyl-blue-800)]'
-                        : 'bg-neutral-100 text-neutral-500',
-                    ].join(' ')}>
+                    <span
+                      className={[
+                        'flex size-9 items-center justify-center rounded-full text-[11px] font-semibold',
+                        c.tier === 'top'
+                          ? 'bg-[var(--nyl-blue-500)] text-white'
+                          : c.tier === 'mid'
+                            ? 'bg-[var(--nyl-blue-100)] text-[var(--nyl-blue-800)]'
+                            : 'bg-neutral-100 text-neutral-500',
+                      ].join(' ')}
+                    >
                       {c.initials}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
                       <span className={['size-1.5 rounded-full', TIER_DOT[c.tier]].join(' ')} aria-hidden="true" />
-                      <span className={['rounded-full px-2 py-0.5 text-[9.5px] font-medium uppercase tracking-[0.18em]', TIER_PILL[c.tier]].join(' ')}>
+                      <span
+                        className={[
+                          'rounded-full px-2 py-0.5 text-[9.5px] font-medium uppercase tracking-[0.18em]',
+                          TIER_PILL[c.tier],
+                        ].join(' ')}
+                      >
                         {TIER_LABEL[c.tier]}
                       </span>
                     </span>
                   </div>
-                  <span aria-hidden="true" className="text-[12px] text-neutral-300 transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--nyl-blue-500)]">
+                  <span
+                    aria-hidden="true"
+                    className="text-[12px] text-neutral-300 transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--nyl-blue-500)]"
+                  >
                     ↗
                   </span>
                 </div>
 
-                <p className="mt-3 font-serif text-[18px] leading-tight tracking-tight text-neutral-900">
-                  {c.name}
-                </p>
-                <p className="text-[10.5px] font-medium uppercase tracking-[0.18em] text-neutral-400">
-                  {c.segment}
-                </p>
+                <p className="mt-3 font-serif text-[18px] leading-tight tracking-tight text-neutral-900">{c.name}</p>
+                <p className="text-[10.5px] font-medium uppercase tracking-[0.18em] text-neutral-400">{c.segment}</p>
 
-                <p className="mt-2.5 text-[12.5px] leading-snug text-neutral-700">
-                  {c.signal}
-                </p>
+                <p className="mt-2.5 text-[12.5px] leading-snug text-neutral-700">{c.signal}</p>
 
                 <div className="mt-3 flex items-center justify-between border-t border-neutral-100 pt-2.5">
-                  <span className="text-[10.5px] uppercase tracking-[0.18em] text-neutral-400">
-                    {c.metric}
-                  </span>
+                  <span className="text-[10.5px] uppercase tracking-[0.18em] text-neutral-400">{c.metric}</span>
                   <span className="text-[10.5px] uppercase tracking-[0.18em] text-[var(--nyl-blue-500)] opacity-0 transition-opacity group-hover:opacity-100">
                     Double-click →
                   </span>
@@ -392,12 +608,8 @@ export function MyBookCanvas() {
               style={{ left: GRID_X0, top: GRID_Y0 + lv.row * ROW_STEP - 50, width: LEVEL_RULE_W, zIndex: 5 }}
             >
               <div className="flex items-baseline gap-2.5 border-b border-neutral-200 pb-2">
-                <span className="font-serif text-[18px] leading-none tracking-tight text-neutral-900">
-                  {lv.label}
-                </span>
-                <span className="text-[10.5px] font-medium uppercase tracking-[0.2em] text-neutral-400">
-                  {lv.sub}
-                </span>
+                <span className="font-serif text-[18px] leading-none tracking-tight text-neutral-900">{lv.label}</span>
+                <span className="text-[10.5px] font-medium uppercase tracking-[0.2em] text-neutral-400">{lv.sub}</span>
               </div>
             </div>
           ))}
@@ -438,7 +650,17 @@ function ToolButton({
 
 function HandIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 18 18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M6 8 V4 a1.4 1.4 0 0 1 2.8 0 V8" />
       <path d="M8.8 8 V3 a1.4 1.4 0 0 1 2.8 0 V8" />
       <path d="M11.6 8 V4 a1.4 1.4 0 0 1 2.8 0 V11 a4.5 4.5 0 0 1 -4.5 4.5 H8 c-1.6 0 -2.5 -1 -3.5 -2 L3 11 a1.2 1.2 0 0 1 2 -1.5 L6 11" />
@@ -448,7 +670,17 @@ function HandIcon() {
 
 function AnnotateIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 18 18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M3 14.5 V11.5 L11.5 3 L14.5 6 L6 14.5 Z" />
       <path d="M10 4.5 L13 7.5" />
     </svg>
@@ -457,7 +689,17 @@ function AnnotateIcon() {
 
 function RefreshIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 18 18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M3.5 8 a5.5 5.5 0 0 1 9.5 -3" />
       <path d="M13 2.5 V5 H10.5" />
       <path d="M14.5 10 a5.5 5.5 0 0 1 -9.5 3" />
@@ -468,7 +710,17 @@ function RefreshIcon() {
 
 function CanvasIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 18 18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <rect x="1.5" y="2.5" width="6" height="6" rx="1.2" />
       <rect x="10.5" y="2.5" width="6" height="6" rx="1.2" />
       <rect x="1.5" y="11" width="6" height="5" rx="1.2" />
@@ -479,7 +731,16 @@ function CanvasIcon() {
 
 function ListIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 18 18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
       <path d="M3 5 H15" />
       <path d="M3 9 H15" />
       <path d="M3 13 H15" />
@@ -489,7 +750,17 @@ function ListIcon() {
 
 function HistoryIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 18 18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M3 6.5 a6.5 6.5 0 1 1 -0.2 4" />
       <path d="M3 3 V6.5 H6.5" />
       <path d="M9 5.5 V9 L11.5 10.5" />

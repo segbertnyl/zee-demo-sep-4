@@ -45,11 +45,7 @@ export function DesktopGrid({
         }}
       >
         {cols.map((_, i) => (
-          <div
-            key={i}
-            className="flex-1"
-            style={{ background: 'var(--nyl-purple-200)', minWidth: 0 }}
-          />
+          <div key={i} className="flex-1" style={{ background: 'var(--nyl-purple-200)', minWidth: 0 }} />
         ))}
       </div>
 
@@ -70,8 +66,12 @@ export function DesktopGrid({
             className="absolute top-4 flex flex-col items-center gap-0.5 text-center"
             style={{ left: sidebarWidth + margin, right: margin }}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--nyl-purple-700)]">Main container</p>
-            <p className="text-[11px] text-[var(--nyl-purple-600,#4d1773)]">{columns} columns · {margin}px margin · {gutter}px gutter</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--nyl-purple-700)]">
+              Main container
+            </p>
+            <p className="text-[11px] text-[var(--nyl-purple-600,#4d1773)]">
+              {columns} columns · {margin}px margin · {gutter}px gutter
+            </p>
           </div>
         </>
       )}
@@ -107,15 +107,9 @@ export function MobileGrid({
           </p>
         </div>
       )}
-      <div
-        className="relative flex-col overflow-hidden"
-        style={{ width: viewportWidth, height, flexShrink: 0 }}
-      >
+      <div className="relative flex-col overflow-hidden" style={{ width: viewportWidth, height, flexShrink: 0 }}>
         {/* Nav bar */}
-        <div
-          className="w-full"
-          style={{ height: 64, background: 'var(--nyl-purple-600)', flexShrink: 0 }}
-        />
+        <div className="w-full" style={{ height: 64, background: 'var(--nyl-purple-600)', flexShrink: 0 }} />
         {/* Column area */}
         <div
           className="flex"
@@ -129,11 +123,7 @@ export function MobileGrid({
           }}
         >
           {cols.map((_, i) => (
-            <div
-              key={i}
-              className="flex-1"
-              style={{ background: 'var(--nyl-purple-200)', minWidth: 0 }}
-            />
+            <div key={i} className="flex-1" style={{ background: 'var(--nyl-purple-200)', minWidth: 0 }} />
           ))}
         </div>
       </div>

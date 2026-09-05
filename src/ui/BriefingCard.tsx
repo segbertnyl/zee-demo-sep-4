@@ -136,8 +136,7 @@ function CoSExpandedBody({
                 aria-hidden="true"
                 className="flex size-11 shrink-0 items-center justify-center rounded-full text-[var(--nyl-blue-500)]"
                 style={{
-                  background:
-                    'radial-gradient(circle at 30% 30%, #1a2a6b 0%, #060f3f 65%, #02071f 100%)',
+                  background: 'radial-gradient(circle at 30% 30%, #1a2a6b 0%, #060f3f 65%, #02071f 100%)',
                 }}
               >
                 <svg width="20" height="20" viewBox="0 0 28 28" fill="currentColor">
@@ -155,8 +154,7 @@ function CoSExpandedBody({
                   className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-[13.5px] text-white transition-shadow hover:shadow-[0_10px_24px_-12px_rgba(2,7,31,0.55)]"
                   style={{
                     background: 'linear-gradient(180deg, #0b1740 0%, #050b29 100%)',
-                    boxShadow:
-                      '0 6px 14px -10px rgba(2, 7, 31, 0.6), 0 0 0 1px rgba(255,255,255,0.04) inset',
+                    boxShadow: '0 6px 14px -10px rgba(2, 7, 31, 0.6), 0 0 0 1px rgba(255,255,255,0.04) inset',
                   }}
                 >
                   {a.freeform && <PenIcon />}
@@ -188,11 +186,7 @@ export function UrgentCard({ item, expanded, onToggle, onActionPrompt, onSuggest
 
   return (
     <div className={['overflow-hidden rounded-xl border', toneRing].join(' ')}>
-      <button
-        type="button"
-        onClick={onToggle}
-        className="group flex w-full items-start gap-4 p-5 text-left"
-      >
+      <button type="button" onClick={onToggle} className="group flex w-full items-start gap-4 p-5 text-left">
         <span
           aria-hidden="true"
           className={['mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-md', dotBg].join(' ')}
@@ -234,11 +228,7 @@ export function UrgentCard({ item, expanded, onToggle, onActionPrompt, onSuggest
           {item.details && <Chevron expanded={expanded} />}
         </div>
       </button>
-      <CoSExpandedBody
-        expanded={expanded}
-        details={item.details}
-        onSuggestedAction={onSuggestedAction}
-      />
+      <CoSExpandedBody expanded={expanded} details={item.details} onSuggestedAction={onSuggestedAction} />
     </div>
   )
 }
@@ -254,11 +244,7 @@ export function SignalCard({ signal, expanded, onToggle, onActionPrompt, onSugge
 
   return (
     <div className="overflow-hidden rounded-xl border border-[var(--border-subtle)] bg-white">
-      <button
-        type="button"
-        onClick={onToggle}
-        className="group flex w-full items-start gap-4 p-5 text-left"
-      >
+      <button type="button" onClick={onToggle} className="group flex w-full items-start gap-4 p-5 text-left">
         <div className="min-w-0 flex-1">
           <p
             className="flex items-center gap-2 font-serif text-[19px] leading-[1.25] tracking-tight text-[var(--text-headline)] md:text-[20px]"
@@ -296,11 +282,7 @@ export function SignalCard({ signal, expanded, onToggle, onActionPrompt, onSugge
           {signal.details && <Chevron expanded={expanded} />}
         </div>
       </button>
-      <CoSExpandedBody
-        expanded={expanded}
-        details={signal.details}
-        onSuggestedAction={onSuggestedAction}
-      />
+      <CoSExpandedBody expanded={expanded} details={signal.details} onSuggestedAction={onSuggestedAction} />
     </div>
   )
 }

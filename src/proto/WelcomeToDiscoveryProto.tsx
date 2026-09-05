@@ -19,7 +19,8 @@ import { DriftingBlobs } from '@/ui/OnboardingIntroOverlay'
 type Variant = 'A' | 'B' | 'C'
 type Phase = 'welcome' | 'transitioning' | 'discovery'
 
-const PURPLE = 'linear-gradient(145deg, var(--nyl-purple-900) 0%, var(--nyl-purple-600) 39%, var(--nyl-purple-500) 56%, var(--nyl-purple-400) 71%)'
+const PURPLE =
+  'linear-gradient(145deg, var(--nyl-purple-900) 0%, var(--nyl-purple-600) 39%, var(--nyl-purple-500) 56%, var(--nyl-purple-400) 71%)'
 const EASE_WIPE = [0.7, 0, 0.2, 1] as const
 
 // ─── Discovery card (destination — same for all variants) ────────────────────
@@ -27,14 +28,53 @@ function DiscoveryCard({ onClose }: { onClose: () => void }) {
   return (
     <div className="absolute inset-0">
       <TitleBackground />
-      <div style={{ position: 'absolute', inset: 15, borderRadius: 16, background: 'white', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '56px 40px 0', flexShrink: 0 }}>
+      <div
+        style={{
+          position: 'absolute',
+          inset: 15,
+          borderRadius: 16,
+          background: 'white',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '56px 40px 0',
+            flexShrink: 0,
+          }}
+        >
           <NYLLogo size="md" />
-          <button type="button" onClick={onClose} style={{ fontSize: 18, color: 'var(--text-body-muted)', background: 'none', border: 'none', cursor: 'pointer' }}>✕</button>
+          <button
+            type="button"
+            onClick={onClose}
+            style={{
+              fontSize: 18,
+              color: 'var(--text-body-muted)',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            ✕
+          </button>
         </div>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 60px' }}>
           <Nyla size={40} />
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'var(--size-display-01)', lineHeight: 'var(--line-display-01)', letterSpacing: '-0.3px', color: 'var(--nyl-blue-800)', marginTop: 24, marginBottom: 0 }}>
+          <h1
+            style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'var(--size-display-01)',
+              lineHeight: 'var(--line-display-01)',
+              letterSpacing: '-0.3px',
+              color: 'var(--nyl-blue-800)',
+              marginTop: 24,
+              marginBottom: 0,
+            }}
+          >
             Hi, Sarah. I'm Nyla. Together, we'll build a plan for your practice, your way.
           </h1>
           <p style={{ fontFamily: 'var(--font-sans)', fontSize: 16, color: 'var(--text-body)', marginTop: 24 }}>
@@ -186,7 +226,18 @@ function WelcomeContent({ onGetStarted }: { onGetStarted: () => void }) {
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}>
           <Nyla size={40} />
         </motion.div>
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 42, fontWeight: 300, color: 'white', lineHeight: 1.15, letterSpacing: '-0.3px', maxWidth: 560, margin: 0 }}>
+        <h1
+          style={{
+            fontFamily: 'var(--font-serif)',
+            fontSize: 42,
+            fontWeight: 300,
+            color: 'white',
+            lineHeight: 1.15,
+            letterSpacing: '-0.3px',
+            maxWidth: 560,
+            margin: 0,
+          }}
+        >
           A plan that frees you to focus on clients.
         </h1>
         <button
@@ -252,27 +303,59 @@ export function WelcomeToDiscoveryProto({ onClose }: { onClose: () => void }) {
         className="fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 rounded-full px-5 py-2.5 shadow-lg"
         style={{ background: 'rgba(0,10,40,0.85)', backdropFilter: 'blur(12px)', zIndex: 200 }}
       >
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.15em', textTransform: 'uppercase' }}>PROTO</span>
-        {(['A', 'B', 'C'] as Variant[]).map(v => (
+        <span
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'rgba(255,255,255,0.4)',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+          }}
+        >
+          PROTO
+        </span>
+        {(['A', 'B', 'C'] as Variant[]).map((v) => (
           <button
             key={v}
             type="button"
-            onClick={() => { setVariant(v); reset() }}
+            onClick={() => {
+              setVariant(v)
+              reset()
+            }}
             style={{
-              fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 600,
-              padding: '4px 12px', borderRadius: 999, border: 'none', cursor: 'pointer',
+              fontFamily: 'var(--font-sans)',
+              fontSize: 12,
+              fontWeight: 600,
+              padding: '4px 12px',
+              borderRadius: 999,
+              border: 'none',
+              cursor: 'pointer',
               background: variant === v ? 'var(--nyl-blue-500)' : 'transparent',
               color: variant === v ? 'white' : 'rgba(255,255,255,0.5)',
               transition: 'all 0.15s',
             }}
-          >{v}</button>
+          >
+            {v}
+          </button>
         ))}
         <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.15)' }} />
         <span style={{ fontFamily: 'var(--font-sans)', fontSize: 11, color: 'rgba(255,255,255,0.5)' }}>
           {{ A: 'Wipe right', B: 'Curtain up', C: 'Star flash' }[variant]}
         </span>
         {phase !== 'welcome' && (
-          <button type="button" onClick={reset} style={{ fontFamily: 'var(--font-sans)', fontSize: 11, color: 'var(--nyl-blue-250)', background: 'transparent', border: 'none', cursor: 'pointer', marginLeft: 4 }}>
+          <button
+            type="button"
+            onClick={reset}
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: 11,
+              color: 'var(--nyl-blue-250)',
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              marginLeft: 4,
+            }}
+          >
             ↺ replay
           </button>
         )}

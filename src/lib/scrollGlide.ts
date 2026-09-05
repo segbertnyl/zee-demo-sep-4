@@ -8,8 +8,12 @@ export type EaseCurve = [number, number, number, number]
 /* Evaluate a cubic-bézier easing at progress x (Newton-Raphson on X). Returns y,
  * which may exceed 1 for overshoot curves. */
 export function cubicBezier([x1, y1, x2, y2]: EaseCurve): (x: number) => number {
-  const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx
-  const cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by
+  const cx = 3 * x1,
+    bx = 3 * (x2 - x1) - cx,
+    ax = 1 - cx - bx
+  const cy = 3 * y1,
+    by = 3 * (y2 - y1) - cy,
+    ay = 1 - cy - by
   const sampleX = (t: number) => ((ax * t + bx) * t + cx) * t
   const sampleY = (t: number) => ((ay * t + by) * t + cy) * t
   const slopeX = (t: number) => (3 * ax * t + 2 * bx) * t + cx
@@ -35,7 +39,10 @@ interface GlideOpts {
 export function glideScrollTop(el: HTMLElement, to: number, { durationMs, ease, onDone }: GlideOpts): () => void {
   const from = el.scrollTop
   const delta = to - from
-  if (Math.abs(delta) < 1) { onDone?.(); return () => {} }
+  if (Math.abs(delta) < 1) {
+    onDone?.()
+    return () => {}
+  }
   const curve = cubicBezier(ease)
   let raf = 0
   let start: number | null = null
@@ -49,5 +56,8 @@ export function glideScrollTop(el: HTMLElement, to: number, { durationMs, ease, 
     else onDone?.()
   }
   raf = requestAnimationFrame(frame)
-  return () => { cancelled = true; cancelAnimationFrame(raf) }
+  return () => {
+    cancelled = true
+    cancelAnimationFrame(raf)
+  }
 }

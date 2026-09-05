@@ -235,11 +235,12 @@ export const useAppStore = create<AppState>((set, get) => ({
   canvasPath: [{ layer: 1 }],
   role: 'advisor',
   setRole: (role) => set({ role }),
-  openCanvas: () => set({
-    scene: 'canvas',
-    canvasPath: [{ layer: 1 }],
-    navTrail: [{ id: 'practice', label: 'Practice', target: { kind: 'canvas-layer1' } }],
-  }),
+  openCanvas: () =>
+    set({
+      scene: 'canvas',
+      canvasPath: [{ layer: 1 }],
+      navTrail: [{ id: 'practice', label: 'Practice', target: { kind: 'canvas-layer1' } }],
+    }),
   closeCanvas: () => set({ scene: 'briefing', navTrail: [] }),
   onboardingOpen: false,
   onboardingMode: null,
@@ -260,16 +261,21 @@ export const useAppStore = create<AppState>((set, get) => ({
   closeYearInReview: () => set({ yearInReviewOpen: false, briefingV6Open: true }),
   discoveryOpen: false,
   discoveryInitialStep: null,
-  openDiscovery: () => set({ discoveryOpen: true, landingChoiceOpen: false, discoveryInitialStep: null, discoveryFromOnboarding: false }),
-  openDiscoveryAt: (step) => set({ discoveryOpen: true, landingChoiceOpen: false, discoveryInitialStep: step, discoveryFromOnboarding: false }),
-  closeDiscovery: () => set({ discoveryOpen: false, landingChoiceOpen: true, discoveryInitialStep: null, discoveryFromOnboarding: false }),
+  openDiscovery: () =>
+    set({ discoveryOpen: true, landingChoiceOpen: false, discoveryInitialStep: null, discoveryFromOnboarding: false }),
+  openDiscoveryAt: (step) =>
+    set({ discoveryOpen: true, landingChoiceOpen: false, discoveryInitialStep: step, discoveryFromOnboarding: false }),
+  closeDiscovery: () =>
+    set({ discoveryOpen: false, landingChoiceOpen: true, discoveryInitialStep: null, discoveryFromOnboarding: false }),
   discoveryFromOnboarding: false,
-  openDiscoveryFromOnboarding: () => set({ discoveryOpen: true, landingChoiceOpen: false, discoveryInitialStep: null, discoveryFromOnboarding: true }),
+  openDiscoveryFromOnboarding: () =>
+    set({ discoveryOpen: true, landingChoiceOpen: false, discoveryInitialStep: null, discoveryFromOnboarding: true }),
   clearDiscoveryFromOnboarding: () => set({ discoveryFromOnboarding: false }),
   briefingV6Open: false,
   briefingV6FromDiscovery: false,
   openBriefingV6: () => set({ briefingV6Open: true, landingChoiceOpen: false }),
-  openBriefingV6FromDiscovery: () => set({ briefingV6Open: true, landingChoiceOpen: false, briefingV6FromDiscovery: true }),
+  openBriefingV6FromDiscovery: () =>
+    set({ briefingV6Open: true, landingChoiceOpen: false, briefingV6FromDiscovery: true }),
   closeBriefingV6: () => set({ briefingV6Open: false, landingChoiceOpen: true }),
   clearBriefingV6FromDiscovery: () => set({ briefingV6FromDiscovery: false }),
   clientFlowOpen: false,
@@ -311,35 +317,42 @@ export const useAppStore = create<AppState>((set, get) => ({
     try {
       const saved = window.localStorage.getItem('agent-os-v5.active-segment')
       if (saved === 'cs-leading' || saved === 'hl-accelerating' || saved === 'cs-building') return saved
-    } catch { /* no-op */ }
+    } catch {
+      /* no-op */
+    }
     return 'hl-accelerating'
   })(),
   setActiveSegment: (s) => {
-    try { window.localStorage.setItem('agent-os-v5.active-segment', s) } catch { /* no-op */ }
+    try {
+      window.localStorage.setItem('agent-os-v5.active-segment', s)
+    } catch {
+      /* no-op */
+    }
     set({ activeSegment: s })
   },
   landingChoiceOpen: true,
   dismissLanding: () => set({ landingChoiceOpen: false }),
-  openLanding: () => set({
-    landingChoiceOpen: true,
-    onboardingOpen: false,
-    onboardingMode: null,
-    collabOpen: false,
-    deepDive: null,
-    coachDrillId: null,
-    wrappedOpen: false,
-    // Close every full-screen overlay portal so "M" always returns to the menu,
-    // rather than opening it underneath a still-mounted overlay.
-    yearInReviewOpen: false,
-    briefingV6Open: false,
-    briefingV6FromDiscovery: false,
-    discoveryOpen: false,
-    discoveryInitialStep: null,
-    quickStartOpen: false,
-    coachOpen: false,
-    clientFlowOpen: false,
-    clientBriefingOpen: false,
-  }),
+  openLanding: () =>
+    set({
+      landingChoiceOpen: true,
+      onboardingOpen: false,
+      onboardingMode: null,
+      collabOpen: false,
+      deepDive: null,
+      coachDrillId: null,
+      wrappedOpen: false,
+      // Close every full-screen overlay portal so "M" always returns to the menu,
+      // rather than opening it underneath a still-mounted overlay.
+      yearInReviewOpen: false,
+      briefingV6Open: false,
+      briefingV6FromDiscovery: false,
+      discoveryOpen: false,
+      discoveryInitialStep: null,
+      quickStartOpen: false,
+      coachOpen: false,
+      clientFlowOpen: false,
+      clientBriefingOpen: false,
+    }),
   canvasDrill: (next) => set({ canvasPath: [...get().canvasPath, next] }),
   canvasSurface: () => {
     const path = get().canvasPath

@@ -16,7 +16,7 @@
 
 An interactive prototype of an **agent operating system** for New York Life advisors: a morning briefing, a living book of business, and an AI chief of staff that turns client signals into next actions. Built by [Huge](https://www.hugeinc.com) as a scene-based React app — no backend, all narrative.
 
-> 🔗 **Live preview:** [agent-os-v5-5 on Vercel](https://agent-os-v5-5-evienna-2363-huge-inc-sandbox.vercel.app) *(password-gated)*
+> 🔗 **Live preview:** [agent-os-v5-5 on Vercel](https://agent-os-v5-5-evienna-2363-huge-inc-sandbox.vercel.app) _(password-gated)_
 
 ---
 
@@ -54,19 +54,19 @@ flowchart LR
 
 ## Scene guide
 
-| Scene | File | What it does |
-|---|---|---|
-| ☀️ **Briefing** | `BriefingV55Scene` | The morning briefing — today's signals, narrated |
-| 📒 **Book of Business** | `ActionBoardScene` · `MyBookCanvas` | Clients and prospects as a living action board |
-| 🎯 **Destinations** | `DestinationScene` | Actives and prospects pipelines |
-| 📈 **Business** | `BusinessScene` | Practice-level metrics |
-| 🗓 **Calendar** | `CalendarScene` | The week, with prep woven in |
-| 🧠 **Canvas** | `CanvasScene` · `FreeformScene` · `SignalsCanvas` | Freeform thinking surfaces |
-| 🔍 **Action Deep Dive** | `ActionDeepDive` | Drill into a single recommended action |
-| 🤝 **Collab Space** | `CollabSpace` | Working session with the AI chief of staff |
-| 🏋️ **Coach Drill** | `CoachDrill` | Practice conversations before the real one |
-| 🎁 **Practice Wrapped** | `PracticeWrapped` | Year-in-review, Spotify-Wrapped style |
-| 👋 **Onboarding** | `OnboardingFlow` · `LandingChooser` · `QuickStartTour` | First-run flows and guided tour |
+| Scene                   | File                                                   | What it does                                     |
+| ----------------------- | ------------------------------------------------------ | ------------------------------------------------ |
+| ☀️ **Briefing**         | `BriefingV55Scene`                                     | The morning briefing — today's signals, narrated |
+| 📒 **Book of Business** | `ActionBoardScene` · `MyBookCanvas`                    | Clients and prospects as a living action board   |
+| 🎯 **Destinations**     | `DestinationScene`                                     | Actives and prospects pipelines                  |
+| 📈 **Business**         | `BusinessScene`                                        | Practice-level metrics                           |
+| 🗓 **Calendar**          | `CalendarScene`                                        | The week, with prep woven in                     |
+| 🧠 **Canvas**           | `CanvasScene` · `FreeformScene` · `SignalsCanvas`      | Freeform thinking surfaces                       |
+| 🔍 **Action Deep Dive** | `ActionDeepDive`                                       | Drill into a single recommended action           |
+| 🤝 **Collab Space**     | `CollabSpace`                                          | Working session with the AI chief of staff       |
+| 🏋️ **Coach Drill**      | `CoachDrill`                                           | Practice conversations before the real one       |
+| 🎁 **Practice Wrapped** | `PracticeWrapped`                                      | Year-in-review, Spotify-Wrapped style            |
+| 👋 **Onboarding**       | `OnboardingFlow` · `LandingChooser` · `QuickStartTour` | First-run flows and guided tour                  |
 
 ## Getting started
 

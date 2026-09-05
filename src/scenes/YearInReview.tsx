@@ -10,26 +10,40 @@ import { EASE, DURATION } from '@/motion'
 /* Year in Review — Spotify-Wrapped-style 1-year milestone review.
  * Advisor is the protagonist; AI contributions are woven into captions. */
 
-const CONFETTI_COLORS = ['#c084ff', '#ffffff', '#2db868', '#f5c842', '#4a7bff', '#ff8b3d', '#f472b6', '#34d399', '#fbbf24']
+const CONFETTI_COLORS = [
+  '#c084ff',
+  '#ffffff',
+  '#2db868',
+  '#f5c842',
+  '#4a7bff',
+  '#ff8b3d',
+  '#f472b6',
+  '#34d399',
+  '#fbbf24',
+]
 
 function Confetti({ animKey, delay: baseDelay = 0 }: { animKey: string; delay?: number }) {
-  const pieces = useMemo(() => Array.from({ length: 110 }, (_, i) => {
-    const angle = (i / 110) * 2 * Math.PI + (Math.random() - 0.5) * 0.25
-    const burstR = 220 + Math.random() * 280
-    return {
-      id: i,
-      dx: Math.cos(angle) * burstR,
-      dy: Math.sin(angle) * burstR,
-      delay: baseDelay + Math.random() * 0.12,
-      duration: 1.4 + Math.random() * 0.8,
-      size: 9 + Math.random() * 14,
-      color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
-      rotate: Math.random() * 360,
-      rotateEnd: Math.random() * 900 - 450,
-      shape: i % 3 === 0 ? 'circle' : 'rect',
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [animKey])
+  const pieces = useMemo(
+    () =>
+      Array.from({ length: 110 }, (_, i) => {
+        const angle = (i / 110) * 2 * Math.PI + (Math.random() - 0.5) * 0.25
+        const burstR = 220 + Math.random() * 280
+        return {
+          id: i,
+          dx: Math.cos(angle) * burstR,
+          dy: Math.sin(angle) * burstR,
+          delay: baseDelay + Math.random() * 0.12,
+          duration: 1.4 + Math.random() * 0.8,
+          size: 9 + Math.random() * 14,
+          color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+          rotate: Math.random() * 360,
+          rotateEnd: Math.random() * 900 - 450,
+          shape: i % 3 === 0 ? 'circle' : 'rect',
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }),
+    [animKey],
+  )
 
   return (
     <div key={animKey} className="pointer-events-none absolute inset-0 z-[3] overflow-hidden">
@@ -129,7 +143,8 @@ const CARDS: Card[] = [
     bgVariant: 'purple' as BgReflectionsVariant,
     eyebrow: 'Handled by Nyla',
     big: '140+ tasks',
-    caption: '67 meeting packs. 31 follow-up reminders. 14 stalled cases flagged before they slipped. You stayed in front of it.',
+    caption:
+      '67 meeting packs. 31 follow-up reminders. 14 stalled cases flagged before they slipped. You stayed in front of it.',
   },
   {
     id: 'outro',
@@ -154,8 +169,16 @@ function getBigStyle(card: Card): React.CSSProperties {
   return { fontSize: 70, lineHeight: 1.2 }
 }
 
-function CharReveal({ text, animKey, staggerSpan = 1.4, charDuration = 0.4 }: {
-  text: string; animKey: string; staggerSpan?: number; charDuration?: number
+function CharReveal({
+  text,
+  animKey,
+  staggerSpan = 1.4,
+  charDuration = 0.4,
+}: {
+  text: string
+  animKey: string
+  staggerSpan?: number
+  charDuration?: number
 }) {
   const chars = text.split('')
   const total = chars.length
@@ -186,7 +209,6 @@ function charRevealDuration(staggerSpan = 1.4, charDuration = 0.4): number {
   return 0.15 + staggerSpan + charDuration
 }
 
-
 const SLIDE_MS = 6000
 
 export function YearInReview() {
@@ -199,7 +221,11 @@ export function YearInReview() {
 
   useEffect(() => {
     if (!open) {
-      const t = setTimeout(() => { setIdx(0); setPaused(false); setProgress(0) }, 0)
+      const t = setTimeout(() => {
+        setIdx(0)
+        setPaused(false)
+        setProgress(0)
+      }, 0)
       return () => clearTimeout(t)
     }
   }, [open])
@@ -221,7 +247,10 @@ export function YearInReview() {
       }
     }
     raf = requestAnimationFrame(tick)
-    return () => { cancelAnimationFrame(raf); clearTimeout(resetT) }
+    return () => {
+      cancelAnimationFrame(raf)
+      clearTimeout(resetT)
+    }
   }, [open, paused, idx])
 
   useEffect(() => {
@@ -230,7 +259,10 @@ export function YearInReview() {
       if (e.key === 'Escape') close()
       if (e.key === 'ArrowRight') setIdx((i) => Math.min(CARDS.length - 1, i + 1))
       if (e.key === 'ArrowLeft') setIdx((i) => Math.max(0, i - 1))
-      if (e.key === ' ') { e.preventDefault(); setPaused((p) => !p) }
+      if (e.key === ' ') {
+        e.preventDefault()
+        setPaused((p) => !p)
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -256,7 +288,6 @@ export function YearInReview() {
         exit={{ opacity: 0 }}
         transition={{ duration: DURATION.standard }}
       >
-
         {/* BgReflections animated background */}
         <AnimatePresence>
           <motion.div
@@ -274,12 +305,19 @@ export function YearInReview() {
         {/* Subtle grain texture */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.035]"
-          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")', backgroundSize: '200px' }}
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
+            backgroundSize: '200px',
+          }}
         />
 
         {/* Top bar — Space to Pause / progress / close, all vertically centered */}
         <div className="absolute inset-x-0 top-0 z-[3] flex items-center px-[27px]" style={{ height: 90 }}>
-          <p className="shrink-0 text-[14px] font-medium uppercase tracking-[0.14em] text-white" style={{ opacity: 0.6 }}>
+          <p
+            className="shrink-0 text-[14px] font-medium uppercase tracking-[0.14em] text-white"
+            style={{ opacity: 0.6 }}
+          >
             Space to Pause
           </p>
           {/* Progress bars — absolutely centered in the top bar */}
@@ -307,11 +345,7 @@ export function YearInReview() {
         {/* Confetti burst — fires after text fully appears */}
         <AnimatePresence>
           {card.confetti && (
-            <Confetti
-              key={card.id + '-confetti'}
-              animKey={card.id}
-              delay={charRevealDuration(0.28, 0.25) + 0.05}
-            />
+            <Confetti key={card.id + '-confetti'} animKey={card.id} delay={charRevealDuration(0.28, 0.25) + 0.05} />
           )}
         </AnimatePresence>
 
@@ -343,17 +377,20 @@ export function YearInReview() {
               {card.nylaIntro ? (
                 /* First card — keep centered layout */
                 <>
-                  <p className="text-[14px] font-medium uppercase tracking-[0.14em] text-white">
-                    {card.eyebrow}
-                  </p>
+                  <p className="text-[14px] font-medium uppercase tracking-[0.14em] text-white">{card.eyebrow}</p>
                   <p
                     className="mt-7 whitespace-pre-line font-serif font-normal tracking-tight text-white"
                     style={bigStyle}
                   >
                     <CharReveal text={card.big} animKey={card.id} />
                   </p>
-                  <div className="mt-8"><Nyla size={96} variant="on-dark" /></div>
-                  <p className="mx-auto mt-8 font-normal text-white" style={{ fontSize: 20, lineHeight: '30px', letterSpacing: '0.3px', maxWidth: 749 }}>
+                  <div className="mt-8">
+                    <Nyla size={96} variant="on-dark" />
+                  </div>
+                  <p
+                    className="mx-auto mt-8 font-normal text-white"
+                    style={{ fontSize: 20, lineHeight: '30px', letterSpacing: '0.3px', maxWidth: 749 }}
+                  >
                     {card.caption}
                   </p>
                 </>
@@ -374,21 +411,24 @@ export function YearInReview() {
                       className="whitespace-pre-line font-serif font-normal tracking-tight text-white"
                       style={bigStyle}
                     >
-                      {card.id === 'commission'
-                        ? <CharReveal text={card.big} animKey={card.id} staggerSpan={0.28} charDuration={0.25} />
-                        : <CharReveal text={card.big} animKey={card.id} />}
+                      {card.id === 'commission' ? (
+                        <CharReveal text={card.big} animKey={card.id} staggerSpan={0.28} charDuration={0.25} />
+                      ) : (
+                        <CharReveal text={card.big} animKey={card.id} />
+                      )}
                     </p>
                   </div>
 
                   {/* Caption + pill — 20vh from bottom */}
                   <div className="flex flex-col items-center gap-5 w-full" style={{ paddingBottom: '18vh' }}>
-                    <p className="font-normal text-white" style={{ fontSize: 20, lineHeight: '30px', letterSpacing: '0.3px', maxWidth: 749 }}>
+                    <p
+                      className="font-normal text-white"
+                      style={{ fontSize: 20, lineHeight: '30px', letterSpacing: '0.3px', maxWidth: 749 }}
+                    >
                       {card.caption}
                     </p>
                     {card.aiNod && (
-                      <div
-                        className="flex items-center gap-[10px] rounded-full border border-white/50 bg-white/10 py-3 pl-3 pr-6"
-                      >
+                      <div className="flex items-center gap-[10px] rounded-full border border-white/50 bg-white/10 py-3 pl-3 pr-6">
                         <Nyla size={48} variant="on-dark" />
                         <p className="whitespace-nowrap text-[14px] leading-[20px] tracking-[0.2px] text-white">
                           {card.aiNod}
@@ -413,7 +453,7 @@ export function YearInReview() {
             style={{ opacity: isFirst ? 0 : 1, pointerEvents: isFirst ? 'none' : 'auto' }}
           >
             <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
-              <path d="M8 2L4 7L8 12" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M8 2L4 7L8 12" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </div>
@@ -431,7 +471,10 @@ export function YearInReview() {
               </button>
               <button
                 type="button"
-                onClick={() => { close(); openLanding() }}
+                onClick={() => {
+                  close()
+                  openLanding()
+                }}
                 className="rounded-[var(--radius-md)] bg-white px-5 py-2.5 text-[14px] font-semibold text-neutral-900 hover:bg-white/90"
               >
                 Adjust goals for 2028
@@ -445,13 +488,13 @@ export function YearInReview() {
               className="flex size-[40px] items-center justify-center rounded-[8px] border-[1.5px] border-white bg-transparent hover:bg-white/10"
             >
               <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
-                <path d="M4 2L8 7L4 12" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M4 2L8 7L4 12" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
           )}
         </div>
       </motion.div>
     </AnimatePresence>,
-    document.body
+    document.body,
   )
 }

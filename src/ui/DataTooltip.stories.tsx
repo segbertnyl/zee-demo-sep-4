@@ -54,7 +54,7 @@ const caseChart: DataTooltipChart = {
     { label: 'Q2', value: 5 },
     { label: 'Q3', value: 4 },
     { label: 'Q4', value: 6 },
-    { label: 'Q1\'25', value: 4 },
+    { label: "Q1'25", value: 4 },
   ],
   yMin: 0,
   yMax: 8,

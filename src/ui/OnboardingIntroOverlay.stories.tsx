@@ -15,7 +15,15 @@ type Story = StoryObj
 export const Default: Story = {
   name: 'Intro — Overlay',
   render: () => (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', background: 'var(--bg-overlay-dark)', overflow: 'hidden' }}>
+    <div
+      style={{
+        position: 'relative',
+        width: '100vw',
+        height: '100vh',
+        background: 'var(--bg-overlay-dark)',
+        overflow: 'hidden',
+      }}
+    >
       <img
         src={bgIntroOverlay}
         alt=""

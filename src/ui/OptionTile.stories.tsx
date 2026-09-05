@@ -54,17 +54,53 @@ export const States: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
       {(['spacious', 'compact'] as const).map((size) => (
         <div key={size}>
-          <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-body-muted)', marginBottom: 12 }}>
+          <p
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: 10.5,
+              fontWeight: 500,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: 'var(--text-body-muted)',
+              marginBottom: 12,
+            }}
+          >
             {size}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 260px)', gap: 12 }}>
-            <OptionTile size={size} title="Become a true holistic financial advisor" sub="Planning, investments, protection together" selected={false} />
-            <OptionTile size={size} title="Become a true holistic financial advisor" sub="Planning, investments, protection together" selected={true} />
-            <OptionTile size={size} title="Become a true holistic financial advisor" sub="Planning, investments, protection together" disabled={true} />
+            <OptionTile
+              size={size}
+              title="Become a true holistic financial advisor"
+              sub="Planning, investments, protection together"
+              selected={false}
+            />
+            <OptionTile
+              size={size}
+              title="Become a true holistic financial advisor"
+              sub="Planning, investments, protection together"
+              selected={true}
+            />
+            <OptionTile
+              size={size}
+              title="Become a true holistic financial advisor"
+              sub="Planning, investments, protection together"
+              disabled={true}
+            />
           </div>
           <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
             {['Unselected', 'Selected', 'Inactive'].map((l) => (
-              <p key={l} style={{ width: 260, fontFamily: 'var(--font-sans)', fontSize: 11, color: 'var(--text-body-faint)', textAlign: 'center' }}>{l}</p>
+              <p
+                key={l}
+                style={{
+                  width: 260,
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: 11,
+                  color: 'var(--text-body-faint)',
+                  textAlign: 'center',
+                }}
+              >
+                {l}
+              </p>
             ))}
           </div>
         </div>
@@ -87,14 +123,34 @@ export const CompactVsSpacious: Story = {
       </p>
       {(['compact', 'spacious'] as const).map((size) => (
         <div key={size}>
-          <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-body-muted)', marginBottom: 12 }}>
+          <p
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: 10.5,
+              fontWeight: 500,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: 'var(--text-body-muted)',
+              marginBottom: 12,
+            }}
+          >
             {size} · {size === 'compact' ? '16px' : '24px'} padding
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 280px)', gap: 12 }}>
             <OptionTile size={size} title="Personal emails" selected={false} />
             <OptionTile size={size} title="Events and community involvement" selected={true} />
-            <OptionTile size={size} title="Clients ready for a holistic conversation" sub="Beyond what they have today" selected={false} />
-            <OptionTile size={size} title="Generate qualified referrals" sub="Build a reliable pipeline before expanding further." selected={true} />
+            <OptionTile
+              size={size}
+              title="Clients ready for a holistic conversation"
+              sub="Beyond what they have today"
+              selected={false}
+            />
+            <OptionTile
+              size={size}
+              title="Generate qualified referrals"
+              sub="Build a reliable pipeline before expanding further."
+              selected={true}
+            />
           </div>
         </div>
       ))}
@@ -157,7 +213,11 @@ export const Group2ColWithMax: Story = {
 // ---------------------------------------------------------------------------
 
 const DIRECTION_OPTIONS: OptionTileOption[] = [
-  { id: 'holistic', title: 'Become a true holistic financial advisor', sub: 'Planning, investments, protection together' },
+  {
+    id: 'holistic',
+    title: 'Become a true holistic financial advisor',
+    sub: 'Planning, investments, protection together',
+  },
   { id: 'eagle', title: 'Build toward Eagle and investment advisory', sub: 'IAR track, AUM, fee-based' },
   { id: 'referrals', title: 'Generating qualified referrals consistently', sub: 'Before expanding further' },
   { id: 'referral-practice', title: 'Build a referral-driven practice', sub: 'Less cold outreach, more warm pipeline' },
@@ -190,21 +250,65 @@ function AllVariantsDemo() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
       <section>
-        <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-body-muted)', marginBottom: 12 }}>
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10.5,
+            fontWeight: 500,
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            color: 'var(--text-body-muted)',
+            marginBottom: 12,
+          }}
+        >
           3-col · compact · max 3 (Direction/ProgressAreas pattern)
         </p>
-        <OptionTileGroup options={DIRECTION_OPTIONS} value={dirValue} onChange={setDirValue} max={3} cols={3} size="compact" />
+        <OptionTileGroup
+          options={DIRECTION_OPTIONS}
+          value={dirValue}
+          onChange={setDirValue}
+          max={3}
+          cols={3}
+          size="compact"
+        />
       </section>
 
       <section>
-        <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-body-muted)', marginBottom: 12 }}>
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10.5,
+            fontWeight: 500,
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            color: 'var(--text-body-muted)',
+            marginBottom: 12,
+          }}
+        >
           2-col · spacious · max 2 (ClientSignals/ClientActivities pattern)
         </p>
-        <OptionTileGroup options={CLIENT_SIGNALS} value={sigValue} onChange={setSigValue} max={2} cols={2} size="spacious" />
+        <OptionTileGroup
+          options={CLIENT_SIGNALS}
+          value={sigValue}
+          onChange={setSigValue}
+          max={2}
+          cols={2}
+          size="spacious"
+        />
       </section>
 
       <section>
-        <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-body-muted)', marginBottom: 12 }}>
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10.5,
+            fontWeight: 500,
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            color: 'var(--text-body-muted)',
+            marginBottom: 12,
+          }}
+        >
           3-col · spacious · no sub (ClientConversations pattern)
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>

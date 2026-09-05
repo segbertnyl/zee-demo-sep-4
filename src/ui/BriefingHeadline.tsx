@@ -27,8 +27,8 @@ const WORD_DURATION = 0.9
 /* Update reveal (scroll / navigate): the old line blurs OUT, then the new line
  * blurs IN — sequenced via AnimatePresence mode="wait". Slowed past the prior
  * pass for a calm, unhurried feel. */
-const UPDATE_IN = DURATION.deliberate * 3.5  // ~2.1s blur-in
-const UPDATE_OUT = DURATION.standard         // ~0.42s blur-out first
+const UPDATE_IN = DURATION.deliberate * 3.5 // ~2.1s blur-in
+const UPDATE_OUT = DURATION.standard // ~0.42s blur-out first
 const EXIT = { opacity: 0, filter: 'blur(8px)', transition: { duration: UPDATE_OUT, ease: EASE.lift } }
 
 export function BriefingHeadline({
@@ -38,8 +38,7 @@ export function BriefingHeadline({
   subtle,
   className,
 }: BriefingHeadlineProps) {
-  const base =
-    'font-serif text-[clamp(34px,3.4vw,46px)] leading-[1.08] tracking-[-0.012em] text-[var(--text-headline)]'
+  const base = 'font-serif text-[clamp(34px,3.4vw,46px)] leading-[1.08] tracking-[-0.012em] text-[var(--text-headline)]'
   const cls = [base, className].filter(Boolean).join(' ')
 
   /* First reveal types in full; every later update uses the subtle blur-fade.
@@ -55,7 +54,11 @@ export function BriefingHeadline({
   }, [text])
 
   if (reducedMotion) {
-    return <h1 className={cls} style={{ fontWeight: 300 }}>{text}</h1>
+    return (
+      <h1 className={cls} style={{ fontWeight: 300 }}>
+        {text}
+      </h1>
+    )
   }
 
   const words = text.split(' ')

@@ -13,6 +13,7 @@ sanitize(title) + '--' + sanitize(storyNameFromExport(exportName))
 ```
 
 **sanitize rules:**
+
 - Lowercase everything
 - Replace spaces and `/` with `-`
 - Strip all characters not in `[a-z0-9_-]` (em-dashes, apostrophes, etc. are removed)
@@ -22,12 +23,12 @@ sanitize(title) + '--' + sanitize(storyNameFromExport(exportName))
 
 **Examples:**
 
-| `Meta.title`                                     | Export         | Story ID                                          |
-|--------------------------------------------------|----------------|---------------------------------------------------|
-| `'UI / BadgePill'`                               | `Urgent`       | `ui-badgepill--urgent`                            |
-| `'UI / OnboardingBackground / Intro — Overlay'`  | `Default`      | `ui-onboardingbackground-intro-overlay--default`  |
-| `'UI / OnboardingBackground / Intro — Overlay'`  | `FullAnimation`| `ui-onboardingbackground-intro-overlay--full-animation` |
-| `'UI / WelcomeSequence'`                         | `WithControls` | `ui-welcomesequence--with-controls`               |
+| `Meta.title`                                    | Export          | Story ID                                                |
+| ----------------------------------------------- | --------------- | ------------------------------------------------------- |
+| `'UI / BadgePill'`                              | `Urgent`        | `ui-badgepill--urgent`                                  |
+| `'UI / OnboardingBackground / Intro — Overlay'` | `Default`       | `ui-onboardingbackground-intro-overlay--default`        |
+| `'UI / OnboardingBackground / Intro — Overlay'` | `FullAnimation` | `ui-onboardingbackground-intro-overlay--full-animation` |
+| `'UI / WelcomeSequence'`                        | `WithControls`  | `ui-welcomesequence--with-controls`                     |
 
 ---
 
@@ -40,7 +41,7 @@ import { test, expect } from '@playwright/test'
 import { gotoStory, expectMounted } from '../helpers/storybook'
 import { assertTextSpacing } from '../helpers/text'
 
-const STORY_ID = 'ui-mycomponent--default'  // ← derive using formula above
+const STORY_ID = 'ui-mycomponent--default' // ← derive using formula above
 
 test.describe('<ComponentName>', () => {
   // Section 1 — Mount smoke
@@ -82,10 +83,12 @@ npm run test:storybook:update-snapshots
 ```
 
 **Update when:**
+
 - A component's design intentionally changed (new spacing, color, layout)
 - You added a new visual snapshot test for the first time (no baseline exists yet)
 - A dependency upgrade changed rendering in an expected way
 
 **Do not update when:**
+
 - CI flags a snapshot diff you did not author — investigate the regression first
 - The diff shows text concatenation or layout collapse — that is a bug, not a snapshot to accept

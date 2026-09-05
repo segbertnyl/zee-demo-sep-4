@@ -16,9 +16,9 @@ export interface SectionActionsProps {
 }
 
 const VARIANT_MAP = {
-  primary:   'primary',
+  primary: 'primary',
   secondary: 'secondary',
-  ghost:     'text',
+  ghost: 'text',
 } as const satisfies Record<SectionActionVariant, ButtonTheme extends never ? never : 'primary' | 'secondary' | 'text'>
 
 export function SectionActions({ actions, theme = 'default' }: SectionActionsProps) {
@@ -32,13 +32,7 @@ export function SectionActions({ actions, theme = 'default' }: SectionActionsPro
   return (
     <div className="flex flex-wrap items-center justify-end gap-3">
       {sorted.map(({ label, variant = 'secondary', onClick, disabled }) => (
-        <Button
-          key={label}
-          variant={VARIANT_MAP[variant]}
-          theme={theme}
-          onClick={onClick}
-          disabled={disabled}
-        >
+        <Button key={label} variant={VARIANT_MAP[variant]} theme={theme} onClick={onClick} disabled={disabled}>
           {label}
         </Button>
       ))}

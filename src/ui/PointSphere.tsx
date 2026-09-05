@@ -100,16 +100,26 @@ export function PointSphere({
   const cfg = useMemo(() => {
     const saved = loadOrbConfigForSize(size, variant)
     return {
-      dotScale:      dotScaleProp      ?? saved.dotScale,
-      glowScale:     glowScaleProp     ?? saved.glowScale,
-      minOpacity:    minOpacityProp    ?? saved.minOpacity,
+      dotScale: dotScaleProp ?? saved.dotScale,
+      glowScale: glowScaleProp ?? saved.glowScale,
+      minOpacity: minOpacityProp ?? saved.minOpacity,
       rotationSpeed: rotationSpeedProp ?? saved.rotationSpeed,
-      purpleMix:     purpleMixProp     ?? saved.purpleMix,
-      haloStrength:  haloStrengthProp  ?? saved.haloStrength,
+      purpleMix: purpleMixProp ?? saved.purpleMix,
+      haloStrength: haloStrengthProp ?? saved.haloStrength,
       /* count prop → saved points → auto density for this size. */
-      count:         count             ?? saved.points ?? recommendedPoints(size),
+      count: count ?? saved.points ?? recommendedPoints(size),
     }
-  }, [size, variant, count, dotScaleProp, glowScaleProp, minOpacityProp, rotationSpeedProp, purpleMixProp, haloStrengthProp])
+  }, [
+    size,
+    variant,
+    count,
+    dotScaleProp,
+    glowScaleProp,
+    minOpacityProp,
+    rotationSpeedProp,
+    purpleMixProp,
+    haloStrengthProp,
+  ])
 
   const pts = useMemo(() => fibonacciSphere(cfg.count), [cfg.count])
 
@@ -131,8 +141,10 @@ export function PointSphere({
       const yaw = t * rotationSpeed
       // Pitch wobble scales with rotation speed (0.4 ratio matches the reference feel)
       const pitch = Math.sin(t * rotationSpeed * 0.4) * 0.28
-      const cosYaw = Math.cos(yaw), sinYaw = Math.sin(yaw)
-      const cosPitch = Math.cos(pitch), sinPitch = Math.sin(pitch)
+      const cosYaw = Math.cos(yaw),
+        sinYaw = Math.sin(yaw)
+      const cosPitch = Math.cos(pitch),
+        sinPitch = Math.sin(pitch)
       // Start exploded, condense over 2s after mount, then stay resolved forever
       const condenseDuration = 2.0
       const u = condense ? Math.max(0, 1 - elapsed / condenseDuration) : 0
@@ -158,20 +170,26 @@ export function PointSphere({
         const d = baseD * scale
         // Position top-left corner so the scaled dot is centered at (X, Y)
         const spreadI = 1 + (spread - 1) * (0.7 + rand(i + 61) * 0.6)
-        const px = cx + X * spreadI * R * size / 100 - d / 2
-        const py = cy - Y * spreadI * R * size / 100 - d / 2
+        const px = cx + (X * spreadI * R * size) / 100 - d / 2
+        const py = cy - (Y * spreadI * R * size) / 100 - d / 2
         el.style.transform = `translate3d(${px.toFixed(1)}px,${py.toFixed(1)}px,0) scale(${scale.toFixed(3)})`
         el.style.opacity = (minOpacity + (1 - minOpacity) * depth).toFixed(2)
       }
     }
 
     // Static / reduced-motion: paint one fully-resolved frame (past the condense)
-    if (!animate || reduce) { render(1.2, 999); return }
+    if (!animate || reduce) {
+      render(1.2, 999)
+      return
+    }
 
     const loop = () => {
       const t = performance.now() / 1000
       if (t0 < 0) t0 = t
-      if (t - lastT >= 1 / 30) { lastT = t; render(t, t - t0) }
+      if (t - lastT >= 1 / 30) {
+        lastT = t
+        render(t, t - t0)
+      }
       raf = requestAnimationFrame(loop)
     }
     raf = requestAnimationFrame(loop)
@@ -186,22 +204,31 @@ export function PointSphere({
 
   return (
     <div data-aura style={{ position: 'relative', width: size, height: size }}>
-      <div style={{
-        position: 'absolute', left: '50%', top: '50%',
-        transform: 'translate(-50%,-50%)',
-        width: '54%', height: '54%', borderRadius: '50%',
-        background: `radial-gradient(circle, rgba(${glowCore},${haloA(0.42)}) 0%, rgba(${glowMid},${haloA(0.24)}) 48%, rgba(139,92,246,${haloA(0.19)}) 62%, transparent 78%)`,
-        filter: `blur(${size * 0.025}px)`,
-      }} />
+      <div
+        style={{
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%,-50%)',
+          width: '54%',
+          height: '54%',
+          borderRadius: '50%',
+          background: `radial-gradient(circle, rgba(${glowCore},${haloA(0.42)}) 0%, rgba(${glowMid},${haloA(0.24)}) 48%, rgba(139,92,246,${haloA(0.19)}) 62%, transparent 78%)`,
+          filter: `blur(${size * 0.025}px)`,
+        }}
+      />
       {pts.map((_, i) => {
         const c = dotColor(i, cfg.purpleMix)
         return (
           <span
             key={i}
-            ref={(el) => { dots.current[i] = el }}
+            ref={(el) => {
+              dots.current[i] = el
+            }}
             style={{
               position: 'absolute',
-              top: 0, left: 0,
+              top: 0,
+              left: 0,
               width: `${baseDotPx}px`,
               height: `${baseDotPx}px`,
               transformOrigin: 'top left',

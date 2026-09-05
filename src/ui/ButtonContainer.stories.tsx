@@ -48,7 +48,17 @@ export const CustomLabels: Story = {
 }
 
 const label = (text: string) => (
-  <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase' as const, color: 'var(--text-body-muted)', marginBottom: 8 }}>
+  <p
+    style={{
+      fontFamily: 'var(--font-sans)',
+      fontSize: 10.5,
+      fontWeight: 500,
+      letterSpacing: '0.22em',
+      textTransform: 'uppercase' as const,
+      color: 'var(--text-body-muted)',
+      marginBottom: 8,
+    }}
+  >
     {text}
   </p>
 )

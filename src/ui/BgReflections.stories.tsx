@@ -54,12 +54,21 @@ export const AllVariants: Story = {
       {(['purple', 'blue', 'green', 'orange'] satisfies BgReflectionsVariant[]).map((v) => (
         <div key={v} style={{ position: 'relative' }}>
           <BgReflections variant={v} style={{ width: '100%', height: '100%' }} />
-          <span style={{
-            position: 'absolute', bottom: 12, left: 16,
-            color: 'white', fontSize: 12, fontWeight: 600,
-            textTransform: 'uppercase', letterSpacing: '0.1em',
-            textShadow: '0 1px 4px rgba(0,0,0,0.4)',
-          }}>{v}</span>
+          <span
+            style={{
+              position: 'absolute',
+              bottom: 12,
+              left: 16,
+              color: 'white',
+              fontSize: 12,
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              textShadow: '0 1px 4px rgba(0,0,0,0.4)',
+            }}
+          >
+            {v}
+          </span>
         </div>
       ))}
     </div>

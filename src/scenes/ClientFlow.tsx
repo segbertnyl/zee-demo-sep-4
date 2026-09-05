@@ -11,6 +11,7 @@ import { ButtonContainer } from '@/ui/ButtonContainer'
 import { Button } from '@/ui/Button'
 import { DURATION, EASE } from '@/motion'
 import { CLIENT_FLOW_CONTENT } from '@/data/clientFlowContent'
+import linkAccount from '../components/link-acct.png'
 
 /* ============================================================================
  * Client flow — placeholder onboarding wizard for a single client (Eric).
@@ -66,14 +67,21 @@ function ClientLoadingSequence({ onGetStarted }: { onGetStarted: () => void }) {
   return (
     <div className="relative z-10" style={{ width: '100%', height: 420 }}>
       {/* Nyla — absolutely positioned above the text's fixed center line. */}
-      <div style={{ position: 'absolute', left: '50%', bottom: `calc(50% + ${LOADING_NYLA_OFFSET}px)`, transform: 'translateX(-50%)' }}>
+      <div
+        style={{
+          position: 'absolute',
+          left: '50%',
+          bottom: `calc(50% + ${LOADING_NYLA_OFFSET}px)`,
+          transform: 'translateX(-50%)',
+        }}
+      >
         <AnimatePresence>
           {line.showNyla && (
             <motion.div
               key="client-loading-nyla"
-              initial={{ opacity: 0,  }}
-              animate={{ opacity: 1,  }}
-              exit={{ opacity: 0,  }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: DURATION.cinematic, ease: EASE.settle as [number, number, number, number] }}
             >
               <Nyla size={160} variant="on-dark" />
@@ -114,7 +122,15 @@ function ClientLoadingSequence({ onGetStarted }: { onGetStarted: () => void }) {
       {/* CTA — absolutely positioned below the text's fixed center line.
        * width: max-content so the absolutely-positioned wrapper always shrinks
        * to the button's natural size instead of stretching and wrapping the label. */}
-      <div style={{ position: 'absolute', left: '50%', top: `calc(50% + ${LOADING_CTA_OFFSET}px)`, width: 'max-content', transform: 'translateX(-50%)' }}>
+      <div
+        style={{
+          position: 'absolute',
+          left: '50%',
+          top: `calc(50% + ${LOADING_CTA_OFFSET}px)`,
+          width: 'max-content',
+          transform: 'translateX(-50%)',
+        }}
+      >
         <AnimatePresence>
           {line.showButton && (
             <motion.div
@@ -135,7 +151,17 @@ function ClientLoadingSequence({ onGetStarted }: { onGetStarted: () => void }) {
   )
 }
 
-function ClientQuestionRail({ onPrev, onNext, prevDisabled, nextDisabled }: { onPrev: () => void; onNext: () => void; prevDisabled: boolean; nextDisabled: boolean }) {
+function ClientQuestionRail({
+  onPrev,
+  onNext,
+  prevDisabled,
+  nextDisabled,
+}: {
+  onPrev: () => void
+  onNext: () => void
+  prevDisabled: boolean
+  nextDisabled: boolean
+}) {
   return (
     <div className="fixed left-0 top-0 z-30 flex h-full w-[272px] flex-col justify-between px-2 py-10 pl-10">
       <div className="flex w-full flex-col gap-[80px]">
@@ -143,14 +169,12 @@ function ClientQuestionRail({ onPrev, onNext, prevDisabled, nextDisabled }: { on
 
         <div className="flex w-full flex-col gap-[16px] px-[8px]">
           <div className="flex flex-col gap-[12px]">
-            <p
-              className="w-full text-[14px] text-[#001e94] font-medium uppercase leading-[26px] tracking-[2px]"
-            >
+            <p className="w-full text-[14px] text-[#001e94] font-medium uppercase leading-[26px] tracking-[2px]">
               ALL ABOUT YOU
             </p>
             <div className="flex w-full items-start gap-[8px]">
               <span className="mt-[6px] size-2 shrink-0 rounded-full" style={{ background: 'var(--action-primary)' }} />
-              <span className="min-w-0 flex-1 text-[14px] leading-[20px] tracking-[0.2px] text-[#0468FF]" >
+              <span className="min-w-0 flex-1 text-[14px] leading-[20px] tracking-[0.2px] text-[#0468FF]">
                 Your background
               </span>
             </div>
@@ -167,7 +191,17 @@ function ClientQuestionRail({ onPrev, onNext, prevDisabled, nextDisabled }: { on
           style={{ opacity: prevDisabled ? 0.4 : 1, borderColor: '#001E94', background: 'transparent' }}
           aria-label="Previous"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#001E94" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            stroke="#001E94"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
             <path d="M2 7 L7 2 L12 7" />
             <path d="M7 2 V12" />
           </svg>
@@ -180,7 +214,17 @@ function ClientQuestionRail({ onPrev, onNext, prevDisabled, nextDisabled }: { on
           style={{ opacity: nextDisabled ? 0.4 : 1, borderColor: '#001E94', background: 'transparent' }}
           aria-label="Next"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#001E94" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            stroke="#001E94"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
             <path d="M2 7 L7 12 L12 7" />
             <path d="M7 12 V2" />
           </svg>
@@ -284,7 +328,12 @@ export function ClientFlow() {
                 </h1>
                 <p className="mt-6 text-[16px] text-[var(--text-body)]">{CLIENT_FLOW_CONTENT.intro.body1}</p>
                 <p className="mt-2 text-[16px] text-[var(--text-headline)]">{CLIENT_FLOW_CONTENT.intro.body2}</p>
-                <ButtonContainer primaryLabel={CLIENT_FLOW_CONTENT.intro.cta} showSecondary={false} onPrimary={advance} className="mt-8" />
+                <ButtonContainer
+                  primaryLabel={CLIENT_FLOW_CONTENT.intro.cta}
+                  showSecondary={false}
+                  onPrimary={advance}
+                  className="mt-8"
+                />
               </motion.div>
             )}
 
@@ -302,74 +351,111 @@ export function ClientFlow() {
 
             {step === 'client-salary' && (
               <>
-              <motion.div
-                key="client-salary"
-                className="relative z-10 mx-auto w-full max-w-[620px] px-6"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
-              >
-                <SectionHeader variant="secondary" heading={CLIENT_FLOW_CONTENT.salary.heading} body={CLIENT_FLOW_CONTENT.salary.body} />
-                <TextInput
-                  variant="numeric"
-                  value={salary}
-                  onChange={setSalary}
-                  placeholder={CLIENT_FLOW_CONTENT.salary.placeholder}
-                  className="mt-8"
-                />
-                {questionCtaShown && <ButtonContainer secondaryVariant="secondary" showClientSecondary={true} showSecondary={false} onPrimary={advanceQuestion} onSecondary={advanceQuestion} className="mt-6" />}
-
-              </motion.div>
-                <Nyla size={160} variant="on-light" align="left" className="absolute bottom-0 right-0"/>
-</>
+                <motion.div
+                  key="client-salary"
+                  className="relative z-10 mx-auto w-full max-w-[620px] px-6"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+                >
+                  <SectionHeader
+                    variant="secondary"
+                    heading={CLIENT_FLOW_CONTENT.salary.heading}
+                    body={CLIENT_FLOW_CONTENT.salary.body}
+                  />
+                  <TextInput
+                    variant="numeric"
+                    value={salary}
+                    onChange={setSalary}
+                    placeholder={CLIENT_FLOW_CONTENT.salary.placeholder}
+                    className="mt-8"
+                  />
+                  {questionCtaShown && (
+                    <ButtonContainer
+                      secondaryVariant="secondary"
+                      showClientSecondary={true}
+                      showSecondary={false}
+                      onPrimary={advanceQuestion}
+                      onSecondary={advanceQuestion}
+                      className="mt-6"
+                    />
+                  )}
+                </motion.div>
+                <Nyla size={160} variant="on-light" align="left" className="absolute bottom-0 right-0" />
+              </>
             )}
 
             {step === 'client-address' && (
               <>
-              <motion.div
-                key="client-address"
-                className="relative z-10 mx-auto w-full max-w-[620px] px-6"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
-              >
-                <SectionHeader variant="secondary" heading={CLIENT_FLOW_CONTENT.address.heading} body={CLIENT_FLOW_CONTENT.address.body} />
-                <TextInput
-                  variant="text"
-                  value={address}
-                  onChange={setAddress}
-                  placeholder={CLIENT_FLOW_CONTENT.address.placeholder}
-                  className="mt-8"
-                />
-                {questionCtaShown && <ButtonContainer secondaryVariant="secondary" showClientSecondary={true} showSecondary={false} onPrimary={advanceQuestion} onSecondary={advanceQuestion} className="mt-6" />}
-              </motion.div>
-                <Nyla size={160} variant="on-light" align="left" className="absolute bottom-0 right-0"/>
-</>
+                <motion.div
+                  key="client-address"
+                  className="relative z-10 mx-auto w-full max-w-[620px] px-6"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+                >
+                  <SectionHeader
+                    variant="secondary"
+                    heading={CLIENT_FLOW_CONTENT.address.heading}
+                    body={CLIENT_FLOW_CONTENT.address.body}
+                  />
+                  <TextInput
+                    variant="text"
+                    value={address}
+                    onChange={setAddress}
+                    placeholder={CLIENT_FLOW_CONTENT.address.placeholder}
+                    className="mt-8"
+                  />
+                  {questionCtaShown && (
+                    <ButtonContainer
+                      secondaryVariant="secondary"
+                      showClientSecondary={true}
+                      showSecondary={false}
+                      onPrimary={advanceQuestion}
+                      onSecondary={advanceQuestion}
+                      className="mt-6"
+                    />
+                  )}
+                </motion.div>
+                <Nyla size={160} variant="on-light" align="left" className="absolute bottom-0 right-0" />
+              </>
             )}
 
             {step === 'client-image' && (
               <>
-              <motion.div
-                key="client-image"
-                className="relative z-10 mx-auto w-full max-w-[620px] px-6"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
-              >
-                <SectionHeader variant="secondary" heading={CLIENT_FLOW_CONTENT.image.heading} body={CLIENT_FLOW_CONTENT.image.body} />
-                <div
-                  className="mt-8 flex items-center justify-center rounded-[4px] border border-dashed"
-                  style={{ height: 220, borderColor: 'var(--border-subtle)', color: 'var(--text-body-faint)' }}
+                <motion.div
+                  key="client-image"
+                  className="relative z-10 mx-auto w-full max-w-[620px] px-6"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
                 >
-                  {CLIENT_FLOW_CONTENT.image.imagePlaceholderLabel}
-                </div>
-                {questionCtaShown && <ButtonContainer secondaryVariant="secondary" showClientSecondary={true} showSecondary={false} onPrimary={finishQuestion} onSecondary={finishQuestion} className="mt-6" />}
-              </motion.div>
-                <Nyla size={160} variant="on-light" align="left" className="absolute bottom-0 right-0"/>
-
+                  <SectionHeader
+                    variant="secondary"
+                    heading={CLIENT_FLOW_CONTENT.image.heading}
+                    body={CLIENT_FLOW_CONTENT.image.body}
+                  />
+                  <div
+                    className="mt-8 flex items-center justify-center rounded-[4px]"
+                    style={{ color: 'var(--text-body-faint)' }}
+                  >
+                    <img src={linkAccount} />
+                  </div>
+                  {questionCtaShown && (
+                    <ButtonContainer
+                      secondaryVariant="secondary"
+                      showClientSecondary={true}
+                      showSecondary={false}
+                      onPrimary={finishQuestion}
+                      onSecondary={finishQuestion}
+                      className="mt-6"
+                    />
+                  )}
+                </motion.div>
+                <Nyla size={160} variant="on-light" align="left" className="absolute bottom-0 right-0" />
               </>
             )}
           </AnimatePresence>

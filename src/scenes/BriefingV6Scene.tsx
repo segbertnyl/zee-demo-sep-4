@@ -1,4 +1,13 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type UIEvent, type ReactElement, type ReactNode } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type UIEvent,
+  type ReactElement,
+  type ReactNode,
+} from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { EASE, DURATION, SCROLL, NYLA, prefersReducedMotion } from '@/motion'
 import { glideScrollTop } from '@/lib/scrollGlide'
@@ -17,15 +26,42 @@ import Onboarding from '@/components/Onboarding'
 import Annual from '@/components/Annual'
 import Legacy from '@/components/Legacy'
 import {
-  NavBriefingIcon, PersonCheckIcon, TagIcon, OrgChartIcon,
-  BriefcaseIcon, ListAddIcon, BellIcon, CalendarIcon, CheckIcon, ArrowDropDownIcon, type IconProps,
+  NavBriefingIcon,
+  PersonCheckIcon,
+  TagIcon,
+  OrgChartIcon,
+  BriefcaseIcon,
+  ListAddIcon,
+  BellIcon,
+  CalendarIcon,
+  CheckIcon,
+  ArrowDropDownIcon,
+  type IconProps,
 } from '@/ui/icons'
 import {
-  HEADLINES, PROGRESS_TEMPLATE, WHILE_AWAY, WHILE_AWAY_2, WHILE_AWAY_3, WHILE_AWAY_4,
-  YOUR_DAY, YOUR_DAY_2, YOUR_DAY_3, YOUR_DAY_4, STACK_FOOTER,
-  INITIAL_TASKS, DAY2_TASKS, DAY3_TASKS, DAY4_TASKS, SANDRA_TASK2, SANDRA_TASK3, SANDRA_FOLLOWUP_SUGGESTED,
-  HORIZON_VIEWS, NAV_PLACEHOLDER,
-  type TaskCardModel, type DayItem, type HorizonView,
+  HEADLINES,
+  PROGRESS_TEMPLATE,
+  WHILE_AWAY,
+  WHILE_AWAY_2,
+  WHILE_AWAY_3,
+  WHILE_AWAY_4,
+  YOUR_DAY,
+  YOUR_DAY_2,
+  YOUR_DAY_3,
+  YOUR_DAY_4,
+  STACK_FOOTER,
+  INITIAL_TASKS,
+  DAY2_TASKS,
+  DAY3_TASKS,
+  DAY4_TASKS,
+  SANDRA_TASK2,
+  SANDRA_TASK3,
+  SANDRA_FOLLOWUP_SUGGESTED,
+  HORIZON_VIEWS,
+  NAV_PLACEHOLDER,
+  type TaskCardModel,
+  type DayItem,
+  type HorizonView,
 } from '@/data/briefingV6Content'
 
 type Horizon = 'Day' | 'Week' | 'Month' | 'Quarter'
@@ -40,7 +76,6 @@ type Horizon = 'Day' | 'Week' | 'Month' | 'Quarter'
  *   5 agent completes it → 3 new follow-ups queue
  * Content is data-driven (briefingV6Content.ts). Motion via @/motion (NYLA set).
  * ========================================================================== */
-
 
 type Status = 'open' | 'loading' | 'suggesting' | 'settled' | 'done'
 interface Entry {
@@ -58,10 +93,14 @@ const CLOCKS = { start: '9:03 AM', suggested: '9:58 AM', done: '10:04 AM' }
  * now, so offset only ever runs 0 → 3. */
 function formatDay(offset: number) {
   switch (offset) {
-    case 1: return { eyebrow: null, weekday: 'FRIDAY', title: 'Friday', label: 'FRIDAY, DEC 16' }
-    case 2: return { eyebrow: null, weekday: 'FRIDAY', title: 'Friday', label: 'FRIDAY, DEC 23' }
-    case 3: return { eyebrow: null, weekday: 'FRIDAY', title: 'Friday', label: 'FRIDAY, DEC 30' }
-    default: return { eyebrow: 'Today', weekday: 'MONDAY', title: 'Monday', label: 'MONDAY, DEC 12' }
+    case 1:
+      return { eyebrow: null, weekday: 'FRIDAY', title: 'Friday', label: 'FRIDAY, DEC 16' }
+    case 2:
+      return { eyebrow: null, weekday: 'FRIDAY', title: 'Friday', label: 'FRIDAY, DEC 23' }
+    case 3:
+      return { eyebrow: null, weekday: 'FRIDAY', title: 'Friday', label: 'FRIDAY, DEC 30' }
+    default:
+      return { eyebrow: 'Today', weekday: 'MONDAY', title: 'Monday', label: 'MONDAY, DEC 12' }
   }
 }
 
@@ -95,8 +134,8 @@ export function BriefingV6Scene() {
   useEffect(() => setReduced(prefersReducedMotion()), [])
 
   /* ── content state ──────────────────────────────────────────────────────*/
-  const [entries, setEntries] = useState<Entry[]>(
-    () => INITIAL_TASKS.map((m) => ({ model: m, status: 'open' as Status, expanded: false })),
+  const [entries, setEntries] = useState<Entry[]>(() =>
+    INITIAL_TASKS.map((m) => ({ model: m, status: 'open' as Status, expanded: false })),
   )
   const [doneCount, setDoneCount] = useState(0)
   const [total, setTotal] = useState(PAGE_TOTAL)
@@ -129,7 +168,7 @@ export function BriefingV6Scene() {
   const dayOffsetRef = useRef(0) // mirrors dayOffset for correct rapid-click math
   const focusDebounce = useRef<number | undefined>(undefined)
   const glideCancel = useRef<(() => void) | null>(null) // cancels an in-flight glide
-  const glidingRef = useRef(false)                       // true while a glide runs (suppress snap)
+  const glidingRef = useRef(false) // true while a glide runs (suppress snap)
   const timers = useRef<number[]>([])
   const clearTimers = useCallback(() => {
     timers.current.forEach((t) => window.clearTimeout(t))
@@ -162,21 +201,24 @@ export function BriefingV6Scene() {
    * frame — that stale frame was leaving orphaned exit nodes behind. Day 1 (0)
    * runs the full Nyla flow; days 2–4 are their own pre-staged sets. Back nav
    * is disabled for now, so next never drops below 0. */
-  const stepDay = useCallback((delta: number) => {
-    const next = Math.max(0, Math.min(3, dayOffsetRef.current + delta))
-    dayOffsetRef.current = next
-    clearTimers()
-    const set = next === 1 ? DAY2_TASKS : next === 2 ? DAY3_TASKS : next === 3 ? DAY4_TASKS : INITIAL_TASKS
-    setDayOffset(next)
-    setEntries(set.map((m) => ({ model: m, status: 'open', expanded: false })))
-    setDoneCount(0)
-    setTotal(next === 0 ? PAGE_TOTAL : set.length)
-    setShowInjectedDay(false)
-    setFocusId(null)
-    setShowCompleted(false)
-    setShowAssessment(false)
-    setShowIntegrated(false)
-  }, [clearTimers])
+  const stepDay = useCallback(
+    (delta: number) => {
+      const next = Math.max(0, Math.min(3, dayOffsetRef.current + delta))
+      dayOffsetRef.current = next
+      clearTimers()
+      const set = next === 1 ? DAY2_TASKS : next === 2 ? DAY3_TASKS : next === 3 ? DAY4_TASKS : INITIAL_TASKS
+      setDayOffset(next)
+      setEntries(set.map((m) => ({ model: m, status: 'open', expanded: false })))
+      setDoneCount(0)
+      setTotal(next === 0 ? PAGE_TOTAL : set.length)
+      setShowInjectedDay(false)
+      setFocusId(null)
+      setShowCompleted(false)
+      setShowAssessment(false)
+      setShowIntegrated(false)
+    },
+    [clearTimers],
+  )
 
   useEffect(() => {
     if (open) reset()
@@ -186,19 +228,32 @@ export function BriefingV6Scene() {
   /* Page-load sequence (chrome is always visible). */
   useEffect(() => {
     if (!open) return
-    if (reduced) { setLoadPhase(3); return }
+    if (reduced) {
+      setLoadPhase(3)
+      return
+    }
     setLoadPhase(0)
     // Staged entrance, paced +50% slower than the first pass for a calmer load.
     const t1 = window.setTimeout(() => setLoadPhase(1), 1500) // headline types in
     const t2 = window.setTimeout(() => setLoadPhase(2), 3000) // cards fade up
     const t3 = window.setTimeout(() => setLoadPhase(3), 4050) // away + day fade in
-    return () => { window.clearTimeout(t1); window.clearTimeout(t2); window.clearTimeout(t3) }
+    return () => {
+      window.clearTimeout(t1)
+      window.clearTimeout(t2)
+      window.clearTimeout(t3)
+    }
   }, [open, reduced])
 
   /* Top heading + subnav appear 400ms after the briefing opens. */
   useEffect(() => {
-    if (!open) { setChromeIn(false); return }
-    if (reduced) { setChromeIn(true); return }
+    if (!open) {
+      setChromeIn(false)
+      return
+    }
+    if (reduced) {
+      setChromeIn(true)
+      return
+    }
     setChromeIn(false)
     const t = window.setTimeout(() => setChromeIn(true), 400)
     return () => window.clearTimeout(t)
@@ -220,7 +275,12 @@ export function BriefingV6Scene() {
   /* On close, reset the tour guard AND loadPhase so the next open starts fresh
    * (prevents a stale loadPhase 3 from firing the tour before the reload). */
   useEffect(() => {
-    if (!open) { tourStarted.current = false; setTourOn(false); window.clearTimeout(tourTimer.current); setLoadPhase(0) }
+    if (!open) {
+      tourStarted.current = false
+      setTourOn(false)
+      window.clearTimeout(tourTimer.current)
+      setLoadPhase(0)
+    }
   }, [open])
 
   /* Clear a pending tour timer if the scene ever fully unmounts. */
@@ -258,24 +318,33 @@ export function BriefingV6Scene() {
    * a fallback timer for the no-movement case (clicking the already-top card). */
   /* JS-driven glide of a card to the top (SCROLL.glide curve). The headline
    * focus updates when the glide lands. reduced-motion → jump instantly. */
-  const glideToCard = useCallback((id: string, focus = true) => {
-    const cont = scrollRef.current
-    const card = cont?.querySelector<HTMLElement>(`[data-card-id="${id}"]`)
-    if (!cont || !card) return
-    const to = Math.max(0, card.getBoundingClientRect().top - cont.getBoundingClientRect().top + cont.scrollTop - STACK_TOP_PAD)
-    glideCancel.current?.()
-    if (reduced) {
-      cont.scrollTop = to
-      if (focus) setFocusId(id)
-      return
-    }
-    glidingRef.current = true
-    glideCancel.current = glideScrollTop(cont, to, {
-      durationMs: SCROLL.glide.duration * 1000,
-      ease: SCROLL.glide.ease,
-      onDone: () => { glidingRef.current = false; if (focus) setFocusId(id) },
-    })
-  }, [reduced])
+  const glideToCard = useCallback(
+    (id: string, focus = true) => {
+      const cont = scrollRef.current
+      const card = cont?.querySelector<HTMLElement>(`[data-card-id="${id}"]`)
+      if (!cont || !card) return
+      const to = Math.max(
+        0,
+        card.getBoundingClientRect().top - cont.getBoundingClientRect().top + cont.scrollTop - STACK_TOP_PAD,
+      )
+      glideCancel.current?.()
+      if (reduced) {
+        cont.scrollTop = to
+        if (focus) setFocusId(id)
+        return
+      }
+      glidingRef.current = true
+      glideCancel.current = glideScrollTop(cont, to, {
+        durationMs: SCROLL.glide.duration * 1000,
+        ease: SCROLL.glide.ease,
+        onDone: () => {
+          glidingRef.current = false
+          if (focus) setFocusId(id)
+        },
+      })
+    },
+    [reduced],
+  )
 
   const surface = useCallback((id: string) => glideToCard(id), [glideToCard])
 
@@ -296,15 +365,26 @@ export function BriefingV6Scene() {
      * DONE styling for now), starting in the loading state. */
     setEntries((prev) => {
       const idx = prev.findIndex((e) => e.model.id === 'sandra-lapse')
-      const card: Entry = { model: SANDRA_FOLLOWUP_SUGGESTED, status: reduced ? 'suggesting' : 'loading', expanded: false }
+      const card: Entry = {
+        model: SANDRA_FOLLOWUP_SUGGESTED,
+        status: reduced ? 'suggesting' : 'loading',
+        expanded: false,
+      }
       const next = [...prev]
       next.splice(idx >= 0 ? idx + 1 : 0, 0, card)
       return next
     })
 
     if (reduced) {
-      setEntries((prev) => prev.map((e) =>
-        e.model.id === FOLLOWUP_ID ? { ...e, status: 'settled', expanded: true } : e.model.id === 'sandra-lapse' ? { ...e, archived: true } : e))
+      setEntries((prev) =>
+        prev.map((e) =>
+          e.model.id === FOLLOWUP_ID
+            ? { ...e, status: 'settled', expanded: true }
+            : e.model.id === 'sandra-lapse'
+              ? { ...e, archived: true }
+              : e,
+        ),
+      )
       return
     }
 
@@ -316,38 +396,61 @@ export function BriefingV6Scene() {
     const t1 = window.setTimeout(() => setStatus(FOLLOWUP_ID, 'suggesting'), loadMs)
     // once the content has typed in, the card auto-expands to reveal the prepped
     // details, and the completed Sandra card fades down into Completed.
-    const t2 = window.setTimeout(() =>
-      setEntries((prev) => prev.map((e) =>
-        e.model.id === FOLLOWUP_ID ? { ...e, expanded: true }
-          : e.model.id === 'sandra-lapse' ? { ...e, archived: true } : e)), loadMs + fillMs)
+    const t2 = window.setTimeout(
+      () =>
+        setEntries((prev) =>
+          prev.map((e) =>
+            e.model.id === FOLLOWUP_ID
+              ? { ...e, expanded: true }
+              : e.model.id === 'sandra-lapse'
+                ? { ...e, archived: true }
+                : e,
+          ),
+        ),
+      loadMs + fillMs,
+    )
     // after the expanded details settle in, the glow fades and the card settles
     // into a normal card.
-    const t3 = window.setTimeout(() => { setClock(CLOCKS.done); setStatus(FOLLOWUP_ID, 'settled') }, loadMs + fillMs + expandDwellMs)
+    const t3 = window.setTimeout(
+      () => {
+        setClock(CLOCKS.done)
+        setStatus(FOLLOWUP_ID, 'settled')
+      },
+      loadMs + fillMs + expandDwellMs,
+    )
     timers.current.push(t1, t2, t3)
   }, [reduced, FOLLOWUP_ID])
 
   /* Marking done shows the DONE styling in place, then the card archives into the
    * collapsed Completed section. Sandra also kicks off the Nyla sequence, which
    * owns her archive timing. */
-  const markDone = useCallback((id: string) => {
-    setEntries((prev) => prev.map((e) => (e.model.id === id ? { ...e, status: 'done' } : e)))
-    setDoneCount((c) => c + 1)
-    if (id === 'sandra-lapse') {
-      const t = window.setTimeout(runNylaSequence, reduced ? 200 : NYLA.sequence.beforeSuggestMs)
-      timers.current.push(t)
-    } else {
-      const t = window.setTimeout(() =>
-        setEntries((prev) => prev.map((e) => (e.model.id === id ? { ...e, archived: true } : e))), reduced ? 200 : NYLA.sequence.doneHoldMs)
-      timers.current.push(t)
-    }
-  }, [runNylaSequence, reduced])
+  const markDone = useCallback(
+    (id: string) => {
+      setEntries((prev) => prev.map((e) => (e.model.id === id ? { ...e, status: 'done' } : e)))
+      setDoneCount((c) => c + 1)
+      if (id === 'sandra-lapse') {
+        const t = window.setTimeout(runNylaSequence, reduced ? 200 : NYLA.sequence.beforeSuggestMs)
+        timers.current.push(t)
+      } else {
+        const t = window.setTimeout(
+          () => setEntries((prev) => prev.map((e) => (e.model.id === id ? { ...e, archived: true } : e))),
+          reduced ? 200 : NYLA.sequence.doneHoldMs,
+        )
+        timers.current.push(t)
+      }
+    },
+    [runNylaSequence, reduced],
+  )
 
-  const dismiss = useCallback((id: string) => {
-    clearTimers()
-    setEntries((prev) => prev.filter((e) => e.model.id !== id))
-    setShowInjectedDay(false)
-    setTotal(PAGE_TOTAL)
-  }, [clearTimers])
+  const dismiss = useCallback(
+    (id: string) => {
+      clearTimers()
+      setEntries((prev) => prev.filter((e) => e.model.id !== id))
+      setShowInjectedDay(false)
+      setTotal(PAGE_TOTAL)
+    },
+    [clearTimers],
+  )
 
   /* Snooze defers a task — removes it from today's stack (no completion). */
   const snooze = useCallback((id: string) => {
@@ -357,36 +460,47 @@ export function BriefingV6Scene() {
   /* Undo a completion — brings the task back into the active stack. Un-archives
    * it (so it leaves Completed), returns it to the open/collapsed state, cancels
    * any pending archive/settle timers, and rolls the completed count back. */
-  const undo = useCallback((id: string) => {
-    clearTimers()
-    setEntries((prev) => prev.map((e) =>
-      e.model.id === id ? { ...e, archived: false, status: 'open', expanded: false } : e))
-    setDoneCount((c) => Math.max(0, c - 1))
-  }, [clearTimers])
+  const undo = useCallback(
+    (id: string) => {
+      clearTimers()
+      setEntries((prev) =>
+        prev.map((e) => (e.model.id === id ? { ...e, archived: false, status: 'open', expanded: false } : e)),
+      )
+      setDoneCount((c) => Math.max(0, c - 1))
+    },
+    [clearTimers],
+  )
 
   /* ── scroll → snap-lock to a full card + drive the headline ────────────────
    * Glide mode: after a manual scroll settles, glide the nearest card's top to
    * the top so the rest position is ALWAYS a full card (never a partial one);
    * its top card becomes the headline focus. Suppressed while a glide runs. */
-  const onScroll = useCallback((_e: UIEvent<HTMLDivElement>) => {
-    if (glidingRef.current) return
-    window.clearTimeout(focusDebounce.current)
-    focusDebounce.current = window.setTimeout(() => {
-      const cont = scrollRef.current
-      if (!cont) return
-      const topY = cont.getBoundingClientRect().top + STACK_TOP_PAD
-      const cards = cont.querySelectorAll<HTMLElement>('[data-card-id]')
-      let nearestId: string | null = null
-      let best = Infinity
-      cards.forEach((c) => {
-        const d = c.getBoundingClientRect().top - topY
-        if (Math.abs(d) < Math.abs(best)) { best = d; nearestId = c.getAttribute('data-card-id') }
-      })
-      if (!nearestId) return
-      if (Math.abs(best) > 2 && !reduced) glideToCard(nearestId) // snap-lock to a full card
-      else setFocusId(nearestId)
-    }, 140)
-  }, [glideToCard, reduced])
+  const onScroll = useCallback(
+    (_e: UIEvent<HTMLDivElement>) => {
+      if (glidingRef.current) return
+      window.clearTimeout(focusDebounce.current)
+      focusDebounce.current = window.setTimeout(() => {
+        const cont = scrollRef.current
+        if (!cont) return
+        const topY = cont.getBoundingClientRect().top + STACK_TOP_PAD
+        const cards = cont.querySelectorAll<HTMLElement>('[data-card-id]')
+        let nearestId: string | null = null
+        let best = Infinity
+        cards.forEach((c) => {
+          const d = c.getBoundingClientRect().top - topY
+          if (Math.abs(d) < Math.abs(best)) {
+            best = d
+            nearestId = c.getAttribute('data-card-id')
+          }
+        })
+        if (!nearestId) return
+        if (Math.abs(best) > 2 && !reduced)
+          glideToCard(nearestId) // snap-lock to a full card
+        else setFocusId(nearestId)
+      }, 140)
+    },
+    [glideToCard, reduced],
+  )
 
   /* Headline always reflects the task at the top of the stack (the scrolled-to
    * card if it's still live, else the top card). During the Nyla flow the
@@ -404,22 +518,22 @@ export function BriefingV6Scene() {
     return top?.model.focusHeadline ?? HEADLINES.opening
   }, [entries, focusId])
 
-  const progressLine = PROGRESS_TEMPLATE
-    .replace('{time}', clock)
+  const progressLine = PROGRESS_TEMPLATE.replace('{time}', clock)
     .replace('{done}', String(doneCount))
     .replace('{total}', String(total))
   const pct = Math.round((doneCount / total) * 100)
 
-  const currentYourDay = dayOffset === 1 ? YOUR_DAY_2 : dayOffset === 2 ? YOUR_DAY_3 : dayOffset === 3 ? YOUR_DAY_4 : YOUR_DAY
-  const currentWhileAway = dayOffset === 1 ? WHILE_AWAY_2 : dayOffset === 2 ? WHILE_AWAY_3 : dayOffset === 3 ? WHILE_AWAY_4 : WHILE_AWAY
+  const currentYourDay =
+    dayOffset === 1 ? YOUR_DAY_2 : dayOffset === 2 ? YOUR_DAY_3 : dayOffset === 3 ? YOUR_DAY_4 : YOUR_DAY
+  const currentWhileAway =
+    dayOffset === 1 ? WHILE_AWAY_2 : dayOffset === 2 ? WHILE_AWAY_3 : dayOffset === 3 ? WHILE_AWAY_4 : WHILE_AWAY
 
   const dayItems: DayItem[] = useMemo(
     () => (showInjectedDay ? [currentYourDay.injectedItem, ...currentYourDay.items] : currentYourDay.items),
     [showInjectedDay, currentYourDay],
   )
 
-  const statusToCardState = (s: Status): CardState =>
-    s === 'open' ? 'default' : (s as CardState)
+  const statusToCardState = (s: Status): CardState => (s === 'open' ? 'default' : (s as CardState))
 
   /* A done task lingers in the stack (DONE styling), then archives into the
    * collapsed Completed section. */
@@ -435,8 +549,8 @@ export function BriefingV6Scene() {
   const isToday = dayOffset === 0
   const isPast = dayOffset < 0
   const horizonNavMeta: Record<'Week' | 'Month' | 'Quarter', { eyebrow: string; label: string }> = {
-    Week:    { eyebrow: 'This Week',    label: 'DEC 9–15' },
-    Month:   { eyebrow: 'This Month',   label: 'DECEMBER' },
+    Week: { eyebrow: 'This Week', label: 'DEC 9–15' },
+    Month: { eyebrow: 'This Month', label: 'DECEMBER' },
     Quarter: { eyebrow: 'This Quarter', label: 'Q4 2026' },
   }
   const topNavMeta = dayView
@@ -444,10 +558,14 @@ export function BriefingV6Scene() {
     : horizonNavMeta[horizon as 'Week' | 'Month' | 'Quarter']
   /* Headline: day 1 → live state-driven (headline, below). Days 2–4 → a fixed
    * line for that day's story beat. Horizon views override all. */
-  const dayHeadline = dayOffset === 1 ? 'Eric has completed his financial intake. Time to run a needs / risk analysis.'
-    : dayOffset === 2 ? 'Prepare for plan presentation with Eric at 10 am.'
-    : dayOffset === 3 ? 'You have clients to follow up with. Let’s keep things moving.'
-    : headline
+  const dayHeadline =
+    dayOffset === 1
+      ? 'Eric has completed his financial intake. Time to run a needs / risk analysis.'
+      : dayOffset === 2
+        ? 'Prepare for plan presentation with Eric at 10 am.'
+        : dayOffset === 3
+          ? 'You have clients to follow up with. Let’s keep things moving.'
+          : headline
   const leftHeadline = horizonView ? horizonView.headline : dayHeadline
 
   return (
@@ -467,13 +585,22 @@ export function BriefingV6Scene() {
         >
           {/* background — Briefing uses the drifting blobs; not-built pages use
               the soft peach/lavender cloud (Figma 1268-29002). */}
-          {showBriefing ? <BriefingV6Background reducedMotion={reduced} /> : isPlan ? <PlanBackground /> : <NotBuiltBackground />}
+          {showBriefing ? (
+            <BriefingV6Background reducedMotion={reduced} />
+          ) : isPlan ? (
+            <PlanBackground />
+          ) : (
+            <NotBuiltBackground />
+          )}
 
           {/* left rail — hover to expand (Figma 1002-12213) */}
           <Rail
             active={showAssessment ? 'Planning' : activeNav}
             onSelect={(s) => {
-              if (s === 'Briefing') { setShowAssessment(false); setShowIntegrated(false) }
+              if (s === 'Briefing') {
+                setShowAssessment(false)
+                setShowIntegrated(false)
+              }
               if (s === 'Clients') setClientsView('onboarding')
               setActiveNav(s)
             }}
@@ -493,32 +620,49 @@ export function BriefingV6Scene() {
                 {isClients ? (
                   <TopNav
                     title="Clients"
-                    right={(
+                    right={
                       <button
                         type="button"
-                        onClick={() => setClientsView((v) => (v === 'onboarding' ? 'annual' : v === 'annual' ? 'legacy' : v))}
+                        onClick={() =>
+                          setClientsView((v) => (v === 'onboarding' ? 'annual' : v === 'annual' ? 'legacy' : v))
+                        }
                         className="rounded-full border border-[var(--nyl-blue-500)] px-4 py-1.5 text-[13px] font-medium text-[var(--nyl-blue-500)] hover:bg-[var(--nyl-blue-050)]"
                       >
                         Sync
                       </button>
-                    )}
+                    }
                   />
                 ) : (
-                  <TopNav eyebrow={topNavMeta.eyebrow} label={topNavMeta.label} onPrev={() => stepDay(-1)} onNext={() => stepDay(1)} />
+                  <TopNav
+                    eyebrow={topNavMeta.eyebrow}
+                    label={topNavMeta.label}
+                    onPrev={() => stepDay(-1)}
+                    onNext={() => stepDay(1)}
+                  />
                 )}
               </motion.div>
             )}
 
             {!showBriefing ? (
               isClients ? (
-                clientsView === 'onboarding' ? <Onboarding /> : clientsView === 'annual' ? <Annual /> : <Legacy />
-              ) : isPlan ? <PlanPage /> : <NavPlaceholder section={activeNav} />
+                clientsView === 'onboarding' ? (
+                  <Onboarding />
+                ) : clientsView === 'annual' ? (
+                  <Annual />
+                ) : (
+                  <Legacy />
+                )
+              ) : isPlan ? (
+                <PlanPage />
+              ) : (
+                <NavPlaceholder section={activeNav} />
+              )
             ) : showAssessment ? (
               <Assessment />
             ) : showIntegrated ? (
               <Integrated />
             ) : (
-            <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
+              <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
                 {/* LEFT — fixed editorial column (4 cols · does NOT scroll).
                     Headline top-aligns with the top card; away/day bottom-anchored. */}
                 <div className="col-span-5 flex h-full flex-col pt-6">
@@ -526,221 +670,279 @@ export function BriefingV6Scene() {
                   {/* First reveal types in full; later headline updates (scroll /
                       navigate) auto-switch to the subtle blur-fade. The Nyla
                       "new task" headline is a system reveal → force the typewriter. */}
-                  {loadPhase >= 1 && <BriefingHeadline text={leftHeadline} reducedMotion={reduced} subtle={leftHeadline === HEADLINES.newTask ? false : undefined} />}
+                  {loadPhase >= 1 && (
+                    <BriefingHeadline
+                      text={leftHeadline}
+                      reducedMotion={reduced}
+                      subtle={leftHeadline === HEADLINES.newTask ? false : undefined}
+                    />
+                  )}
 
-                  {loadPhase >= 1 && (horizonView ? (
-                    <p className="mt-5 text-[14px] text-[var(--text-body-muted)]">
-                      Switch back to{' '}
-                      <button type="button" onClick={() => setHorizon('Day')} className="font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]">Day</button>
-                      {' '}to act on today's priorities.
-                    </p>
-                  ) : (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: DURATION.standard, delay: 0.2 }} className="mt-5 flex items-center gap-3">
-                    <p className="text-[13px] text-[var(--text-body-muted)]">{progressLine}</p>
-                    <div className="h-1.5 w-20 overflow-hidden rounded-full bg-[var(--nyl-gray-100)]">
+                  {loadPhase >= 1 &&
+                    (horizonView ? (
+                      <p className="mt-5 text-[14px] text-[var(--text-body-muted)]">
+                        Switch back to{' '}
+                        <button
+                          type="button"
+                          onClick={() => setHorizon('Day')}
+                          className="font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]"
+                        >
+                          Day
+                        </button>{' '}
+                        to act on today's priorities.
+                      </p>
+                    ) : (
                       <motion.div
-                        className="h-full rounded-full bg-[var(--action-primary)]"
-                        animate={{ width: `${pct}%` }}
-                        transition={{ duration: DURATION.standard, ease: EASE.settle }}
-                      />
-                    </div>
-                  </motion.div>
-                  ))}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: DURATION.standard, delay: 0.2 }}
+                        className="mt-5 flex items-center gap-3"
+                      >
+                        <p className="text-[13px] text-[var(--text-body-muted)]">{progressLine}</p>
+                        <div className="h-1.5 w-20 overflow-hidden rounded-full bg-[var(--nyl-gray-100)]">
+                          <motion.div
+                            className="h-full rounded-full bg-[var(--action-primary)]"
+                            animate={{ width: `${pct}%` }}
+                            transition={{ duration: DURATION.standard, ease: EASE.settle }}
+                          />
+                        </div>
+                      </motion.div>
+                    ))}
 
                   {/* phase 3 — While you were away + Your day fade in (no move).
                       Content swaps per selected day (see currentWhileAway/currentYourDay). */}
                   {dayView && loadPhase >= 3 && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: DURATION.deliberate, ease: EASE.settle }} className="mt-auto pt-10 pb-16">
-                  <section>
-                    <h2 className="flex items-baseline gap-2">
-                      <span className="eyebrow">{currentWhileAway.heading}</span>
-                      <span className="text-[11px] text-[var(--text-body-faint)]">· {currentWhileAway.savedLabel}</span>
-                    </h2>
-                    <ul className="mt-3 space-y-2">
-                      {currentWhileAway.items.map((it) => (
-                        <AwayItem key={it.id} label={it.label} detail={it.detail} cta={it.cta} />
-                      ))}
-                    </ul>
-                  </section>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: DURATION.deliberate, ease: EASE.settle }}
+                      className="mt-auto pt-10 pb-16"
+                    >
+                      <section>
+                        <h2 className="flex items-baseline gap-2">
+                          <span className="eyebrow">{currentWhileAway.heading}</span>
+                          <span className="text-[11px] text-[var(--text-body-faint)]">
+                            · {currentWhileAway.savedLabel}
+                          </span>
+                        </h2>
+                        <ul className="mt-3 space-y-2">
+                          {currentWhileAway.items.map((it) => (
+                            <AwayItem key={it.id} label={it.label} detail={it.detail} cta={it.cta} />
+                          ))}
+                        </ul>
+                      </section>
 
-                  {/* Your day */}
-                  <section className="mt-9">
-                    <h2 className="eyebrow">{currentYourDay.heading}</h2>
-                    <ul className="mt-3 space-y-2.5">
-                      <AnimatePresence initial={false}>
-                        {dayItems.map((d) => (
-                          <motion.li
-                            key={d.id}
-                            layout
-                            initial={d.injected && !reduced ? { opacity: 0, x: -8 } : false}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: DURATION.short, ease: EASE.settle }}
-                            className="flex items-center gap-2.5 text-[13.5px] text-[var(--text-body)]"
-                          >
-                            <span className={[
-                              'size-2 shrink-0 rounded-full',
-                              d.dot === 'now' ? 'bg-[var(--action-ai)]'
-                                : d.dot === 'review' ? 'bg-[var(--nyl-orange-400)]'
-                                : d.dot === 'done' || d.dot === 'ready' ? 'bg-[var(--badge-opportunity)]'
-                                : 'bg-[var(--nyl-gray-250)]',
-                            ].join(' ')} />
-                            <span className="text-[var(--text-body-muted)]">{d.time}</span>
-                            <span>{d.label}</span>
-                            {d.cta && (
-                              <button type="button" className="font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]">
-                                {d.cta}
-                              </button>
-                            )}
-                            {d.tag && (
-                              <span className={[
-                                'rounded-full px-2 py-0.5 text-[10.5px] font-medium uppercase tracking-[0.08em]',
-                                d.tag === 'New' ? 'bg-[var(--badge-new-soft)] text-[var(--badge-new)]' : 'bg-[var(--nyl-gray-050)] text-[var(--text-body-muted)]',
-                              ].join(' ')}>
-                                {d.tag}
-                              </span>
-                            )}
-                          </motion.li>
-                        ))}
-                      </AnimatePresence>
-                    </ul>
-                    <button type="button" onClick={() => setActiveNav('Calendar')} className="mt-4 text-[13px] font-medium text-[var(--text-accent)] hover:text-[var(--nyl-blue-800)]">
-                      {currentYourDay.viewAll}
-                    </button>
-                  </section>
-                  </motion.div>
+                      {/* Your day */}
+                      <section className="mt-9">
+                        <h2 className="eyebrow">{currentYourDay.heading}</h2>
+                        <ul className="mt-3 space-y-2.5">
+                          <AnimatePresence initial={false}>
+                            {dayItems.map((d) => (
+                              <motion.li
+                                key={d.id}
+                                layout
+                                initial={d.injected && !reduced ? { opacity: 0, x: -8 } : false}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: DURATION.short, ease: EASE.settle }}
+                                className="flex items-center gap-2.5 text-[13.5px] text-[var(--text-body)]"
+                              >
+                                <span
+                                  className={[
+                                    'size-2 shrink-0 rounded-full',
+                                    d.dot === 'now'
+                                      ? 'bg-[var(--action-ai)]'
+                                      : d.dot === 'review'
+                                        ? 'bg-[var(--nyl-orange-400)]'
+                                        : d.dot === 'done' || d.dot === 'ready'
+                                          ? 'bg-[var(--badge-opportunity)]'
+                                          : 'bg-[var(--nyl-gray-250)]',
+                                  ].join(' ')}
+                                />
+                                <span className="text-[var(--text-body-muted)]">{d.time}</span>
+                                <span>{d.label}</span>
+                                {d.cta && (
+                                  <button
+                                    type="button"
+                                    className="font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]"
+                                  >
+                                    {d.cta}
+                                  </button>
+                                )}
+                                {d.tag && (
+                                  <span
+                                    className={[
+                                      'rounded-full px-2 py-0.5 text-[10.5px] font-medium uppercase tracking-[0.08em]',
+                                      d.tag === 'New'
+                                        ? 'bg-[var(--badge-new-soft)] text-[var(--badge-new)]'
+                                        : 'bg-[var(--nyl-gray-050)] text-[var(--text-body-muted)]',
+                                    ].join(' ')}
+                                  >
+                                    {d.tag}
+                                  </span>
+                                )}
+                              </motion.li>
+                            ))}
+                          </AnimatePresence>
+                        </ul>
+                        <button
+                          type="button"
+                          onClick={() => setActiveNav('Calendar')}
+                          className="mt-4 text-[13px] font-medium text-[var(--text-accent)] hover:text-[var(--nyl-blue-800)]"
+                        >
+                          {currentYourDay.viewAll}
+                        </button>
+                      </section>
+                    </motion.div>
                   )}
                 </div>
 
                 {/* RIGHT — cols 6–12. Only this column scrolls. */}
                 <div className="col-span-7 flex min-h-0 flex-col">
-                {horizonView ? (
-                  <HorizonSummary view={horizonView} horizon={horizon as 'Week' | 'Month' | 'Quarter'} reduced={reduced} loading={horizonLoading} />
-                ) : isPast ? (
-                  <PastPlaceholder onToday={() => stepDay(-dayOffset)} />
-                ) : entries.length === 0 ? (
-                  <EmptyState onReplay={reset} />
-                ) : (
-                <div
-                  ref={scrollRef}
-                  onScroll={onScroll}
-                  className="-mx-4 -mt-[72px] min-h-0 flex-1 overflow-y-auto px-4 pb-[55vh] pt-[72px]"
-                  style={{
-                    WebkitMaskImage: 'linear-gradient(to bottom, transparent 0, black 72px)',
-                    maskImage: 'linear-gradient(to bottom, transparent 0, black 72px)',
-                  }}
-                >
-                  {/* The 72px fade lives in the top padding ABOVE the first card
+                  {horizonView ? (
+                    <HorizonSummary
+                      view={horizonView}
+                      horizon={horizon as 'Week' | 'Month' | 'Quarter'}
+                      reduced={reduced}
+                      loading={horizonLoading}
+                    />
+                  ) : isPast ? (
+                    <PastPlaceholder onToday={() => stepDay(-dayOffset)} />
+                  ) : entries.length === 0 ? (
+                    <EmptyState onReplay={reset} />
+                  ) : (
+                    <div
+                      ref={scrollRef}
+                      onScroll={onScroll}
+                      className="-mx-4 -mt-[72px] min-h-0 flex-1 overflow-y-auto px-4 pb-[55vh] pt-[72px]"
+                      style={{
+                        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0, black 72px)',
+                        maskImage: 'linear-gradient(to bottom, transparent 0, black 72px)',
+                      }}
+                    >
+                      {/* The 72px fade lives in the top padding ABOVE the first card
                       (-mt/pt keep the card aligned with the headline), sitting well
                       clear of the top chrome so the first card is never dimmed at
                       rest and scrolling cards dissolve gradually over a tall band
                       rather than getting cut off. Horizontal -mx/px gives the
                       glowing border room so it isn't cut off on the sides. */}
-                  {/* phase 2 — task cards fade up from the bottom (800ms, with a
+                      {/* phase 2 — task cards fade up from the bottom (800ms, with a
                       little overshoot/stretch on arrival). Keyed by day so the
                       stack fully remounts on date change (no stale cards). The
                       load gate only applies to today's first paint. */}
-                  <motion.div
-                    key={`day-${dayOffset}`}
-                    className="space-y-4"
-                    initial={false}
-                    animate={(loadPhase >= 2 || !isToday) ? { opacity: 1, y: 0 } : { opacity: 0, y: 44 }}
-                    transition={{ duration: 0.8, ease: [0.34, 1.32, 0.64, 1] }}
-                  >
-                  <AnimatePresence initial={false}>
-                    {activeEntries.map((e) => (
                       <motion.div
-                        key={e.model.id}
-                        data-card-id={e.model.id}
-                        layout
+                        key={`day-${dayOffset}`}
+                        className="space-y-4"
                         initial={false}
-                        exit={{ opacity: 0, scale: 0.98, transition: { duration: DURATION.dramatic, ease: EASE.lift } }}
-                        whileHover={reduced ? undefined : { y: -2 }}
-                        transition={{ duration: DURATION.micro, ease: EASE.settle, layout: { duration: DURATION.deliberate, ease: EASE.settle } }}
-                        className="cursor-default"
-                        onClick={(ev) => {
-                          if ((ev.target as HTMLElement).closest('button,a,input,textarea')) return
-                          surface(e.model.id)
-                        }}
+                        animate={loadPhase >= 2 || !isToday ? { opacity: 1, y: 0 } : { opacity: 0, y: 44 }}
+                        transition={{ duration: 0.8, ease: [0.34, 1.32, 0.64, 1] }}
                       >
-                        <BriefingTaskCard
-                          model={e.model}
-                          state={statusToCardState(e.status)}
-                          expanded={e.expanded}
-                          reducedMotion={reduced}
-                          onToggleExpand={() => toggleExpand(e.model.id)}
-                          onMarkDone={() => markDone(e.model.id)}
-                          onSnooze={() => snooze(e.model.id)}
-                          onDismiss={() => dismiss(e.model.id)}
-                          onAddToQueue={() => {/* queued — settle proceeds via timer */}}
-                          onPrimary={() => (
-                            e.model === SANDRA_TASK2 ? setShowAssessment(true)
-                              : e.model === SANDRA_TASK3 ? setShowIntegrated(true)
-                              : surface(e.model.id)
-                          )}
-                          onUndo={() => undo(e.model.id)}
-                        />
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-
-                  {/* closing line — priorities end here; Nyla keeps watch. When
-                      tasks are completed, a show/hide of them merges in here. */}
-                  <motion.div
-                    initial={false}
-                    animate={loadPhase >= 2 ? { opacity: 1 } : { opacity: 0 }}
-                    transition={{ duration: DURATION.deliberate, ease: EASE.settle }}
-                    className="px-1 pt-6 text-center"
-                  >
-                    <p className="text-[12.5px] leading-[1.5] text-[var(--text-body-faint)]">{STACK_FOOTER}</p>
-                    {completedEntries.length > 0 && (
-                      <>
-                        <button
-                          type="button"
-                          onClick={() => setShowCompleted((v) => !v)}
-                          aria-expanded={showCompleted}
-                          className="mt-3 inline-flex items-center gap-1 text-[12.5px] font-medium text-[var(--nyl-blue-500)] transition-colors hover:text-[var(--nyl-blue-600)]"
-                        >
-                          {showCompleted ? 'Hide' : 'Show'} completed ({completedEntries.length})
-                          <ArrowDropDownIcon size={16} className={showCompleted ? 'rotate-180' : ''} />
-                        </button>
                         <AnimatePresence initial={false}>
-                          {showCompleted && (
+                          {activeEntries.map((e) => (
                             <motion.div
-                              key="completed"
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: 'auto', opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: DURATION.short, ease: EASE.settle }}
-                              className="overflow-hidden"
+                              key={e.model.id}
+                              data-card-id={e.model.id}
+                              layout
+                              initial={false}
+                              exit={{
+                                opacity: 0,
+                                scale: 0.98,
+                                transition: { duration: DURATION.dramatic, ease: EASE.lift },
+                              }}
+                              whileHover={reduced ? undefined : { y: -2 }}
+                              transition={{
+                                duration: DURATION.micro,
+                                ease: EASE.settle,
+                                layout: { duration: DURATION.deliberate, ease: EASE.settle },
+                              }}
+                              className="cursor-default"
+                              onClick={(ev) => {
+                                if ((ev.target as HTMLElement).closest('button,a,input,textarea')) return
+                                surface(e.model.id)
+                              }}
                             >
-                              <div className="mt-4 space-y-3 text-left">
-                                {completedEntries.map((e) => (
-                                  <BriefingTaskCard
-                                    key={e.model.id}
-                                    model={e.model}
-                                    state="done"
-                                    reducedMotion={reduced}
-                                    onToggleExpand={() => {}}
-                                    onMarkDone={() => {}}
-                                    onSnooze={() => {}}
-                                    onDismiss={() => {}}
-                                    onAddToQueue={() => {}}
-                                    onPrimary={() => {}}
-                                    onUndo={() => undo(e.model.id)}
-                                  />
-                                ))}
-                              </div>
+                              <BriefingTaskCard
+                                model={e.model}
+                                state={statusToCardState(e.status)}
+                                expanded={e.expanded}
+                                reducedMotion={reduced}
+                                onToggleExpand={() => toggleExpand(e.model.id)}
+                                onMarkDone={() => markDone(e.model.id)}
+                                onSnooze={() => snooze(e.model.id)}
+                                onDismiss={() => dismiss(e.model.id)}
+                                onAddToQueue={() => {
+                                  /* queued — settle proceeds via timer */
+                                }}
+                                onPrimary={() =>
+                                  e.model === SANDRA_TASK2
+                                    ? setShowAssessment(true)
+                                    : e.model === SANDRA_TASK3
+                                      ? setShowIntegrated(true)
+                                      : surface(e.model.id)
+                                }
+                                onUndo={() => undo(e.model.id)}
+                              />
                             </motion.div>
-                          )}
+                          ))}
                         </AnimatePresence>
-                      </>
-                    )}
-                  </motion.div>
-                  </motion.div>
+
+                        {/* closing line — priorities end here; Nyla keeps watch. When
+                      tasks are completed, a show/hide of them merges in here. */}
+                        <motion.div
+                          initial={false}
+                          animate={loadPhase >= 2 ? { opacity: 1 } : { opacity: 0 }}
+                          transition={{ duration: DURATION.deliberate, ease: EASE.settle }}
+                          className="px-1 pt-6 text-center"
+                        >
+                          <p className="text-[12.5px] leading-[1.5] text-[var(--text-body-faint)]">{STACK_FOOTER}</p>
+                          {completedEntries.length > 0 && (
+                            <>
+                              <button
+                                type="button"
+                                onClick={() => setShowCompleted((v) => !v)}
+                                aria-expanded={showCompleted}
+                                className="mt-3 inline-flex items-center gap-1 text-[12.5px] font-medium text-[var(--nyl-blue-500)] transition-colors hover:text-[var(--nyl-blue-600)]"
+                              >
+                                {showCompleted ? 'Hide' : 'Show'} completed ({completedEntries.length})
+                                <ArrowDropDownIcon size={16} className={showCompleted ? 'rotate-180' : ''} />
+                              </button>
+                              <AnimatePresence initial={false}>
+                                {showCompleted && (
+                                  <motion.div
+                                    key="completed"
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: DURATION.short, ease: EASE.settle }}
+                                    className="overflow-hidden"
+                                  >
+                                    <div className="mt-4 space-y-3 text-left">
+                                      {completedEntries.map((e) => (
+                                        <BriefingTaskCard
+                                          key={e.model.id}
+                                          model={e.model}
+                                          state="done"
+                                          reducedMotion={reduced}
+                                          onToggleExpand={() => {}}
+                                          onMarkDone={() => {}}
+                                          onSnooze={() => {}}
+                                          onDismiss={() => {}}
+                                          onAddToQueue={() => {}}
+                                          onPrimary={() => {}}
+                                          onUndo={() => undo(e.model.id)}
+                                        />
+                                      ))}
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </>
+                          )}
+                        </motion.div>
+                      </motion.div>
+                    </div>
+                  )}
                 </div>
-                )}
               </div>
-            </div>
             )}
           </div>
 
@@ -785,50 +987,65 @@ function AwayItem({ label, detail, cta }: { label: string; detail: string; cta?:
   return (
     <li>
       {/* hover target hugs the text only (inline-block), not the full row width */}
-      <span
-        className="relative inline-block"
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
-      <button
-        type="button"
-        className="text-left text-[13.5px] font-medium text-[var(--text-body-muted)] underline decoration-dotted decoration-[var(--text-body-faint)] underline-offset-[3px] transition-colors hover:text-[var(--text-body)] hover:decoration-[var(--text-body)]"
-      >
-        {label}
-      </button>
-      <AnimatePresence>
-        {hover && (
-          <motion.div
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: DURATION.micro, ease: EASE.settle }}
-            className="absolute bottom-[calc(100%+6px)] left-0 z-40 w-[320px] rounded-lg border border-[var(--border-default)] bg-white p-3 shadow-[0_14px_36px_-16px_rgba(23,24,28,0.3)]"
-          >
-            <p className="text-[12px] leading-[1.5] text-[var(--text-body-muted)]">{detail}</p>
-            {cta && (
-              <button type="button" className="mt-2 text-[12px] font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]">
-                {cta} →
-              </button>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <span className="relative inline-block" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+        <button
+          type="button"
+          className="text-left text-[13.5px] font-medium text-[var(--text-body-muted)] underline decoration-dotted decoration-[var(--text-body-faint)] underline-offset-[3px] transition-colors hover:text-[var(--text-body)] hover:decoration-[var(--text-body)]"
+        >
+          {label}
+        </button>
+        <AnimatePresence>
+          {hover && (
+            <motion.div
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: DURATION.micro, ease: EASE.settle }}
+              className="absolute bottom-[calc(100%+6px)] left-0 z-40 w-[320px] rounded-lg border border-[var(--border-default)] bg-white p-3 shadow-[0_14px_36px_-16px_rgba(23,24,28,0.3)]"
+            >
+              <p className="text-[12px] leading-[1.5] text-[var(--text-body-muted)]">{detail}</p>
+              {cta && (
+                <button
+                  type="button"
+                  className="mt-2 text-[12px] font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]"
+                >
+                  {cta} →
+                </button>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </span>
     </li>
   )
 }
 
 const HORIZON_PLACEHOLDER_COPY: Record<'Week' | 'Month' | 'Quarter', string> = {
-  Week: 'The rhythm that compounds — Nyla tracks your activity targets, surfaces what\'s unscheduled, and helps you fill the week with the right conversations.',
-  Month: 'See the whole board, not just the next move — closes, reviews, service, outreach, all organized by what needs to happen so you and Nyla can sequence the month.',
-  Quarter: 'The view that separates intentional from reactive — where council stands, where your review cycle is, and what the math says you need to finish strong, with Nyla mapping the path to get there.',
+  Week: "The rhythm that compounds — Nyla tracks your activity targets, surfaces what's unscheduled, and helps you fill the week with the right conversations.",
+  Month:
+    'See the whole board, not just the next move — closes, reviews, service, outreach, all organized by what needs to happen so you and Nyla can sequence the month.',
+  Quarter:
+    'The view that separates intentional from reactive — where council stands, where your review cycle is, and what the math says you need to finish strong, with Nyla mapping the path to get there.',
 }
 
 /* ── horizon summary (Week / Month / Quarter right-side view) ───────────────*/
-function HorizonSummary({ view, horizon, reduced, loading }: { view: HorizonView; horizon: 'Week' | 'Month' | 'Quarter'; reduced: boolean; loading: boolean }) {
+function HorizonSummary({
+  view,
+  horizon,
+  reduced,
+  loading,
+}: {
+  view: HorizonView
+  horizon: 'Week' | 'Month' | 'Quarter'
+  reduced: boolean
+  loading: boolean
+}) {
   const toneColor = (t?: string) =>
-    t === 'good' ? 'text-[var(--badge-opportunity)]' : t === 'warn' ? 'text-[var(--nyl-orange-500)]' : 'text-[var(--text-headline)]'
+    t === 'good'
+      ? 'text-[var(--badge-opportunity)]'
+      : t === 'warn'
+        ? 'text-[var(--nyl-orange-500)]'
+        : 'text-[var(--text-headline)]'
 
   if (loading) {
     return (
@@ -860,7 +1077,12 @@ function HorizonSummary({ view, horizon, reduced, loading }: { view: HorizonView
             className="rounded-[14px] border border-[var(--border-subtle)] bg-white p-5"
           >
             <p className="text-[12px] uppercase tracking-[0.1em] text-[var(--text-body-muted)]">{s.label}</p>
-            <p className={['mt-2 font-serif text-[32px] leading-none', toneColor(s.tone)].join(' ')} style={{ fontWeight: 400 }}>{s.value}</p>
+            <p
+              className={['mt-2 font-serif text-[32px] leading-none', toneColor(s.tone)].join(' ')}
+              style={{ fontWeight: 400 }}
+            >
+              {s.value}
+            </p>
             <p className="mt-2 text-[13px] text-[var(--text-body-muted)]">{s.sub}</p>
           </motion.div>
         ))}
@@ -872,7 +1094,12 @@ function HorizonSummary({ view, horizon, reduced, loading }: { view: HorizonView
         className="mt-4 flex min-h-0 flex-1 flex-col items-center justify-center rounded-[14px] border border-[var(--border-subtle)] bg-white p-8 text-center"
       >
         <p className="max-w-[400px] text-[16px] leading-relaxed text-[var(--text-primary)]">{placeholderCopy}</p>
-        <span className="mt-6 rounded-full border bg-[var(--nyl-blue-050)] px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[var(--text-secondary)]" style={{ borderColor: '#80BAFF' }}>Coming Soon</span>
+        <span
+          className="mt-6 rounded-full border bg-[var(--nyl-blue-050)] px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[var(--text-secondary)]"
+          style={{ borderColor: '#80BAFF' }}
+        >
+          Coming Soon
+        </span>
       </motion.div>
     </div>
   )
@@ -920,15 +1147,38 @@ function NavPlaceholder({ section }: { section: string }) {
         <span className="flex size-14 items-center justify-center rounded-2xl bg-white/80 text-[var(--nyl-blue-500)]">
           {Icon && <Icon size={iconSize} />}
         </span>
-        <h2 className="mt-6 font-serif text-[32px] leading-tight text-[var(--text-headline)]" style={{ fontWeight: 300 }}>{meta?.title ?? section}</h2>
+        <h2
+          className="mt-6 font-serif text-[32px] leading-tight text-[var(--text-headline)]"
+          style={{ fontWeight: 300 }}
+        >
+          {meta?.title ?? section}
+        </h2>
         <p className="mt-3 max-w-[460px] text-[18px] leading-relaxed text-[var(--text-primary)]">{meta?.valueProp}</p>
         {meta?.example && (
           <div className="mt-6 w-full rounded-[14px] border border-[var(--border-subtle)] bg-white p-5 text-center">
-            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', fontWeight: 500, lineHeight: '26px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-primary)', textAlign: 'center' }}>Advisors Can...</p>
+            <p
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '14px',
+                fontWeight: 500,
+                lineHeight: '26px',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                color: 'var(--text-primary)',
+                textAlign: 'center',
+              }}
+            >
+              Advisors Can...
+            </p>
             <p className="mt-2 text-[16px] leading-relaxed text-[var(--text-secondary)]">{meta.example}</p>
           </div>
         )}
-        <span className="mt-6 rounded-full border bg-[var(--nyl-blue-050)] px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[var(--text-secondary)]" style={{ borderColor: '#80BAFF' }}>Coming Soon</span>
+        <span
+          className="mt-6 rounded-full border bg-[var(--nyl-blue-050)] px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[var(--text-secondary)]"
+          style={{ borderColor: '#80BAFF' }}
+        >
+          Coming Soon
+        </span>
       </motion.div>
     </div>
   )
@@ -947,11 +1197,17 @@ function PastPlaceholder({ onToday }: { onToday: () => void }) {
         <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-[var(--nyl-gray-050)] text-[var(--text-body-muted)]">
           <CalendarIcon size={22} />
         </span>
-        <h2 className="mt-5 font-serif text-[24px] text-[var(--text-headline)]" style={{ fontWeight: 400 }}>Looking back is coming soon.</h2>
+        <h2 className="mt-5 font-serif text-[24px] text-[var(--text-headline)]" style={{ fontWeight: 400 }}>
+          Looking back is coming soon.
+        </h2>
         <p className="mt-2 max-w-[340px] text-[14px] text-[var(--text-body-muted)]">
           The past-day briefing view is still being designed. For now, jump back to today.
         </p>
-        <button type="button" onClick={onToday} className="mt-6 text-[13px] font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]">
+        <button
+          type="button"
+          onClick={onToday}
+          className="mt-6 text-[13px] font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]"
+        >
           ← Back to today
         </button>
       </motion.div>
@@ -972,11 +1228,17 @@ function EmptyState({ onReplay }: { onReplay: () => void }) {
         <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-[var(--badge-opportunity-soft)] text-[var(--badge-opportunity)]">
           <CheckIcon size={22} />
         </span>
-        <h2 className="mt-5 font-serif text-[24px] text-[var(--text-headline)]" style={{ fontWeight: 400 }}>You’re clear for now.</h2>
+        <h2 className="mt-5 font-serif text-[24px] text-[var(--text-headline)]" style={{ fontWeight: 400 }}>
+          You’re clear for now.
+        </h2>
         <p className="mt-2 max-w-[320px] text-[14px] text-[var(--text-body-muted)]">
           Nothing left in today’s queue. Nyla will surface the next thing the moment it matters.
         </p>
-        <button type="button" onClick={onReplay} className="mt-6 text-[13px] font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]">
+        <button
+          type="button"
+          onClick={onReplay}
+          className="mt-6 text-[13px] font-medium text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]"
+        >
           ↻ Replay the briefing
         </button>
       </motion.div>
@@ -994,7 +1256,10 @@ function HorizonPill({ horizon, setHorizon }: { horizon: Horizon; setHorizon: (h
   return (
     // Vertically centered on the rail avatar (center 60px from the viewport bottom
     // = py-10 40px + half the 40px avatar). Shared Y with the Plan subnav.
-    <div className="pointer-events-none absolute left-[130px] right-10 z-20 flex justify-center" style={{ bottom: 60, transform: 'translateY(50%)' }}>
+    <div
+      className="pointer-events-none absolute left-[130px] right-10 z-20 flex justify-center"
+      style={{ bottom: 60, transform: 'translateY(50%)' }}
+    >
       <PageSubnav
         active={horizon}
         options={['Day', 'Week', 'Month', 'Quarter']}
@@ -1063,7 +1328,9 @@ function RailRow({ item, expanded, onClick }: { item: RailItem; expanded: boolea
       <span
         className={[
           'relative flex size-10 shrink-0 items-center justify-center rounded-[11px] transition-colors',
-          item.active ? 'bg-[var(--nyl-blue-050)] text-[var(--nyl-blue-500)]' : 'text-[var(--nyl-gray-700)] group-hover:bg-[var(--nyl-blue-025)] group-hover:text-[var(--nyl-blue-500)]',
+          item.active
+            ? 'bg-[var(--nyl-blue-050)] text-[var(--nyl-blue-500)]'
+            : 'text-[var(--nyl-gray-700)] group-hover:bg-[var(--nyl-blue-025)] group-hover:text-[var(--nyl-blue-500)]',
         ].join(' ')}
       >
         <item.Icon size={item.size} />
@@ -1083,7 +1350,17 @@ function RailRow({ item, expanded, onClick }: { item: RailItem; expanded: boolea
   )
 }
 
-function Rail({ active, onSelect, onExit, slideIn = false }: { active: string; onSelect: (s: string) => void; onExit: () => void; slideIn?: boolean }) {
+function Rail({
+  active,
+  onSelect,
+  onExit,
+  slideIn = false,
+}: {
+  active: string
+  onSelect: (s: string) => void
+  onExit: () => void
+  slideIn?: boolean
+}) {
   const [expanded, setExpanded] = useState(false)
   const enterTimer = useRef<number | undefined>(undefined)
   /* Expand only after a brief hover so a passing cursor doesn't trigger it. */
@@ -1120,14 +1397,24 @@ function Rail({ active, onSelect, onExit, slideIn = false }: { active: string; o
         {/* main nav */}
         <div className="mt-12 flex flex-1 flex-col gap-6">
           {NAV_ITEMS.map((it) => (
-            <RailRow key={it.label} item={{ ...it, active: it.label === active }} expanded={expanded} onClick={() => onSelect(it.label)} />
+            <RailRow
+              key={it.label}
+              item={{ ...it, active: it.label === active }}
+              expanded={expanded}
+              onClick={() => onSelect(it.label)}
+            />
           ))}
         </div>
 
         {/* bottom utilities */}
         <div className="flex flex-col gap-6">
           {BOTTOM_ITEMS.map((it) => (
-            <RailRow key={it.label} item={{ ...it, active: it.label === active }} expanded={expanded} onClick={() => onSelect(it.label)} />
+            <RailRow
+              key={it.label}
+              item={{ ...it, active: it.label === active }}
+              expanded={expanded}
+              onClick={() => onSelect(it.label)}
+            />
           ))}
         </div>
 
@@ -1155,7 +1442,23 @@ function Rail({ active, onSelect, onExit, slideIn = false }: { active: string; o
 /* ── top nav — "Briefing" · centered date · dev controls ────────────────────
  * Center date matches Figma (TODAY · MONDAY, DEC 12 with prev/next chevrons).
  * The time-of-day toggle + Replay are demo controls (not in the Figma chrome). */
-function TopNav({ title = 'Briefing', eyebrow, label, onPrev, onNext, prevDisabled, right }: { title?: string; eyebrow?: string | null; label?: string; onPrev?: () => void; onNext?: () => void; prevDisabled?: boolean; right?: ReactNode }) {
+function TopNav({
+  title = 'Briefing',
+  eyebrow,
+  label,
+  onPrev,
+  onNext,
+  prevDisabled,
+  right,
+}: {
+  title?: string
+  eyebrow?: string | null
+  label?: string
+  onPrev?: () => void
+  onNext?: () => void
+  prevDisabled?: boolean
+  right?: ReactNode
+}) {
   /* Fixed 120px band whose center (60px) matches the rail's NYL logo center
      (rail py-10 = 40px + 40px logo / 2), so the page title + date carousel sit
      on the same horizontal line as the logo. */
@@ -1167,16 +1470,40 @@ function TopNav({ title = 'Briefing', eyebrow, label, onPrev, onNext, prevDisabl
           that stack's left/right edges and the date centered between them
           (or a custom `right` node, e.g. the Clients page's Sync button). */}
       <div className={[GRID, 'grid w-full grid-cols-12 items-center gap-6'].join(' ')}>
-        <p className="col-span-5 font-serif text-[18px] text-[var(--text-headline)]" style={{ fontWeight: 400 }}>{title}</p>
+        <p className="col-span-5 font-serif text-[18px] text-[var(--text-headline)]" style={{ fontWeight: 400 }}>
+          {title}
+        </p>
 
         <div className="col-span-7 flex items-center justify-end">
-          {right ? right : (
+          {right ? (
+            right
+          ) : (
             <div className="grid w-full grid-cols-[auto_1fr_auto] items-center">
-              <button type="button" onClick={onPrev} disabled={prevDisabled} aria-label="Previous day" className="justify-self-start text-[18px] leading-none text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)] disabled:opacity-40 disabled:hover:text-[var(--nyl-blue-500)]">‹</button>
+              <button
+                type="button"
+                onClick={onPrev}
+                disabled={prevDisabled}
+                aria-label="Previous day"
+                className="justify-self-start text-[18px] leading-none text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)] disabled:opacity-40 disabled:hover:text-[var(--nyl-blue-500)]"
+              >
+                ‹
+              </button>
               <span className="text-center text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-headline)]">
-                {eyebrow && <>{eyebrow} <span className="text-[var(--text-body-faint)]">·</span> </>}{label}
+                {eyebrow && (
+                  <>
+                    {eyebrow} <span className="text-[var(--text-body-faint)]">·</span>{' '}
+                  </>
+                )}
+                {label}
               </span>
-              <button type="button" onClick={onNext} aria-label="Next day" className="justify-self-end text-[18px] leading-none text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]">›</button>
+              <button
+                type="button"
+                onClick={onNext}
+                aria-label="Next day"
+                className="justify-self-end text-[18px] leading-none text-[var(--nyl-blue-500)] hover:text-[var(--nyl-blue-600)]"
+              >
+                ›
+              </button>
             </div>
           )}
         </div>

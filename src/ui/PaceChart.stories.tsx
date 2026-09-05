@@ -57,7 +57,7 @@ export const OnTrack: Story = {
     todayLabel: 'Today, Dec 16',
     actualValueAtToday: 52.4,
     fycGoal: 47,
-    
+
     legend: ON_TRACK_LEGEND,
     xAxisLabels: NYL_FISCAL_X_LABELS,
   },
@@ -93,7 +93,7 @@ export const BehindPace: Story = {
     todayLabel: 'Today, Dec 16',
     actualValueAtToday: 33,
     fycGoal: 47,
-    
+
     legend: [
       { label: 'Actual · $33K', color: '#9b9997' },
       { label: 'Current pace', color: '#bc79ec' },
@@ -129,7 +129,7 @@ export const JustStarted: Story = {
     todayLabel: 'Today, Aug 15',
     actualValueAtToday: 43,
     fycGoal: 47,
-    
+
     legend: [
       { label: 'Actual · $43K', color: '#9b9997' },
       { label: 'Current pace', color: '#bc79ec' },
@@ -164,7 +164,7 @@ export const YearComplete: Story = {
     todayLabel: 'Jun 30',
     actualValueAtToday: 87,
     fycGoal: 47,
-    
+
     legend: [
       { label: 'Final · $87K', color: '#9b9997' },
       { label: 'FYC goal · $42K', color: '#bc79ec', dotted: true },
@@ -204,7 +204,7 @@ export const Playground: Story = {
     todayLabel: 'Today, Dec 16',
     actualValueAtToday: 52.4,
     fycGoal: 47,
-    
+
     legend: ON_TRACK_LEGEND,
     width: 858,
     height: 196,

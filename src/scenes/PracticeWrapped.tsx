@@ -79,7 +79,7 @@ const STORIES: Story[] = [
     eyebrow: '#7 · Your most-trusted client',
     big: 'Maria Garcia',
     bigSub: '2 referrals · 12 yr history',
-    caption: 'Send her a hand-written thank you. We\'ll prep the card.',
+    caption: "Send her a hand-written thank you. We'll prep the card.",
   },
   {
     id: 'milestone',
@@ -87,7 +87,7 @@ const STORIES: Story[] = [
     eyebrow: '#8 · The milestone',
     big: 'Executive Council',
     bigSub: 'Locked · September 14',
-    caption: 'Top 12% of advisors at your tenure. The next bar is Chairman\'s.',
+    caption: "Top 12% of advisors at your tenure. The next bar is Chairman's.",
   },
   {
     id: 'next',
@@ -115,7 +115,13 @@ export function PracticeWrapped() {
   const [paused, setPaused] = useState(false)
   const [progress, setProgress] = useState(0)
 
-  useEffect(() => { if (!open) { setIdx(0); setPaused(false); setProgress(0) } }, [open])
+  useEffect(() => {
+    if (!open) {
+      setIdx(0)
+      setPaused(false)
+      setProgress(0)
+    }
+  }, [open])
 
   useEffect(() => {
     if (!open || paused) return
@@ -143,7 +149,10 @@ export function PracticeWrapped() {
       if (e.key === 'Escape') close()
       if (e.key === 'ArrowRight') setIdx((i) => Math.min(STORIES.length - 1, i + 1))
       if (e.key === 'ArrowLeft') setIdx((i) => Math.max(0, i - 1))
-      if (e.key === ' ') { e.preventDefault(); setPaused((p) => !p) }
+      if (e.key === ' ') {
+        e.preventDefault()
+        setPaused((p) => !p)
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)

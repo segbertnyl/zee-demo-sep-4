@@ -12,7 +12,8 @@ export default {
     controls: { disable: true },
     docs: {
       description: {
-        component: 'Fixed vertical navigation rail. Collapsed at 76px wide; expands to 220px on hover after 2s. Houses primary destinations, canvas mode toggle, role switcher, recent activity flyout, and user avatar.',
+        component:
+          'Fixed vertical navigation rail. Collapsed at 76px wide; expands to 220px on hover after 2s. Houses primary destinations, canvas mode toggle, role switcher, recent activity flyout, and user avatar.',
       },
     },
   },

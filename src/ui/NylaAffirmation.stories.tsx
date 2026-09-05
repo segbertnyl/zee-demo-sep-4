@@ -7,7 +7,7 @@ export default {
   parameters: { layout: 'fullscreen' },
   args: {
     onComplete: () => {},
-    duration: 99999,  // disabled in Storybook so screen stays visible
+    duration: 99999, // disabled in Storybook so screen stays visible
   },
 } satisfies Meta<typeof NylaAffirmation>
 

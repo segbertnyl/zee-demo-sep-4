@@ -31,7 +31,9 @@ export function GoalRow({
       role="button"
       tabIndex={0}
       onClick={!selected ? onSelect : undefined}
-      onKeyDown={e => { if (!selected && (e.key === 'Enter' || e.key === ' ')) onSelect?.() }}
+      onKeyDown={(e) => {
+        if (!selected && (e.key === 'Enter' || e.key === ' ')) onSelect?.()
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={className}
@@ -40,8 +42,8 @@ export function GoalRow({
         display: 'flex',
         alignItems: 'flex-start',
         gap: 16,
-        paddingTop: 16,
-        paddingBottom: 16,
+        paddingTop: 12,
+        paddingBottom: 12,
         borderTop: '1px solid var(--border-subtle, #dcd9d5)',
         outline: 'none',
         borderRadius: selected ? 4 : 0,
@@ -53,9 +55,7 @@ export function GoalRow({
       }}
     >
       {/* Icon */}
-      <div style={{ flexShrink: 0, width: 24, height: 24 }}>
-        {icon}
-      </div>
+      <div style={{ flexShrink: 0, width: 24, height: 24 }}>{icon}</div>
 
       {/* Content */}
       <div style={{ flex: '1 0 0', minWidth: 0, display: 'flex', flexDirection: 'column' }}>
@@ -68,9 +68,7 @@ export function GoalRow({
             lineHeight: '24px',
             letterSpacing: '0.2px',
             fontWeight: hovered || selected ? 500 : 400,
-            color: hovered || selected
-              ? 'var(--text-heading, #000533)'
-              : 'var(--text-body-secondary, #474952)',
+            color: hovered || selected ? 'var(--text-heading, #000533)' : 'var(--text-body-secondary, #474952)',
             transition: 'color 120ms ease',
           }}
         >
@@ -123,7 +121,10 @@ export function GoalRow({
           >
             <button
               type="button"
-              onClick={e => { e.stopPropagation(); onChange?.() }}
+              onClick={(e) => {
+                e.stopPropagation()
+                onChange?.()
+              }}
               style={{
                 background: 'none',
                 border: 'none',
@@ -142,7 +143,10 @@ export function GoalRow({
             </button>
             <button
               type="button"
-              onClick={e => { e.stopPropagation(); onRemove?.() }}
+              onClick={(e) => {
+                e.stopPropagation()
+                onRemove?.()
+              }}
               style={{
                 background: 'none',
                 border: 'none',

@@ -23,31 +23,28 @@ function doPost(e) {
     sheet.clearContents()
 
     if (payload.rows && payload.rows.length > 0) {
-      sheet.getRange(1, 1, payload.rows.length, payload.rows[0].length)
-        .setValues(payload.rows)
+      sheet.getRange(1, 1, payload.rows.length, payload.rows[0].length).setValues(payload.rows)
 
       // Freeze header row
       sheet.setFrozenRows(1)
 
       // Bold the header row
-      sheet.getRange(1, 1, 1, payload.rows[0].length)
-        .setFontWeight('bold')
+      sheet.getRange(1, 1, 1, payload.rows[0].length).setFontWeight('bold')
     }
 
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: true, rows: payload.rows.length - 1 }))
-      .setMimeType(ContentService.MimeType.JSON)
-
+    return ContentService.createTextOutput(JSON.stringify({ ok: true, rows: payload.rows.length - 1 })).setMimeType(
+      ContentService.MimeType.JSON,
+    )
   } catch (err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: false, error: err.message }))
-      .setMimeType(ContentService.MimeType.JSON)
+    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: err.message })).setMimeType(
+      ContentService.MimeType.JSON,
+    )
   }
 }
 
 // Lets you test the deployment is live by visiting the URL in a browser
 function doGet() {
-  return ContentService
-    .createTextOutput(JSON.stringify({ ok: true, message: 'NYL360 copy receiver is live' }))
-    .setMimeType(ContentService.MimeType.JSON)
+  return ContentService.createTextOutput(
+    JSON.stringify({ ok: true, message: 'NYL360 copy receiver is live' }),
+  ).setMimeType(ContentService.MimeType.JSON)
 }

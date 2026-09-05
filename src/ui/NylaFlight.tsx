@@ -81,11 +81,17 @@ export function captureNylaFlightSource(slotId: string, hideIds: string[] = [], 
     }
     el = el.parentElement
   }
-  rotationDeg = ((rotationDeg % 360) + 540) % 360 - 180 // normalize to ±180
+  rotationDeg = (((rotationDeg % 360) + 540) % 360) - 180 // normalize to ±180
   if (snapToSize) {
     const cx = r.left + r.width / 2
     const cy = r.top + r.height / 2
-    pendingSource = { left: cx - snapToSize / 2, top: cy - snapToSize / 2, width: snapToSize, height: snapToSize, rotationDeg }
+    pendingSource = {
+      left: cx - snapToSize / 2,
+      top: cy - snapToSize / 2,
+      width: snapToSize,
+      height: snapToSize,
+      rotationDeg,
+    }
   } else {
     pendingSource = { left: r.left, top: r.top, width: r.width, height: r.height, rotationDeg }
   }
@@ -257,7 +263,20 @@ export function NylaFlight({
     }
     raf = requestAnimationFrame(loop)
     return () => cancelAnimationFrame(raf)
-  }, [reduce, from, to, size, holdMs, flightMs, gatherInPlaceMs, scatterMax, burstMs, hangMs, gatherFraction, cascadeAtFraction])
+  }, [
+    reduce,
+    from,
+    to,
+    size,
+    holdMs,
+    flightMs,
+    gatherInPlaceMs,
+    scatterMax,
+    burstMs,
+    hangMs,
+    gatherFraction,
+    cascadeAtFraction,
+  ])
 
   if (reduce) return null
 

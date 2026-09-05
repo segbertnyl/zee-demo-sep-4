@@ -107,8 +107,7 @@ export function getCollab(): Session {
     emit(s.peerListeners)
   })
   provider.on('status', (e: { status: string }) => {
-    s.connSnap =
-      e.status === 'connected' ? 'connected' : e.status === 'connecting' ? 'connecting' : 'disconnected'
+    s.connSnap = e.status === 'connected' ? 'connected' : e.status === 'connecting' ? 'connecting' : 'disconnected'
     emit(s.connListeners)
   })
 

@@ -7,20 +7,21 @@ Agent definitions live in `scripts/agents/`.
 
 ## Agents used in this build
 
-| Agent | Definition | Role |
-|---|---|---|
-| Frontend Developer | `scripts/agents/engineering-frontend-developer.md` | Built all UI components and Discovery flow screens |
-| Minimal Change Engineer | `scripts/agents/engineering-minimal-change-engineer.md` | Applied targeted fixes — token compliance, padding, copy — without scope creep |
-| Code Reviewer | `scripts/agents/engineering-code-reviewer.md` | Audited all 34 Storybook components for design token compliance |
-| Senior Developer | Built-in `code-reviewer` subagent (Claude Code) | Validated implementations before commit; caught animation bugs and unguarded effects |
-| Workflow Architect | `scripts/agents/specialized-workflow-architect.md` | Scoped component work; produced build-ready specs from Figma |
-| Reality Checker | `scripts/agents/testing-reality-checker.md` | Certified production readiness; defaulted to NEEDS WORK, required evidence |
+| Agent                   | Definition                                              | Role                                                                                 |
+| ----------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Frontend Developer      | `scripts/agents/engineering-frontend-developer.md`      | Built all UI components and Discovery flow screens                                   |
+| Minimal Change Engineer | `scripts/agents/engineering-minimal-change-engineer.md` | Applied targeted fixes — token compliance, padding, copy — without scope creep       |
+| Code Reviewer           | `scripts/agents/engineering-code-reviewer.md`           | Audited all 34 Storybook components for design token compliance                      |
+| Senior Developer        | Built-in `code-reviewer` subagent (Claude Code)         | Validated implementations before commit; caught animation bugs and unguarded effects |
+| Workflow Architect      | `scripts/agents/specialized-workflow-architect.md`      | Scoped component work; produced build-ready specs from Figma                         |
+| Reality Checker         | `scripts/agents/testing-reality-checker.md`             | Certified production readiness; defaulted to NEEDS WORK, required evidence           |
 
 ---
 
 ## Multi-agent workflows
 
 ### Component build (per new component)
+
 ```
 Figma MCP fetch → Parallel: Frontend Developer (component + story) + CSV agent
                → Code Reviewer token check
@@ -30,6 +31,7 @@ Figma MCP fetch → Parallel: Frontend Developer (component + story) + CSV agent
 ```
 
 ### Full token audit (34 components)
+
 ```
 Workflow → 5 parallel Code Reviewer agents (grouped by component category)
          → Synthesize findings
@@ -38,6 +40,7 @@ Workflow → 5 parallel Code Reviewer agents (grouped by component category)
 ```
 
 ### Discovery flow screens
+
 ```
 Parallel: Frontend Developer (Storybook component) + Frontend Developer (flow screen + CSV)
 → Senior Developer review → Minimal Change Engineer fixes → Push
@@ -62,8 +65,8 @@ npm run test:storybook:update-snapshots   # generate baselines
 
 ## Prototype keyboard shortcuts
 
-| Key | Action |
-|---|---|
-| `M` | Open prototype menu |
-| `G` | Toggle 12-column grid overlay |
+| Key      | Action                              |
+| -------- | ----------------------------------- |
+| `M`      | Open prototype menu                 |
+| `G`      | Toggle 12-column grid overlay       |
 | `Escape` | Close current flow / return to menu |

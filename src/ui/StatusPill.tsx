@@ -14,7 +14,7 @@ const STATUS = {
     border: 'var(--nyl-green-200)',
     dot: 'var(--nyl-green-600)',
   },
-  'stretch': {
+  stretch: {
     label: 'Stretch',
     bg: 'var(--nyl-orange-100)',
     border: 'var(--nyl-orange-400)',
@@ -54,16 +54,18 @@ export function StatusPill({ status }: StatusPillProps) {
         transition={{ duration: DURATION.deliberate }}
         style={{ width: 6, height: 6, borderRadius: '50%', flexShrink: 0 }}
       />
-      <span style={{
-        fontFamily: 'var(--font-sans)',
-        fontSize: 12,
-        fontWeight: 500,
-        lineHeight: '16.5px',
-        letterSpacing: '1.76px',
-        textTransform: 'uppercase',
-        color: 'var(--text-body-secondary)',
-        whiteSpace: 'nowrap',
-      }}>
+      <span
+        style={{
+          fontFamily: 'var(--font-sans)',
+          fontSize: 12,
+          fontWeight: 500,
+          lineHeight: '16.5px',
+          letterSpacing: '1.76px',
+          textTransform: 'uppercase',
+          color: 'var(--text-body-secondary)',
+          whiteSpace: 'nowrap',
+        }}
+      >
         {s.label}
       </span>
     </motion.div>

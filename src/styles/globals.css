@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "./tokens.css";
+@import 'tailwindcss';
+@import './tokens.css';
 
 @theme inline {
   --color-background: var(--bg-canvas);
@@ -32,7 +32,9 @@
   --radius: var(--radius-md);
 }
 
-html, body, #root {
+html,
+body,
+#root {
   margin: 0;
   background: var(--bg-canvas);
   color: var(--text-body);
@@ -42,10 +44,17 @@ html, body, #root {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
-html { height: 100%; }
-body, #root { min-height: 100%; }
+html {
+  height: 100%;
+}
+body,
+#root {
+  min-height: 100%;
+}
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 ::selection {
   background: var(--nyl-blue-500);
@@ -72,7 +81,9 @@ body, #root { min-height: 100%; }
   text-transform: uppercase;
   color: var(--text-body-muted);
 }
-.accent { color: var(--text-accent); }
+.accent {
+  color: var(--text-accent);
+}
 
 /* Fullscreen takeover roots bleed 1px past the viewport so environmental
  * hairlines (fractional browser zoom / display scaling on demo machines)
@@ -83,8 +94,12 @@ body, #root { min-height: 100%; }
 }
 
 @keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 /* ---- Button component ---- */
@@ -97,9 +112,16 @@ body, #root { min-height: 100%; }
   padding: 12px 32px;
   border: none;
 }
-.btn-primary:not(:disabled):hover  { background: var(--action-primary-hover); }
-.btn-primary:not(:disabled):active { background: #001e94; }
-.btn-primary:disabled               { background: var(--bg-surface-disabled); color: var(--text-body-faint); }
+.btn-primary:not(:disabled):hover {
+  background: var(--action-primary-hover);
+}
+.btn-primary:not(:disabled):active {
+  background: #001e94;
+}
+.btn-primary:disabled {
+  background: var(--bg-surface-disabled);
+  color: var(--text-body-faint);
+}
 
 .btn-primary-dark {
   background: var(--nyl-white);
@@ -107,9 +129,16 @@ body, #root { min-height: 100%; }
   padding: 12px 32px;
   border: none;
 }
-.btn-primary-dark:not(:disabled):hover  { background: #e5f1ff; }
-.btn-primary-dark:not(:disabled):active { background: var(--nyl-blue-100); }
-.btn-primary-dark:disabled               { background: var(--bg-surface-disabled); color: var(--text-body-faint); }
+.btn-primary-dark:not(:disabled):hover {
+  background: #e5f1ff;
+}
+.btn-primary-dark:not(:disabled):active {
+  background: var(--nyl-blue-100);
+}
+.btn-primary-dark:disabled {
+  background: var(--bg-surface-disabled);
+  color: var(--text-body-faint);
+}
 
 .btn-secondary {
   background: transparent;
@@ -117,9 +146,18 @@ body, #root { min-height: 100%; }
   color: var(--action-primary-hover);
   padding: 10px 30px; /* accounts for 2px border */
 }
-.btn-secondary:not(:disabled):hover  { border-color: #001e94; color: #001e94; }
-.btn-secondary:not(:disabled):active { border-color: var(--nyl-blue-800); color: var(--nyl-blue-800); }
-.btn-secondary:disabled               { border-color: var(--text-body-faint); color: var(--text-body-faint); }
+.btn-secondary:not(:disabled):hover {
+  border-color: #001e94;
+  color: #001e94;
+}
+.btn-secondary:not(:disabled):active {
+  border-color: var(--nyl-blue-800);
+  color: var(--nyl-blue-800);
+}
+.btn-secondary:disabled {
+  border-color: var(--text-body-faint);
+  color: var(--text-body-faint);
+}
 
 .btn-secondary-dark {
   background: transparent;
@@ -127,9 +165,18 @@ body, #root { min-height: 100%; }
   color: var(--nyl-white);
   padding: 10px 30px;
 }
-.btn-secondary-dark:not(:disabled):hover  { border-color: #e5f1ff; color: #e5f1ff; }
-.btn-secondary-dark:not(:disabled):active { border-color: var(--nyl-blue-100); color: var(--nyl-blue-100); }
-.btn-secondary-dark:disabled               { border-color: var(--text-body-faint); color: var(--text-body-faint); }
+.btn-secondary-dark:not(:disabled):hover {
+  border-color: #e5f1ff;
+  color: #e5f1ff;
+}
+.btn-secondary-dark:not(:disabled):active {
+  border-color: var(--nyl-blue-100);
+  color: var(--nyl-blue-100);
+}
+.btn-secondary-dark:disabled {
+  border-color: var(--text-body-faint);
+  color: var(--text-body-faint);
+}
 
 .btn-text {
   background: transparent;
@@ -137,9 +184,15 @@ body, #root { min-height: 100%; }
   color: var(--action-primary-hover);
   padding: 12px 2px;
 }
-.btn-text:not(:disabled):hover  { color: #001e94; }
-.btn-text:not(:disabled):active { color: var(--nyl-blue-800); }
-.btn-text:disabled               { color: var(--text-body-faint); }
+.btn-text:not(:disabled):hover {
+  color: #001e94;
+}
+.btn-text:not(:disabled):active {
+  color: var(--nyl-blue-800);
+}
+.btn-text:disabled {
+  color: var(--text-body-faint);
+}
 
 .btn-text-dark {
   background: transparent;
@@ -147,9 +200,15 @@ body, #root { min-height: 100%; }
   color: var(--nyl-white);
   padding: 12px 2px;
 }
-.btn-text-dark:not(:disabled):hover  { color: #e5f1ff; }
-.btn-text-dark:not(:disabled):active { color: var(--nyl-blue-100); }
-.btn-text-dark:disabled               { color: var(--text-body-faint); }
+.btn-text-dark:not(:disabled):hover {
+  color: #e5f1ff;
+}
+.btn-text-dark:not(:disabled):active {
+  color: var(--nyl-blue-100);
+}
+.btn-text-dark:disabled {
+  color: var(--text-body-faint);
+}
 
 /* Outlined — transparent bg, 1.5px brand-blue border, rounded-[8px] */
 .btn-outlined {
@@ -159,9 +218,21 @@ body, #root { min-height: 100%; }
   padding: 10px 30px;
   border-radius: 8px;
 }
-.btn-outlined:not(:disabled):hover  { background: #f0f5ff; border-color: #001e94; color: #001e94; }
-.btn-outlined:not(:disabled):active { background: #e0ecff; border-color: var(--nyl-blue-800); color: var(--nyl-blue-800); }
-.btn-outlined:disabled              { border-color: var(--text-body-faint); color: var(--text-body-faint); opacity: 0.4; }
+.btn-outlined:not(:disabled):hover {
+  background: #f0f5ff;
+  border-color: #001e94;
+  color: #001e94;
+}
+.btn-outlined:not(:disabled):active {
+  background: #e0ecff;
+  border-color: var(--nyl-blue-800);
+  color: var(--nyl-blue-800);
+}
+.btn-outlined:disabled {
+  border-color: var(--text-body-faint);
+  color: var(--text-body-faint);
+  opacity: 0.4;
+}
 
 /* Icon — square outlined button for icon-only content (e.g. nav arrows) */
 .btn-icon {
@@ -173,9 +244,15 @@ body, #root { min-height: 100%; }
   height: 40px;
   border-radius: 8px;
 }
-.btn-icon:not(:disabled):hover  { background: #f0f5ff; }
-.btn-icon:not(:disabled):active { background: #e0ecff; }
-.btn-icon:disabled              { opacity: 0.4; }
+.btn-icon:not(:disabled):hover {
+  background: #f0f5ff;
+}
+.btn-icon:not(:disabled):active {
+  background: #e0ecff;
+}
+.btn-icon:disabled {
+  opacity: 0.4;
+}
 
 /* ---- OptionTile component ---- */
 /* All state-dependent styles live here so the browser owns both ends of the
@@ -191,10 +268,10 @@ body, #root { min-height: 100%; }
   transition-timing-function: linear;
   transition-duration: 180ms;
 }
-.option-tile:not(:disabled):not([aria-pressed="true"]):hover {
+.option-tile:not(:disabled):not([aria-pressed='true']):hover {
   border-color: var(--border-strong);
 }
-.option-tile[aria-pressed="true"] {
+.option-tile[aria-pressed='true'] {
   background-color: var(--global\/blue\/blue-050, #e5f1ff);
   border-color: var(--global\/blue\/blue-150, #b2d5ff);
   color: var(--text-headline, #17181c);
@@ -206,7 +283,7 @@ body, #root { min-height: 100%; }
   color: var(--text-body-muted);
   transition: color 180ms linear;
 }
-.option-tile[aria-pressed="true"] .option-tile-sub {
+.option-tile[aria-pressed='true'] .option-tile-sub {
   color: var(--text-body-muted);
 }
 
@@ -221,7 +298,6 @@ body, #root { min-height: 100%; }
   color: var(--global\/gray\/gray-500, #7d7e82);
 }
 
-
 /* ----------------------------------------------------------------------------
  * Nyla-suggested card glow — rotating conic-gradient border (purple↔blue).
  * Technique adapted from https://codepen.io/Quakeee/pen/EaxRKjp — an animated
@@ -232,15 +308,19 @@ body, #root { min-height: 100%; }
  * glow is the box-shadow applied by the component (NYLA.glow.peakShadow).
  * -------------------------------------------------------------------------- */
 @property --nyla-angle {
-  syntax: "<angle>";
+  syntax: '<angle>';
   initial-value: 0deg;
   inherits: false;
 }
 @keyframes nyla-border-spin {
-  to { --nyla-angle: 360deg; }
+  to {
+    --nyla-angle: 360deg;
+  }
 }
 
-.nyla-suggest-glow { position: relative; }
+.nyla-suggest-glow {
+  position: relative;
+}
 
 /* The card content layer sits above the gradient pseudos. */
 .nyla-suggest-glow > .nyla-suggest-card {
@@ -254,7 +334,7 @@ body, #root { min-height: 100%; }
  * reads clearly the moment the card appears. Purple-400 per request. */
 .nyla-suggest-glow::before,
 .nyla-suggest-glow::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: -4px;
   border-radius: 18px;
@@ -289,7 +369,9 @@ body, #root { min-height: 100%; }
     animation: none;
     background: var(--nyl-purple-100);
   }
-  .nyla-suggest-glow::after { opacity: 0.35; }
+  .nyla-suggest-glow::after {
+    opacity: 0.35;
+  }
 }
 
 /* Dotted ground — used in v4 scenes for an editorial paper texture */

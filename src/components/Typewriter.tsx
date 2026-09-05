@@ -63,7 +63,9 @@ export function Typewriter({
   return (
     <Tag className={className}>
       {visible}
-      {cursor && !done && <span className="ml-0.5 inline-block h-[0.85em] w-[1.5px] translate-y-[2px] animate-pulse bg-current align-middle" />}
+      {cursor && !done && (
+        <span className="ml-0.5 inline-block h-[0.85em] w-[1.5px] translate-y-[2px] animate-pulse bg-current align-middle" />
+      )}
     </Tag>
   )
 }

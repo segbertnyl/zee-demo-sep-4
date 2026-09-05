@@ -24,7 +24,7 @@ type TriggerType =
 type Trigger = {
   id: string
   type: TriggerType
-  clientId: string   /* maps to ActionDeepDive canvasId */
+  clientId: string /* maps to ActionDeepDive canvasId */
   clientName: string
   detail: string
   /* Days since the trigger fired. Lower = more urgent. */
@@ -55,20 +55,104 @@ const TYPE_TONE: Record<TriggerType, string> = {
 
 const TRIGGERS: Trigger[] = [
   /* Urgent — last 7 days */
-  { id: 't1', type: 'term_expiring', clientId: 'cesar-powell', clientName: 'Cesar Powell', detail: 'Sept expiry · 84d no-touch', freshness: 2 },
-  { id: 't2', type: 'new_home', clientId: 'janet', clientName: 'Janet Henderson', detail: 'Coastal household · flood-risk', freshness: 3 },
-  { id: 't3', type: 'birth', clientId: 'noor-yehya', clientName: 'Noor Yehya', detail: 'New dependent · 12 days', freshness: 12 },
-  { id: 't4', type: 'content_engagement', clientId: 'helena-1', clientName: 'Helena Garcia', detail: 'Retirement pages · spike wk 1', freshness: 4 },
-  { id: 't5', type: 'retirement_milestone', clientId: 'helena-1', clientName: 'Helena Garcia', detail: 'Turned 58 · pre-60 window', freshness: 6 },
-  { id: 't6', type: 'beneficiary_uninsured', clientId: 'frances-carter', clientName: 'Frances Carter', detail: 'Beneficiary on Janet · no NYL', freshness: 9 },
+  {
+    id: 't1',
+    type: 'term_expiring',
+    clientId: 'cesar-powell',
+    clientName: 'Cesar Powell',
+    detail: 'Sept expiry · 84d no-touch',
+    freshness: 2,
+  },
+  {
+    id: 't2',
+    type: 'new_home',
+    clientId: 'janet',
+    clientName: 'Janet Henderson',
+    detail: 'Coastal household · flood-risk',
+    freshness: 3,
+  },
+  {
+    id: 't3',
+    type: 'birth',
+    clientId: 'noor-yehya',
+    clientName: 'Noor Yehya',
+    detail: 'New dependent · 12 days',
+    freshness: 12,
+  },
+  {
+    id: 't4',
+    type: 'content_engagement',
+    clientId: 'helena-1',
+    clientName: 'Helena Garcia',
+    detail: 'Retirement pages · spike wk 1',
+    freshness: 4,
+  },
+  {
+    id: 't5',
+    type: 'retirement_milestone',
+    clientId: 'helena-1',
+    clientName: 'Helena Garcia',
+    detail: 'Turned 58 · pre-60 window',
+    freshness: 6,
+  },
+  {
+    id: 't6',
+    type: 'beneficiary_uninsured',
+    clientId: 'frances-carter',
+    clientName: 'Frances Carter',
+    detail: 'Beneficiary on Janet · no NYL',
+    freshness: 9,
+  },
 
   /* Watching — 7–30 days */
-  { id: 't7', type: 'no_touch_90', clientId: 'rachel-lim', clientName: 'Rachel Lim', detail: '90d silence · LTC web signal', freshness: 14 },
-  { id: 't8', type: 'wealth_milestone', clientId: 'wei-chen', clientName: 'Wei Chen', detail: 'Score 23 → 41 · life event', freshness: 11 },
-  { id: 't9', type: 'content_engagement', clientId: 'rachel-lim', clientName: 'Rachel Lim', detail: 'LTC pages · 14 min · 2 days', freshness: 2 },
-  { id: 't10', type: 'new_home', clientId: 'kai-park', clientName: 'Kai Park', detail: 'Move-in detected · new household', freshness: 7 },
-  { id: 't11', type: 'no_touch_90', clientId: 'omar-hadi', clientName: 'Omar Hadi', detail: '30d window · light-touch', freshness: 30 },
-  { id: 't12', type: 'retirement_milestone', clientId: 'aanya-patel', clientName: 'Aanya Patel', detail: 'Turns 18 · Sept · locked rate', freshness: 20 },
+  {
+    id: 't7',
+    type: 'no_touch_90',
+    clientId: 'rachel-lim',
+    clientName: 'Rachel Lim',
+    detail: '90d silence · LTC web signal',
+    freshness: 14,
+  },
+  {
+    id: 't8',
+    type: 'wealth_milestone',
+    clientId: 'wei-chen',
+    clientName: 'Wei Chen',
+    detail: 'Score 23 → 41 · life event',
+    freshness: 11,
+  },
+  {
+    id: 't9',
+    type: 'content_engagement',
+    clientId: 'rachel-lim',
+    clientName: 'Rachel Lim',
+    detail: 'LTC pages · 14 min · 2 days',
+    freshness: 2,
+  },
+  {
+    id: 't10',
+    type: 'new_home',
+    clientId: 'kai-park',
+    clientName: 'Kai Park',
+    detail: 'Move-in detected · new household',
+    freshness: 7,
+  },
+  {
+    id: 't11',
+    type: 'no_touch_90',
+    clientId: 'omar-hadi',
+    clientName: 'Omar Hadi',
+    detail: '30d window · light-touch',
+    freshness: 30,
+  },
+  {
+    id: 't12',
+    type: 'retirement_milestone',
+    clientId: 'aanya-patel',
+    clientName: 'Aanya Patel',
+    detail: 'Turns 18 · Sept · locked rate',
+    freshness: 20,
+  },
 ]
 
 const GROUP_ORDER: TriggerType[] = [
@@ -99,9 +183,7 @@ export function SignalsCanvas() {
   return (
     <section className="dot-ground flex flex-1 flex-col overflow-auto">
       <div className="mx-auto w-full max-w-[1200px] px-8 py-10 pb-20 md:px-12">
-        <p className="text-[10.5px] font-medium uppercase tracking-[0.24em] text-neutral-400">
-          Signals · last 30 days
-        </p>
+        <p className="text-[10.5px] font-medium uppercase tracking-[0.24em] text-neutral-400">Signals · last 30 days</p>
         <h1
           className="mt-3 font-serif text-[40px] leading-[1.04] tracking-tight text-neutral-900 md:text-[52px]"
           style={{ fontWeight: 400, textWrap: 'balance' }}
@@ -109,8 +191,8 @@ export function SignalsCanvas() {
           12 fresh signals on your book.
         </h1>
         <p className="mt-3 max-w-[58ch] text-[13.5px] leading-[1.55] text-neutral-600">
-          Each signal is a trigger that opens a household to a conversation. Click any
-          node to drop into that client's canvas.
+          Each signal is a trigger that opens a household to a conversation. Click any node to drop into that client's
+          canvas.
         </p>
 
         <div className="mt-10 flex flex-col gap-7">
@@ -132,19 +214,18 @@ export function SignalsCanvas() {
                     className="flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-white p-4 text-left shadow-[0_8px_24px_-18px_rgba(0,10,98,0.18)] transition-shadow hover:shadow-[0_18px_40px_-22px_rgba(0,10,98,0.28)]"
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className={['rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em]', TYPE_TONE[t.type]].join(' ')}>
+                      <span
+                        className={[
+                          'rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em]',
+                          TYPE_TONE[t.type],
+                        ].join(' ')}
+                      >
                         {TYPE_LABEL[t.type]}
                       </span>
-                      <span className="text-[10.5px] uppercase tracking-[0.18em] text-neutral-400">
-                        {t.freshness}d
-                      </span>
+                      <span className="text-[10.5px] uppercase tracking-[0.18em] text-neutral-400">{t.freshness}d</span>
                     </div>
-                    <p className="text-[14px] font-medium text-neutral-900">
-                      {t.clientName}
-                    </p>
-                    <p className="text-[12.5px] leading-snug text-neutral-600">
-                      {t.detail}
-                    </p>
+                    <p className="text-[14px] font-medium text-neutral-900">{t.clientName}</p>
+                    <p className="text-[12.5px] leading-snug text-neutral-600">{t.detail}</p>
                     <p className="mt-1 text-[10.5px] uppercase tracking-[0.22em] text-[var(--nyl-blue-500)]">
                       Open canvas →
                     </p>

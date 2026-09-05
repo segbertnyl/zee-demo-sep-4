@@ -8,7 +8,7 @@
 export const CLIENT_FLOW_CONTENT = {
   intro: {
     headline: "Hi, Eric. I'm Nyla. Let's work together to acheive your goals",
-    body1: 'Everyone\'s financial needs are different.  I\'m here to help you get the best outcomes for yours.',
+    body1: "Everyone's financial needs are different.  I'm here to help you get the best outcomes for yours.",
     body2: "When you're ready, let's get started.",
     cta: "I'm ready",
   },
@@ -26,7 +26,7 @@ export const CLIENT_FLOW_CONTENT = {
     placeholder: 'Enter full address...',
   },
   image: {
-    heading: "Do you want to link any accounts?",
+    heading: 'Do you want to link any accounts?',
     body: 'So that I can provide relevant financial insights to you.',
     imagePlaceholderLabel: 'Image placeholder',
   },

@@ -25,7 +25,10 @@ function AnimatedLoader() {
   useEffect(() => {
     const id = setInterval(() => {
       setValue((v) => {
-        if (v >= 100) { clearInterval(id); return 100 }
+        if (v >= 100) {
+          clearInterval(id)
+          return 100
+        }
         return v + 1
       })
     }, 40)
@@ -34,9 +37,7 @@ function AnimatedLoader() {
   return (
     <div className="flex items-center gap-3">
       <PercentLoader value={value} />
-      <span style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: 'var(--text-body-muted)' }}>
-        {value}%
-      </span>
+      <span style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: 'var(--text-body-muted)' }}>{value}%</span>
     </div>
   )
 }

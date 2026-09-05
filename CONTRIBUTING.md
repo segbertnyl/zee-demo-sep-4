@@ -5,7 +5,7 @@ Internal prototype — New York Life × Huge. This is the working agreement for 
 ## 1. Get access (one-time)
 
 1. An org admin adds you to the **HugeInternal** org and grants you Write access on **nylife-proto**.
-2. Add your SSH key to GitHub, then **authorize it for the HugeInternal org**: GitHub → Settings → SSH and GPG keys → next to your key, *Configure SSO* → *Authorize* for HugeInternal.
+2. Add your SSH key to GitHub, then **authorize it for the HugeInternal org**: GitHub → Settings → SSH and GPG keys → next to your key, _Configure SSO_ → _Authorize_ for HugeInternal.
    - SAML SSO is enforced. Skip this and `git clone`/`push` fails with a `SAML SSO` error — it's the #1 thing people miss.
 
 ## 2. Clone & run
