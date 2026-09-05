@@ -38,6 +38,8 @@ import nylaFin2 from '../components/nyla-fin-risk-2.png'
 import collabBoard from '../components/collab-board.png'
 import financial3 from '../components/fin-plan-3.png'
 import nylaApply from '../components/nyla-apply.png'
+import pref2 from '../components/preference-2.png'
+import pref2nyla from '../components/preference-2-nyla.png'
 
 /* ============================================================================
  * Client Briefing scene — the client's own version of the briefing screen.
@@ -523,7 +525,7 @@ export function ClientBriefingScene() {
                   />
                   <motion.div
                     initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1 , y: 0}}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: DURATION.standard, delay: 0.2 }}
                     className="mt-5 flex items-center gap-3"
                   >
@@ -952,14 +954,45 @@ export function ClientBriefingScene() {
               </div>
             )}
             {activeNav === 'Preference Center' && preferenceView === 2 && (
-              <div>hi</div>
+              <>
+                <BriefingHeadline text="Your policies are in effect!" className={GRID} />
+
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: DURATION.standard, delay: 0.2 }}
+                  className={[GRID, 'mt-5 flex items-center gap-3'].join(' ')}
+                >
+                  <p className="text-[13px] text-[var(--text-body-muted)] mb-8 ml-2">
+                    As of 12:16 PM · 4/25 questions completed
+                  </p>
+                </motion.div>
+                <motion.div
+                  className={[GRID, 'flex flex-row items-start gap-4'].join(' ')}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: DURATION.deliberate,
+                    ease: EASE.settle as [number, number, number, number],
+                  }}
+                >
+                  <img src={pref2} />
+                  <img src={pref2nyla} className="mt-10" />
+                </motion.div>
+                <motion.div
+                  className={GRID}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+                >
+                  <Nyla size={120} className="absolute bottom-0 right-10" />
+                </motion.div>
+              </>
             )}
-                        {activeNav === 'Preference Center' && preferenceView === 3 && (
-              <div>hi</div>
-            )}
-                                    {activeNav === 'Legacy Vault' && (
-              <div>hi</div>
-            )}
+            {activeNav === 'Preference Center' && preferenceView === 3 && <div>hi</div>}
+            {activeNav === 'Legacy Vault' && <div>hi</div>}
             {activeNav === 'Resources' && (
               <motion.div
                 className="flex flex-row justify-center"
@@ -988,7 +1021,6 @@ export function ClientBriefingScene() {
                   }}
                 >
                   <img src={potentialRisks} />
-
                 </motion.div>
                 <motion.div
                   className={GRID}
@@ -997,7 +1029,7 @@ export function ClientBriefingScene() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
                 >
-                                    <img src={nylaRisks} className="absolute right-0 top-[50%]" />
+                  <img src={nylaRisks} className="absolute right-0 top-[50%]" />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                   <ButtonContainer
                     secondaryVariant="secondary"
@@ -1030,8 +1062,7 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img src={financial2}/>
-
+                  <img src={financial2} />
                 </motion.div>
                 <motion.div
                   className={GRID}
@@ -1040,7 +1071,7 @@ export function ClientBriefingScene() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
                 >
-                                    <img src={nylaFin2} className="absolute right-0 top-[50%]" />
+                  <img src={nylaFin2} className="absolute right-0 top-[50%]" />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                   <ButtonContainer
                     secondaryVariant="secondary"
@@ -1075,7 +1106,6 @@ export function ClientBriefingScene() {
                 >
                   <img src={financial3} />
                   <img src={nylaApply} className="" />
-
                 </motion.div>
                 <motion.div
                   className={GRID}
