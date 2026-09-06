@@ -40,6 +40,10 @@ import financial3 from '../components/fin-plan-3.png'
 import nylaApply from '../components/nyla-apply.png'
 import pref2 from '../components/preference-2.png'
 import pref2nyla from '../components/preference-2-nyla.png'
+import nylapref3 from '../components/nyla-pref-3.png'
+import bodyPref3 from '../components/body-pref-3.png'
+import nylaLegacy from '../components/nyla-legacy.png';
+import legacyBody from '../components/legacy-body.png';
 
 /* ============================================================================
  * Client Briefing scene — the client's own version of the briefing screen.
@@ -331,8 +335,7 @@ const getTitle = (activeNav: string) => {
     case 'Preference Center':
       return 'Your Profile'
     case 'Legacy Vault':
-      // Code to run if expression == value2
-      break
+      return 'Welcome Eric'
     case 'Collab Board':
       return 'Collab Board'
     case 'Financial Plan':
@@ -350,7 +353,7 @@ const getTitle = (activeNav: string) => {
  * left ("Welcome Eric"), nothing on the right. */
 function TopNav({ activeNav }: { activeNav: string }) {
   return (
-    <div className="flex h-[120px] items-center">
+    <div className="flex h-[100px] items-center">
       <div className={[GRID, 'grid w-full grid-cols-12 items-center gap-6'].join(' ')}>
         <p className="col-span-5 font-serif text-[18px] text-[var(--text-headline)]" style={{ fontWeight: 400 }}>
           {getTitle(activeNav)}
@@ -963,7 +966,7 @@ export function ClientBriefingScene() {
                   transition={{ duration: DURATION.standard, delay: 0.2 }}
                   className={[GRID, 'mt-5 flex items-center gap-3'].join(' ')}
                 >
-                  <p className="text-[13px] text-[var(--text-body-muted)] mb-8 ml-2">
+                  <p className="text-[13px] text-[var(--text-body-muted)] mb-8 ml-2 cursor-pointer" onClick={() => setPreferenceView(3)}>
                     As of 12:16 PM · 4/25 questions completed
                   </p>
                 </motion.div>
@@ -991,8 +994,83 @@ export function ClientBriefingScene() {
                 </motion.div>
               </>
             )}
-            {activeNav === 'Preference Center' && preferenceView === 3 && <div>hi</div>}
-            {activeNav === 'Legacy Vault' && <div>hi</div>}
+            {activeNav === 'Preference Center' && preferenceView === 3 && (
+                            <>
+                <BriefingHeadline text="Just checking in... Has anything changed recently?" className={GRID} />
+
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: DURATION.standard, delay: 0.2 }}
+                  className={[GRID, 'mt-4 flex items-center gap-3'].join(' ')}
+                >
+                  <p className="text-[13px] text-[var(--text-body-muted)] mb-4 ml-2 cursor-pointer" onClick={() => setPreferenceView(3)}>
+                    As of 12:16 PM · 4/25 questions completed
+                  </p>
+                </motion.div>
+                <motion.div
+                  className={[GRID, 'flex flex-row items-start gap-4'].join(' ')}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: DURATION.deliberate,
+                    ease: EASE.settle as [number, number, number, number],
+                  }}
+                >
+                  <img src={bodyPref3} />
+                  <img src={nylapref3} className="mt-10" />
+                </motion.div>
+                <motion.div
+                  className={GRID}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+                >
+                  <Nyla size={120} className="absolute bottom-0 right-10" />
+                </motion.div>
+              </>
+            )}
+            {activeNav === 'Legacy Vault' && 
+                                        <>
+                <BriefingHeadline text="Your legacy documents at a glance" className={GRID} />
+
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: DURATION.standard, delay: 0.2 }}
+                  className={[GRID, 'mt-4 flex items-center gap-3'].join(' ')}
+                >
+                  <p className="text-[13px] text-[var(--text-body-muted)] mb-4 ml-2 cursor-pointer" onClick={() => setPreferenceView(3)}>
+                    As of 12:16 PM · 4/25 questions completed
+                  </p>
+                </motion.div>
+                <motion.div
+                  className={[GRID, 'flex flex-row items-start gap-4'].join(' ')}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: DURATION.deliberate,
+                    ease: EASE.settle as [number, number, number, number],
+                  }}
+                >
+                  <img src={legacyBody} />
+                  <img src={nylaLegacy} className="mt-10" />
+                </motion.div>
+                <motion.div
+                  className={GRID}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+                >
+                  <Nyla size={120} className="absolute bottom-0 right-10" />
+                </motion.div>
+              </>
+            
+            }
             {activeNav === 'Resources' && (
               <motion.div
                 className="flex flex-row justify-center"
@@ -1063,6 +1141,7 @@ export function ClientBriefingScene() {
                   }}
                 >
                   <img src={financial2} />
+
                 </motion.div>
                 <motion.div
                   className={GRID}
@@ -1071,7 +1150,8 @@ export function ClientBriefingScene() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
                 >
-                  <img src={nylaFin2} className="absolute right-0 top-[50%]" />
+                  <img src={nylaFin2} className="absolute right-0 top-[40%]" />
+
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                   <ButtonContainer
                     secondaryVariant="secondary"
@@ -1095,7 +1175,7 @@ export function ClientBriefingScene() {
             {activeNav === 'Financial Plan' && financialPlanView === 3 && (
               <>
                 <motion.div
-                  className={['ml-6 flex flex-row items-center justify-center w-full'].join(' ')}
+                  className={[' flex flex-row items-center justify-center w-full'].join(' ')}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
@@ -1105,7 +1185,6 @@ export function ClientBriefingScene() {
                   }}
                 >
                   <img src={financial3} />
-                  <img src={nylaApply} className="" />
                 </motion.div>
                 <motion.div
                   className={GRID}
@@ -1114,6 +1193,7 @@ export function ClientBriefingScene() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
                 >
+                  <img src={nylaApply} className="absolute right-0 top-[20%]" />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                   <ButtonContainer
                     primaryLabel="Start your application"
@@ -1122,7 +1202,7 @@ export function ClientBriefingScene() {
                       setPreferenceView(2)
                       setActiveNav('Preference Center')
                     }}
-                    className="absolute bottom-2 right-[20%]"
+                    className="absolute bottom-10 right-[20%]"
                   />
                 </motion.div>
               </>

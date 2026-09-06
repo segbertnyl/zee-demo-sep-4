@@ -35,13 +35,22 @@ export function LandingChooser() {
 
   const cards: Card[] = [
     {
-      label: 'First-time onboarding',
+      label: 'First-time agent onboarding',
       description: 'Set your goals, shape how your OS works, and see your first plan come together.',
       quickLinks: [
         { label: 'Discovery', action: () => openDiscovery() },
         { label: 'Plan reveal', action: () => openDiscoveryAt('plan') },
-        { label: 'Client', action: () => openClientFlow() },
-        { label: 'Brief', action: () => openClientBrief() },
+ 
+      ],
+      action: pickOnboarding,
+    },
+        {
+      label: 'First-time client onboarding',
+      description: 'Set your goals, shape how your OS works, and see your first plan come together.',
+      quickLinks: [
+ 
+        { label: 'Discovery', action: () => openClientFlow() },
+        { label: 'Dashboard', action: () => openClientBrief() },
       ],
       action: pickOnboarding,
     },
