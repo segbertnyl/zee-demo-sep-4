@@ -259,33 +259,22 @@ interface WhatIHeardProps {
 }
 
 export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
-  const [goals, setGoals] = useState(GOALS)
-  const [practice, setPractice] = useState(PRACTICE)
-  const [expandedKey, setExpandedKey] = useState<string | null>(null)
-  const collapseTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [goals] = useState(GOALS)
+  const [practice] = useState(PRACTICE)
   const [showGoals, setShowGoals] = useState(false)
   const [showPractice, setShowPractice] = useState(false)
   const [showCTA, setShowCTA] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const [topOffset, setTopOffset] = useState(64)
-  // Read the latest expandedKey inside measure() without making it an effect dep
-  // — re-running on hover would measure mid-collapse-animation and shift the page.
-  const expandedKeyRef = useRef(expandedKey)
-  useEffect(() => {
-    expandedKeyRef.current = expandedKey
-  }, [expandedKey])
+  const [, setTopOffset] = useState(64)
 
   // Center the content based on its COLLAPSED height. Measure only on mount,
-  // after fonts load (serif metrics change the height), and on resize — never on
-  // hover — so the container's y-position stays fixed while rows expand/collapse
-  // (expanding grows the content downward).
+  // after fonts load (serif metrics change the height), and on resize.
   useLayoutEffect(() => {
     const scrollEl = scrollRef.current
     const contentEl = contentRef.current
     if (!scrollEl || !contentEl) return
     const measure = () => {
-      if (expandedKeyRef.current !== null) return
       const avail = scrollEl.clientHeight
       const contentH = contentEl.offsetHeight
       // Vertically center the (collapsed) content. Measured only on mount/fonts/resize,
@@ -316,15 +305,6 @@ export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
       clearTimeout(t3)
     }
   }, [])
-
-  function handleEnter(key: string) {
-    if (collapseTimer.current) clearTimeout(collapseTimer.current)
-    setExpandedKey(key)
-  }
-
-  function handleLeave() {
-    collapseTimer.current = setTimeout(() => setExpandedKey(null), 300)
-  }
 
   return (
     <div style={{ boxSizing: 'border-box' }}>
@@ -388,8 +368,7 @@ export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
                 Your Financial Goals
               </motion.p>
               <motion.div variants={listVariants} initial="hidden" animate={showGoals ? 'visible' : 'hidden'}>
-                {goals.map((goal, i) => {
-                  const key = `g-${i}`
+                {goals.map((goal) => {
                   return (
                     <motion.div key={goal.title} variants={itemVariants}>
                       <GoalRow icon={goal.icon} title={goal.title} />
@@ -419,8 +398,7 @@ export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
                 Your Personal Goals
               </motion.p>
               <motion.div variants={listVariants} initial="hidden" animate={showPractice ? 'visible' : 'hidden'}>
-                {practice.map((item, i) => {
-                  const key = `p-${i}`
+                {practice.map((item) => {
                   return (
                     <motion.div key={item.title} variants={itemVariants}>
                       <GoalRow icon={item.icon} title={item.title} />

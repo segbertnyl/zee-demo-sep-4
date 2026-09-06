@@ -372,13 +372,6 @@ function StatRow({ config, value, onChange, outOfRange, first, last }: StatRowPr
   )
 }
 
-// ── Qualified appointments formula ────────────────────────────────────────────
-
-function calcApptsPerWk(referrals: number, prospects: number, networking: number) {
-  const raw = (prospects / 10) * 2 + (referrals / 4) * 0.8 + (networking / 1) * 0.2
-  return Math.round(raw * 2) / 2 // round to nearest 0.5
-}
-
 // ── Recommended pace (from the prior question / PacingStep) ────────────────────
 // Derived from the $47K FYC goal, mirroring src/scenes/PacingStep.tsx.
 const FYC_GOAL = 175000

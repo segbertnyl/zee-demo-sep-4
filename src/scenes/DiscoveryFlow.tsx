@@ -10,7 +10,6 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { MicGlyph } from './OnboardingFlow'
 import { useAppStore } from '@/state/useAppStore'
 import { LoadingBackground } from '@/ui/LoadingBackground'
 import { SectionHeader } from '@/ui/SectionHeader'
@@ -702,7 +701,6 @@ export function DiscoveryFlow() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [open, closeDiscovery, focusNext, focusPrevious])
-  const [free, setFree] = useState('')
   if (!open) return null
 
   return (

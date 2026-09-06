@@ -26,13 +26,13 @@ import { DURATION, EASE, NYLA_FLIGHT } from '@/motion'
 
 export type OnboardingMode = 'first-run' | 'reorg' | 'revisit-goals'
 
-type StageId = 'background' | 'goals' | 'practice' | 'plan'
+type StageId = 'background' | 'goals' | 'practice' | 'brand'
 
 const STAGES: { id: StageId; label: string; sub: string }[] = [
   { id: 'background', label: 'Your background', sub: '' },
   { id: 'goals', label: 'Goals', sub: '' },
   { id: 'practice', label: 'Practice', sub: '' },
-  { id: 'plan', label: '', sub: '' },
+  { id: 'brand', label: '', sub: '' },
 ]
 
 type StepId =
@@ -77,7 +77,7 @@ const STEP_STAGE: Record<StepId, StageId | null> = {
   'client-conversations': 'practice',
   'stay-in-front': 'practice',
   'life-events': 'practice',
-  plan: 'plan',
+  plan: 'brand',
 }
 
 /* NOTE (2026-07-02): the old 'create-plan' welcome step was removed — the
