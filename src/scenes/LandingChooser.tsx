@@ -133,7 +133,7 @@ export function LandingChooser() {
                     textTransform: 'uppercase',
                   }}
                 >
-                  Project Game On
+                  2026 Design Standards
                 </p>
                 <h1
                   className="text-white"
