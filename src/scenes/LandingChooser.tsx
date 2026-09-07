@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
 import { useAppStore } from '@/state/useAppStore'
-import { hasCompletedOnboarding } from '@/scenes/OnboardingFlow'
+// import { hasCompletedOnboarding } from '@/scenes/OnboardingFlow'
 import { NYLLogo } from '@/ui/NYLLogo'
 import { DriftingBlobs, HighlightBlob } from '@/ui/OnboardingIntroOverlay'
 import { EASE, DURATION } from '@/motion'
@@ -19,19 +19,19 @@ export function LandingChooser() {
   const dismiss = useAppStore((s) => s.dismissLanding)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
-  const openOnboarding = useAppStore((s) => s.openOnboarding)
+  // const openOnboarding = useAppStore((s) => s.openOnboarding)
   const openYearInReview = useAppStore((s) => s.openYearInReview)
   const openDiscovery = useAppStore((s) => s.openDiscovery)
   const openDiscoveryAt = useAppStore((s) => s.openDiscoveryAt)
   const openBriefingV6 = useAppStore((s) => s.openBriefingV6)
   const openClientFlow = useAppStore((s) => s.openClientFlow)
   const openClientBrief = useAppStore((s) => s.openClientBriefing)
-  const completed = hasCompletedOnboarding()
+  // const completed = hasCompletedOnboarding()
 
-  function pickOnboarding() {
-    dismiss()
-    openOnboarding(completed ? 'reorg' : 'first-run')
-  }
+  // function pickOnboarding() {
+  //   dismiss()
+  //   openOnboarding(completed ? 'reorg' : 'first-run')
+  // }
 
   function placeholder() {
     console.log('nothing')

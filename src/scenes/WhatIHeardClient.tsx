@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { motion } from 'motion/react'
 import { EASE, DURATION } from '@/motion'
 import { GoalRow } from '@/ui/GoalRow'
-import { Button } from '@/ui/Button'
+// import { Button } from '@/ui/Button'
 
 // ── Icon components ──────────────────────────────────────────────────────────
 
@@ -254,11 +254,11 @@ const PRACTICE = [
 
 // ── Component ────────────────────────────────────────────────────────────────
 
-interface WhatIHeardProps {
-  onContinue?: () => void
-}
+// interface WhatIHeardProps {
+//   onContinue?: () => void
+// }
 
-export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
+export function WhatIHeardClient() {
   const [goals] = useState(GOALS)
   const [practice] = useState(PRACTICE)
   const [showGoals, setShowGoals] = useState(false)
@@ -266,7 +266,7 @@ export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
   const [showCTA, setShowCTA] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const [topOffset, setTopOffset] = useState(64)
+  // const [topOffset, setTopOffset] = useState(64)
 
   // Center the content based on its COLLAPSED height. Measure only on mount,
   // after fonts load (serif metrics change the height), and on resize.
@@ -275,11 +275,11 @@ export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
     const contentEl = contentRef.current
     if (!scrollEl || !contentEl) return
     const measure = () => {
-      const avail = scrollEl.clientHeight
-      const contentH = contentEl.offsetHeight
+      // const avail = scrollEl.clientHeight
+      // const contentH = contentEl.offsetHeight
       // Vertically center the (collapsed) content. Measured only on mount/fonts/resize,
       // so expanding a row grows downward and never shifts the group's y-position.
-      setTopOffset(Math.max(64, (avail - contentH) / 2))
+      // setTopOffset(Math.max(64, (avail - contentH) / 2))
     }
     measure()
     let cancelled = false

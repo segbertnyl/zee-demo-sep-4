@@ -33,7 +33,6 @@ import { PlanSummary } from '@/scenes/PlanSummary'
 import { PlanAcceptLoader } from '@/scenes/PlanAcceptLoader'
 import { PlanSummaryBackground } from '@/ui/PlanSummaryBackground'
 import { StageRail, STAGES, type StageId } from '@/ui/StageRail'
-import Brand from '@/components/Brand'
 
 function fadeUp(delay: number, opacityOnly = false) {
   return {
