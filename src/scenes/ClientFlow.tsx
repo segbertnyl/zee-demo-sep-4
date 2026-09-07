@@ -21,15 +21,23 @@ import linkAccount from '../components/link-acct.png'
  *
  *   0 client-loading  — loader (copy of Brand's "Pulling it all together...")
  *   1 client-intro    — splash (copy of Discovery's "Hi, Sarah..." intro)
- *   2 client-salary   — single input: yearly salary
- *   3 client-address  — single input: full address
- *   4 client-image    — image placeholder where the input would be
+ *   2 client-name     — single input: full name
+ *   3 client-salary   — single input: yearly salary
+ *   4 client-address  — single input: full address
+ *   5 client-image    — image placeholder where the input would be
  * ========================================================================== */
 
-type ClientStep = 'client-intro' | 'client-loading' | 'client-salary' | 'client-address' | 'client-image'
-const CLIENT_STEPS: ClientStep[] = ['client-loading', 'client-intro', 'client-salary', 'client-address', 'client-image']
+type ClientStep = 'client-intro' | 'client-loading' | 'client-name' | 'client-salary' | 'client-address' | 'client-image'
+const CLIENT_STEPS: ClientStep[] = [
+  'client-loading',
+  'client-intro',
+  'client-name',
+  'client-salary',
+  'client-address',
+  'client-image',
+]
 
-const QUESTION_STEPS: ClientStep[] = ['client-salary', 'client-address', 'client-image']
+const QUESTION_STEPS: ClientStep[] = ['client-name', 'client-salary', 'client-address', 'client-image']
 
 /* client-loading's text/Nyla/CTA sequence — cycles on its own timer, but the
  * "Get started" button (shown from line 2 onward) can jump to client-intro
@@ -241,6 +249,7 @@ export function ClientFlow() {
 
   const [stepIndex, setStepIndex] = useState(0)
   const step = CLIENT_STEPS[stepIndex]
+  const [name, setName] = useState('')
   const [salary, setSalary] = useState('')
   const [address, setAddress] = useState('')
   const [collapsedUpTo, setCollapsedUpTo] = useState(-1)
@@ -260,7 +269,8 @@ export function ClientFlow() {
     setStepIndex((i) => Math.max(0, i - 1))
   }
 
-  const isQuestionStep = step === 'client-salary' || step === 'client-address' || step === 'client-image'
+  const isQuestionStep =
+    step === 'client-name' || step === 'client-salary' || step === 'client-address' || step === 'client-image'
   const questionIndex = QUESTION_STEPS.indexOf(step)
   const lastQuestionIndex = QUESTION_STEPS.length - 1
   const questionCtaShown = !isQuestionStep || questionIndex > collapsedUpTo
@@ -324,7 +334,8 @@ export function ClientFlow() {
                   className="mt-6 font-serif text-[var(--nyl-blue-800)]"
                   style={{ fontSize: 'var(--size-display-01)', lineHeight: 'var(--line-display-01)', letterSpacing: 0 }}
                 >
-                  {CLIENT_FLOW_CONTENT.intro.headline}
+                  Hi, I'm Nyla.<br/>
+                  Let's work together to acheive your goals
                 </h1>
                 <p className="mt-6 text-[16px] text-[var(--text-body)]">{CLIENT_FLOW_CONTENT.intro.body1}</p>
                 <p className="mt-2 text-[16px] text-[var(--text-headline)]">{CLIENT_FLOW_CONTENT.intro.body2}</p>
@@ -347,6 +358,42 @@ export function ClientFlow() {
               >
                 <ClientLoadingSequence onGetStarted={advance} />
               </motion.div>
+            )}
+
+            {step === 'client-name' && (
+              <>
+                <motion.div
+                  key="client-name"
+                  className="relative z-10 mx-auto w-full max-w-[620px] px-6"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
+                >
+                  <SectionHeader
+                    variant="secondary"
+                    heading={CLIENT_FLOW_CONTENT.name.heading}
+                    body={CLIENT_FLOW_CONTENT.name.body}
+                  />
+                  <TextInput
+                    variant="text"
+                    value={name}
+                    onChange={setName}
+                    placeholder={CLIENT_FLOW_CONTENT.name.placeholder}
+                    className="mt-8"
+                  />
+                  {questionCtaShown && (
+                    <ButtonContainer
+                      secondaryVariant="secondary"
+                      showSecondary={false}
+                      onPrimary={advanceQuestion}
+                      onSecondary={advanceQuestion}
+                      className="mt-6"
+                    />
+                  )}
+                </motion.div>
+                <Nyla size={160} variant="on-light" align="left" className="absolute bottom-0 right-0" />
+              </>
             )}
 
             {step === 'client-salary' && (
@@ -374,7 +421,6 @@ export function ClientFlow() {
                   {questionCtaShown && (
                     <ButtonContainer
                       secondaryVariant="secondary"
-                      showClientSecondary={true}
                       showSecondary={false}
                       onPrimary={advanceQuestion}
                       onSecondary={advanceQuestion}

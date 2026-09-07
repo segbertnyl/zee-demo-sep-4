@@ -33,6 +33,10 @@ export function LandingChooser() {
     openOnboarding(completed ? 'reorg' : 'first-run')
   }
 
+  function placeholder() {
+    console.log('nothing')
+  }
+
   const cards: Card[] = [
     {
       label: 'First-time agent onboarding',
@@ -42,7 +46,7 @@ export function LandingChooser() {
         { label: 'Plan reveal', action: () => openDiscoveryAt('plan') },
  
       ],
-      action: pickOnboarding,
+      action: placeholder,
     },
         {
       label: 'First-time client onboarding',
@@ -52,7 +56,7 @@ export function LandingChooser() {
         { label: 'Discovery', action: () => openClientFlow() },
         { label: 'Dashboard', action: () => openClientBrief() },
       ],
-      action: pickOnboarding,
+      action: placeholder,
     },
     {
       label: 'The briefing',
@@ -77,7 +81,7 @@ export function LandingChooser() {
         <motion.div
           key="landing-chooser"
           role="dialog"
-          aria-label="Prototype menu"
+          aria-label="2026 Design Standards"
           className="overlay-bleed z-[180] overflow-hidden"
           style={{ background: 'var(--bg-overlay-dark)' }}
           initial={{ opacity: 1 }}
@@ -188,9 +192,9 @@ export function LandingChooser() {
                     if ((e.target as HTMLElement).closest('[data-quicklinks]')) return
                     card.action()
                   }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') card.action()
-                  }}
+                  // onKeyDown={(e) => {
+                  //   if (e.key === 'Enter' || e.key === ' ') card.action()
+                  // }}
                   className="group w-full cursor-pointer rounded-2xl text-left transition-shadow"
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}

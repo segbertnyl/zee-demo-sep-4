@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useAppStore } from '@/state/useAppStore'
 import { EASE, DURATION, prefersReducedMotion } from '@/motion'
 import { NYLLogo } from '@/ui/NYLLogo'
+import { ClientSplashBackground } from '@/ui/ClientSplashBackground'
 import { BriefingHeadline } from '@/ui/BriefingHeadline'
 import { BriefingTaskCard } from '@/ui/BriefingTaskCard'
 import type { TaskCardModel } from '@/data/briefingV6Content'
@@ -18,32 +19,70 @@ import {
   type IconProps,
 } from '@/ui/icons'
 import sarahIcon from '../components/sarah-icon.png'
+import sarahIcon2x from '../components/sarah-icon-2x.png'
+import sarahIcon3x from '../components/sarah-icon-3x.png'
 import { Button } from '@/ui/Button'
 import clientQuiz from '../components/client quiz.png'
+import clientQuiz2x from '../components/client quiz-2x.png'
+import clientQuiz3x from '../components/client quiz-3x.png'
 import { Nyla } from '@/ui/Nyla'
 import guidanceBox from '../components/guidance.png'
+import guidanceBox2x from '../components/guidance-2x.png'
+import guidanceBox3x from '../components/guidance-3x.png'
 import adB from '../components/assets-debts-brief.png'
+import adB2x from '../components/asset-debts-brief-2x.png'
+import adB3x from '../components/asset-debts-brief-3x.png'
 import sarah from '../components/Frame 2134540829.png'
 import { SectionHeader } from '@/ui/SectionHeader'
 import { TextInput } from '@/ui/TextInput'
 import { ButtonContainer } from '@/ui/ButtonContainer'
-import guideRetire from '../components/guide-retire.png'
 import guideRetire2 from '../components/guide-retire-2.png'
+import guideRetire2_2x from '../components/guide-retire-2-2x.png'
+import guideRetire2_3x from '../components/guide-retire-2-3x.png'
 import { Textarea } from '@/ui/Textarea'
 import { WhatIHeardClient } from '../scenes/WhatIHeardClient'
 import potentialRisks from '../components/potential-risks.png'
+import potentialRisks2x from '../components/potential-risks-2x.png'
+import potentialRisks3x from '../components/potential-risks-3x.png'
 import nylaRisks from '../components/nyla-risks.png'
+import nylaRisks2x from '../components/nyla-risks-2x.png'
+import nylaRisks3x from '../components/nyla-risks-3x.png'
 import financial2 from '../components/financial-2.png'
+import financial2_2x from '../components/financial-2-2x.png'
+import financial2_3x from '../components/financial-2-3x.png'
 import nylaFin2 from '../components/nyla-fin-risk-2.png'
+import nylaFin2_2x from '../components/nyla-fin-risk-2-2x.png'
+import nylaFin2_3x from '../components/nyla-fin-risk-2-3x.png'
 import collabBoard from '../components/collab-board.png'
+import collabBoard2x from '../components/collab-board-2x.png'
+import collabBoard3x from '../components/collab-board-3x.png'
 import financial3 from '../components/fin-plan-3.png'
+import financial3_2x from '../components/fin-plan-3-2x.png'
+import financial3_3x from '../components/fin-plan-3-3x.png'
 import nylaApply from '../components/nyla-apply.png'
+import nylaApply2x from '../components/nyla-apply-2x.png'
+import nylaApply3x from '../components/nyla-apply-3x.png'
 import pref2 from '../components/preference-2.png'
+import pref2_2x from '../components/preference-2-2x.png'
+import pref2_3x from '../components/preference-2-3x.png'
 import pref2nyla from '../components/preference-2-nyla.png'
+import pref2nyla2x from '../components/pref-2-nyla-2x.png'
+import pref2nyla3x from '../components/pref-2-nyla-3x.png'
 import nylapref3 from '../components/nyla-pref-3.png'
+import nylapref3_2x from '../components/nyla-pref-3-2x.png'
+import nylapref3_3x from '../components/nyla-pref-3-3x.png'
 import bodyPref3 from '../components/body-pref-3.png'
+import bodyPref3_2x from '../components/body-pref-3-2x.png'
+import bodyPref3_3x from '../components/body-pref-3-3x.png'
 import nylaLegacy from '../components/nyla-legacy.png';
+import nylaLegacy2x from '../components/nyla-legacy-2x.png';
+import nylaLegacy3x from '../components/nyla-legacy-3x.png';
 import legacyBody from '../components/legacy-body.png';
+import legacyBody2x from '../components/legacy-body-2x.png';
+import legacyBody3x from '../components/legacy-body-3x.png';
+import sarahBig from '../components/sarah-big.png'
+import sarahBig2x from '../components/sarah-big-2x.png'
+import sarahBig3x from '../components/sarah-big-3x.png'
 
 /* ============================================================================
  * Client Briefing scene — the client's own version of the briefing screen.
@@ -509,6 +548,8 @@ export function ClientBriefingScene() {
           exit={{ opacity: 0 }}
           transition={{ duration: DURATION.short }}
         >
+          <ClientSplashBackground style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
+
           <Rail active={activeNav} onSelect={setActiveNav} onExit={closeClientBriefing} />
 
           <div className="relative z-10 flex min-w-0 flex-1 flex-col px-6">
@@ -520,7 +561,7 @@ export function ClientBriefingScene() {
               <TopNav activeNav={activeNav} />
             </motion.div>
             {activeNav === 'Dashboard' && dashboardView === 3 && (
-              <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
+              <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 overflow-y-auto pt-6'].join(' ')}>
                 <div className="col-span-5 flex h-full flex-col pt-6">
                   <BriefingHeadline
                     text={'Sarah just posted your risk and needs assessment to your account'}
@@ -589,13 +630,13 @@ export function ClientBriefingScene() {
                       setFinancialPlanView(2)
                     }}
                   />
-                  <img src={adB} />
+                  <img src={adB} srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`} />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
             )}
             {activeNav === 'Dashboard' && dashboardView === 4 && (
-              <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
+              <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 overflow-y-auto pt-6'].join(' ')}>
                 <div className="col-span-5 flex h-full flex-col pt-6">
                   <BriefingHeadline text={'Today you take another step toward your goals'} reducedMotion={reduced} />
                   <motion.div
@@ -661,7 +702,7 @@ export function ClientBriefingScene() {
                       setFinancialPlanView(3)
                     }}
                   />
-                  <img src={adB} />
+                  <img src={adB} srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`} />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -673,7 +714,10 @@ export function ClientBriefingScene() {
                  underneath; right keeps the top/bottom "nuance" but contained
                  in one column — one follow-up task card stacked above the
                  assets/debts image. */
-              <div key={dashboardView} className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 pt-6'].join(' ')}>
+              <div
+                key={dashboardView}
+                className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 overflow-y-auto pt-6'].join(' ')}
+              >
                 <div className="col-span-5 flex h-full flex-col pt-6">
                   <BriefingHeadline
                     text={
@@ -745,17 +789,17 @@ export function ClientBriefingScene() {
                       setActiveNav('Financial Plan')
                     }}
                   />
-                  <img src={adB} />
+                  <img src={adB} srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`} />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
             )}
             {activeNav === 'Dashboard' && dashboardView === 0 && (
-              <div className="flex min-h-0 flex-1 flex-col ">
+              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
                 {/* view 0 (default) — top region: 7/12 of the body height.
                     5/7 col split inside, same shape as BriefingV6's left/right
                     columns, minus the scrollable right stack (this one's static). */}
-                <div className={[GRID, 'grid grid-cols-12 gap-6 pt-6'].join(' ')} style={{ flex: 7, minHeight: 0 }}>
+                <div className={[GRID, 'grid grid-cols-12 gap-6 pt-6'].join(' ')} style={{ flex: '7 0 auto' }}>
                   <div className="col-span-5 flex flex-col">
                     {loadPhase >= 1 && (
                       <>
@@ -779,10 +823,17 @@ export function ClientBriefingScene() {
                             />
                           </div>
                         </motion.div>
+                        <div
+                          className="font-serif text-[#243641] text-[24px] leading-[48px]"
+                          style={{ fontWeight: 'var(--weight-light)' }}
+                        >
+                          Sarah is a top match
+                        </div>
                         <div className="flex flex-row gap-[20px] ml-2">
-                          <img src={sarahIcon} />
-                          <div className="flex flex-col justify-between h-full">
-                            <div className="text-[#474952] text-base pt-[16px]">Sarah can help you meet your goals</div>
+                          <img src={sarahIcon} srcSet={`${sarahIcon} 1x, ${sarahIcon2x} 2x, ${sarahIcon3x} 3x`} />
+                          <div className="flex flex-col gap-2 h-full">
+                            <div className="text-[#474952] text-base pt-[10px]">Based on your profile we would recommend</div>
+                            <div className="text-[#474952] text-base ">Sarah to help you acheive your goals</div>
                             <Button
                               onClick={() => {
                                 setActiveNav('Resources')
@@ -802,20 +853,20 @@ export function ClientBriefingScene() {
                     animate={{ opacity: loadPhase >= 2 ? 1 : 0 }}
                     transition={{ duration: DURATION.standard, ease: EASE.settle }}
                   >
-                    <img src={adB} />
+                    <img src={adB} srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`} />
                   </motion.div>
                 </div>
 
                 {/* bottom region — 5/12 of the body height. 9/ou 3 col split, both
                     fading in together at loadPhase 3 (@4050ms). */}
-                <div className={[GRID, 'grid grid-cols-12  py-6'].join(' ')} style={{ minHeight: 0 }}>
+                <div className={[GRID, 'grid grid-cols-12  py-6'].join(' ')} style={{ flexShrink: 0 }}>
                   <motion.div
                     className="col-span-8"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: loadPhase >= 3 ? 1 : 0 }}
                     transition={{ duration: DURATION.standard, ease: EASE.settle }}
                   >
-                    <img src={clientQuiz} />
+                    <img src={clientQuiz} srcSet={`${clientQuiz} 1x, ${clientQuiz2x} 2x, ${clientQuiz3x} 3x`} />
                   </motion.div>
                   <motion.div
                     className="col-span-4"
@@ -824,7 +875,7 @@ export function ClientBriefingScene() {
                     transition={{ duration: DURATION.standard, ease: EASE.settle }}
                   >
                     <div className="w-full flex justify-end">
-                      <img src={guidanceBox} />
+                      <img src={guidanceBox} srcSet={`${guidanceBox} 1x, ${guidanceBox2x} 2x, ${guidanceBox3x} 3x`} />
                       <Nyla size={120} className="absolute bottom-0 right-15" />
                     </div>
                   </motion.div>
@@ -869,7 +920,11 @@ export function ClientBriefingScene() {
                         />
                       }
                     </motion.div>
-                    <img src={guideRetire} className="absolute right-0" />
+                    <img
+                      src={guidanceBox}
+                      srcSet={`${guidanceBox} 1x, ${guidanceBox2x} 2x, ${guidanceBox3x} 3x`}
+                      className="absolute right-0"
+                    />
                     <Nyla size={120} variant="on-light" align="left" className="absolute bottom-0 right-0" />
                   </>
                 )}
@@ -914,7 +969,11 @@ export function ClientBriefingScene() {
                         />
                       }
                     </motion.div>
-                    <img src={guideRetire2} className="absolute right-0" />
+                    <img
+                      src={guideRetire2}
+                      srcSet={`${guideRetire2} 1x, ${guideRetire2_2x} 2x, ${guideRetire2_3x} 3x`}
+                      className="absolute right-0"
+                    />
                     <Nyla size={120} variant="on-light" align="left" className="absolute bottom-0 right-0" />
                   </>
                 )}
@@ -922,7 +981,7 @@ export function ClientBriefingScene() {
                   <>
                     <motion.div
                       key="client-salary"
-                      className="relative z-10 mx-auto w-full max-w-[770px] px-6 -mt-6 overflow-hidden"
+                      className="relative z-10 h-full w-full"
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
@@ -971,7 +1030,7 @@ export function ClientBriefingScene() {
                   </p>
                 </motion.div>
                 <motion.div
-                  className={[GRID, 'flex flex-row items-start gap-4'].join(' ')}
+                  className={['flex flex-row items-start justify-end gap-24'].join(' ')}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
@@ -980,8 +1039,12 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img src={pref2} />
-                  <img src={pref2nyla} className="mt-10" />
+                  <img src={pref2} srcSet={`${pref2} 1x, ${pref2_2x} 2x, ${pref2_3x} 3x`} />
+                  <img
+                    src={pref2nyla}
+                    srcSet={`${pref2nyla} 1x, ${pref2nyla2x} 2x, ${pref2nyla3x} 3x`}
+                    className="mt-10 shrink-0"
+                  />
                 </motion.div>
                 <motion.div
                   className={GRID}
@@ -1009,7 +1072,7 @@ export function ClientBriefingScene() {
                   </p>
                 </motion.div>
                 <motion.div
-                  className={[GRID, 'flex flex-row items-start gap-4'].join(' ')}
+                  className={['flex flex-row items-start justify-end gap-24'].join(' ')}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
@@ -1018,8 +1081,12 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img src={bodyPref3} />
-                  <img src={nylapref3} className="mt-10" />
+                  <img src={bodyPref3} srcSet={`${bodyPref3} 1x, ${bodyPref3_2x} 2x, ${bodyPref3_3x} 3x`} />
+                  <img
+                    src={nylapref3}
+                    srcSet={`${nylapref3} 1x, ${nylapref3_2x} 2x, ${nylapref3_3x} 3x`}
+                    className="mt-10 shrink-0"
+                  />
                 </motion.div>
                 <motion.div
                   className={GRID}
@@ -1047,7 +1114,7 @@ export function ClientBriefingScene() {
                   </p>
                 </motion.div>
                 <motion.div
-                  className={[GRID, 'flex flex-row items-start gap-4'].join(' ')}
+                  className={['flex flex-row items-start justify-end gap-24'].join(' ')}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
@@ -1056,8 +1123,12 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img src={legacyBody} />
-                  <img src={nylaLegacy} className="mt-10" />
+                  <img src={legacyBody} srcSet={`${legacyBody} 1x, ${legacyBody2x} 2x, ${legacyBody3x} 3x`} />
+                  <img
+                    src={nylaLegacy}
+                    srcSet={`${nylaLegacy} 1x, ${nylaLegacy2x} 2x, ${nylaLegacy3x} 3x`}
+                    className="mt-10 shrink-0"
+                  />
                 </motion.div>
                 <motion.div
                   className={GRID}
@@ -1082,12 +1153,16 @@ export function ClientBriefingScene() {
                   ease: EASE.settle as [number, number, number, number],
                 }}
               >
-                <img src={sarah} />
+                <img
+                  src={sarahBig}
+                  srcSet={`${sarahBig} 1x, ${sarahBig2x} 2x, ${sarahBig3x} 3x`}
+                  className="-mt-[72px]"
+                />
                 <Nyla size={120} className="absolute bottom-0 right-10" />
               </motion.div>
             )}
             {activeNav === 'Financial Plan' && financialPlanView === 1 && (
-              <>
+              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
                 <motion.div
                   className={[GRID, 'flex flex-row justify-center'].join(' ')}
                   initial={{ opacity: 0, y: 8 }}
@@ -1098,7 +1173,10 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img src={potentialRisks} />
+                  <img
+                    src={potentialRisks}
+                    srcSet={`${potentialRisks} 1x, ${potentialRisks2x} 2x, ${potentialRisks3x} 3x`}
+                  />
                 </motion.div>
                 <motion.div
                   className={GRID}
@@ -1107,31 +1185,36 @@ export function ClientBriefingScene() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
                 >
-                  <img src={nylaRisks} className="absolute right-0 top-[50%]" />
-                  <Nyla size={120} className="absolute bottom-0 right-10" />
-                  <ButtonContainer
-                    secondaryVariant="secondary"
-                    primaryLabel="Accept"
-                    secondaryLabel="Make Adjustments"
-                    showClientSecondary={true}
-                    showSecondary={false}
-                    onPrimary={() => {
-                      setDashboardView(3)
-                      setActiveNav('Dashboard')
-                    }}
-                    onSecondary={() => {
-                      setDashboardView(3)
-                      setActiveNav('Dashboard')
-                    }}
-                    className="mt-6 absolute bottom-10 right-72"
+                  <img
+                    src={nylaRisks}
+                    srcSet={`${nylaRisks} 1x, ${nylaRisks2x} 2x, ${nylaRisks3x} 3x`}
+                    className="absolute right-0 top-[50%]"
                   />
+                  <div className="mt-6 pb-10 flex items-center justify-end gap-4">
+                    <ButtonContainer
+                      secondaryVariant="secondary"
+                      primaryLabel="Accept"
+                      secondaryLabel="Make Adjustments"
+                      showClientSecondary={true}
+                      showSecondary={false}
+                      onPrimary={() => {
+                        setDashboardView(3)
+                        setActiveNav('Dashboard')
+                      }}
+                      onSecondary={() => {
+                        setDashboardView(3)
+                        setActiveNav('Dashboard')
+                      }}
+                    />
+                    <Nyla size={120} className="shrink-0" />
+                  </div>
                 </motion.div>
-              </>
+              </div>
             )}
             {activeNav === 'Financial Plan' && financialPlanView === 2 && (
-              <>
+              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
                 <motion.div
-                  className={[GRID, 'flex flex-row justify-center -mt-6'].join(' ')}
+                  className={[GRID, 'flex flex-row justify-center'].join(' ')}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
@@ -1140,7 +1223,10 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img src={financial2} />
+                  <img
+                    src={financial2}
+                    srcSet={`${financial2} 1x, ${financial2_2x} 2x, ${financial2_3x} 3x`}
+                  />
 
                 </motion.div>
                 <motion.div
@@ -1150,32 +1236,37 @@ export function ClientBriefingScene() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
                 >
-                  <img src={nylaFin2} className="absolute right-0 top-[40%]" />
-
-                  <Nyla size={120} className="absolute bottom-0 right-10" />
-                  <ButtonContainer
-                    secondaryVariant="secondary"
-                    primaryLabel="Prepare for my meeting"
-                    secondaryLabel="Download a MD file"
-                    showClientSecondary={true}
-                    showSecondary={false}
-                    onPrimary={() => {
-                      setDashboardView(4)
-                      setActiveNav('Dashboard')
-                    }}
-                    onSecondary={() => {
-                      setDashboardView(4)
-                      setActiveNav('Dashboard')
-                    }}
-                    className="mt-6 absolute bottom-0 right-72"
+                  <img
+                    src={nylaFin2}
+                    srcSet={`${nylaFin2} 1x, ${nylaFin2_2x} 2x, ${nylaFin2_3x} 3x`}
+                    className="absolute right-0 top-[40%]"
                   />
+
+                  <div className="mt-6 pb-10 flex items-center justify-end gap-4">
+                    <ButtonContainer
+                      secondaryVariant="secondary"
+                      primaryLabel="Prepare for my meeting"
+                      secondaryLabel="Download a MD file"
+                      showClientSecondary={true}
+                      showSecondary={false}
+                      onPrimary={() => {
+                        setDashboardView(4)
+                        setActiveNav('Dashboard')
+                      }}
+                      onSecondary={() => {
+                        setDashboardView(4)
+                        setActiveNav('Dashboard')
+                      }}
+                    />
+                    <Nyla size={120} className="shrink-0" />
+                  </div>
                 </motion.div>
-              </>
+              </div>
             )}
             {activeNav === 'Financial Plan' && financialPlanView === 3 && (
-              <>
+              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
                 <motion.div
-                  className={[' flex flex-row items-center justify-center w-full'].join(' ')}
+                  className={[GRID, 'flex flex-row justify-center'].join(' ')}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
@@ -1184,7 +1275,10 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img src={financial3} />
+                  <img
+                    src={financial3}
+                    srcSet={`${financial3} 1x, ${financial3_2x} 2x, ${financial3_3x} 3x`}
+                  />
                 </motion.div>
                 <motion.div
                   className={GRID}
@@ -1193,19 +1287,24 @@ export function ClientBriefingScene() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
                 >
-                  <img src={nylaApply} className="absolute right-0 top-[20%]" />
-                  <Nyla size={120} className="absolute bottom-0 right-10" />
-                  <ButtonContainer
-                    primaryLabel="Start your application"
-                    showSecondary={false}
-                    onPrimary={() => {
-                      setPreferenceView(2)
-                      setActiveNav('Preference Center')
-                    }}
-                    className="absolute bottom-10 right-[20%]"
+                  <img
+                    src={nylaApply}
+                    srcSet={`${nylaApply} 1x, ${nylaApply2x} 2x, ${nylaApply3x} 3x`}
+                    className="absolute right-0 top-[20%]"
                   />
+                  <div className="mt-6 pb-10 flex items-center justify-end gap-4">
+                    <ButtonContainer
+                      primaryLabel="Start your application"
+                      showSecondary={false}
+                      onPrimary={() => {
+                        setPreferenceView(2)
+                        setActiveNav('Preference Center')
+                      }}
+                    />
+                    <Nyla size={120} className="shrink-0" />
+                  </div>
                 </motion.div>
-              </>
+              </div>
             )}
             {activeNav === 'Collab Board' && (
               <motion.div
@@ -1218,7 +1317,10 @@ export function ClientBriefingScene() {
                   ease: EASE.settle as [number, number, number, number],
                 }}
               >
-                <img src={collabBoard} />
+                <img
+                  src={collabBoard}
+                  srcSet={`${collabBoard} 1x, ${collabBoard2x} 2x, ${collabBoard3x} 3x`}
+                />
 
                 <Nyla size={120} className="absolute bottom-0 right-10" />
               </motion.div>

@@ -37,7 +37,7 @@ export function TextInput({
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange?.(e.target.value)}
-        className={isText ? 'text-input-text' : undefined}
+        className="text-input-text"
         style={{
           flex: 1,
           border: 'none',

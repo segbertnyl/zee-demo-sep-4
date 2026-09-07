@@ -7,13 +7,18 @@
 
 export const CLIENT_FLOW_CONTENT = {
   intro: {
-    headline: "Hi, Eric. I'm Nyla. Let's work together to acheive your goals",
+    headline: "Hi, I'm Nyla. Let's work together to acheive your goals",
     body1: "Everyone's financial needs are different.  I'm here to help you get the best outcomes for yours.",
     body2: "When you're ready, let's get started.",
-    cta: "I'm ready",
+    cta: "Get started",
   },
   loading: {
     text: 'Pulling it all together...',
+  },
+  name: {
+    heading: 'What is your name',
+    body: 'Please tell me your first and last name so that I can add it to your profile',
+    placeholder: 'Enter your name...',
   },
   salary: {
     heading: "What's your yearly salary?",

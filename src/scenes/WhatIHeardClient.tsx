@@ -266,7 +266,7 @@ export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
   const [showCTA, setShowCTA] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const [, setTopOffset] = useState(64)
+  const [topOffset, setTopOffset] = useState(64)
 
   // Center the content based on its COLLAPSED height. Measure only on mount,
   // after fonts load (serif metrics change the height), and on resize.
@@ -307,13 +307,13 @@ export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
   }, [])
 
   return (
-    <div style={{ boxSizing: 'border-box' }}>
+    <div style={{ position: 'relative', height: '100%', boxSizing: 'border-box' }}>
       {/* Scrollable content — columns 2-8, centered from collapsed state */}
       <div
         ref={scrollRef}
         style={{
           height: '100%',
-          overflowY: 'hidden',
+          overflowY: 'auto',
           display: 'grid',
           gridTemplateColumns: 'repeat(12, 1fr)',
           columnGap: 24,
@@ -322,7 +322,7 @@ export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
           boxSizing: 'border-box',
         }}
       >
-        <div ref={contentRef} style={{ gridColumn: '2 / 9' }}>
+        <div ref={contentRef} style={{ gridColumn: '2 / 9', marginBottom: 64 }}>
           {/* Heading */}
           <motion.h1
             variants={headingVariants}
@@ -415,9 +415,9 @@ export function WhatIHeardClient({ onContinue }: WhatIHeardProps) {
               animate={showCTA ? 'visible' : 'hidden'}
               style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 48 }}
             >
-              <Button variant="primary" style={{ padding: '12px 32px' }} onClick={onContinue}>
+              {/* <Button variant="primary" style={{ padding: '12px 32px' }} onClick={onContinue}>
                 Let&rsquo;s turn it into a plan
-              </Button>
+              </Button> */}
             </motion.div>
           </div>
         </div>

@@ -107,7 +107,6 @@ type Step =
   | 'brand-marketing'
   | 'brand-interests'
   | 'brand-other'
-  | 'brand-loading'
   | 'brand-content'
   | 'plan'
   | 'plan-reveal'
@@ -135,7 +134,6 @@ const STEPS: Step[] = [
   'brand-marketing',
   'brand-interests',
   'brand-other',
-  'brand-loading',
   'brand-content',
   'plan',
   'plan-reveal',
@@ -164,7 +162,6 @@ const STEP_TO_STAGE: Record<Step, number> = {
   'brand-marketing': 3,
   'brand-interests': 3,
   'brand-other': 3,
-  'brand-loading': 3,
   'brand-content': 3,
   plan: 4,
   'plan-reveal': 4,
@@ -674,9 +671,9 @@ export function DiscoveryFlow() {
   }, [activeStep, advanceFromIndex, introOpen, open])
 
   useEffect(() => {
-    if (!open || introOpen || activeStep !== 'brand-loading') return
-    const brandLoadingIndex = STEPS.indexOf('brand-loading')
-    const t = setTimeout(() => advanceFromIndex(brandLoadingIndex), 2600)
+    if (!open || introOpen || activeStep !== 'brand-content') return
+    const brandContentIndex = STEPS.indexOf('brand-content')
+    const t = setTimeout(() => advanceFromIndex(brandContentIndex), 2600)
     return () => clearTimeout(t)
   }, [activeStep, advanceFromIndex, introOpen, open])
 
@@ -1519,35 +1516,7 @@ export function DiscoveryFlow() {
                 <Nyla size={160} variant="on-light" />
               </motion.div>
             </motion.div>
-            <TransitionText text="Pulling it all together..." exiting={false} active startDelay={0.5} />
-          </div>
-        </ThreadStep>
-
-        <ThreadStep
-          index={19}
-          activeIndex={activeIndex}
-          collapsedUpTo={collapsedUpTo}
-          setRef={(node) => {
-            stepRefs.current[19] = node
-          }}
-          compact
-        >
-          <div style={CONTENT_COLUMN_STYLE}>
-            <RevealBody>
-              <motion.div {...fadeUp(0)}>
-                <Brand />
-              </motion.div>
-              <motion.div {...fadeUp(0, true)}>
-                <CTAReveal show={showCta(19)}>
-                  <ButtonContainer
-                    primaryLabel={ctaLabel(19)}
-                    onPrimary={makeAdvance(19)}
-                    showSecondary={false}
-                    className="mt-6"
-                  />
-                </CTAReveal>
-              </motion.div>
-            </RevealBody>
+            <TransitionText text="Synthesizing your goals and priorities..." exiting={false} active startDelay={0.5} />
           </div>
         </ThreadStep>
       </div>
@@ -1604,7 +1573,8 @@ export function DiscoveryFlow() {
                 letterSpacing: 0,
               }}
             >
-              Hi, Sarah. I'm Nyla. Together, we'll build a plan for your practice, your way.
+              Hi, I'm Nyla.<br/> 
+              Together, we'll build a plan for your practice, your way.
             </motion.h1>
             <motion.p
               initial={introHasEntrance ? { opacity: 0, y: 8 } : false}
@@ -1636,7 +1606,7 @@ export function DiscoveryFlow() {
               style={{ pointerEvents: introRevealed && !introSubmitted ? 'auto' : 'none' }}
             >
               <ButtonContainer
-                primaryLabel="I'm ready"
+                primaryLabel="Get started"
                 showSecondary={false}
                 onPrimary={handleIntroAdvance}
                 className="mt-8"
