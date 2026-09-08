@@ -1562,7 +1562,8 @@ export function DiscoveryFlow() {
                 letterSpacing: 0,
               }}
             >
-              Hi, I'm Nyla.<br/> 
+              Hi, I'm Nyla.
+              <br />
               Together, we'll build a plan for your practice, your way.
             </motion.h1>
             <motion.p

@@ -10,7 +10,7 @@ export const CLIENT_FLOW_CONTENT = {
     headline: "Hi, I'm Nyla. Let's work together to acheive your goals",
     body1: "Everyone's financial needs are different.  I'm here to help you get the best outcomes for yours.",
     body2: "When you're ready, let's get started.",
-    cta: "Get started",
+    cta: 'Get started',
   },
   loading: {
     text: 'Pulling it all together...',

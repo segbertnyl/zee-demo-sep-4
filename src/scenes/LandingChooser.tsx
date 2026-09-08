@@ -44,15 +44,13 @@ export function LandingChooser() {
       quickLinks: [
         { label: 'Discovery', action: () => openDiscovery() },
         { label: 'Plan reveal', action: () => openDiscoveryAt('plan') },
- 
       ],
       action: placeholder,
     },
-        {
+    {
       label: 'First-time client onboarding',
       description: 'Set your goals, shape how your OS works, and see your first plan come together.',
       quickLinks: [
- 
         { label: 'Discovery', action: () => openClientFlow() },
         { label: 'Dashboard', action: () => openClientBrief() },
       ],

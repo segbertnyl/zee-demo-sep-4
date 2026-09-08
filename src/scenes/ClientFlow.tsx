@@ -27,7 +27,8 @@ import linkAccount from '../components/link-acct.png'
  *   5 client-image    — image placeholder where the input would be
  * ========================================================================== */
 
-type ClientStep = 'client-intro' | 'client-loading' | 'client-name' | 'client-salary' | 'client-address' | 'client-image'
+type ClientStep =
+  'client-intro' | 'client-loading' | 'client-name' | 'client-salary' | 'client-address' | 'client-image'
 const CLIENT_STEPS: ClientStep[] = [
   'client-loading',
   'client-intro',
@@ -334,7 +335,8 @@ export function ClientFlow() {
                   className="mt-6 font-serif text-[var(--nyl-blue-800)]"
                   style={{ fontSize: 'var(--size-display-01)', lineHeight: 'var(--line-display-01)', letterSpacing: 0 }}
                 >
-                  Hi, I'm Nyla.<br/>
+                  Hi, I'm Nyla.
+                  <br />
                   Let's work together to acheive your goals
                 </h1>
                 <p className="mt-6 text-[16px] text-[var(--text-body)]">{CLIENT_FLOW_CONTENT.intro.body1}</p>
