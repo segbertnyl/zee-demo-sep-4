@@ -629,7 +629,11 @@ export function ClientBriefingScene() {
                       setFinancialPlanView(2)
                     }}
                   />
-                  <img src={adB} srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`} />
+                  <img
+                    src={adB}
+                    srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
+                    className="w-full h-auto object-contain"
+                  />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -701,7 +705,11 @@ export function ClientBriefingScene() {
                       setFinancialPlanView(3)
                     }}
                   />
-                  <img src={adB} srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`} />
+                  <img
+                    src={adB}
+                    srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
+                    className="w-full h-auto object-contain"
+                  />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -788,7 +796,11 @@ export function ClientBriefingScene() {
                       setActiveNav('Financial Plan')
                     }}
                   />
-                  <img src={adB} srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`} />
+                  <img
+                    src={adB}
+                    srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
+                    className="w-full h-auto object-contain"
+                  />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -1193,7 +1205,7 @@ export function ClientBriefingScene() {
                     srcSet={`${nylaRisks} 1x, ${nylaRisks2x} 2x, ${nylaRisks3x} 3x`}
                     className="absolute right-0 top-[50%]"
                   />
-                  <div className="mt-6 pb-10 flex items-center justify-end gap-4">
+                  <div className="mt-6 pb-4 absolute right-10 bottom-0 flex items-center justify-end gap-4">
                     <ButtonContainer
                       secondaryVariant="secondary"
                       primaryLabel="Accept"
@@ -1245,7 +1257,7 @@ export function ClientBriefingScene() {
                     className="absolute right-0 top-[40%]"
                   />
 
-                  <div className="mt-6 pb-10 flex items-center justify-end gap-4">
+                  <div className="mt-6 pb-4 absolute right-10 bottom-0 flex items-center justify-end gap-4">
                     <ButtonContainer
                       secondaryVariant="secondary"
                       primaryLabel="Prepare for my meeting"
@@ -1295,7 +1307,7 @@ export function ClientBriefingScene() {
                     srcSet={`${nylaApply} 1x, ${nylaApply2x} 2x, ${nylaApply3x} 3x`}
                     className="absolute right-0 top-[20%]"
                   />
-                  <div className="mt-6 pb-10 flex items-center justify-end gap-4">
+                  <div className="mt-6 pb-4 absolute right-10 bottom-0 flex items-center justify-end gap-4">
                     <ButtonContainer
                       primaryLabel="Start your application"
                       showSecondary={false}
