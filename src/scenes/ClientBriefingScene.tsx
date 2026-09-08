@@ -798,7 +798,10 @@ export function ClientBriefingScene() {
                 {/* view 0 (default) — top region: 7/12 of the body height.
                     5/7 col split inside, same shape as BriefingV6's left/right
                     columns, minus the scrollable right stack (this one's static). */}
-                <div className={[GRID, 'grid grid-cols-12 gap-6 pt-6'].join(' ')} style={{ flex: '7 0 auto' }}>
+                <div
+                  className={[GRID, 'grid max-w-[1240px] grid-cols-12 gap-6 pt-6'].join(' ')}
+                  style={{ flex: '7 0 auto' }}
+                >
                   <div className="col-span-5 flex flex-col">
                     {loadPhase >= 1 && (
                       <>
