@@ -912,11 +912,11 @@ export function ClientBriefingScene() {
                       setDashboardView(1)
                     }}
                   />
-                  <div className="p-6 border flex items-center rounded-md border-[#E3E0DD]">
+                  <div className="p-6 pr-0 border flex justify-center items-center rounded-md border-[#E3E0DD]">
                     <img
                       src={adB}
                       srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                      className="w-full max-h-[260px] h-auto object-contain"
+                      className="w-full  h-auto object-contain"
                     />
                   </div>
                   <Nyla size={120} className="absolute bottom-0 right-10" />
@@ -1152,7 +1152,7 @@ export function ClientBriefingScene() {
                   </p>
                 </motion.div>
                 <motion.div
-                  className={['flex flex-row items-start justify-end gap-24'].join(' ')}
+                  className={['relative flex flex-row items-start justify-center gap-24'].join(' ')}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
@@ -1165,7 +1165,7 @@ export function ClientBriefingScene() {
                   <img
                     src={nylaLegacy}
                     srcSet={`${nylaLegacy} 1x, ${nylaLegacy2x} 2x, ${nylaLegacy3x} 3x`}
-                    className="mt-10 shrink-0"
+                    className="absolute right-10 top-10 shrink-0"
                   />
                 </motion.div>
                 <motion.div
