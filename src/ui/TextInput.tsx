@@ -3,8 +3,8 @@ export interface TextInputProps {
   placeholder?: string
   onChange?: (value: string) => void
   onMicClick?: () => void
-  /** numeric: 24px medium — for dollar amounts and quantitative values (default)
-   *  text: 16px regular — for free-text strings; placeholder rendered italic + muted */
+  /** No longer affects styling — value/placeholder text is always 16px/400/18px
+   *  regardless of variant. Kept for callers' semantic intent. */
   variant?: 'numeric' | 'text'
   className?: string
 }
@@ -17,7 +17,7 @@ export function TextInput({
   variant = 'numeric',
   className,
 }: TextInputProps) {
-  const isText = variant === 'text'
+  void variant
   return (
     <div
       className={className}
@@ -44,8 +44,8 @@ export function TextInput({
           outline: 'none',
           background: 'transparent',
           fontFamily: 'var(--font-sans)',
-          fontSize: isText ? '16px' : 'var(--size-lg-01)',
-          fontWeight: isText ? 400 : ('var(--weight-medium)' as unknown as number),
+          fontSize: '16px',
+          fontWeight: 400,
           lineHeight: '18px',
           letterSpacing: '0.2px',
           color: 'var(--text-body)',

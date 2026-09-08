@@ -9,7 +9,7 @@ export function ClientSplashBackground({ className, style }: { className?: strin
         height: '100%',
         backgroundColor: '#ffffff',
         backgroundImage:
-          'radial-gradient(ellipse 60% 60% at 100% 100%, oklch(0.86 0.09 262) 0%, oklch(0.95 0.03 262) 40%, oklch(0.99 0.003 262) 65%, transparent 90%)',
+          'radial-gradient(ellipse 80% 60% at 100% 100%, oklch(0.7 0.14 262 / 0.85) 0%, oklch(0.85 0.07 262 / 0.55) 40%, oklch(0.99 0.003 262 / 0.15) 65%, transparent 80%)',
         ...style,
       }}
       aria-hidden="true"
