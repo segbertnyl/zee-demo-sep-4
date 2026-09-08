@@ -30,8 +30,6 @@ import guidanceBox from '../components/guidance.png'
 import guidanceBox2x from '../components/guidance-2x.png'
 import guidanceBox3x from '../components/guidance-3x.png'
 import adB from '../components/assets-debts-brief.png'
-// import adB2x from '../components/asset-debts-brief-2x.png'
-// import adB3x from '../components/asset-debts-brief-3x.png'
 import { SectionHeader } from '@/ui/SectionHeader'
 import { TextInput } from '@/ui/TextInput'
 import { ButtonContainer } from '@/ui/ButtonContainer'
@@ -629,11 +627,7 @@ export function ClientBriefingScene() {
                       setFinancialPlanView(2)
                     }}
                   />
-                  <img
-                    src={adB}
-                    // srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                    className="w-full h-auto object-contain"
-                  />
+                  <img src={adB} className="w-full h-auto object-contain" />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -705,11 +699,7 @@ export function ClientBriefingScene() {
                       setFinancialPlanView(3)
                     }}
                   />
-                  <img
-                    src={adB}
-                    // srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                    className="w-full h-auto object-contain"
-                  />
+                  <img src={adB} className="w-full h-auto object-contain" />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -796,11 +786,7 @@ export function ClientBriefingScene() {
                       setActiveNav('Financial Plan')
                     }}
                   />
-                  <img
-                    src={adB}
-                    // srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                    className="w-full h-auto object-contain"
-                  />
+                  <img src={adB} className="w-full h-auto object-contain" />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -810,7 +796,7 @@ export function ClientBriefingScene() {
                 {/* view 0 (default) — top region: 7/12 of the body height.
                     5/7 col split inside, same shape as BriefingV6's left/right
                     columns, minus the scrollable right stack (this one's static). */}
-                <div className={[GRID, 'grid grid-cols-12 gap-6 pt-6'].join(' ')} style={{ flex: '7 0 auto' }}>
+                <div className={[GRID, 'grid grid-cols-12 gap-6 pt-6'].join(' ')} style={{ flexShrink: 0 }}>
                   <div className="col-span-5 flex flex-col">
                     {loadPhase >= 1 && (
                       <>
@@ -861,16 +847,12 @@ export function ClientBriefingScene() {
                     )}
                   </div>
                   <motion.div
-                    className="col-span-7 max-h-[400px] overflow-hidden"
+                    className="col-span-7 max-h-[520px] overflow-hidden"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: loadPhase >= 2 ? 1 : 0 }}
                     transition={{ duration: DURATION.standard, ease: EASE.settle }}
                   >
-                    <img
-                      // src={adB}
-                      // srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                      className="h-full w-auto max-w-full object-contain"
-                    />
+                    <img src={adB} className="h-full w-auto max-w-full object-contain" />
                   </motion.div>
                 </div>
 
@@ -1190,7 +1172,7 @@ export function ClientBriefingScene() {
                     src={potentialRisks}
                     srcSet={`${potentialRisks} 1x, ${potentialRisks2x} 2x, ${potentialRisks3x} 3x`}
                   />
-                  <div className="mt-6 pb-4 absolute right-10 bottom-0 flex items-center justify-end gap-4">
+                  <div className="mt-6 pb-4 w-full flex items-center justify-end gap-4">
                     <ButtonContainer
                       secondaryVariant="secondary"
                       primaryLabel="Accept"
@@ -1238,7 +1220,7 @@ export function ClientBriefingScene() {
                 >
                   <img src={financial2} srcSet={`${financial2} 1x, ${financial2_2x} 2x, ${financial2_3x} 3x`} />
 
-                  <div className="mt-6 pb-4 absolute right-10 bottom-0 flex items-center justify-end gap-4">
+                  <div className="mt-6 pb-4 w-full flex items-center justify-end gap-4">
                     <ButtonContainer
                       secondaryVariant="secondary"
                       primaryLabel="Prepare for my meeting"
@@ -1285,7 +1267,7 @@ export function ClientBriefingScene() {
                   }}
                 >
                   <img src={financial3} srcSet={`${financial3} 1x, ${financial3_2x} 2x, ${financial3_3x} 3x`} />
-                  <div className="mt-6 pb-4 absolute right-10 bottom-0 flex items-center justify-end gap-4">
+                  <div className="mt-6 pb-4 w-full flex items-center justify-end gap-4">
                     <ButtonContainer
                       primaryLabel="Start your application"
                       showSecondary={false}
