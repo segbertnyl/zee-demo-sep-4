@@ -157,12 +157,12 @@ const ZERO_TASK: TaskCardModel = {
   headlinePrefix: '',
   clientName: 'Sarah Chen',
   clientPreview: ERIC_PREVIEW,
-  headlineSuffix: 'is ready to discuss your full plan in details',
+  headlineSuffix: 'is recommended to best help you create a personalized financial plan',
   doneSummary: 'Call Sandra Kim to reactivate WL policy',
-  description: 'Join the meeting and Sarah will open up your collaboration board so that you can work together.',
+  description: 'Review Sarah\'s profile and learn more about her approach to providing Protection Powered Growth.',
   tags: [],
   footerLabel: 'Why is this important',
-  primaryCta: 'Join now',
+  primaryCta: 'Connect with Sarah',
   email: 'sarah_chen@ft.newyorklife.com',
   doneHeadline: 'Sandra’s handled. Next up, review Laura’s coverage gaps before you write.',
   defaultDraft: 'call',
@@ -658,11 +658,14 @@ export function ClientBriefingScene() {
                       setFinancialPlanView(2)
                     }}
                   />
-                  <img
+                  <div className="p-6 border rounded-medium border-[#E3E0DD]">
+                 <img
                     src={adB}
                     srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                    className="w-full max-h-[260px] h-auto object-contain"
+                    className="w-full h-auto object-contain"
                   />
+                  </div>
+ 
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -734,11 +737,14 @@ export function ClientBriefingScene() {
                       setFinancialPlanView(3)
                     }}
                   />
+                  <div className="p-6 border rounded-medium border-[#E3E0DD]">
+
                   <img
                     src={adB}
                     srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                    className="w-full max-h-[260px] h-auto object-contain"
+                    className="w-full h-auto object-contain"
                   />
+                  </div>
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -825,11 +831,14 @@ export function ClientBriefingScene() {
                       setActiveNav('Financial Plan')
                     }}
                   />
+                  <div className="p-6 border rounded-medium border-[#E3E0DD]">
+
                   <img
                     src={adB}
                     srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                    className="w-full max-h-[260px] h-auto object-contain"
+                    className="w-full  h-auto object-contain"
                   />
+                  </div>
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -839,7 +848,7 @@ export function ClientBriefingScene() {
                             <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 overflow-y-auto pt-6'].join(' ')}>
                 <div className="col-span-5 flex h-full flex-col pt-6">
                   <BriefingHeadline 
-                          text="Great job connecting your accounts. Here is where you stand."
+                          text="Connect with Sarah."
 
                   reducedMotion={reduced} 
                   />
@@ -902,8 +911,8 @@ export function ClientBriefingScene() {
                     reducedMotion={reduced}
                     label="Remind me"
                     onPrimary={() => {
-                      setActiveNav('Collab Board')
-                      setFinancialPlanView(3)
+                                setActiveNav('Resources')
+                                setDashboardView(1)
                     }}
                   />
                   <img
@@ -1204,28 +1213,30 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img
-                    src={potentialRisks}
-                    srcSet={`${potentialRisks} 1x, ${potentialRisks2x} 2x, ${potentialRisks3x} 3x`}
-                    className="h-auto object-contain"
-                  />
-                  <div className="mt-6 pb-4 w-full flex items-center justify-end gap-4">
-                    <ButtonContainer
-                      secondaryVariant="secondary"
-                      primaryLabel="Accept"
-                      secondaryLabel="Make Adjustments"
-                      showClientSecondary={true}
-                      showSecondary={false}
-                      onPrimary={() => {
-                        setDashboardView(3)
-                        setActiveNav('Dashboard')
-                      }}
-                      onSecondary={() => {
-                        setDashboardView(3)
-                        setActiveNav('Dashboard')
-                      }}
+                  <div className="w-fit">
+                    <img
+                      src={potentialRisks}
+                      srcSet={`${potentialRisks} 1x, ${potentialRisks2x} 2x, ${potentialRisks3x} 3x`}
+                      className="max-w-full h-auto object-contain"
                     />
-                    <Nyla size={120} className="shrink-0" />
+                    <div className="mt-6 pb-4 flex items-center justify-end gap-4">
+                      <ButtonContainer
+                        secondaryVariant="secondary"
+                        primaryLabel="Accept"
+                        secondaryLabel="Make Adjustments"
+                        showClientSecondary={true}
+                        showSecondary={false}
+                        onPrimary={() => {
+                          setDashboardView(3)
+                          setActiveNav('Dashboard')
+                        }}
+                        onSecondary={() => {
+                          setDashboardView(3)
+                          setActiveNav('Dashboard')
+                        }}
+                      />
+                      <Nyla size={120} className="shrink-0" />
+                    </div>
                   </div>
                 </motion.div>
                 <motion.div
@@ -1255,29 +1266,31 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img
-                    src={financial2}
-                    srcSet={`${financial2} 1x, ${financial2_2x} 2x, ${financial2_3x} 3x`}
-                    className="max-w-[50%] h-auto object-contain"
-                  />
-
-                  <div className="mt-6 pb-4 w-full flex items-center justify-end gap-4">
-                    <ButtonContainer
-                      secondaryVariant="secondary"
-                      primaryLabel="Prepare for my meeting"
-                      secondaryLabel="Download a MD file"
-                      showClientSecondary={true}
-                      showSecondary={false}
-                      onPrimary={() => {
-                        setDashboardView(4)
-                        setActiveNav('Dashboard')
-                      }}
-                      onSecondary={() => {
-                        setDashboardView(4)
-                        setActiveNav('Dashboard')
-                      }}
+                  <div className="w-fit">
+                    <img
+                      src={financial2}
+                      srcSet={`${financial2} 1x, ${financial2_2x} 2x, ${financial2_3x} 3x`}
+                      className="max-w-full h-auto object-contain"
                     />
-                    <Nyla size={120} className="shrink-0" />
+
+                    <div className="mt-6 pb-4 flex items-center justify-end gap-4">
+                      <ButtonContainer
+                        secondaryVariant="secondary"
+                        primaryLabel="Prepare for my meeting"
+                        secondaryLabel="Download a MD file"
+                        showClientSecondary={true}
+                        showSecondary={false}
+                        onPrimary={() => {
+                          setDashboardView(4)
+                          setActiveNav('Dashboard')
+                        }}
+                        onSecondary={() => {
+                          setDashboardView(4)
+                          setActiveNav('Dashboard')
+                        }}
+                      />
+                      <Nyla size={120} className="shrink-0" />
+                    </div>
                   </div>
                 </motion.div>
                 <motion.div
@@ -1307,21 +1320,23 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img
-                    src={financial3}
-                    srcSet={`${financial3} 1x, ${financial3_2x} 2x, ${financial3_3x} 3x`}
-                    className="max-w-[50%] h-auto object-contain"
-                  />
-                  <div className="mt-6 pb-4 w-full flex items-center justify-end gap-4">
-                    <ButtonContainer
-                      primaryLabel="Start your application"
-                      showSecondary={false}
-                      onPrimary={() => {
-                        setPreferenceView(2)
-                        setActiveNav('Preference Center')
-                      }}
+                  <div className="w-fit">
+                    <img
+                      src={financial3}
+                      srcSet={`${financial3} 1x, ${financial3_2x} 2x, ${financial3_3x} 3x`}
+                      className="max-w-full h-auto object-contain"
                     />
-                    <Nyla size={120} className="shrink-0"/>
+                    <div className="mt-6 pb-4 flex items-center justify-end gap-4">
+                      <ButtonContainer
+                        primaryLabel="Start your application"
+                        showSecondary={false}
+                        onPrimary={() => {
+                          setPreferenceView(2)
+                          setActiveNav('Preference Center')
+                        }}
+                      />
+                      <Nyla size={120} className="shrink-0"/>
+                    </div>
                   </div>
                 </motion.div>
                 <motion.div
