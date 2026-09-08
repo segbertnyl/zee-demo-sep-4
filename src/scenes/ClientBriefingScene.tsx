@@ -18,13 +18,6 @@ import {
   CalendarIcon,
   type IconProps,
 } from '@/ui/icons'
-import sarahIcon from '../components/sarah-icon.png'
-import sarahIcon2x from '../components/sarah-icon-2x.png'
-import sarahIcon3x from '../components/sarah-icon-3x.png'
-import { Button } from '@/ui/Button'
-import clientQuiz from '../components/client quiz.png'
-import clientQuiz2x from '../components/client quiz-2x.png'
-import clientQuiz3x from '../components/client quiz-3x.png'
 import { Nyla } from '@/ui/Nyla'
 import guidanceBox from '../components/guidance.png'
 import guidanceBox2x from '../components/guidance-2x.png'
@@ -525,23 +518,23 @@ export function ClientBriefingScene() {
    * 0 = nothing yet, 1 = "headline" region (@1500ms), 2 = "cards" region
    * (@3000ms), 3 = reserved for whatever loads last (@4050ms — not wired to
    * a block yet; the bottom band is a static placeholder for now, see below). */
-  const [loadPhase, setLoadPhase] = useState(0)
-  useEffect(() => {
-    if (!open) return
-    if (reduced) {
-      setLoadPhase(3)
-      return
-    }
-    setLoadPhase(0)
-    const t1 = window.setTimeout(() => setLoadPhase(1), 1500)
-    const t2 = window.setTimeout(() => setLoadPhase(2), 3000)
-    const t3 = window.setTimeout(() => setLoadPhase(3), 4050)
-    return () => {
-      window.clearTimeout(t1)
-      window.clearTimeout(t2)
-      window.clearTimeout(t3)
-    }
-  }, [open, reduced])
+  // const [loadPhase, setLoadPhase] = useState(0)
+  // useEffect(() => {
+  //   if (!open) return
+  //   if (reduced) {
+  //     setLoadPhase(3)
+  //     return
+  //   }
+  //   setLoadPhase(0)
+  //   const t1 = window.setTimeout(() => setLoadPhase(1), 1500)
+  //   const t2 = window.setTimeout(() => setLoadPhase(2), 3000)
+  //   const t3 = window.setTimeout(() => setLoadPhase(3), 4050)
+  //   return () => {
+  //     window.clearTimeout(t1)
+  //     window.clearTimeout(t2)
+  //     window.clearTimeout(t3)
+  //   }
+  // }, [open, reduced])
 
   /* Dashboard's own sub-flow: 0 on initial load; "Learn More About Sarah"
    * sets it to 1 (and navigates the rail to Resources). Only resets to 0 on
@@ -1319,7 +1312,7 @@ export function ClientBriefingScene() {
                         setActiveNav('Preference Center')
                       }}
                     />
-                    <Nyla size={120} className="shrink-0"f />
+                    <Nyla size={120} className="shrink-0"/>
                   </div>
                 </motion.div>
                 <motion.div
