@@ -30,6 +30,8 @@ import guidanceBox from '../components/guidance.png'
 import guidanceBox2x from '../components/guidance-2x.png'
 import guidanceBox3x from '../components/guidance-3x.png'
 import adB from '../components/assets-debts-brief.png'
+import adB2x from '../components/asset-debts-brief-2x.png'
+import adB3x from '../components/asset-debts-brief-3x.png'
 import { SectionHeader } from '@/ui/SectionHeader'
 import { TextInput } from '@/ui/TextInput'
 import { ButtonContainer } from '@/ui/ButtonContainer'
@@ -132,6 +134,42 @@ const SANDRA_TASK: TaskCardModel = {
   tags: [],
   footerLabel: 'Missing information',
   primaryCta: 'Get started',
+  email: 'sarah_chen@ft.newyorklife.com',
+  doneHeadline: 'Sandra’s handled. Next up, review Laura’s coverage gaps before you write.',
+  defaultDraft: 'call',
+  drafts: {
+    call: {
+      context:
+        'Sandy is direct — lead with the policy, skip the warmup, and address the WL lapse (16d left in grace period).',
+      body: 'Hi Sandy, it’s Sarah. Your WL policy has a payment past due and I want to make sure we get this resolved before it affects your coverage. Can we connect today?',
+      meta: 'Draft generated · Last updated 9:56 AM',
+    },
+    text: {
+      context: 'Short SMS — clear about the deadline, easy to reply to.',
+      body: 'Hi Sandy, it’s Sarah from New York Life. Your WL policy payment is past due — 16 days left in the grace period. Can we hop on a quick call today to sort it before it affects your coverage?',
+      meta: 'Draft generated · Last updated 9:56 AM',
+    },
+    email: {
+      context: 'A short, warm email — policy first, with the payment link ready.',
+      body: 'Subject: A quick fix on your WL policy\n\nHi Sandy,\n\nYour whole life policy has a payment past due, and I’d like to help you clear it before it affects your coverage — there are 16 days left in the grace period. It’s a quick fix; I can send a secure payment link or walk you through it on a short call.\n\nWhat works best for you this week?\n\nBest,\nSarah Ferreira\nNew York Life',
+      meta: 'Draft generated · Last updated 9:56 AM',
+    },
+  },
+}
+
+const ZERO_TASK: TaskCardModel = {
+  id: 'sandra-lapse',
+  kind: 'task',
+  badge: { label: 'MEETING WITH SARAH', tone: 'prep' },
+  headlinePrefix: '',
+  clientName: 'Sarah Chen',
+  clientPreview: ERIC_PREVIEW,
+  headlineSuffix: 'is ready to discuss your full plan in details',
+  doneSummary: 'Call Sandra Kim to reactivate WL policy',
+  description: 'Join the meeting and Sarah will open up your collaboration board so that you can work together.',
+  tags: [],
+  footerLabel: 'Why is this important',
+  primaryCta: 'Join now',
   email: 'sarah_chen@ft.newyorklife.com',
   doneHeadline: 'Sandra’s handled. Next up, review Laura’s coverage gaps before you write.',
   defaultDraft: 'call',
@@ -627,7 +665,11 @@ export function ClientBriefingScene() {
                       setFinancialPlanView(2)
                     }}
                   />
-                  <img src={adB} className="w-full h-auto object-contain" />
+                  <img
+                    src={adB}
+                    srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
+                    className="w-full h-auto object-contain"
+                  />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -699,7 +741,11 @@ export function ClientBriefingScene() {
                       setFinancialPlanView(3)
                     }}
                   />
-                  <img src={adB} className="w-full h-auto object-contain" />
+                  <img
+                    src={adB}
+                    srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
+                    className="w-full h-auto object-contain"
+                  />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
@@ -786,100 +832,97 @@ export function ClientBriefingScene() {
                       setActiveNav('Financial Plan')
                     }}
                   />
-                  <img src={adB} className="w-full h-auto object-contain" />
+                  <img
+                    src={adB}
+                    srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
+                    className="w-full h-auto object-contain"
+                  />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
               </div>
             )}
             {activeNav === 'Dashboard' && dashboardView === 0 && (
-              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
-                {/* view 0 (default) — top region: 7/12 of the body height.
-                    5/7 col split inside, same shape as BriefingV6's left/right
-                    columns, minus the scrollable right stack (this one's static). */}
-                <div className={[GRID, 'grid grid-cols-12 gap-6 pt-6'].join(' ')} style={{ flexShrink: 0 }}>
-                  <div className="col-span-5 flex flex-col">
-                    {loadPhase >= 1 && (
-                      <>
-                        <BriefingHeadline
-                          text="Great job connecting your accounts. Here is where you stand."
-                          reducedMotion={reduced}
-                        />
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: DURATION.standard, delay: 0.2 }}
-                          className="mt-5 flex items-center gap-3 mb-20"
-                        >
-                          <p className="text-[13px] text-[var(--text-body-muted)]">As of 12:16 PM · 1/6 completed</p>
-                          <div className="h-1.5 w-20 overflow-hidden rounded-full bg-[var(--nyl-gray-100)]">
-                            <motion.div
-                              className="h-full rounded-full bg-[var(--action-primary)]"
-                              initial={{ width: 0 }}
-                              animate={{ width: `${Math.round((1 / 6) * 100)}%` }}
-                              transition={{ duration: DURATION.standard, ease: EASE.settle }}
-                            />
-                          </div>
-                        </motion.div>
-                        <div
-                          className="font-serif text-[#243641] text-[24px] leading-[48px]"
-                          style={{ fontWeight: 'var(--weight-light)' }}
-                        >
-                          Sarah is a top match
-                        </div>
-                        <div className="flex flex-row gap-[20px] ml-2">
-                          <img src={sarahIcon} srcSet={`${sarahIcon} 1x, ${sarahIcon2x} 2x, ${sarahIcon3x} 3x`} />
-                          <div className="flex flex-col gap-2 h-full">
-                            <div className="text-[#474952] text-base pt-[10px]">
-                              Based on your profile we would recommend
-                            </div>
-                            <div className="text-[#474952] text-base ">Sarah to help you acheive your goals</div>
-                            <Button
-                              onClick={() => {
-                                setActiveNav('Resources')
-                                setDashboardView(1)
-                              }}
-                            >
-                              Learn More About Sarah
-                            </Button>
-                          </div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <motion.div
-                    className="col-span-7 max-h-[520px] overflow-hidden"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: loadPhase >= 2 ? 1 : 0 }}
-                    transition={{ duration: DURATION.standard, ease: EASE.settle }}
-                  >
-                    <img src={adB} className="h-full w-auto max-w-full object-contain" />
-                  </motion.div>
-                </div>
 
-                {/* bottom region — 5/12 of the body height. 9/ou 3 col split, both
-                    fading in together at loadPhase 3 (@4050ms). */}
-                <div className={[GRID, 'grid grid-cols-12  py-6'].join(' ')} style={{ flexShrink: 0 }}>
+                            <div className={[GRID, 'grid min-h-0 flex-1 grid-cols-12 gap-6 overflow-y-auto pt-6'].join(' ')}>
+                <div className="col-span-5 flex h-full flex-col pt-6">
+                  <BriefingHeadline 
+                          text="Great job connecting your accounts. Here is where you stand."
+
+                  reducedMotion={reduced} 
+                  />
                   <motion.div
-                    className="col-span-8"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: loadPhase >= 3 ? 1 : 0 }}
-                    transition={{ duration: DURATION.standard, ease: EASE.settle }}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: DURATION.standard, delay: 0.2 }}
+                    className="mt-5 flex items-center gap-3"
                   >
-                    <img src={clientQuiz} srcSet={`${clientQuiz} 1x, ${clientQuiz2x} 2x, ${clientQuiz3x} 3x`} />
-                  </motion.div>
-                  <motion.div
-                    className="col-span-4"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: loadPhase >= 3 ? 1 : 0 }}
-                    transition={{ duration: DURATION.standard, ease: EASE.settle }}
-                  >
-                    <div className="w-full flex justify-end">
-                      <img src={guidanceBox} srcSet={`${guidanceBox} 1x, ${guidanceBox2x} 2x, ${guidanceBox3x} 3x`} />
-                      <Nyla size={120} className="absolute bottom-0 right-15" />
+                    <p className="text-[13px] text-[var(--text-body-muted)]">
+                      As of 12:16 PM · 4/25 questions completed
+                    </p>
+                    <div className="h-1.5 w-20 overflow-hidden rounded-full bg-[var(--nyl-gray-100)]">
+                      <motion.div
+                        className="h-full rounded-full bg-[var(--action-primary)]"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${Math.round((4 / 25) * 100)}%` }}
+                        transition={{ duration: DURATION.standard, ease: EASE.settle }}
+                      />
                     </div>
                   </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: DURATION.deliberate, ease: EASE.settle }}
+                    className="mt-auto pt-10 pb-16"
+                  >
+                    <AwaySection
+                      heading="While you were away"
+                      savedLabel="1h28m saved"
+                      items={[
+                        'Refreshed your accounts',
+                        'Your home value increased by 3%',
+                        'Your stocks decreased by 2%',
+                      ]}
+                    />
+                    <AwaySection
+                      heading="Helpful insights for you"
+                      itemSpacing="space-y-2.5"
+                      showDots
+                      items={[
+                        'Sarah posted a video on the new tax law impacting teachers',
+                        'Understand how you can benefit from macro-balancing',
+                        'Get to know how the latest rate change impacts you',
+                      ]}
+                      footerCta="Add to my weekly insights for later"
+                    />
+                  </motion.div>
                 </div>
+                <motion.div
+                  className="col-span-7 flex flex-col gap-8"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: DURATION.standard, ease: EASE.settle }}
+                >
+                  <BriefingTaskCard
+                    model={ZERO_TASK}
+                    state="focus"
+                    reducedMotion={reduced}
+                    label="Remind me"
+                    onPrimary={() => {
+                      setActiveNav('Collab Board')
+                      setFinancialPlanView(3)
+                    }}
+                  />
+                  <img
+                    src={adB}
+                    srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
+                    className="w-full h-auto object-contain"
+                  />
+                  <Nyla size={120} className="absolute bottom-0 right-10" />
+                </motion.div>
               </div>
+              
+         
             )}
             {activeNav === 'Preference Center' && preferenceView === 1 && (
               <div className={'pt-6 h-full flex flex-col items-center justify-center'}>
@@ -1276,7 +1319,7 @@ export function ClientBriefingScene() {
                         setActiveNav('Preference Center')
                       }}
                     />
-                    <Nyla size={120} className="shrink-0" />
+                    <Nyla size={120} className="shrink-0"f />
                   </div>
                 </motion.div>
                 <motion.div
