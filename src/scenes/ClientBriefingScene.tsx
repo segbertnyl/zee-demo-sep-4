@@ -661,7 +661,7 @@ export function ClientBriefingScene() {
                   <img
                     src={adB}
                     srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                    className="w-full h-auto object-contain"
+                    className="w-full max-h-[260px] h-auto object-contain"
                   />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
@@ -737,7 +737,7 @@ export function ClientBriefingScene() {
                   <img
                     src={adB}
                     srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                    className="w-full h-auto object-contain"
+                    className="w-full max-h-[260px] h-auto object-contain"
                   />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
@@ -828,7 +828,7 @@ export function ClientBriefingScene() {
                   <img
                     src={adB}
                     srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                    className="w-full h-auto object-contain"
+                    className="w-full max-h-[260px] h-auto object-contain"
                   />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
@@ -909,7 +909,7 @@ export function ClientBriefingScene() {
                   <img
                     src={adB}
                     srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
-                    className="w-full h-auto object-contain"
+                    className="w-full max-h-[260px] h-auto object-contain"
                   />
                   <Nyla size={120} className="absolute bottom-0 right-10" />
                 </motion.div>
@@ -1195,7 +1195,7 @@ export function ClientBriefingScene() {
             {activeNav === 'Financial Plan' && financialPlanView === 1 && (
               <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
                 <motion.div
-                  className={[GRID, 'flex flex-row justify-center'].join(' ')}
+                  className={[GRID, 'flex flex-col items-center justify-center'].join(' ')}
                   initial={{ opacity: 0, }}
                   animate={{ opacity: 1,  }}
                   exit={{ opacity: 0 }}
@@ -1207,6 +1207,7 @@ export function ClientBriefingScene() {
                   <img
                     src={potentialRisks}
                     srcSet={`${potentialRisks} 1x, ${potentialRisks2x} 2x, ${potentialRisks3x} 3x`}
+                    className="h-auto object-contain"
                   />
                   <div className="mt-6 pb-4 w-full flex items-center justify-end gap-4">
                     <ButtonContainer
@@ -1245,7 +1246,7 @@ export function ClientBriefingScene() {
             {activeNav === 'Financial Plan' && financialPlanView === 2 && (
               <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
                 <motion.div
-                  className={[GRID, 'flex flex-row justify-center'].join(' ')}
+                  className={[GRID, 'flex flex-col justify-center'].join(' ')}
                   initial={{ opacity: 0,}}
                   animate={{ opacity: 1,}}
                   exit={{ opacity: 0 }}
@@ -1254,7 +1255,11 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img src={financial2} srcSet={`${financial2} 1x, ${financial2_2x} 2x, ${financial2_3x} 3x`} />
+                  <img
+                    src={financial2}
+                    srcSet={`${financial2} 1x, ${financial2_2x} 2x, ${financial2_3x} 3x`}
+                    className="max-w-[50%] h-auto object-contain"
+                  />
 
                   <div className="mt-6 pb-4 w-full flex items-center justify-end gap-4">
                     <ButtonContainer
@@ -1293,7 +1298,7 @@ export function ClientBriefingScene() {
             {activeNav === 'Financial Plan' && financialPlanView === 3 && (
               <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
                 <motion.div
-                  className={[GRID, 'flex flex-row justify-center'].join(' ')}
+                  className={[GRID, 'flex flex-col justify-center'].join(' ')}
                   initial={{ opacity: 0, }}
                   animate={{ opacity: 1,}}
                   exit={{ opacity: 0 }}
@@ -1302,7 +1307,11 @@ export function ClientBriefingScene() {
                     ease: EASE.settle as [number, number, number, number],
                   }}
                 >
-                  <img src={financial3} srcSet={`${financial3} 1x, ${financial3_2x} 2x, ${financial3_3x} 3x`} />
+                  <img
+                    src={financial3}
+                    srcSet={`${financial3} 1x, ${financial3_2x} 2x, ${financial3_3x} 3x`}
+                    className="max-w-[50%] h-auto object-contain"
+                  />
                   <div className="mt-6 pb-4 w-full flex items-center justify-end gap-4">
                     <ButtonContainer
                       primaryLabel="Start your application"
