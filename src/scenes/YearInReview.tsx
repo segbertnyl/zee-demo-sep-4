@@ -117,7 +117,7 @@ const CARDS: Card[] = [
     id: 'cases',
     bgVariant: 'green' as BgReflectionsVariant,
     eyebrow: 'Cases closed',
-    big: '534 families\nwith a plan',
+    big: '934 families\nwith a plan',
     caption: "That's not a number — that's a legacy.",
     aiNod: 'Triaged 89 at-risk cases and stayed ahead of them — you cleared every one before its review window closed.',
   },

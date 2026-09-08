@@ -33,6 +33,7 @@ import { PlanSummary } from '@/scenes/PlanSummary'
 import { PlanAcceptLoader } from '@/scenes/PlanAcceptLoader'
 import { PlanSummaryBackground } from '@/ui/PlanSummaryBackground'
 import { StageRail, STAGES, type StageId } from '@/ui/StageRail'
+import { WelcomeSequence } from '@/ui/WelcomeSequence'
 
 function fadeUp(delay: number, opacityOnly = false) {
   return {
@@ -393,6 +394,10 @@ export function DiscoveryFlow() {
   const discoveryInitialStep = useAppStore((s) => s.discoveryInitialStep)
   const fromOnboarding = useAppStore((s) => s.discoveryFromOnboarding)
   const clearDiscoveryFromOnboarding = useAppStore((s) => s.clearDiscoveryFromOnboarding)
+  /* Welcome is now the front door of Discovery itself — always plays first,
+   * regardless of entry point, then hands off into the intro below exactly
+   * as it starts today. */
+  const [showWelcome, setShowWelcome] = useState(true)
 
   const initialStepIndex = discoveryInitialStep ? Math.max(0, STEPS.indexOf(discoveryInitialStep as Step)) : 0
   const [introOpen, setIntroOpen] = useState(() => !discoveryInitialStep)
@@ -587,6 +592,7 @@ export function DiscoveryFlow() {
 
   useEffect(() => {
     if (open) {
+      setShowWelcome(true)
       setPlanAccepting(false)
       const entrance = !discoveryInitialStep && !prefersReducedMotion()
       setIntroRevealed(!entrance)
@@ -711,6 +717,23 @@ export function DiscoveryFlow() {
       animate={{ opacity: 1 }}
       transition={{ duration: DURATION.short, ease: EASE.settle as [number, number, number, number] }}
     >
+      {/* Welcome — the front door of Discovery itself. Always plays first,
+          regardless of entry point, then hands off into the intro below
+          exactly as it starts today. */}
+      <AnimatePresence>
+        {showWelcome && (
+          <motion.div
+            key="discovery-welcome"
+            className="absolute inset-0 z-[100]"
+            initial={false}
+            exit={{ opacity: 0 }}
+            transition={{ duration: DURATION.short }}
+          >
+            <WelcomeSequence onStart={() => setShowWelcome(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Close button — above intro overlay. Hidden while Nyla is in flight so
           no clickable control exists mid-flight (Escape stays live). */}
       <button
