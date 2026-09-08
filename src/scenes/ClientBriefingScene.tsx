@@ -45,7 +45,7 @@ import financial2_3x from '../components/financial-2-3x.png'
 import nylaFin2 from '../components/nyla-fin-risk-2.png'
 import nylaFin2_2x from '../components/nyla-fin-risk-2-2x.png'
 import nylaFin2_3x from '../components/nyla-fin-risk-2-3x.png'
-import collabBoard from '../components/collab-board.png'
+import collabBoard from '../components/collab-board-fix-long.png'
 import collabBoard2x from '../components/collab-board-2x.png'
 import collabBoard3x from '../components/collab-board-3x.png'
 import financial3 from '../components/fin-plan-3.png'
@@ -1367,7 +1367,7 @@ export function ClientBriefingScene() {
                   ease: EASE.settle as [number, number, number, number],
                 }}
               >
-                <img src={collabBoard} srcSet={`${collabBoard} 1x, ${collabBoard2x} 2x, ${collabBoard3x} 3x`} />
+                <img src={collabBoard}  />
 
                 <Nyla size={120} className="absolute bottom-0 right-10" />
               </motion.div>
