@@ -107,7 +107,6 @@ type Step =
   | 'brand-marketing'
   | 'brand-interests'
   | 'brand-other'
-  | 'brand-content'
   | 'plan'
   | 'plan-reveal'
   | 'plan-pacing'
@@ -134,7 +133,6 @@ const STEPS: Step[] = [
   'brand-marketing',
   'brand-interests',
   'brand-other',
-  'brand-content',
   'plan',
   'plan-reveal',
   'plan-pacing',
@@ -162,7 +160,6 @@ const STEP_TO_STAGE: Record<Step, number> = {
   'brand-marketing': 3,
   'brand-interests': 3,
   'brand-other': 3,
-  'brand-content': 3,
   plan: 4,
   'plan-reveal': 4,
   'plan-pacing': 4,
@@ -672,13 +669,6 @@ export function DiscoveryFlow() {
     if (!open || introOpen || activeStep !== 'plan') return
     const planIndex = STEPS.indexOf('plan')
     const t = setTimeout(() => advanceFromIndex(planIndex), 2600)
-    return () => clearTimeout(t)
-  }, [activeStep, advanceFromIndex, introOpen, open])
-
-  useEffect(() => {
-    if (!open || introOpen || activeStep !== 'brand-content') return
-    const brandContentIndex = STEPS.indexOf('brand-content')
-    const t = setTimeout(() => advanceFromIndex(brandContentIndex), 2600)
     return () => clearTimeout(t)
   }, [activeStep, advanceFromIndex, introOpen, open])
 
@@ -1518,29 +1508,6 @@ export function DiscoveryFlow() {
             </CTAReveal>
           </motion.div>
         </QuestionStep>
-
-        <ThreadStep
-          index={18}
-          activeIndex={activeIndex}
-          collapsedUpTo={collapsedUpTo}
-          setRef={(node) => {
-            stepRefs.current[18] = node
-          }}
-          background="loading"
-        >
-          <div className="relative flex flex-col items-center gap-8">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: DURATION.deliberate, ease: EASE.settle as [number, number, number, number] }}
-            >
-              <motion.div animate={{ rotate: 360 }} transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}>
-                <Nyla size={160} variant="on-light" />
-              </motion.div>
-            </motion.div>
-            <TransitionText text="Synthesizing your goals and priorities..." exiting={false} active startDelay={0.5} />
-          </div>
-        </ThreadStep>
       </div>
 
       {/* Intro overlay — on "I'm ready" it fades out (and its content blurs

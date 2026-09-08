@@ -798,10 +798,7 @@ export function ClientBriefingScene() {
                 {/* view 0 (default) — top region: 7/12 of the body height.
                     5/7 col split inside, same shape as BriefingV6's left/right
                     columns, minus the scrollable right stack (this one's static). */}
-                <div
-                  className={[GRID, 'grid max-w-[1240px] grid-cols-12 gap-6 pt-6'].join(' ')}
-                  style={{ flex: '7 0 auto' }}
-                >
+                <div className={[GRID, 'grid grid-cols-12 gap-6 pt-6'].join(' ')} style={{ flex: '7 0 auto' }}>
                   <div className="col-span-5 flex flex-col">
                     {loadPhase >= 1 && (
                       <>
@@ -850,12 +847,16 @@ export function ClientBriefingScene() {
                     )}
                   </div>
                   <motion.div
-                    className="col-span-7"
+                    className="col-span-7 max-h-[400px] overflow-hidden"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: loadPhase >= 2 ? 1 : 0 }}
                     transition={{ duration: DURATION.standard, ease: EASE.settle }}
                   >
-                    <img src={adB} srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`} />
+                    <img
+                      src={adB}
+                      srcSet={`${adB} 1x, ${adB2x} 2x, ${adB3x} 3x`}
+                      className="h-full w-auto max-w-full object-contain"
+                    />
                   </motion.div>
                 </div>
 
